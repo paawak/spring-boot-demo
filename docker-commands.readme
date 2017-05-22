@@ -1,0 +1,19 @@
+* For building a docker image:
+	mvn docker:build
+	
+* For running the docker image and mappint it to port 80:
+	docker run -it -p 80:8080 swayam/demo/spring-boot-demo
+	
+* For getting the container id of the running image: 
+	docker ps
+	
+* The above command will give an id, say, 0b74d969e83e
+
+* Retrieving the IP address of the docker container:
+	There are two ways of doing it:
+		1. Using the command:
+			docker exec -it 0b74d969e83e ip add show eth0
+		2. Get into the docker container using bash
+			docker exec -it 0b74d969e83e bash
+			ip addr
+	
