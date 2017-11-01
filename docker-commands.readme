@@ -2,7 +2,7 @@
 	mvn docker:build
 	
 * For running the docker image and mappint it to port 80:
-	docker run -it -p 80:8080 swayam/demo/spring-boot-demo
+	docker run -it -p 80:8080 swayam/demo/spring-boot-demo:0.0.1-SNAPSHOT
 	
 * For getting the container id of the running image: 
 	docker ps
