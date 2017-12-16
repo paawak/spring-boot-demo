@@ -23,7 +23,7 @@ pipeline {
 	                            
 	                            if (line.startsWith('serverUrl')) {
 	                            	 def sonarServerUrl = line.split('=')[1]
-	                            	 if (!sonarServerUrl.endsEith('/')) {
+	                            	 if (!sonarServerUrl.endsWith('/')) {
 	                            	      sonarServerUrl += '/'
 	                            	 }
 
