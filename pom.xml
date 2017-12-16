@@ -213,8 +213,6 @@
 				<sonar.projectName>${project.artifactId}</sonar.projectName>
 				<sonar.projectVersion>${project.version}</sonar.projectVersion>
 				<sonar.host.url>http://192.168.1.4:9000</sonar.host.url>
-				<sonar.login>admin</sonar.login>
-				<sonar.password>admin</sonar.password>
 				<sonar.sources>src/main/java</sonar.sources>
 				<sonar.sourceEncoding>UTF-8</sonar.sourceEncoding>
 				<sonar.language>java</sonar.language>
