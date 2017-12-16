@@ -184,7 +184,7 @@
 				<sonar.language>java</sonar.language>
 				<sonar.tests>src/test/java</sonar.tests>
 				<sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
-				<sonar.junit.reportsPath>target/surefire-reports</sonar.junit.reportsPath>
+				<sonar.junit.reportPaths>target/surefire-reports</sonar.junit.reportPaths>
 				<sonar.surefire.reportsPath>target/surefire-reports</sonar.surefire.reportsPath>
 				<sonar.java.binaries>target/classes</sonar.java.binaries>
 			</properties>
