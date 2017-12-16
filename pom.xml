@@ -31,6 +31,42 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>0.7.9</version>
+				<configuration>
+					<systemPropertyVariables>
+						<jacoco-agent.destfile>target/jacoco.exe</jacoco-agent.destfile>
+					</systemPropertyVariables>
+				</configuration>
+				<executions>
+					<execution>
+						<id>prepare-agent</id>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>report</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>post-unit-test</id>
+						<phase>test</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+						<configuration>
+							<dataFile>target/jacoco.exe</dataFile>
+							<outputDirectory>target/site</outputDirectory>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
 	</build>
 
@@ -173,9 +209,6 @@
 		<profile>
 			<id>sonar</id>
 			<properties>
-				<sonar.host.url>http://192.168.1.4:9000</sonar.host.url>
-				<sonar.login>admin</sonar.login>
-				<sonar.password>admin</sonar.password>
 				<sonar.projectKey>${project.artifactId}</sonar.projectKey>
 				<sonar.projectName>${project.artifactId}</sonar.projectName>
 				<sonar.projectVersion>${project.version}</sonar.projectVersion>
@@ -185,8 +218,9 @@
 				<sonar.tests>src/test/java</sonar.tests>
 				<sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
 				<sonar.junit.reportPaths>target/surefire-reports</sonar.junit.reportPaths>
-				<sonar.surefire.reportsPath>target/surefire-reports</sonar.surefire.reportsPath>
 				<sonar.java.binaries>target/classes</sonar.java.binaries>
+				<sonar.jacoco.reportPath>target/jacoco.exec</sonar.jacoco.reportPath>
+				<sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
 			</properties>
 			<build>
 				<plugins>
