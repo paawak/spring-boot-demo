@@ -8,7 +8,7 @@ pipeline {
         stage('Build') {
             steps {
                 withSonarQubeEnv('MySonarQubeLocal') {
-                    sh "mvn clean install sonar:sonar -P sonar"
+                    sh "/var/jenkins_home/apache-maven-3.5.0/bin/mvn clean install sonar:sonar -P sonar"
                     script {
                         def sonarProps = readFile encoding: 'utf-8', file: 'target/sonar/report-task.txt'
                         echo "sonarProps: " + sonarProps
