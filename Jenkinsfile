@@ -67,6 +67,12 @@ pipeline {
                 }
             }
         }
+        
+        stage('Code Coverage') {
+			steps {
+				jacoco()                          
+			}
+        }
 
     }
     
