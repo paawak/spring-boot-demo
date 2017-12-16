@@ -170,6 +170,38 @@
 				</plugins>
 			</build>
 		</profile>
+		<profile>
+			<id>sonar</id>
+			<properties>
+				<sonar.projectKey>${project.artifactId}</sonar.projectKey>
+				<sonar.projectName>${project.artifactId}</sonar.projectName>
+				<sonar.projectVersion>${project.version}</sonar.projectVersion>
+				<sonar.sources>src/main/java</sonar.sources>
+				<sonar.sourceEncoding>UTF-8</sonar.sourceEncoding>
+				<sonar.language>java</sonar.language>
+				<sonar.tests>src/test/java</sonar.tests>
+				<sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
+				<sonar.junit.reportsPath>target/surefire-reports</sonar.junit.reportsPath>
+				<sonar.surefire.reportsPath>target/surefire-reports</sonar.surefire.reportsPath>
+				<sonar.java.binaries>target/classes</sonar.java.binaries>
+			</properties>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.sonarsource.scanner.maven</groupId>
+						<artifactId>sonar-maven-plugin</artifactId>
+						<version>3.4.0.905</version>
+						<executions>
+							<execution>
+								<goals>
+									<goal>sonar</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
 	</profiles>
 
 </project>
