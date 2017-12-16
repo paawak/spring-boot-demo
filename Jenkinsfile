@@ -54,7 +54,7 @@ pipeline {
 	                        def qualityGateUrl = env.SONAR_SERVER_URL + 'api/qualitygates/project_status?analysisId=' + env.SONAR_ANALYSIS_ID
 	                        echo "qualityGateUrl: " + qualityGateUrl
 	                        def qualityGateJsonFile = 'target/sonar/qualityGate.json'
-	                        sh 'curl $qualityGateUrl -o ' + qualityGateJsonFile
+	                        sh 'curl ' + qualityGateUrl + ' -o ' + qualityGateJsonFile
 	                        def qualityGateJsonFileContents = readFile encoding: 'utf-8', file: qualityGateJsonFile
 	                        def qualityGateJson = new groovy.json.JsonSlurper().parseText(qualityGateJsonFileContents)
 	                        echo 'qualityGateJson: ' + qualityGateJson
