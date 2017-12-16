@@ -173,6 +173,7 @@
 		<profile>
 			<id>sonar</id>
 			<properties>
+				<sonar.host.url>http://home-desktop-pony:9000</sonar.host.url>
 				<sonar.projectKey>${project.artifactId}</sonar.projectKey>
 				<sonar.projectName>${project.artifactId}</sonar.projectName>
 				<sonar.projectVersion>${project.version}</sonar.projectVersion>
