@@ -1,3 +1,8 @@
+## Resource has moved
+This has moved to a new home:
+https://github.com/paawak/spring-boot-demo
+
+
 ## Starting SonarQube
 		docker run -d --name sonarqube -p 9000:9000 -p 9092:9092 sonarqube
 		
