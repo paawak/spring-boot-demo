@@ -1,4 +1,4 @@
-package com.swayam.demo.spring.springbootdemo;
+package com.swayam.demo.springbootdemo.rest;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -7,7 +7,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class SpringBootDemoApplicationTests {
+public class RestFulMicroserviceApplicationTests {
 
 	@Test
 	public void contextLoads() {
