@@ -8,7 +8,7 @@ public class IndexController {
 
 	@RequestMapping("/")
 	public String handleIndex() {
-		return "Hello " + System.getProperty("user.name");
+		return "This is a spring boot application";
 	}
 
 }

@@ -1,6 +1,8 @@
-## Resource has moved
-This has moved to a new home:
-https://github.com/paawak/spring-boot-demo
+## To add a new Currency
+	curl -H "Content-Type: application/json" -X POST -d @src/test/resources/json/save_new_currency_request.json http://localhost:8080/restful-microservice/currency
+	
+## To list all Currencies
+	curl -X GET http://localhost:8080/restful-microservice/currency	
 
 
 ## Starting SonarQube

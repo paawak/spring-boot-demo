@@ -16,7 +16,7 @@ public class SwaggerConfig {
 	@Bean
 	public Docket api() {
 		return new Docket(DocumentationType.SWAGGER_2).select()
-				.apis(RequestHandlerSelectors.basePackage("com.swayam.demo.spring.springbootdemo.controllers"))
+				.apis(RequestHandlerSelectors.basePackage("com.swayam.demo.springbootdemo.rest.controllers"))
 				.paths(PathSelectors.any()).build();
 	}
 
