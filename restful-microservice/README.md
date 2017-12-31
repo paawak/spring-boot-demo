@@ -4,6 +4,8 @@
 ## To list all Currencies
 	curl -X GET http://localhost:8080/restful-microservice/currency	
 
+## To know flyway status
+	mvn flyway:info -Dflyway.url=jdbc:postgresql://localhost:5432/spring_boot_rest -Dflyway.user=postgres -Dflyway.password=postgres
 
 ## Starting SonarQube
 		docker run -d --name sonarqube -p 9000:9000 -p 9092:9092 sonarqube
