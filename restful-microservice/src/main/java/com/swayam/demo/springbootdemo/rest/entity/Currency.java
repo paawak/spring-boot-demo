@@ -23,7 +23,10 @@ public class Currency implements Serializable {
 	private String name;
 
 	@Column
-	private String symbol;
+	private Character symbol;
+
+	@Column
+	private String code;
 
 	@Column
 	private boolean active;
@@ -44,12 +47,20 @@ public class Currency implements Serializable {
 		this.name = name;
 	}
 
-	public String getSymbol() {
+	public Character getSymbol() {
 		return symbol;
 	}
 
-	public void setSymbol(String symbol) {
+	public void setSymbol(Character symbol) {
 		this.symbol = symbol;
+	}
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
 	}
 
 	public boolean isActive() {
@@ -65,6 +76,7 @@ public class Currency implements Serializable {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + (active ? 1231 : 1237);
+		result = prime * result + ((code == null) ? 0 : code.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((symbol == null) ? 0 : symbol.hashCode());
@@ -81,6 +93,11 @@ public class Currency implements Serializable {
 			return false;
 		Currency other = (Currency) obj;
 		if (active != other.active)
+			return false;
+		if (code == null) {
+			if (other.code != null)
+				return false;
+		} else if (!code.equals(other.code))
 			return false;
 		if (id == null) {
 			if (other.id != null)
@@ -102,7 +119,8 @@ public class Currency implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Currency [id=" + id + ", name=" + name + ", symbol=" + symbol + ", active=" + active + "]";
+		return "Currency [id=" + id + ", name=" + name + ", symbol=" + symbol + ", code=" + code + ", active=" + active
+				+ "]";
 	}
 
 }
