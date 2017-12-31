@@ -1,0 +1,10 @@
+/code/WebServiceExample/build/generated/wsgen/service/com/swayam/webservice/jaxws/AddUser.java
+*log.*
+*.log
+.project
+.classpath
+*~
+**target
+**bin
+**.settings
+**metastore_db
