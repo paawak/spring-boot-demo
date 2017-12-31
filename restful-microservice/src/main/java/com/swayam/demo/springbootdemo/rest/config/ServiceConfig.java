@@ -1,4 +1,4 @@
-package com.swayam.demo.spring.springbootdemo.config;
+package com.swayam.demo.springbootdemo.rest.config;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;

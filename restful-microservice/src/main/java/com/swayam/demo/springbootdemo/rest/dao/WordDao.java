@@ -1,4 +1,4 @@
-package com.swayam.demo.spring.springbootdemo.dao;
+package com.swayam.demo.springbootdemo.rest.dao;
 
 public interface WordDao {
 

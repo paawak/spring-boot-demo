@@ -1,10 +1,10 @@
-package com.swayam.demo.spring.springbootdemo.service;
+package com.swayam.demo.springbootdemo.rest.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.swayam.demo.spring.springbootdemo.dao.WordDao;
+import com.swayam.demo.springbootdemo.rest.dao.WordDao;
 
 @Service
 public class WordServiceImpl implements WordService {

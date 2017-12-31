@@ -1,4 +1,4 @@
-package com.swayam.demo.spring.springbootdemo.service;
+package com.swayam.demo.springbootdemo.rest.service;
 
 import java.nio.file.Path;
 
