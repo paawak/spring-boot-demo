@@ -15,8 +15,9 @@ public class IndexController {
 
 	@RequestMapping("/")
 	public String handleIndex() {
-		String key = "app.code.secret";
-		return key + ":" + environment.getProperty(key);
+		String key1 = "app.code.secret";
+		String key2 = "app.code.pass";
+		return key1 + ":" + environment.getProperty(key1) + "\n" + key2 + ":" + environment.getProperty(key2);
 	}
 
 }

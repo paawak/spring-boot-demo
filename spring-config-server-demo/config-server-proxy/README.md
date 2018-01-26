@@ -4,7 +4,11 @@ This is a [Spring Config Server](https://cloud.spring.io/spring-cloud-config/) d
 
 # Fetching application properties
 
-	curl -u "my_user:MySecret&23" -s -X GET "http://localhost:8888/config-server-proxy/my-spring-config-client-default.yml" 
+	curl -u "my_user:MySecret&23" -s -X GET "http://localhost:8888/config-server-proxy/my-spring-config-client-default.yml"
+	
+# Trigger re-load of properties by the clients
+
+	curl -s -X POST --header 'Content-Type: application/x-www-form-urlencoded' --header 'Accept: application/json' -d 'path=*' "http://localhost:8888/config-server-proxy/monitor"	 
 
 # Running a RabbitMQ on Docker
 
