@@ -3,8 +3,9 @@ server:
   port: 8888
   
 security:
-  user: my_user
-  password: MySecret&23  
+  user:
+    name: my_user
+    password: MySecret&23  
   
 spring:
   rabbitmq:
@@ -16,7 +17,13 @@ spring:
     config: 
       server:
         git:
-          uri:        
+          uri: https://github.com/paawak/spring-boot-demo.git   
           addLabelLocations: false
-          searchPaths: /{application} 
+          searchPaths: /spring-config-server-demo/config-server-props/{application} 
           basedir: target/props-git-checkout
+          cloneOnStart: true
+          
+management:
+  security:
+    enabled: false          
+          
