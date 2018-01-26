@@ -1,3 +1,11 @@
 spring:
   application:
     name: config-server-proxy
+    
+encrypt:
+  keyStore:
+    location: file:certs/config-server-keystore.jks
+    alias: config-server.palashray.com
+    password: Yellow98
+    secret: Red123
+        
