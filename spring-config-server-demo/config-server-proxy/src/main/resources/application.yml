@@ -13,7 +13,10 @@ spring:
     username: my_mq_user
     password: mq_secret_57*key
   cloud:
-    config:
+    config: 
       server:
         git:
-          uri:         
+          uri:        
+          addLabelLocations: false
+          searchPaths: /{application} 
+          basedir: target/props-git-checkout
