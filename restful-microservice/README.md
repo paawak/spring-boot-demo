@@ -21,6 +21,9 @@ Subsequently:
 		
 		docker start 	sonarqube
 		
+To login to Sonarqube with username/password : admin/admin at: http://localhost:9000
+		
+		
 # Starting Jenkins
 
 The first time:
@@ -30,5 +33,8 @@ The first time:
 Subsequently:
 		
 		docker start jenkins
+		
+Access Jenkins at: http://localhost:8100
+		
 		
 		

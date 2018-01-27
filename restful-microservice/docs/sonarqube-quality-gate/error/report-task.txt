@@ -1,0 +1,6 @@
+projectKey=restful-microservice
+serverUrl=http://192.168.1.4:9000
+serverVersion=6.7.0.33306
+dashboardUrl=http://192.168.1.4:9000/dashboard/index/restful-microservice
+ceTaskId=AWE3eRSZAEMe8tTgpicn
+ceTaskUrl=http://192.168.1.4:9000/api/ce/task?id=AWE3eRSZAEMe8tTgpicn
