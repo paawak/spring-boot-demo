@@ -28,6 +28,7 @@
 	</properties>
 
 	<build>
+		<finalName>${project.artifactId}</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
@@ -143,7 +144,7 @@
 							</execution>
 						</executions>
 						<configuration>
-							<repository>docker.io/paawak/spring-boot-demo</repository>
+							<repository>docker.io/paawak/${project.artifactId}</repository>
 							<tag>${project.version}</tag>
 						</configuration>
 					</plugin>
@@ -161,7 +162,7 @@
 						<configuration>
 							<images>
 								<image>
-									<name>docker.io/paawak/spring-boot-demo</name>
+									<name>docker.io/paawak/${project.artifactId}</name>
 									<build>
 										<dockerFileDir>${basedir}</dockerFileDir>
 										<dockerFile>Dockerfile</dockerFile>
@@ -179,7 +180,7 @@
 										</env>
 										<wait>
 											<http>
-												<url>http://localhost:9090/swagger-ui.html</url>
+												<url>http://localhost:9090/${project.artifactId}/swagger-ui.html</url>
 												<method>GET</method>
 												<status>200</status>
 											</http>
