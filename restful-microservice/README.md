@@ -12,9 +12,23 @@
 	mvn flyway:info -Dflyway.url=jdbc:postgresql://localhost:5432/spring_boot_rest -Dflyway.user=postgres -Dflyway.password=postgres
 
 # Starting SonarQube
-		docker run -d --name sonarqube -p 9000:9000 -p 9092:9092 sonarqube
+
+The first time:
+
+		docker run -d --name sonarqube -p 9000:9000 -p 9092:9092 sonarqube:6.7.1
+		
+Subsequently:
+		
+		docker start 	sonarqube
 		
 # Starting Jenkins
 
-		docker run -d -p 8100:8080 -p 50000:50000 -v /kaaj/java/jenkins/jenkins-docker-home:/var/jenkins_home jenkins/jenkins:latest
+The first time:
+
+		docker run -d --name jenkins -p 8100:8080 -p 50000:50000 -v /kaaj/java/jenkins/jenkins-docker-home:/var/jenkins_home jenkins/jenkins:2.60.3
 				
+Subsequently:
+		
+		docker start jenkins
+		
+		
