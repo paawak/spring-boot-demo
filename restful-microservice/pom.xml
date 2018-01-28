@@ -46,6 +46,11 @@
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
 				<version>0.7.9</version>
+				<configuration>
+					<excludes>
+						<exclude>com/swayam/demo/springbootdemo/rest/config/**</exclude>
+					</excludes>
+				</configuration>
 				<executions>
 					<execution>
 						<id>prepare-agent</id>
@@ -235,6 +240,9 @@
 				<sonar.projectVersion>${project.version}</sonar.projectVersion>
 				<sonar.host.url>http://192.168.1.4:9000/</sonar.host.url>
 				<sonar.sources>src/main/java</sonar.sources>
+				<sonar.exclusions>
+					**/com/swayam/demo/springbootdemo/rest/config/**
+				</sonar.exclusions>
 				<sonar.sourceEncoding>UTF-8</sonar.sourceEncoding>
 				<sonar.language>java</sonar.language>
 				<sonar.tests>src/test/java</sonar.tests>
