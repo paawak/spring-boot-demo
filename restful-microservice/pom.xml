@@ -241,7 +241,9 @@
 				<sonar.host.url>http://192.168.1.4:9000/</sonar.host.url>
 				<sonar.sources>src/main/java</sonar.sources>
 				<sonar.exclusions>
-					**/com/swayam/demo/springbootdemo/rest/config/**
+					**/com/swayam/demo/springbootdemo/rest/config/**,
+					**/com/swayam/demo/springbootdemo/rest/entity/**,
+					**/RestFulMicroserviceApplication.java
 				</sonar.exclusions>
 				<sonar.sourceEncoding>UTF-8</sonar.sourceEncoding>
 				<sonar.language>java</sonar.language>
