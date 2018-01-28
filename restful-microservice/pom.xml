@@ -244,6 +244,12 @@
 				<sonar.projectName>${project.artifactId}</sonar.projectName>
 				<sonar.projectVersion>${project.version}</sonar.projectVersion>
 				<sonar.host.url>http://192.168.1.4:9000/</sonar.host.url>
+				<sonar.verbose>true</sonar.verbose>
+				<sonar.showProfiling>true</sonar.showProfiling>
+				<!-- 
+				Sonar plugin is BUGGY!! It will not run when the below property is set
+				<sonar.scanner.dumpToFile>target/sonar-properties.txt</sonar.scanner.dumpToFile>
+				-->
 				<!-- 
 				<sonar.login>admin</sonar.login>
 				<sonar.password>admin</sonar.password>
