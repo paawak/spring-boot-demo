@@ -53,7 +53,7 @@
 					<excludes>
 						<exclude>com/swayam/demo/springbootdemo/rest/config/**</exclude>
 						<exclude>com/swayam/demo/springbootdemo/rest/entity/**</exclude>
-						<exclude>**/RestFulMicroserviceApplication.class</exclude>
+						<exclude>**/RestFulMicroserviceApplication</exclude>
 					</excludes>
 				</configuration>
 				<executions>
