@@ -47,8 +47,13 @@
 				<artifactId>jacoco-maven-plugin</artifactId>
 				<version>0.7.9</version>
 				<configuration>
+					<includes>
+						<include>com/swayam/demo/springbootdemo/rest/**</include>
+					</includes>
 					<excludes>
 						<exclude>com/swayam/demo/springbootdemo/rest/config/**</exclude>
+						<exclude>com/swayam/demo/springbootdemo/rest/entity/**</exclude>
+						<exclude>**/RestFulMicroserviceApplication.class</exclude>
 					</excludes>
 				</configuration>
 				<executions>
