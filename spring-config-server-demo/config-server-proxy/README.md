@@ -26,4 +26,11 @@ This is a [Spring Config Server](https://cloud.spring.io/spring-cloud-config/) d
 
 	curl -u "my_user:MySecret&23" -s -X POST "http://localhost:8888/config-server-proxy/decrypt" --data-urlencode my_passwd
 	
+# Spring encryption
+
+Look at the below classes:
+1. EncryptionController
+2. KeyStoreTextEncryptorLocator
+3. RsaSecretEncryptor
+
 	
