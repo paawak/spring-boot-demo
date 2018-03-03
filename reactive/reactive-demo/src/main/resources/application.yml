@@ -1,0 +1,21 @@
+server:
+  port: 8080
+  servlet:
+    contextPath: /reactive-demo
+  
+logging:
+  level:
+    root: INFO
+    com.swayam.demo: DEBUG
+    org.springframework.web: INFO
+    org.hibernate: INFO
+
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: none
+  datasource:
+    url: jdbc:postgresql://192.168.1.4:5432/spring_boot_rest
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
