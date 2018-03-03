@@ -1,10 +1,11 @@
-var refreshButton = document.getElementById('fetch');
+var url = 'https://api.github.com/users?since=124'; 
 
+var refreshButton = document.getElementById('fetch');
 
 var refreshClickStream = Rx.Observable.fromEvent(refreshButton, 'click');
 
 refreshClickStream.subscribe(event => {
-	var responseStream = Rx.Observable.fromPromise($.getJSON('https://api.github.com/users?since=124'));
+	var responseStream = Rx.Observable.fromPromise($.getJSON(url));
 	responseStream.subscribe(jsonData => {responseSubscriber(jsonData);});
 });
 
