@@ -6,22 +6,29 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.swayam.demo.springbootdemo.reactive.dao.BankDetailDao;
 import com.swayam.demo.springbootdemo.reactive.model.BankDetail;
+import com.swayam.demo.springbootdemo.reactive.service.BankDetailService;
+
+import reactor.core.publisher.Flux;
 
 @RestController
 @RequestMapping("/bank-item")
 public class BankDetailController {
 
-	private final BankDetailDao bankDetailDao;
+	private final BankDetailService bankDetailService;
 
-	public BankDetailController(BankDetailDao bankDetailDao) {
-		this.bankDetailDao = bankDetailDao;
+	public BankDetailController(BankDetailService bankDetailService) {
+		this.bankDetailService = bankDetailService;
 	}
 
-	@RequestMapping(method = RequestMethod.GET)
+	@RequestMapping(value = "/blocking", method = RequestMethod.GET)
 	public List<BankDetail> getBankDetails() {
-		return bankDetailDao.getBankDetails();
+		return bankDetailService.getBankDetails();
+	}
+
+	@RequestMapping(value = "/reactive", method = RequestMethod.GET)
+	public Flux<BankDetail> getBankDetailsReactive() {
+		return bankDetailService.getBankDetailsReactive();
 	}
 
 }

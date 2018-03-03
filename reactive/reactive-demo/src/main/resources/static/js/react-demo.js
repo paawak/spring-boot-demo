@@ -1,4 +1,4 @@
-var url = 'http://localhost:8080/reactive-demo/bank-item'; 
+var url = 'http://localhost:8080/reactive-demo/bank-item/reactive'; 
 
 var refreshButton = document.getElementById('fetch');
 
