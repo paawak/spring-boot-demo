@@ -1,4 +1,4 @@
-var refreshButton = document.querySelector('.refresh');
+var refreshButton = document.getElementById('fetch');
 
 
 var refreshClickStream = Rx.Observable.fromEvent(refreshButton, 'click');
@@ -15,6 +15,12 @@ var responseSubscriber = function(jsonData) {
 
 var responseArraySubscriber = function(row) {
 	console.log(row.login);
+	addRow(row.login);
 };
 
-
+function addRow(newValue) {
+    var ul = document.getElementById("items");
+    var li = document.createElement("li");
+    li.appendChild(document.createTextNode(newValue));
+    ul.appendChild(li);
+}
