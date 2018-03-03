@@ -15,7 +15,7 @@ spring:
     hibernate:
       ddl-auto: none
   datasource:
-    url: jdbc:postgresql://192.168.1.4:5432/spring_boot_rest
-    username: postgres
-    password: postgres
-    driver-class-name: org.postgresql.Driver
+    url: jdbc:mysql://localhost:3306/datasets
+    username: root
+    password: root123
+    driver-class-name: com.mysql.jdbc.Driver

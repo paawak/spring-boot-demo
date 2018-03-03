@@ -1,4 +1,4 @@
-var url = 'https://api.github.com/users?since=124'; 
+var url = 'http://localhost:8080/reactive-demo/bank-item'; 
 
 var refreshButton = document.getElementById('fetch');
 
@@ -15,8 +15,8 @@ var responseSubscriber = function(jsonData) {
 };
 
 var responseArraySubscriber = function(row) {
-	console.log(row.login);
-	addRow(row.login);
+	console.log(row.id);
+	addRow(row.id);
 };
 
 function addRow(newValue) {
