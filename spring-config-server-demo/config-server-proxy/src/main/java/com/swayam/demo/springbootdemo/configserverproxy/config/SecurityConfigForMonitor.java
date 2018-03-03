@@ -14,7 +14,7 @@ public class SecurityConfigForMonitor {
 		return new WebSecurityConfigurerAdapter() {
 			@Override
 			public void configure(WebSecurity webSecurity) {
-				webSecurity.ignoring().antMatchers("/monitor");
+				webSecurity.ignoring().antMatchers("/**");
 			}
 		};
 	}
