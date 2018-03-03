@@ -10,7 +10,7 @@ refreshClickStream.subscribe(event => {
 });
 
 var responseSubscriber = function(jsonData) {
-	var responseArrayStream = Rx.Observable.fromArray(jsonData);
+	var responseArrayStream = Rx.Observable.from(jsonData);
 	responseArrayStream.subscribe(row => {responseArraySubscriber(row);});
 };
 
