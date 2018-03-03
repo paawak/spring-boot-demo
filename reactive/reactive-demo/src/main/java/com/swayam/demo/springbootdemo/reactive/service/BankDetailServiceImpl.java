@@ -8,6 +8,7 @@ import com.swayam.demo.springbootdemo.reactive.dao.BankDetailDao;
 import com.swayam.demo.springbootdemo.reactive.model.BankDetail;
 
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.FluxSink;
 
 @Service
 public class BankDetailServiceImpl implements BankDetailService {
@@ -25,7 +26,9 @@ public class BankDetailServiceImpl implements BankDetailService {
 
 	@Override
 	public Flux<BankDetail> getBankDetailsReactive() {
-		return Flux.fromIterable(bankDetailDao.getBankDetails());
+		return Flux.create((FluxSink<BankDetail> fluxSink) -> {
+			bankDetailDao.publishBankDetails(fluxSink);
+		});
 	}
 
 }
