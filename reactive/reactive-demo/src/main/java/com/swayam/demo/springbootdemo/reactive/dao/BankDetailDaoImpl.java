@@ -45,7 +45,7 @@ public class BankDetailDaoImpl implements BankDetailDao {
 				if (++rowCount % 5 == 0) {
 					try {
 						LOGGER.info("in delay...");
-						Thread.sleep(300);
+						Thread.sleep(1000);
 					} catch (InterruptedException e) {
 						LOGGER.error("error", e);
 					}
