@@ -27,7 +27,7 @@ public class BankDetailController {
 		return bankDetailService.getBankDetails();
 	}
 
-	@RequestMapping(value = "/reactive", method = RequestMethod.GET, produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+	@RequestMapping(value = "/reactive", method = RequestMethod.GET, produces = MediaType.APPLICATION_STREAM_JSON_VALUE)
 	public Flux<BankDetail> getBankDetailsReactive() {
 		return bankDetailService.getBankDetailsReactive();
 	}
