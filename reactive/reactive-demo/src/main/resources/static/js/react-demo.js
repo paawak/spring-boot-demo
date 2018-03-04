@@ -9,8 +9,8 @@ refreshClickStream.subscribe(event => {
 	responseStream.subscribe(jsonData => {responseSubscriber(jsonData);});
 });
 
-var responseSubscriber = function(jsonData) {
-	var responseArrayStream = Rx.Observable.from(jsonData);
+var responseSubscriber = function(rawJsonData) {
+	var responseArrayStream = Rx.Observable.from(rawJsonData);
 	responseArrayStream.subscribe(row => {responseArraySubscriber(row);});
 };
 
