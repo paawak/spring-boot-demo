@@ -1,0 +1,20 @@
+{
+	"task": {
+		"id": "AWE3eRSZAEMe8tTgpicn",
+		"type": "REPORT",
+		"componentId": "AWCtqVv8SVvpdwOKoKxB",
+		"componentKey": "restful-microservice",
+		"componentName": "restful-microservice",
+		"componentQualifier": "TRK",
+		"analysisId": "AWE3eRcyxJqMzJgr501D",
+		"status": "SUCCESS",
+		"submittedAt": "2018-01-27T11:55:37+0000",
+		"submitterLogin": "admin",
+		"startedAt": "2018-01-27T11:55:37+0000",
+		"executedAt": "2018-01-27T11:55:41+0000",
+		"executionTimeMs": 3592,
+		"logs": false,
+		"hasScannerContext": true,
+		"organization": "default-organization"
+	}
+}

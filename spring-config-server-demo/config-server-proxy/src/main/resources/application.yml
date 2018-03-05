@@ -1,0 +1,29 @@
+server:
+  contextPath: /config-server-proxy
+  port: 8888
+  
+security:
+  user:
+    name: my_user
+    password: MySecret&23  
+  
+spring:
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: my_mq_user
+    password: mq_secret_57*key
+  cloud:
+    config: 
+      server:
+        git:
+          uri: https://github.com/paawak/spring-boot-demo.git   
+          addLabelLocations: false
+          searchPaths: /spring-config-server-demo/config-server-props/{application} 
+          basedir: target/props-git-checkout
+          cloneOnStart: true
+          
+management:
+  security:
+    enabled: false          
+          

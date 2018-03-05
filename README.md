@@ -1,7 +1,5 @@
-## Starting SonarQube
-		docker run -d --name sonarqube -p 9000:9000 -p 9092:9092 sonarqube
-		
-## Starting Jenkins
+# About
+	
+Home for everything Spring Boot: mainly the work that I am doing,  or interested in. Contains many examples of solving real life problems.
 
-		docker run -d -p 8100:8080 -p 50000:50000 -v /kaaj/java/jenkins/jenkins-docker-home:/var/jenkins_home jenkins/jenkins:latest
-				
+

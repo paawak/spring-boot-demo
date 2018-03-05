@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: my-spring-config-client
+  cloud:
+    config:
+      uri: http://localhost:8888/config-server-proxy/
+      username: my_user
+      password: MySecret&23
+      fail-fast: true
+      retry:
+        initialInterval: 2000
+        maxAttempts: 3
+        maxInterval: 3000
+        multiplier: 1.5
+        
+  
