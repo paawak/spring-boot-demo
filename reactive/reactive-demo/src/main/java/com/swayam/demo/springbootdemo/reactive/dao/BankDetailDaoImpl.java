@@ -51,14 +51,6 @@ public class BankDetailDaoImpl implements BankDetailDao {
 					}
 				}
 
-				// TODO: remove later
-				if (true) {
-					if (rowCount == 10) {
-						fluxSink.complete();
-						LOGGER.info("completed publishing");
-						return null;
-					}
-				}
 			}
 			LOGGER.info("completed publishing");
 			fluxSink.complete();
