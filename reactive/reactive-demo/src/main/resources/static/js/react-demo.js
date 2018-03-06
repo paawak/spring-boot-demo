@@ -25,8 +25,11 @@ refreshClickStream.flatMap(event => {
 });
 
 function addRow(newValueAsJson) {
-    var ul = document.getElementById("items");
-    var li = document.createElement("li");
-    li.appendChild(document.createTextNode(newValueAsJson.id));
-    ul.appendChild(li);
+    var tableDiv = document.getElementById("tableDiv");
+    var newDivRow = '<div class="div-table-row">' 
+	+ '<div class="div-table-col">' + newValueAsJson.id + '</div>'
+	+ '<div class="div-table-col">' + newValueAsJson.age + '</div>'
+	+ '<div class="div-table-col">' + newValueAsJson.job + '</div>'
+	+ '</div>'; 
+    tableDiv.innerHTML += newDivRow;
 }
