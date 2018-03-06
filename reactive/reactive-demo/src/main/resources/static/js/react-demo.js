@@ -5,20 +5,10 @@ var refreshButton = document.getElementById('fetch');
 var refreshClickStream = Rx.Observable.fromEvent(refreshButton, 'click');
 
 refreshClickStream.subscribe(event => {
-	var responseStream = Rx.Observable.fromPromise(
-			fetch(url, {
-			    cache: 'no-cache', 
-			    headers: {
-			    	'content-type': 'application/json'
-			    },
-			    method: 'GET'
-			  })).map((res) => {
-				var json = res.text();
-				console.log("json: " + json);
-				return Rx.Observable.fromPromise(json);
-			}).subscribe(jsonData => {
-		responseSubscriber(jsonData);
-	});
+	var responseHandle = new EventSource(url);
+	responseHandle.onmessage = function(event) {
+	    addRow(event.data);
+	};
 });
 
 var responseSubscriber = function(rawJsonData) {
