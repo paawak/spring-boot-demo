@@ -18,11 +18,15 @@ var eventSourceObserver = function (observer) {
 
 refreshClickStream.flatMap(event => {
     return Rx.Observable.create(eventSourceObserver);
-}).subscribe(data=>{addRow(data);});
+}).map(dataAsText => {
+    return JSON.parse(dataAsText);
+}).subscribe(jsonData => {
+    addRow(jsonData);
+});
 
-function addRow(newValue) {
+function addRow(newValueAsJson) {
     var ul = document.getElementById("items");
     var li = document.createElement("li");
-    li.appendChild(document.createTextNode(newValue));
+    li.appendChild(document.createTextNode(newValueAsJson.id));
     ul.appendChild(li);
 }
