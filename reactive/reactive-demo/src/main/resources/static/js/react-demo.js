@@ -6,14 +6,20 @@ var refreshClickStream = Rx.Observable.fromEvent(refreshButton, 'click');
 
 refreshClickStream.subscribe(event => {
 	console.log("subscribed to click events on fetch");
-	var eventSource = new EventSource(url);
-	eventSource.onmessage = function(event) {
-	    addRow(event.data);
-	};
-	eventSource.onerror = function() {
-	    console.log("EventSource failed: closing the connection");
-	    eventSource.close();
-	};
+	
+	var observable = Rx.Observable.create(function (observer) {
+	    var eventSource = new EventSource(url);
+		eventSource.onmessage = function(event) {
+		    observer.next(event.data);
+		};
+		eventSource.onerror = function() {
+		    console.log("EventSource failed: closing the connection");
+		    eventSource.close();
+		    observer.complete();
+		};
+	  });
+	
+	observable.subscribe(data=>{addRow(data);});
 });
 
 var responseSubscriber = function(rawJsonData) {
