@@ -2,7 +2,6 @@ package com.swayam.demo.springbootdemo.reactive.controller;
 
 import java.util.List;
 
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,7 +26,7 @@ public class BankDetailController {
 		return bankDetailService.getBankDetails();
 	}
 
-	@RequestMapping(value = "/reactive", method = RequestMethod.GET, produces = MediaType.APPLICATION_STREAM_JSON_VALUE)
+	@RequestMapping(value = "/reactive", method = RequestMethod.GET)
 	public Flux<BankDetail> getBankDetailsReactive() {
 		return bankDetailService.getBankDetailsReactive();
 	}
