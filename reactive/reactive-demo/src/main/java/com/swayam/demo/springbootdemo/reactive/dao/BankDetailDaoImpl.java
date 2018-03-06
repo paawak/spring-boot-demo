@@ -42,12 +42,21 @@ public class BankDetailDaoImpl implements BankDetailDao {
 			int rowCount = 0;
 			while (rs.next()) {
 				fluxSink.next(mapResultSet(rs));
-				if (++rowCount % 5 == 0) {
+				if (++rowCount % 2 == 0) {
 					try {
 						LOGGER.info("in delay...");
 						Thread.sleep(1000);
 					} catch (InterruptedException e) {
 						LOGGER.error("error", e);
+					}
+				}
+
+				// TODO: remove later
+				if (true) {
+					if (rowCount == 10) {
+						fluxSink.complete();
+						LOGGER.info("completed publishing");
+						return null;
 					}
 				}
 			}
