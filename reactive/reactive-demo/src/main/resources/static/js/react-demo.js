@@ -5,9 +5,14 @@ var refreshButton = document.getElementById('fetch');
 var refreshClickStream = Rx.Observable.fromEvent(refreshButton, 'click');
 
 refreshClickStream.subscribe(event => {
-	var responseHandle = new EventSource(url);
-	responseHandle.onmessage = function(event) {
+	console.log("subscribed to click events on fetch");
+	var eventSource = new EventSource(url);
+	eventSource.onmessage = function(event) {
 	    addRow(event.data);
+	};
+	eventSource.onerror = function() {
+	    console.log("EventSource failed: closing the connection");
+	    eventSource.close();
 	};
 });
 
