@@ -2,6 +2,9 @@ package com.swayam.demo.springbootdemo.reactive.controller;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,6 +18,8 @@ import reactor.core.publisher.Flux;
 @RequestMapping("/bank-item")
 public class BankDetailController {
 
+	private static final Logger LOGGER = LoggerFactory.getLogger(BankDetailController.class);
+
 	private final BankDetailService bankDetailService;
 
 	public BankDetailController(BankDetailService bankDetailService) {
@@ -26,8 +31,9 @@ public class BankDetailController {
 		return bankDetailService.getBankDetails();
 	}
 
-	@RequestMapping(value = "/reactive", method = RequestMethod.GET)
+	@RequestMapping(value = "/reactive", method = RequestMethod.GET, produces = MediaType.APPLICATION_STREAM_JSON_VALUE)
 	public Flux<BankDetail> getBankDetailsReactive() {
+		LOGGER.info("serving reactive content");
 		return bankDetailService.getBankDetailsReactive();
 	}
 
