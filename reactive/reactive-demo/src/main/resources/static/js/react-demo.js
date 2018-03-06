@@ -9,14 +9,13 @@ refreshClickStream.subscribe(event => {
 			fetch(url, {
 			    cache: 'no-cache', 
 			    headers: {
-			      'content-type': 'application/json'
-//			    	'content-type': 'application/stream+json'
+			    	'content-type': 'application/json'
 			    },
-			    method: 'GET', 
-			  })).flatMap((res) => {
-				var text = res.json();
-				console.log("text: " + text);
-				return Rx.Observable.fromPromise(text);
+			    method: 'GET'
+			  })).map((res) => {
+				var json = res.text();
+				console.log("json: " + json);
+				return Rx.Observable.fromPromise(json);
 			}).subscribe(jsonData => {
 		responseSubscriber(jsonData);
 	});
