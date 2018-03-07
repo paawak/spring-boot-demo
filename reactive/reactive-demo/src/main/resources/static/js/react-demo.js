@@ -17,12 +17,14 @@ var eventSourceObserver = function (observer) {
 };
 
 refreshClickStream.flatMap(event => {
+    console.log("refresh clicked.");
     return Rx.Observable.create(eventSourceObserver);
 }).map(dataAsText => {
     return JSON.parse(dataAsText);
 }).subscribe(jsonData => {
     addRow(jsonData);
 });
+
 
 function addRow(newValueAsJson) {
     var tableDiv = document.getElementById("tableDiv");
