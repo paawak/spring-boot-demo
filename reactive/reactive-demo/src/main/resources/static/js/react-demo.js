@@ -1,11 +1,23 @@
 var url = 'http://localhost:8080/bank-item/reactive'; 
 
-var refreshButton = document.getElementById('fetch');
+var fetchButton = document.getElementById('fetch');
+var fetchClickStream = Rx.Observable.fromEvent(fetchButton, 'click');
 
-var refreshClickStream = Rx.Observable.fromEvent(refreshButton, 'click');
+var stopButton = document.getElementById('stop');
+var stopClickStream = Rx.Observable.fromEvent(stopButton, 'click');
+
+var eventSource = null;
+
+stopClickStream.subscribe(event => {
+    if (eventSource != null) {
+	console.log("closing the EventSource connection");
+	eventSource.close();
+    }
+});
+
 
 var eventSourceObserver = function (observer) {
-    var eventSource = new EventSource(url);
+    eventSource = new EventSource(url);
     eventSource.onmessage = function(event) {
 	observer.next(event.data);
     };
@@ -13,10 +25,11 @@ var eventSourceObserver = function (observer) {
 	console.log("EventSource failed: closing the connection");
 	eventSource.close();
 	observer.complete();
+	eventSource = null;
     };
 };
 
-refreshClickStream.flatMap(event => {
+fetchClickStream.flatMap(event => {
     console.log("refresh clicked.");
     return Rx.Observable.create(eventSourceObserver);
 }).map(dataAsText => {
