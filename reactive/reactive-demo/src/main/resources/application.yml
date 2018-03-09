@@ -13,10 +13,6 @@ logging:
 spring:
   flyway:
     locations: classpath:/sql
-  h2:
-    console:
-      enabled: true
-      path: /h2
   jpa:
     hibernate:
       ddl-auto: none
