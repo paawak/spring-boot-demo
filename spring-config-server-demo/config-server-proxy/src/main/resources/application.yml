@@ -4,8 +4,8 @@ server:
   
 security:
   user:
-    name: my_user
-    password: MySecret&23  
+    name: my_user          # custom user name
+    password: MySecret&23  # custom password: if not set, spring provides a random password on start-up
   
 spring:
   rabbitmq:
@@ -17,10 +17,10 @@ spring:
     config: 
       server:
         git:
-          uri: https://github.com/paawak/spring-boot-demo.git   
+          uri: https://github.com/paawak/spring-boot-demo.git   # path to the Git repo
           addLabelLocations: false
-          searchPaths: /spring-config-server-demo/config-server-props/{application} 
-          basedir: target/props-git-checkout
+          searchPaths: /spring-config-server-demo/config-server-props/{application}   # Path relative to the root of the Git repo, including the name of the client project
+          basedir: target/props-git-checkout    # location where the Git Repo is cloned by the proxy server
           cloneOnStart: true
           
 management:

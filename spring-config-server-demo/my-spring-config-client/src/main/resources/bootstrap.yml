@@ -1,6 +1,6 @@
 spring:
   application:
-    name: my-spring-config-client
+    name: my-spring-config-client   # This is the client name that would be replaced in the {application} placeholder while resolving the searchPaths for Git Repo
   cloud:
     config:
       uri: http://localhost:8888/config-server-proxy/

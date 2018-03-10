@@ -1,11 +1,11 @@
 spring:
   application:
-    name: config-server-proxy
+    name: config-server-proxy # This is the name/identifier of the project
     
-encrypt:
-  keyStore:
+encrypt:    # Details used for encryption and decryption
+  keyStore: 
     location: file:certs/config-server-keystore.jks
-    alias: config-server.palashray.com
-    password: Yellow98
-    secret: Red123
+    alias: config-server.palashray.com    
+    password: Yellow98    # Storepass 
+    secret: Red123        # KeyPass 
         
