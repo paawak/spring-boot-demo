@@ -4,7 +4,7 @@ server:
   
 app:
   code:
-    pass: false
+    pass: true
     secret: '{cipher}AQAl/OnOL52EQ6cUVj49gtgsRfHNpMD5gLvGL3FHIau8iZWWsnslJo8KLxiJGsKcOWaUR+7uVOOucIfBjhrNONB9oTkXbUbKSNkJRZhL1ustYnXkiYyLYdAUkAPat95DI+233EKcg8KCJoN9pzKQ9/YTeHlGiYV/NK4LNaxjrb5cz2/NZ97rVmJpnNDPQy1kvB28Z2/0PCIYgJTNbYRayokxFDbDeeEF3W2jXQhYYxc/h3NUc6FGf6rtVRmQqHCeAADlP0b0byf62/0fzglFlHoL6OP/NFcxzq50caI1vwH9T9Kj5HNAy9FJ48EmHq+rMor/6zr1kobUyU9HMKUxxe34+ycGK814qlZGXhhH5akr46L2UI2+l8YU42YXC9gpnrs='  
   
 spring:
