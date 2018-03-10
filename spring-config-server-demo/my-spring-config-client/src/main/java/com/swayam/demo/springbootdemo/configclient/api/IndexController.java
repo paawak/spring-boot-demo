@@ -17,7 +17,9 @@ public class IndexController {
 	public String handleIndex() {
 		String key1 = "app.code.secret";
 		String key2 = "app.code.pass";
-		return key1 + ":" + environment.getProperty(key1) + "\n" + key2 + ":" + environment.getProperty(key2);
+		String key3 = "app.code.key";
+		return key1 + ":" + environment.getProperty(key1) + "\n" + key2 + ":" + environment.getProperty(key2) + "\n"
+				+ key3 + ":" + environment.getProperty(key3);
 	}
 
 }
