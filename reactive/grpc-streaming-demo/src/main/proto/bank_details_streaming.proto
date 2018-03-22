@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.swayam.demo.springbootdemo.grpc.proto";
+option java_outer_classname = "BankDetailsStreamerProto";
+
+package bankDetails;
+
+service BankDetailStreamer {
+  rpc streamBankDetails(BankDetailRequest) returns (stream BankDetailDto) {}
+}
+
+message BankDetailRequest {
+}
+
+
+message BankDetailDto {
+	int32 id = 1;
+	int32 age = 2;
+	string job = 3;
+	string marital = 4;
+	string education = 5;
+	string defaulted = 6;
+	double balance = 7;
+	string housing = 8;
+	string loan = 9;
+	string contact = 10;
+	int32 day = 11;
+	string month = 12;
+	int32 duration = 13;
+	int32 campaign = 14;
+	int32 pdays = 15;
+	int32 previous = 16;
+	string poutcome = 17;
+	string y = 18;
+}
