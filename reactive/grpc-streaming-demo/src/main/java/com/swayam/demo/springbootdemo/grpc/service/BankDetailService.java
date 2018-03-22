@@ -1,15 +1,11 @@
 package com.swayam.demo.springbootdemo.grpc.service;
 
-import java.util.List;
+import com.swayam.demo.springbootdemo.grpc.proto.BankDetailDto;
 
-import com.swayam.demo.springbootdemo.grpc.model.BankDetail;
-
-import reactor.core.publisher.Flux;
+import io.grpc.stub.StreamObserver;
 
 public interface BankDetailService {
 
-	List<BankDetail> getBankDetails();
-
-	Flux<BankDetail> getBankDetailsReactive();
+    void getBankDetailsReactive(StreamObserver<BankDetailDto> responseObserver);
 
 }

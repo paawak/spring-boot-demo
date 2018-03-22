@@ -2,16 +2,15 @@ package com.swayam.demo.springbootdemo.grpc.dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.swayam.demo.springbootdemo.grpc.model.BankDetail;
+import com.swayam.demo.springbootdemo.grpc.proto.BankDetailDto;
 
-import reactor.core.publisher.FluxSink;
+import io.grpc.stub.StreamObserver;
 
 @Repository
 public class BankDetailDaoImpl implements BankDetailDao {
@@ -27,28 +26,15 @@ public class BankDetailDaoImpl implements BankDetailDao {
     }
 
     @Override
-    public List<BankDetail> getBankDetails() {
-
-	return jdbcTemplate.query(BANK_DETAILS_SQL, (ResultSet resultSet, int row) -> {
-	    return mapResultSet(resultSet);
-	});
-
-    }
-
-    @Override
-    public void publishBankDetails(FluxSink<BankDetail> fluxSink) {
+    public void getBankDetailsReactive(StreamObserver<BankDetailDto> responseObserver) {
 
 	jdbcTemplate.query(BANK_DETAILS_SQL, (ResultSet rs) -> {
 	    LOGGER.info("start publishing...");
 	    int rowCount = 0;
 	    while (rs.next()) {
 
-		if (fluxSink.isCancelled()) {
-		    LOGGER.info("publishing is cancelled");
-		    return null;
-		}
+		responseObserver.onNext(mapResultSet(rs));
 
-		fluxSink.next(mapResultSet(rs));
 		if (++rowCount % 2 == 0) {
 		    try {
 			LOGGER.info("in delay...");
@@ -60,32 +46,17 @@ public class BankDetailDaoImpl implements BankDetailDao {
 
 	    }
 	    LOGGER.info("completed publishing");
-	    fluxSink.complete();
+	    responseObserver.onCompleted();
 	    return null;
 	});
     }
 
-    private BankDetail mapResultSet(ResultSet resultSet) throws SQLException {
-	BankDetail bankDetail = new BankDetail();
-	bankDetail.setId(resultSet.getInt("id"));
-	bankDetail.setAge(resultSet.getInt("age"));
-	bankDetail.setJob(resultSet.getString("job"));
-	bankDetail.setMarital(resultSet.getString("marital"));
-	bankDetail.setEducation(resultSet.getString("education"));
-	bankDetail.setDefaulted(resultSet.getString("defaulted"));
-	bankDetail.setBalance(resultSet.getBigDecimal("balance"));
-	bankDetail.setHousing(resultSet.getString("housing"));
-	bankDetail.setLoan(resultSet.getString("loan"));
-	bankDetail.setContact(resultSet.getString("contact"));
-	bankDetail.setDay(resultSet.getInt("day"));
-	bankDetail.setMonth(resultSet.getString("month"));
-	bankDetail.setDuration(resultSet.getInt("duration"));
-	bankDetail.setCampaign(resultSet.getInt("campaign"));
-	bankDetail.setPdays(resultSet.getInt("pdays"));
-	bankDetail.setPrevious(resultSet.getInt("previous"));
-	bankDetail.setPoutcome(resultSet.getString("poutcome"));
-	bankDetail.setY(resultSet.getString("y"));
-	return bankDetail;
+    private BankDetailDto mapResultSet(ResultSet resultSet) throws SQLException {
+	return BankDetailDto.newBuilder().setId(resultSet.getInt("id")).setAge(resultSet.getInt("age")).setJob(resultSet.getString("job")).setMarital(resultSet.getString("marital"))
+		.setEducation(resultSet.getString("education")).setDefaulted(resultSet.getString("defaulted")).setBalance(resultSet.getDouble("balance")).setHousing(resultSet.getString("housing"))
+		.setLoan(resultSet.getString("loan")).setContact(resultSet.getString("contact")).setDay(resultSet.getInt("day")).setMonth(resultSet.getString("month"))
+		.setDuration(resultSet.getInt("duration")).setCampaign(resultSet.getInt("campaign")).setPdays(resultSet.getInt("pdays")).setPrevious(resultSet.getInt("previous"))
+		.setPoutcome(resultSet.getString("poutcome")).setY(resultSet.getString("y")).build();
     }
 
 }
