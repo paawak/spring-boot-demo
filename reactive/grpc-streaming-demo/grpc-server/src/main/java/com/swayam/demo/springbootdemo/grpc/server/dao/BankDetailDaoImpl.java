@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.swayam.demo.springbootdemo.grpc.proto.BankDetailDto;
+import com.swayam.demo.springbootdemo.grpc.shared.proto.BankDetailDto;
 
 import io.grpc.stub.StreamObserver;
 

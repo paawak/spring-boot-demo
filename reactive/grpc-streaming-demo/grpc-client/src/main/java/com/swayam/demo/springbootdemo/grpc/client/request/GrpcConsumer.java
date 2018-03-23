@@ -6,10 +6,10 @@ import java.util.concurrent.TimeUnit;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.swayam.demo.springbootdemo.grpc.proto.BankDetailDto;
-import com.swayam.demo.springbootdemo.grpc.proto.BankDetailRequest;
-import com.swayam.demo.springbootdemo.grpc.proto.BankDetailStreamerGrpc;
-import com.swayam.demo.springbootdemo.grpc.proto.BankDetailStreamerGrpc.BankDetailStreamerStub;
+import com.swayam.demo.springbootdemo.grpc.shared.proto.BankDetailDto;
+import com.swayam.demo.springbootdemo.grpc.shared.proto.BankDetailRequest;
+import com.swayam.demo.springbootdemo.grpc.shared.proto.BankDetailStreamerGrpc;
+import com.swayam.demo.springbootdemo.grpc.shared.proto.BankDetailStreamerGrpc.BankDetailStreamerStub;
 
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;

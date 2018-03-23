@@ -2,8 +2,8 @@ package com.swayam.demo.springbootdemo.grpc.server.service;
 
 import org.springframework.stereotype.Service;
 
-import com.swayam.demo.springbootdemo.grpc.proto.BankDetailDto;
 import com.swayam.demo.springbootdemo.grpc.server.dao.BankDetailDao;
+import com.swayam.demo.springbootdemo.grpc.shared.proto.BankDetailDto;
 
 import io.grpc.stub.StreamObserver;
 

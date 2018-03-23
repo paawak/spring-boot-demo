@@ -16,14 +16,13 @@ import io.grpc.ServerBuilder;
 @Configuration
 public class GrpcServerConfig {
 
-	private static final Logger logger = LoggerFactory.getLogger(GrpcServerConfig.class);
+    private static final Logger logger = LoggerFactory.getLogger(GrpcServerConfig.class);
 
-	@Bean(destroyMethod = "shutdown")
-	public Server server(@Value("${grpc.server.port}") int port, BankDetailStreamer bankDetailStreamer)
-			throws IOException {
-		Server server = ServerBuilder.forPort(port).addService(bankDetailStreamer).build().start();
-		logger.info("Grpc Server started, listening on " + port);
-		return server;
-	}
+    @Bean(destroyMethod = "shutdown")
+    public Server server(@Value("${grpc.server.port}") int port, BankDetailStreamer bankDetailStreamer) throws IOException {
+	Server server = ServerBuilder.forPort(port).addService(bankDetailStreamer).build().start();
+	logger.info("Grpc Server started, listening on " + port);
+	return server;
+    }
 
 }

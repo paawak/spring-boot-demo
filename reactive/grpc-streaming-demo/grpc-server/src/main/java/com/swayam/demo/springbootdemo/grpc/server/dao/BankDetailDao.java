@@ -1,6 +1,6 @@
 package com.swayam.demo.springbootdemo.grpc.server.dao;
 
-import com.swayam.demo.springbootdemo.grpc.proto.BankDetailDto;
+import com.swayam.demo.springbootdemo.grpc.shared.proto.BankDetailDto;
 
 import io.grpc.stub.StreamObserver;
 
