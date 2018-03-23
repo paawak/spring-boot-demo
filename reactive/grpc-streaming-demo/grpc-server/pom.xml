@@ -5,12 +5,12 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.swayam.demo.springbootdemo.grpc</groupId>
-	<artifactId>grpc-streaming-demo</artifactId>
+	<artifactId>grpc-server</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>grpc-streaming-demo</name>
-	<description>Demo project for gRPC Streaming</description>
+	<name>grpc-server</name>
+	<description>Demo project for gRPC Streaming Server</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
