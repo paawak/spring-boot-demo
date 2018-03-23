@@ -21,3 +21,7 @@ spring:
     username: sa
     password: sa
     driver-class-name: org.h2.Driver
+
+grpc:
+  server:
+    port: 50051    
