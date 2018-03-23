@@ -34,7 +34,6 @@ public class GrpcServerConfig {
 	    }
 
 	};
-	awaitThread.setDaemon(false);
 	awaitThread.start();
 
 	return server;
