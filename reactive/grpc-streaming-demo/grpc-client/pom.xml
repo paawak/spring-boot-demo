@@ -4,12 +4,12 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.swayam.demo.springbootdemo.reactive</groupId>
-	<artifactId>grpc-client-java</artifactId>
+	<groupId>com.swayam.demo.springbootdemo.grpc</groupId>
+	<artifactId>grpc-client</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>grpc-client-java</name>
+	<name>grpc-client</name>
 	<description>Demo project for gRPC Streaming Client</description>
 
 	<parent>
