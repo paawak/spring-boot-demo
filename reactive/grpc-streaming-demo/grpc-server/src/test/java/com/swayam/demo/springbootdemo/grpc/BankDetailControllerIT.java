@@ -6,7 +6,7 @@ import org.junit.Test;
 import org.springframework.http.MediaType;
 import org.springframework.web.reactive.function.client.WebClient;
 
-import com.swayam.demo.springbootdemo.grpc.model.BankDetail;
+import com.swayam.demo.springbootdemo.grpc.server.model.BankDetail;
 
 import reactor.core.publisher.Flux;
 

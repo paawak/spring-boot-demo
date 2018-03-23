@@ -1,4 +1,4 @@
-package com.swayam.demo.springbootdemo.grpc.config;
+package com.swayam.demo.springbootdemo.grpc.server.config;
 
 import java.io.IOException;
 
@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.swayam.demo.springbootdemo.grpc.controller.BankDetailStreamer;
+import com.swayam.demo.springbootdemo.grpc.server.controller.BankDetailStreamer;
 
 import io.grpc.Server;
 import io.grpc.ServerBuilder;

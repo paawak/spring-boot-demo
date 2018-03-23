@@ -1,4 +1,4 @@
-package com.swayam.demo.springbootdemo.grpc.model;
+package com.swayam.demo.springbootdemo.grpc.server.model;
 
 import java.math.BigDecimal;
 

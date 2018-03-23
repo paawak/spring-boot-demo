@@ -1,4 +1,4 @@
-package com.swayam.demo.springbootdemo.grpc;
+package com.swayam.demo.springbootdemo.grpc.server;
 
 import java.io.IOException;
 

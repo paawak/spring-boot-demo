@@ -1,4 +1,4 @@
-package com.swayam.demo.springbootdemo.grpc.dao;
+package com.swayam.demo.springbootdemo.grpc.server.dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
