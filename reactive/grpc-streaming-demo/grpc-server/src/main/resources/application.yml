@@ -1,8 +1,3 @@
-server:
-  port: 8080
-  servlet:
-    contextPath: /
-  
 logging:
   level:
     root: INFO

@@ -16,12 +16,27 @@ import io.grpc.ServerBuilder;
 @Configuration
 public class GrpcServerConfig {
 
-    private static final Logger logger = LoggerFactory.getLogger(GrpcServerConfig.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(GrpcServerConfig.class);
 
     @Bean(destroyMethod = "shutdown")
     public Server server(@Value("${grpc.server.port}") int port, BankDetailStreamer bankDetailStreamer) throws IOException {
-	Server server = ServerBuilder.forPort(port).addService(bankDetailStreamer).build().start();
-	logger.info("Grpc Server started, listening on " + port);
+	final Server server = ServerBuilder.forPort(port).addService(bankDetailStreamer).build().start();
+	LOGGER.info("Grpc Server started, listening on " + port);
+
+	Thread awaitThread = new Thread("gRPCServer") {
+	    @Override
+	    public void run() {
+		try {
+		    server.awaitTermination();
+		} catch (InterruptedException e) {
+		    LOGGER.error("error", e);
+		}
+	    }
+
+	};
+	awaitThread.setDaemon(false);
+	awaitThread.start();
+
 	return server;
     }
 
