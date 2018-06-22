@@ -1,0 +1,5 @@
+Publishing sub-folder
+heroku create
+git subtree push --prefix reactive/reactive-demo heroku master
+heroku ps:scale web=1
+heroku open
