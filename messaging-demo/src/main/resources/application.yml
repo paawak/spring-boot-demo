@@ -17,8 +17,6 @@ logging:
     org.hibernate: INFO
 
 spring:
-  profiles:
-    active: default, activemq
   flyway:
     locations: classpath:/sql
   jpa:
