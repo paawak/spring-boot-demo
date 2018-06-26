@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
@@ -62,6 +63,7 @@
 	</dependencies>
 
 	<build>
+		<finalName>${project.artifactId}</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
@@ -73,6 +75,52 @@
 			</plugin>
 		</plugins>
 	</build>
+
+	<profiles>
+		<profile>
+			<id>docker</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>io.fabric8</groupId>
+						<artifactId>docker-maven-plugin</artifactId>
+						<version>0.23.0</version>
+						<configuration>
+							<images>
+								<image>
+									<name>docker.io/paawak/${project.artifactId}</name>
+									<build>
+										<dockerFileDir>${basedir}</dockerFileDir>
+										<dockerFile>Dockerfile</dockerFile>
+										<tags>
+											<tag>${project.version}</tag>
+											<tag>latest</tag>
+										</tags>
+									</build>
+								</image>
+							</images>
+						</configuration>
+						<executions>
+							<execution>
+								<id>build-docker-image</id>
+								<phase>package</phase>
+								<goals>
+									<goal>build</goal>
+								</goals>
+							</execution>
+							<execution>
+								<id>push-docker-image</id>
+								<phase>install</phase>
+								<goals>
+									<goal>push</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 
 
 </project>
