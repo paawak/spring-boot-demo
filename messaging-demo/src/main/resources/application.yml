@@ -2,6 +2,12 @@ server:
   port: 8080
   servlet:
     contextPath: /
+    
+app:
+  config:
+    message:
+      queue: 
+        bank-data: bank-data-queue    
   
 logging:
   level:
@@ -11,6 +17,8 @@ logging:
     org.hibernate: INFO
 
 spring:
+  profiles:
+    active: default, activemq
   flyway:
     locations: classpath:/sql
   jpa:
@@ -21,8 +29,4 @@ spring:
     username: sa
     password: sa
     driver-class-name: org.h2.Driver
-  rabbitmq:
-    host: localhost
-    port: 5672
-    username: admin
-    password: admin123
+
