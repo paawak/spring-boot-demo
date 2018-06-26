@@ -18,7 +18,7 @@ public class ActiveMQConfig {
 
     private final String queueName;
 
-    public ActiveMQConfig(@Value("${app.config.message.queue.bank-data}") String queueName) {
+    public ActiveMQConfig(@Value(CommonMessageBrokerConfig.BANK_DATA_QUEUE_NAME) String queueName) {
 	this.queueName = queueName;
     }
 

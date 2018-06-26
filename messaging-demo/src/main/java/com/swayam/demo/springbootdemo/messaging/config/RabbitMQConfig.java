@@ -17,7 +17,7 @@ public class RabbitMQConfig {
 
     private final String queueName;
 
-    public RabbitMQConfig(@Value("${app.config.message.queue.bank-data}") String queueName) {
+    public RabbitMQConfig(@Value(CommonMessageBrokerConfig.BANK_DATA_QUEUE_NAME) String queueName) {
 	this.queueName = queueName;
     }
 

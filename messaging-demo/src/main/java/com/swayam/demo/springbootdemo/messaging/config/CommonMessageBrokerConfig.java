@@ -8,9 +8,11 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class CommonMessageBrokerConfig {
 
+    static final String BANK_DATA_QUEUE_NAME = "${app.config.message.queue.bank-data}";
+
     private final String queueName;
 
-    public CommonMessageBrokerConfig(@Value("${app.config.message.queue.bank-data}") String queueName) {
+    public CommonMessageBrokerConfig(@Value(BANK_DATA_QUEUE_NAME) String queueName) {
 	this.queueName = queueName;
     }
 
