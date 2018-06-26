@@ -1,6 +1,7 @@
 package com.swayam.demo.springbootdemo.messaging.config;
 
-import org.springframework.amqp.core.MessageListener;
+import javax.jms.MessageListener;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

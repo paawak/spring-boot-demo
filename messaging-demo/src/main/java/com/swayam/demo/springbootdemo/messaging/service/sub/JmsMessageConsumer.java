@@ -1,9 +1,10 @@
 package com.swayam.demo.springbootdemo.messaging.service.sub;
 
+import javax.jms.Message;
+import javax.jms.MessageListener;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.amqp.core.Message;
-import org.springframework.amqp.core.MessageListener;
 
 public class JmsMessageConsumer implements MessageListener {
 
