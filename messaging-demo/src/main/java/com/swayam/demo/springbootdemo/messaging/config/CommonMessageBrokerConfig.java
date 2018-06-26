@@ -15,7 +15,7 @@ public class CommonMessageBrokerConfig {
     }
 
     @Bean
-    Queue queue() {
+    public Queue queue() {
 	return new Queue(queueName, false);
     }
 
