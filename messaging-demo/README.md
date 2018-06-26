@@ -2,11 +2,18 @@
 
 Demo project for Spring Boot with a Message Broker
 
+# Building and pushing a Docker image
+	
+	mvn clean install -P docker
+	
+# Staring the docker image
+
+	docker run -it -p 8080:8080 -e spring.profiles.active=default,rabbitmq paawak/messaging-demo:latest
+
 # Starting with RabbitMQ:
 
 	-Dspring.profiles.active=default,rabbitmq
 	
-
 # Starting with ActiveMQ:
 
 	-Dspring.profiles.active=default,activemq	
