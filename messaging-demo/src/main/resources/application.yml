@@ -19,9 +19,6 @@ logging:
 spring:
   flyway:
     locations: classpath:/sql
-  jpa:
-    hibernate:
-      ddl-auto: none
   datasource:
     url: jdbc:h2:mem:bank_details
     username: sa
