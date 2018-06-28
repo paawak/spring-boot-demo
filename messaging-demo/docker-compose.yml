@@ -8,7 +8,9 @@ services:
         environment:
           - spring.profiles.active=default,rabbitmq,h2
         networks:
-            - paawak-net
+          - paawak-net
+        depends_on:
+          - rabbitmq                  
             
     rabbitmq:
         image: rabbitmq:3.7.6
