@@ -1,34 +1,30 @@
 package com.swayam.demo.springbootdemo.messaging.config;
 
-import org.springframework.amqp.core.AmqpTemplate;
-import org.springframework.amqp.core.MessageListener;
-import org.springframework.beans.factory.annotation.Value;
+import javax.jms.ConnectionFactory;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
+import org.springframework.core.env.Environment;
 
-import com.swayam.demo.springbootdemo.messaging.service.pub.AmqpQueuePublisher;
-import com.swayam.demo.springbootdemo.messaging.service.pub.QueuePublisher;
-import com.swayam.demo.springbootdemo.messaging.service.sub.AmqpMessageConsumer;
+import com.rabbitmq.jms.admin.RMQConnectionFactory;
 
 @Configuration
 @Profile("rabbitmq")
 public class RabbitMQConfig {
 
-    private final String queueName;
+	@Autowired
+	private Environment environment;
 
-    public RabbitMQConfig(@Value(CommonMessageBrokerConfig.BANK_DATA_QUEUE_NAME) String queueName) {
-	this.queueName = queueName;
-    }
-
-    @Bean
-    public MessageListener messageListener() {
-	return new AmqpMessageConsumer();
-    }
-
-    @Bean
-    public QueuePublisher amqpQueuePublisher(AmqpTemplate amqpTemplate) {
-	return new AmqpQueuePublisher(queueName, amqpTemplate);
-    }
+	@Bean
+	public ConnectionFactory connectionFactory() {
+		RMQConnectionFactory connectionFactory = new RMQConnectionFactory();
+		connectionFactory.setHost(environment.getProperty("app.config.rabbitmq.host"));
+		connectionFactory.setPort(Integer.parseInt(environment.getProperty("app.config.rabbitmq.port")));
+		connectionFactory.setUsername(environment.getProperty("app.config.rabbitmq.username"));
+		connectionFactory.setPassword(environment.getProperty("app.config.rabbitmq.password"));
+		return connectionFactory;
+	}
 
 }

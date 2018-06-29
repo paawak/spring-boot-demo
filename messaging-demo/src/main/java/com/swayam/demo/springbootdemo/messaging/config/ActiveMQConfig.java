@@ -1,35 +1,26 @@
 package com.swayam.demo.springbootdemo.messaging.config;
 
-import javax.jms.MessageListener;
+import javax.jms.ConnectionFactory;
 
-import org.springframework.beans.factory.annotation.Value;
+import org.apache.activemq.ActiveMQConnectionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
-import org.springframework.jms.core.JmsTemplate;
-
-import com.swayam.demo.springbootdemo.messaging.service.pub.JmsQueuePublisher;
-import com.swayam.demo.springbootdemo.messaging.service.pub.QueuePublisher;
-import com.swayam.demo.springbootdemo.messaging.service.sub.JmsMessageConsumer;
+import org.springframework.core.env.Environment;
 
 @Configuration
 @Profile("activemq")
 public class ActiveMQConfig {
 
-    private final String queueName;
+	@Autowired
+	private Environment environment;
 
-    public ActiveMQConfig(@Value(CommonMessageBrokerConfig.BANK_DATA_QUEUE_NAME) String queueName) {
-	this.queueName = queueName;
-    }
-
-    @Bean
-    public MessageListener messageListener() {
-	return new JmsMessageConsumer();
-    }
-
-    @Bean
-    public QueuePublisher jmsQueuePublisher(JmsTemplate jmsTemplate) {
-	return new JmsQueuePublisher(queueName, jmsTemplate);
-    }
+	@Bean
+	public ConnectionFactory connectionFactory() {
+		ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory();
+		connectionFactory.setBrokerURL(environment.getProperty("app.config.activemq.broker-url"));
+		return connectionFactory;
+	}
 
 }

@@ -1,6 +1,7 @@
-spring:
-  rabbitmq:
-    host: 172.16.238.1
-    port: 5673
-    username: admin
-    password: admin123
+app:
+  config:
+    rabbitmq:
+      host: 172.16.238.1
+      port: 5673
+      username: admin
+      password: admin123   

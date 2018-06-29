@@ -1,3 +1,4 @@
-spring:
-  activemq:
-    broker-url: tcp://localhost:61616
+app:
+  config:
+    activemq:
+      broker-url: tcp://localhost:61616
