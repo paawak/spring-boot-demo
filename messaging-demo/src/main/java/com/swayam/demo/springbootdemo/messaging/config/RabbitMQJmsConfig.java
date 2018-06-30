@@ -11,8 +11,8 @@ import org.springframework.core.env.Environment;
 import com.rabbitmq.jms.admin.RMQConnectionFactory;
 
 @Configuration
-@Profile("rabbitmq")
-public class RabbitMQConfig {
+@Profile("rabbitmq-jms")
+public class RabbitMQJmsConfig {
 
 	@Autowired
 	private Environment environment;
