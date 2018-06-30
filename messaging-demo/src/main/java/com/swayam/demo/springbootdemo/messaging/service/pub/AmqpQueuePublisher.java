@@ -2,23 +2,23 @@ package com.swayam.demo.springbootdemo.messaging.service.pub;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.jms.core.JmsTemplate;
+import org.springframework.amqp.core.AmqpTemplate;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.swayam.demo.springbootdemo.messaging.model.BankDetail;
 
-public class JmsQueuePublisher implements QueuePublisher {
+public class AmqpQueuePublisher implements QueuePublisher {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(JmsQueuePublisher.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(AmqpQueuePublisher.class);
 
     private final ObjectMapper mapper = new ObjectMapper();
     private final String queueName;
-    private final JmsTemplate jmsTemplate;
+    private final AmqpTemplate amqpTemplate;
 
-    public JmsQueuePublisher(String queueName, JmsTemplate jmsTemplate) {
+    public AmqpQueuePublisher(String queueName, AmqpTemplate amqpTemplate) {
 	this.queueName = queueName;
-	this.jmsTemplate = jmsTemplate;
+	this.amqpTemplate = amqpTemplate;
     }
 
     @Override
@@ -32,7 +32,7 @@ public class JmsQueuePublisher implements QueuePublisher {
 
 	LOGGER.info("trying to publish message `{}` to queue...", jsonString);
 
-	jmsTemplate.convertAndSend(queueName, jsonString);
+	amqpTemplate.convertAndSend(queueName, jsonString);
 
     }
 
