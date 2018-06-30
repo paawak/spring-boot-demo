@@ -6,7 +6,7 @@ services:
         ports:
           - "8080:8080"
         environment:
-          - spring.profiles.active=default,rabbitmq,h2
+          - spring.profiles.active=default,rabbitmq-amqp,h2
         networks:
           - paawak-net
         depends_on:

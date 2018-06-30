@@ -8,19 +8,23 @@ Demo project for Spring Boot with a Message Broker
 	
 # Staring the docker image
 
-	docker run -it -p 8080:8080 -e spring.profiles.active=default,rabbitmq paawak/messaging-demo:latest
+	docker run -it -p 8080:8080 -e spring.profiles.active=default,rabbitmq-amqp,h2 paawak/messaging-demo:latest
 	
 # Access the in-memory H2 DB:
 	
 	http://localhost:8080/h2/	
 
-# Starting with RabbitMQ:
+# Starting with RabbitMQ in AMQP mode:
 
-	-Dspring.profiles.active=default,rabbitmq
+	-Dspring.profiles.active=default,rabbitmq-amqp,h2
+	
+# Starting with RabbitMQ in JMS mode:
+
+	-Dspring.profiles.active=default,rabbitmq-jms,h2	
 	
 # Starting with ActiveMQ:
 
-	-Dspring.profiles.active=default,activemq	
+	-Dspring.profiles.active=default,activemq,h2	
 
 # Starting RabbitMQ in Docker
 
