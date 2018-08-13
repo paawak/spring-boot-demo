@@ -4,12 +4,12 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.swayam.demo.springbootdemo.reactive</groupId>
-	<artifactId>reactive-demo</artifactId>
+	<artifactId>reactive-demo-with-netty</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>reactive-demo</name>
-	<description>Demo project for Spring Boot</description>
+	<name>reactive-demo-with-netty</name>
+	<description>Demo project for Server to Client Reactive programming with Netty</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
