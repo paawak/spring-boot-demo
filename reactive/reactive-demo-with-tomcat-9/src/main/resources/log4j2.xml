@@ -23,14 +23,8 @@
 	</Appenders>
 
 	<Loggers>
-		<Logger name="com.swayam" level="DEBUG">
-		</Logger>
-		<Logger name="org.apache.tomcat" level="TRACE">
-		</Logger>
-		<Logger name="org.apache.coyote" level="TRACE">
-		</Logger>
-		<Logger name="org.apache.catalina" level="TRACE">
-		</Logger>
+		<Logger name="org.apache" level="DEBUG"/>
+		<Logger name="org.flywaydb" level="WARN"/>
 		<root level="INFO">
 			<AppenderRef ref="CONSOLE" />
 			<AppenderRef ref="FILE" />
