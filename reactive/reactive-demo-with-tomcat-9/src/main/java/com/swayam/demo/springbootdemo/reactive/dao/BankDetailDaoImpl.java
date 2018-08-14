@@ -49,9 +49,9 @@ public class BankDetailDaoImpl implements BankDetailDao {
 		}
 
 		fluxSink.next(mapResultSet(rs));
+		LOGGER.debug("published a chunk...");
 		if (++rowCount % 2 == 0) {
 		    try {
-			LOGGER.info("in delay...");
 			Thread.sleep(1000);
 		    } catch (InterruptedException e) {
 			LOGGER.error("error", e);
