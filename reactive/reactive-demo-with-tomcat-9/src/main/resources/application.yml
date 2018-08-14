@@ -2,14 +2,7 @@ server:
   port: 8080
   servlet:
     contextPath: /
-  
-logging:
-  level:
-    root: INFO
-    com.swayam.demo: DEBUG
-    org.springframework.web: INFO
-    org.hibernate: INFO
-
+    
 spring:
   flyway:
     locations: classpath:/sql
