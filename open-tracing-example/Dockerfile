@@ -1,4 +1,4 @@
-FROM openjdk:8u191-jdk-alpine3.7
+FROM openjdk:8u151-jdk-alpine3.7
 MAINTAINER Palash Ray <paawak@gmail.com>
 ENV APP_HOME=/usr/local/app
 ENV PROJECT_NAME=open-tracing-example
