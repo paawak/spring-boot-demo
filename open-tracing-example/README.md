@@ -2,11 +2,13 @@
 
 	java -XX:+FlightRecorder -XX:StartFlightRecording=duration=60s,filename=target/open-tracing-example.jfr -jar target/open-tracing-example.jar 
 
+# Creating Docker build
 
+	 mvn package -P docker.fabric8
 
 # Running this application in Docker
 
-	docker run -it -d -p 8080:8080 paawak/open-tracing-example:latest
+	docker run -it -d -p 8080:8080 docker.io/paawak/open-tracing-example:latest
 	
 # To add a new Currency
 	curl -H "Content-Type: application/json" -X POST -d @src/test/resources/json/save_new_currency_request.json http://localhost:8080/open-tracing-example/currency
