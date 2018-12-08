@@ -149,31 +149,7 @@
 
 	<profiles>
 		<profile>
-			<id>docker.spotify</id>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>com.spotify</groupId>
-						<artifactId>dockerfile-maven-plugin</artifactId>
-						<executions>
-							<execution>
-								<id>default</id>
-								<goals>
-									<goal>build</goal>
-									<goal>push</goal>
-								</goals>
-							</execution>
-						</executions>
-						<configuration>
-							<repository>docker.io/paawak/${project.artifactId}</repository>
-							<tag>${project.version}</tag>
-						</configuration>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-		<profile>
-			<id>docker.fabric8</id>
+			<id>docker</id>
 			<build>
 				<plugins>
 					<plugin>

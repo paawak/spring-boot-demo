@@ -4,7 +4,7 @@
 
 # Creating Docker build
 
-	 mvn package -P docker.fabric8
+	 mvn package -P docker
 
 # Running this application in Docker
 
