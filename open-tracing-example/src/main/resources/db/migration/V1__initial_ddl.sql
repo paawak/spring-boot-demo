@@ -1,0 +1,8 @@
+CREATE TABLE   currency  (
+	 id NUMERIC(7)  PRIMARY KEY  NOT NULL,
+	 name VARCHAR(30) NOT NULL,
+	 symbol CHARACTER(1) NOT NULL,
+	 active BOOLEAN NOT NULL DEFAULT TRUE
+);
+
+CREATE SEQUENCE seq_currency_id;
