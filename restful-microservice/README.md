@@ -1,3 +1,9 @@
+# Running standalone with Java Flight Recorder with OpenJDK 11
+
+	java -XX:+FlightRecorder -XX:StartFlightRecording=duration=60s,filename=target/restful-microservice.jfr -jar target/restful-microservice.jar 
+
+
+
 # Running this application in Docker
 
 	docker run -it -d -p 8080:8080 paawak/restful-microservice:latest
