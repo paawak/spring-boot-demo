@@ -6,6 +6,8 @@ server:
 debug: false
 
 spring:
+  application:
+    name: open-tracing-example  
   jpa:
     properties:
        hibernate:
@@ -19,3 +21,10 @@ spring:
     username: postgres
     password: postgres
     driver-class-name: org.postgresql.Driver
+
+opentracing:
+  jaeger:
+    udp-sender:
+      host: localhost
+      port: 6831    
+          

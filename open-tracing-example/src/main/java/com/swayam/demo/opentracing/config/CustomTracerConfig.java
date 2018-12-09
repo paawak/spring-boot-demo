@@ -2,7 +2,6 @@ package com.swayam.demo.opentracing.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -28,7 +27,7 @@ public class CustomTracerConfig implements WebMvcConfigurer {
         registry.addInterceptor(new TracingHandlerInterceptor(tracer));
     }
 
-    @Bean
+    // @Bean
     public FilterRegistrationBean<TracingFilter> tracingFilter() {
         TracingFilter tracingFilter = new TracingFilter(tracer);
         FilterRegistrationBean<TracingFilter> filterRegistrationBean = new FilterRegistrationBean<>(tracingFilter);
