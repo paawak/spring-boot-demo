@@ -25,4 +25,4 @@ RUN mkdir -p $APP_HOME && \
 
 WORKDIR $APP_HOME
 ADD target/${APP_JAR_NAME} .
-CMD java ${JFR_OPTS} -jar ${APP_JAR_NAME}
+CMD java ${JFR_OPTS} -Dspring.profiles.active=docker -jar ${APP_JAR_NAME}

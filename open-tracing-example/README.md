@@ -8,7 +8,7 @@
 
 # Running this application in Docker
 
-	docker run -it -v /kaaj/source/spring-boot-demo/open-tracing-example/target/jfr:/usr/local/logs/jfr -p 8080:8080 docker.io/paawak/open-tracing-example:latest
+	docker run -it -v /kaaj/source/spring-boot-demo/open-tracing-example/jfr:/usr/local/logs/jfr -p 8080:8080 docker.io/paawak/open-tracing-example:latest
 	
 # Swagger
 

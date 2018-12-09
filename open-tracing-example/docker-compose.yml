@@ -9,17 +9,30 @@ services:
       - "16686:16686"
     networks:
       - simulation
+      
+  postgres:
+    container_name: postgres
+    image: postgres:11.1-alpine
+    environment:
+      POSTGRES_DB: "spring_boot_rest"
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "postgres"
+    ports:
+      - "15432:5432"
+    networks:
+      - simulation      
 
   open-tracing-example:
     container_name: open-tracing-example
     image: docker.io/paawak/open-tracing-example:latest
     depends_on:
+      - postgres
       - jaeger
     ports:
       - "8080:8080"
       - "9999:9999"
     volumes:
-      - "/kaaj/source/spring-boot-demo/open-tracing-example/target/jfr:/usr/local/logs/jfr"
+      - "/kaaj/source/spring-boot-demo/open-tracing-example/jfr:/usr/local/logs/jfr"
     networks:
     - simulation
 

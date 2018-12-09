@@ -2,14 +2,14 @@ server:
   port: 8080
   context-path: /open-tracing-example
   
-debug: true
+debug: false
 
 spring:
   jpa:
     hibernate:
       ddl-auto: none
   datasource:
-    url: jdbc:postgresql://localhost:5432/spring_boot_rest
+    url: jdbc:postgresql://postgres:5432/spring_boot_rest
     username: postgres
     password: postgres
     driver-class-name: org.postgresql.Driver
