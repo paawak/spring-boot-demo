@@ -1,4 +1,4 @@
-package com.swayam.demo.springbootdemo.rest.entity;
+package com.swayam.demo.opentracing.entity;
 
 import java.io.Serializable;
 

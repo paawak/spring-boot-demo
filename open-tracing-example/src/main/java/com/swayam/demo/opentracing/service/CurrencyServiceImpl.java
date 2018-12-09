@@ -1,11 +1,11 @@
-package com.swayam.demo.springbootdemo.rest.service;
+package com.swayam.demo.opentracing.service;
 
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.swayam.demo.springbootdemo.rest.dao.CurrencyDao;
-import com.swayam.demo.springbootdemo.rest.entity.Currency;
+import com.swayam.demo.opentracing.dao.CurrencyDao;
+import com.swayam.demo.opentracing.entity.Currency;
 
 @Service
 public class CurrencyServiceImpl implements CurrencyService {

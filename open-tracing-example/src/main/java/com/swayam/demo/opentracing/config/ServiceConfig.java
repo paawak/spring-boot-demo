@@ -1,4 +1,4 @@
-package com.swayam.demo.springbootdemo.rest.config;
+package com.swayam.demo.opentracing.config;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;

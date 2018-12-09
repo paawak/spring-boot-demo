@@ -52,9 +52,9 @@
 						<include>com/swayam/demo/springbootdemo/rest/**</include>
 					</includes>
 					<excludes>
-						<exclude>com/swayam/demo/springbootdemo/rest/config/**</exclude>
-						<exclude>com/swayam/demo/springbootdemo/rest/entity/**</exclude>
-						<exclude>**/RestFulMicroserviceApplication.class</exclude>
+						<exclude>com/swayam/demo/opentracing/config/**</exclude>
+						<exclude>com/swayam/demo/opentracing/entity/**</exclude>
+						<exclude>**/OpenTracingExampleApplication.class</exclude>
 					</excludes>
 				</configuration>
 				<executions>

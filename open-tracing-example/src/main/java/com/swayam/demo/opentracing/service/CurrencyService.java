@@ -1,8 +1,8 @@
-package com.swayam.demo.springbootdemo.rest.service;
+package com.swayam.demo.opentracing.service;
 
 import java.util.List;
 
-import com.swayam.demo.springbootdemo.rest.entity.Currency;
+import com.swayam.demo.opentracing.entity.Currency;
 
 public interface CurrencyService {
 
