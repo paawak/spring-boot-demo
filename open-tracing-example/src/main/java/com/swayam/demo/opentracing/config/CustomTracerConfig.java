@@ -11,28 +11,26 @@ import io.opentracing.Tracer;
 import io.opentracing.contrib.spring.web.interceptor.TracingHandlerInterceptor;
 import io.opentracing.contrib.web.servlet.filter.TracingFilter;
 import io.opentracing.util.GlobalTracer;
-import se.hirt.jmc.opentracing.DelegatingJfrTracer;
 
 @Configuration
 public class CustomTracerConfig implements WebMvcConfigurer {
 
-    private final Tracer jfrTracer;
+    private final Tracer tracer;
 
     @Autowired
     public CustomTracerConfig(Tracer tracer) {
-        System.out.println("CustomTracerConfig.CustomTracerConfig(): " + tracer);
-        jfrTracer = new DelegatingJfrTracer(tracer);
-        GlobalTracer.register(jfrTracer);
+        this.tracer = tracer;
+        GlobalTracer.register(tracer);
     }
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new TracingHandlerInterceptor(jfrTracer));
+        registry.addInterceptor(new TracingHandlerInterceptor(tracer));
     }
 
     @Bean
     public FilterRegistrationBean<TracingFilter> tracingFilter() {
-        TracingFilter tracingFilter = new TracingFilter(jfrTracer);
+        TracingFilter tracingFilter = new TracingFilter(tracer);
         FilterRegistrationBean<TracingFilter> filterRegistrationBean = new FilterRegistrationBean<>(tracingFilter);
         filterRegistrationBean.addUrlPatterns("/*");
         filterRegistrationBean.setOrder(Integer.MIN_VALUE);

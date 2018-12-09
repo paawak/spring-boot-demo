@@ -4,8 +4,14 @@ server:
   
 debug: false
 
+
 spring:
   jpa:
+    properties:
+       hibernate:
+          jdbc:
+             lob:
+                non_contextual_creation: true
     hibernate:
       ddl-auto: none
   datasource:
