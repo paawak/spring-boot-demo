@@ -12,7 +12,7 @@ services:
       
   postgres:
     container_name: postgres
-    image: postgres:11.1-alpine
+    image: postgres:9.5.15-alpine
     environment:
       POSTGRES_DB: "spring_boot_rest"
       POSTGRES_USER: "postgres"
