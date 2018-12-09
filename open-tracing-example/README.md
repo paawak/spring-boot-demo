@@ -8,7 +8,7 @@
 
 # Running this application in Docker
 
-	docker run -it -v /usr/local/app/jfr:/kaaj/source/spring-boot-demo/open-tracing-example/target/jfr -p 8080:8080 docker.io/paawak/open-tracing-example:latest
+	docker run -it -v /kaaj/source/spring-boot-demo/open-tracing-example/target/jfr:/usr/local/logs/jfr -p 8080:8080 docker.io/paawak/open-tracing-example:latest
 	
 # To add a new Currency
 	curl -H "Content-Type: application/json" -X POST -d @src/test/resources/json/save_new_currency_request.json http://localhost:8080/open-tracing-example/currency
