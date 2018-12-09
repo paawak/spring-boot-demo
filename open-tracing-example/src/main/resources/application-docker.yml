@@ -1,6 +1,7 @@
 server:
   port: 8080
-  context-path: /open-tracing-example
+  servlet:
+    contextPath: /open-tracing-example
   
 debug: false
 

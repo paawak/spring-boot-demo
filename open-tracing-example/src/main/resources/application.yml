@@ -1,11 +1,17 @@
 server:
   port: 8080
-  context-path: /open-tracing-example
+  servlet:
+    contextPath: /open-tracing-example
   
-debug: true
+debug: false
 
 spring:
   jpa:
+    properties:
+       hibernate:
+          jdbc:
+             lob:
+                non_contextual_creation: true  
     hibernate:
       ddl-auto: none
   datasource:
