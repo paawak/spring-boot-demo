@@ -12,12 +12,12 @@ logging:
 
 spring:
   flyway:
-    locations: classpath:/sql
+    locations: classpath:/sql/prod
   jpa:
     hibernate:
       ddl-auto: none
   datasource:
-    url: jdbc:h2:mem:bank_details
+    url: jdbc:h2:mem:bank_details_prod
     username: sa
     password: sa
     driver-class-name: org.h2.Driver
