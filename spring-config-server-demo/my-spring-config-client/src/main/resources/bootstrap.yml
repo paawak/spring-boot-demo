@@ -13,4 +13,9 @@ spring:
         maxInterval: 3000
         multiplier: 1.5
         
-  
+logging:
+  level:
+    root: INFO
+    com.swayam.demo: DEBUG
+    org.springframework: INFO
+    org.springframework.amqp.rabbit.listener: INFO
