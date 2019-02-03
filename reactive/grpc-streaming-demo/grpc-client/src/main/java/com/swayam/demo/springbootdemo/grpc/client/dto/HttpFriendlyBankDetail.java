@@ -1,6 +1,6 @@
-package com.swayam.demo.springbootdemo.grpc.client.model;
+package com.swayam.demo.springbootdemo.grpc.client.dto;
 
-public class BankDetailForJson {
+public class HttpFriendlyBankDetail {
 
     private int id;
     private int age;
@@ -167,7 +167,7 @@ public class BankDetailForJson {
 
     @Override
     public String toString() {
-        return "BankDetailForJson [id=" + id + ", age=" + age + ", job=" + job + ", marital=" + marital + ", education=" + education + ", defaulted="
+        return "HttpFriendlyBankDetail [id=" + id + ", age=" + age + ", job=" + job + ", marital=" + marital + ", education=" + education + ", defaulted="
                 + defaulted + ", balance=" + balance + ", housing=" + housing + ", loan=" + loan + ", contact=" + contact + ", day=" + day + ", month=" + month
                 + ", duration=" + duration + ", campaign=" + campaign + ", pdays=" + pdays + ", previous=" + previous + ", poutcome=" + poutcome + ", y=" + y
                 + "]";

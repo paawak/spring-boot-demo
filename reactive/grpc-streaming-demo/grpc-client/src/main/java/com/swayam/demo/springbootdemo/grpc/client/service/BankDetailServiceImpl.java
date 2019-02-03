@@ -7,7 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import com.swayam.demo.springbootdemo.grpc.client.model.BankDetailForJson;
+import com.swayam.demo.springbootdemo.grpc.client.dto.HttpFriendlyBankDetail;
 import com.swayam.demo.springbootdemo.grpc.shared.proto.BankDetailDto;
 import com.swayam.demo.springbootdemo.grpc.shared.proto.BankDetailRequest;
 import com.swayam.demo.springbootdemo.grpc.shared.proto.BankDetailStreamerGrpc;
@@ -26,9 +26,9 @@ public class BankDetailServiceImpl implements BankDetailService {
     private static final Logger LOGGER = LoggerFactory.getLogger(BankDetailServiceImpl.class);
 
     @Override
-    public Flux<BankDetailForJson> getBankDetailsReactive() {
+    public Flux<HttpFriendlyBankDetail> getBankDetailsReactive() {
 
-        return Flux.create((FluxSink<BankDetailForJson> fluxSink) -> {
+        return Flux.create((FluxSink<HttpFriendlyBankDetail> fluxSink) -> {
 
             final CountDownLatch done = new CountDownLatch(1);
 
@@ -82,8 +82,8 @@ public class BankDetailServiceImpl implements BankDetailService {
 
     }
 
-    private BankDetailForJson adapt(BankDetailDto resultSet) {
-        BankDetailForJson bankDetail = new BankDetailForJson();
+    private HttpFriendlyBankDetail adapt(BankDetailDto resultSet) {
+        HttpFriendlyBankDetail bankDetail = new HttpFriendlyBankDetail();
         bankDetail.setId(resultSet.getId());
         bankDetail.setAge(resultSet.getAge());
         bankDetail.setJob(resultSet.getJob());
