@@ -13,6 +13,7 @@ import com.swayam.demo.springbootdemo.grpc.shared.proto.BankDetailStreamerGrpc.B
 import io.grpc.ManagedChannel;
 import io.grpc.stub.ClientCallStreamObserver;
 import io.grpc.stub.ClientResponseObserver;
+import io.grpc.stub.StreamObserver;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.FluxSink;
 
@@ -31,67 +32,67 @@ public class BankDetailServiceImpl implements BankDetailService {
     public Flux<HttpFriendlyBankDetail> getBankDetailsReactive() {
 
         return Flux.create((FluxSink<HttpFriendlyBankDetail> fluxSink) -> {
-
             BankDetailStreamerStub stub = BankDetailStreamerGrpc.newStub(channel);
-
-            ClientResponseObserver<BankDetailRequest, BankDetailDto> clientResponseObserver = new ClientResponseObserver<BankDetailRequest, BankDetailDto>() {
-
-                @Override
-                public void beforeStart(final ClientCallStreamObserver<BankDetailRequest> requestStream) {
-
-                }
-
-                @Override
-                public void onNext(BankDetailDto bankDetailDto) {
-
-                    if (fluxSink.isCancelled()) {
-                        LOGGER.info("publishing is cancelled");
-                        return;
-                    }
-
-                    LOGGER.info("bankDetailDto: {}", bankDetailDto);
-                    fluxSink.next(adapt(bankDetailDto));
-                }
-
-                @Override
-                public void onError(Throwable t) {
-                    LOGGER.error("error occurred", t);
-                    fluxSink.error(t);
-                }
-
-                @Override
-                public void onCompleted() {
-                    LOGGER.info("All Done");
-                    fluxSink.complete();
-                }
-            };
-
+            StreamObserver<BankDetailDto> clientResponseObserver = createObservable(fluxSink);
             stub.streamBankDetails(BankDetailRequest.newBuilder().build(), clientResponseObserver);
-
         });
 
     }
 
-    private HttpFriendlyBankDetail adapt(BankDetailDto resultSet) {
+    private StreamObserver<BankDetailDto> createObservable(FluxSink<HttpFriendlyBankDetail> fluxSink) {
+        return new ClientResponseObserver<BankDetailRequest, BankDetailDto>() {
+
+            @Override
+            public void beforeStart(final ClientCallStreamObserver<BankDetailRequest> requestStream) {
+
+            }
+
+            @Override
+            public void onNext(BankDetailDto bankDetailDto) {
+
+                if (fluxSink.isCancelled()) {
+                    LOGGER.info("publishing is cancelled");
+                    return;
+                }
+
+                LOGGER.info("bankDetailDto: {}", bankDetailDto);
+                fluxSink.next(adapt(bankDetailDto));
+            }
+
+            @Override
+            public void onError(Throwable t) {
+                LOGGER.error("error occurred", t);
+                fluxSink.error(t);
+            }
+
+            @Override
+            public void onCompleted() {
+                LOGGER.info("All Done");
+                fluxSink.complete();
+            }
+        };
+    }
+
+    private HttpFriendlyBankDetail adapt(BankDetailDto dto) {
         HttpFriendlyBankDetail bankDetail = new HttpFriendlyBankDetail();
-        bankDetail.setId(resultSet.getId());
-        bankDetail.setAge(resultSet.getAge());
-        bankDetail.setJob(resultSet.getJob());
-        bankDetail.setMarital(resultSet.getMarital());
-        bankDetail.setEducation(resultSet.getEducation());
-        bankDetail.setDefaulted(resultSet.getDefaulted());
-        bankDetail.setBalance(resultSet.getBalance());
-        bankDetail.setHousing(resultSet.getHousing());
-        bankDetail.setLoan(resultSet.getLoan());
-        bankDetail.setContact(resultSet.getContact());
-        bankDetail.setDay(resultSet.getDay());
-        bankDetail.setMonth(resultSet.getMonth());
-        bankDetail.setDuration(resultSet.getDuration());
-        bankDetail.setCampaign(resultSet.getCampaign());
-        bankDetail.setPdays(resultSet.getPdays());
-        bankDetail.setPrevious(resultSet.getPrevious());
-        bankDetail.setPoutcome(resultSet.getPoutcome());
-        bankDetail.setY(resultSet.getY());
+        bankDetail.setId(dto.getId());
+        bankDetail.setAge(dto.getAge());
+        bankDetail.setJob(dto.getJob());
+        bankDetail.setMarital(dto.getMarital());
+        bankDetail.setEducation(dto.getEducation());
+        bankDetail.setDefaulted(dto.getDefaulted());
+        bankDetail.setBalance(dto.getBalance());
+        bankDetail.setHousing(dto.getHousing());
+        bankDetail.setLoan(dto.getLoan());
+        bankDetail.setContact(dto.getContact());
+        bankDetail.setDay(dto.getDay());
+        bankDetail.setMonth(dto.getMonth());
+        bankDetail.setDuration(dto.getDuration());
+        bankDetail.setCampaign(dto.getCampaign());
+        bankDetail.setPdays(dto.getPdays());
+        bankDetail.setPrevious(dto.getPrevious());
+        bankDetail.setPoutcome(dto.getPoutcome());
+        bankDetail.setY(dto.getY());
         return bankDetail;
     }
 
