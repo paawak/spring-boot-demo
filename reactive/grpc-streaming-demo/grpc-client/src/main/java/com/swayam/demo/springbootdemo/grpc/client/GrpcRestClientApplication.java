@@ -4,9 +4,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class GrpcClientApplication {
+public class GrpcRestClientApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(GrpcClientApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(GrpcRestClientApplication.class, args);
+    }
 }
