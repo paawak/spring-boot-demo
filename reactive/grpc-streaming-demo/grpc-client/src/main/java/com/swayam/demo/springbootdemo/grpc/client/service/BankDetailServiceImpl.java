@@ -1,7 +1,5 @@
 package com.swayam.demo.springbootdemo.grpc.client.service;
 
-import java.util.concurrent.TimeUnit;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -13,7 +11,6 @@ import com.swayam.demo.springbootdemo.grpc.shared.proto.BankDetailStreamerGrpc;
 import com.swayam.demo.springbootdemo.grpc.shared.proto.BankDetailStreamerGrpc.BankDetailStreamerStub;
 
 import io.grpc.ManagedChannel;
-import io.grpc.ManagedChannelBuilder;
 import io.grpc.stub.ClientCallStreamObserver;
 import io.grpc.stub.ClientResponseObserver;
 import reactor.core.publisher.Flux;
@@ -24,14 +21,17 @@ public class BankDetailServiceImpl implements BankDetailService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(BankDetailServiceImpl.class);
 
+    private final ManagedChannel channel;
+
+    public BankDetailServiceImpl(ManagedChannel channel) {
+        this.channel = channel;
+    }
+
     @Override
     public Flux<HttpFriendlyBankDetail> getBankDetailsReactive() {
 
         return Flux.create((FluxSink<HttpFriendlyBankDetail> fluxSink) -> {
 
-            // final CountDownLatch done = new CountDownLatch(1);
-
-            ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", 50051).usePlaintext(true).build();
             BankDetailStreamerStub stub = BankDetailStreamerGrpc.newStub(channel);
 
             ClientResponseObserver<BankDetailRequest, BankDetailDto> clientResponseObserver = new ClientResponseObserver<BankDetailRequest, BankDetailDto>() {
@@ -51,31 +51,16 @@ public class BankDetailServiceImpl implements BankDetailService {
                 public void onError(Throwable t) {
                     LOGGER.error("error occurred", t);
                     fluxSink.error(t);
-                    // done.countDown();
                 }
 
                 @Override
                 public void onCompleted() {
                     LOGGER.info("All Done");
                     fluxSink.complete();
-                    // done.countDown();
                 }
             };
 
             stub.streamBankDetails(BankDetailRequest.newBuilder().build(), clientResponseObserver);
-
-            // try {
-            // done.await();
-            // } catch (InterruptedException e) {
-            // LOGGER.error("error occurred", e);
-            // }
-
-            // channel.shutdown();
-            try {
-                channel.awaitTermination(1, TimeUnit.SECONDS);
-            } catch (InterruptedException e) {
-                LOGGER.error("error occurred", e);
-            }
 
         });
 

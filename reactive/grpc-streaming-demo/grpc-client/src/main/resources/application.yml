@@ -9,3 +9,9 @@ logging:
     com.swayam.demo: DEBUG
     org.springframework.web: INFO
     org.hibernate: INFO
+
+grpc:
+   server:
+      host: localhost
+      port: 50051
+          
