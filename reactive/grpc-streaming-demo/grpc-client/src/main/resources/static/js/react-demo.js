@@ -1,4 +1,4 @@
-var url = 'http://localhost:8080/bank-item/reactive'; 
+var url = 'http://localhost:9090/bank-item/reactive'; 
 
 var fetchButton = document.getElementById('fetch');
 var fetchClickStream = Rx.Observable.fromEvent(fetchButton, 'click');
