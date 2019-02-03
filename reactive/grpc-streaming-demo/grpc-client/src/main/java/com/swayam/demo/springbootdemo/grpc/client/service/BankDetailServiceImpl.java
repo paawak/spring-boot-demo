@@ -1,6 +1,5 @@
 package com.swayam.demo.springbootdemo.grpc.client.service;
 
-import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
 import org.slf4j.Logger;
@@ -30,7 +29,7 @@ public class BankDetailServiceImpl implements BankDetailService {
 
         return Flux.create((FluxSink<HttpFriendlyBankDetail> fluxSink) -> {
 
-            final CountDownLatch done = new CountDownLatch(1);
+            // final CountDownLatch done = new CountDownLatch(1);
 
             ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", 50051).usePlaintext(true).build();
             BankDetailStreamerStub stub = BankDetailStreamerGrpc.newStub(channel);
@@ -52,26 +51,26 @@ public class BankDetailServiceImpl implements BankDetailService {
                 public void onError(Throwable t) {
                     LOGGER.error("error occurred", t);
                     fluxSink.error(t);
-                    done.countDown();
+                    // done.countDown();
                 }
 
                 @Override
                 public void onCompleted() {
                     LOGGER.info("All Done");
                     fluxSink.complete();
-                    done.countDown();
+                    // done.countDown();
                 }
             };
 
             stub.streamBankDetails(BankDetailRequest.newBuilder().build(), clientResponseObserver);
 
-            try {
-                done.await();
-            } catch (InterruptedException e) {
-                LOGGER.error("error occurred", e);
-            }
+            // try {
+            // done.await();
+            // } catch (InterruptedException e) {
+            // LOGGER.error("error occurred", e);
+            // }
 
-            channel.shutdown();
+            // channel.shutdown();
             try {
                 channel.awaitTermination(1, TimeUnit.SECONDS);
             } catch (InterruptedException e) {
