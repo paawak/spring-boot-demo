@@ -43,6 +43,12 @@ public class BankDetailServiceImpl implements BankDetailService {
 
                 @Override
                 public void onNext(BankDetailDto bankDetailDto) {
+
+                    if (fluxSink.isCancelled()) {
+                        LOGGER.info("publishing is cancelled");
+                        return;
+                    }
+
                     LOGGER.info("bankDetailDto: {}", bankDetailDto);
                     fluxSink.next(adapt(bankDetailDto));
                 }
