@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.swayam.demo.springbootdemo.grpc.client.model.BankDetailForJson;
 import com.swayam.demo.springbootdemo.grpc.client.service.BankDetailService;
-import com.swayam.demo.springbootdemo.grpc.shared.proto.BankDetailDto;
 
 import reactor.core.publisher.Flux;
 
@@ -24,7 +24,7 @@ public class BankDetailController {
     }
 
     @RequestMapping(value = "/reactive", method = RequestMethod.GET)
-    public Flux<BankDetailDto> getBankDetailsReactive() {
+    public Flux<BankDetailForJson> getBankDetailsReactive() {
         LOGGER.info("serving reactive content");
         return bankDetailService.getBankDetailsReactive();
     }
