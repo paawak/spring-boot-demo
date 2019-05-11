@@ -1,0 +1,9 @@
+spring:
+   data:
+      cassandra:
+         contact-points: localhost
+         port: 9042
+         ssl: false
+         username: cassandra
+         password: cassandra
+         keyspace-name: reactive_demo
