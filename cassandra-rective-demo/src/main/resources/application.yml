@@ -7,3 +7,8 @@ spring:
          username: cassandra
          password: cassandra
          keyspace-name: reactive_demo
+         
+logging:
+   level:
+      com.datastax.driver: INFO  
+      org.springframework.web: INFO       
