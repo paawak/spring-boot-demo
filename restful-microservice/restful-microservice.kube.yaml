@@ -1,0 +1,17 @@
+---
+ apiVersion: v1
+ kind: Pod
+ metadata:
+   name: restful-microservice
+   labels:
+     app: restful-microservice
+ spec:
+   hostNetwork: true
+   containers:
+     - name: restful-microservice
+       image: paawak/restful-microservice:latest
+       ports:
+         - containerPort: 8080
+
+
+
