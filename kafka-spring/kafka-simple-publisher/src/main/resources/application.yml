@@ -15,8 +15,8 @@ spring:
     producer:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
-      properties:
-        spring.json.type.mapping: bankDetail:com.swayam.demo.springbootdemo.kafka.model.BankDetail      
+      #properties:
+       # spring.json.type.mapping: bankDetail:com.swayam.demo.springbootdemo.kafka.model.BankDetail      
   flyway:
     locations: classpath:/sql
   jpa:

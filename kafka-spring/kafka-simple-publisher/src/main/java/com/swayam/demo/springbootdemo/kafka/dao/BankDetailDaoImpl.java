@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.swayam.demo.springbootdemo.kafka.model.BankDetail;
+import com.swayam.demo.springbootdemo.kafkadto.BankDetail;
 
 import reactor.core.publisher.FluxSink;
 

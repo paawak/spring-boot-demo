@@ -11,7 +11,7 @@ import org.springframework.cloud.stream.annotation.StreamListener;
 import org.springframework.cloud.stream.binder.kafka.streams.annotations.KafkaStreamsProcessor;
 import org.springframework.messaging.handler.annotation.SendTo;
 
-import com.swayam.demo.springbootdemo.kafkastream.dto.BankDetail;
+import com.swayam.demo.springbootdemo.kafkadto.BankDetail;
 
 @EnableBinding(KafkaStreamsProcessor.class)
 public class BankDetailsProcessor {

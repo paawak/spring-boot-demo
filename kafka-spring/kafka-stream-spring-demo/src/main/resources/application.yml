@@ -4,9 +4,9 @@ spring.cloud.stream.kafka.streams:
   binder.configuration:
     default.key.serde: org.apache.kafka.common.serialization.Serdes$StringSerde
     default.value.serde: org.springframework.kafka.support.serializer.JsonSerde
-  bindings.input.consumer.application-id: basic-word-count
+  bindings.input.consumer.application-id: bank-details-aggregator
 spring.cloud.stream.bindings.output:
   destination: bank-details-by-job
 spring.cloud.stream.bindings.input:
   destination: bank-details
-spring.cloud.stream.kafka.binder.headerMapperBeanName: kafkaHeaderMapper
+#spring.cloud.stream.kafka.binder.headerMapperBeanName: kafkaHeaderMapper

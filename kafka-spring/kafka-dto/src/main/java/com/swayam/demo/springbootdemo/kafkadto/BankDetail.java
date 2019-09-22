@@ -1,4 +1,4 @@
-package com.swayam.demo.springbootdemo.kafka.model;
+package com.swayam.demo.springbootdemo.kafkadto;
 
 import java.math.BigDecimal;
 

@@ -2,14 +2,14 @@ package com.swayam.demo.springbootdemo.kafka.service;
 
 import java.util.List;
 
-import com.swayam.demo.springbootdemo.kafka.model.BankDetail;
+import com.swayam.demo.springbootdemo.kafkadto.BankDetail;
 
 import reactor.core.publisher.Flux;
 
 public interface BankDetailService {
 
-	List<BankDetail> getBankDetails();
+    List<BankDetail> getBankDetails();
 
-	Flux<BankDetail> getBankDetailsReactive();
+    Flux<BankDetail> getBankDetailsReactive();
 
 }
