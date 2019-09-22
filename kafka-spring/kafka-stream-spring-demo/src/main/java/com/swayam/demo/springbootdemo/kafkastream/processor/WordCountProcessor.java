@@ -1,4 +1,4 @@
-package com.swayam.demo.springbootdemo.processor;
+package com.swayam.demo.springbootdemo.kafkastream.processor;
 
 import java.util.Arrays;
 import java.util.Date;

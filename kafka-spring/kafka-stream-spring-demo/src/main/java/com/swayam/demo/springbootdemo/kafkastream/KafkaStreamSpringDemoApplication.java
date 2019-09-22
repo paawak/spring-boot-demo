@@ -1,4 +1,4 @@
-package com.swayam.demo.springbootdemo;
+package com.swayam.demo.springbootdemo.kafkastream;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

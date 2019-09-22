@@ -9,7 +9,7 @@
 		<version>2.1.8.RELEASE</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.swayam.demo.springbootdemo</groupId>
+	<groupId>com.swayam.demo.springbootdemo.kafkastream</groupId>
 	<artifactId>kafka-stream-spring-demo</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>kafka-stream-spring-demo</name>

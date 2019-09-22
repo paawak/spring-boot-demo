@@ -1,4 +1,4 @@
-package com.swayam.demo.springbootdemo.processor;
+package com.swayam.demo.springbootdemo.kafkastream.processor;
 
 import org.apache.kafka.common.serialization.Serdes;
 import org.apache.kafka.common.utils.Bytes;
@@ -12,7 +12,7 @@ import org.springframework.cloud.stream.annotation.Output;
 import org.springframework.cloud.stream.annotation.StreamListener;
 import org.springframework.messaging.handler.annotation.SendTo;
 
-import com.swayam.demo.springbootdemo.processor.WordCountKTable.KTableProcessor;
+import com.swayam.demo.springbootdemo.kafkastream.processor.WordCountKTable.KTableProcessor;
 
 @EnableBinding(KTableProcessor.class)
 public class WordCountKTable {
