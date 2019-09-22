@@ -5,15 +5,16 @@ spring.cloud.stream.kafka.streams:
     default.key.serde: org.apache.kafka.common.serialization.Serdes$StringSerde
     default.value.serde: org.apache.kafka.common.serialization.Serdes$StringSerde
   bindings.input.consumer.application-id: basic-word-count
+  bindings.kTableInput.consumer.application-id: word-count-aggegator
 spring.cloud.stream.bindings.output:
   destination: counts
 spring.cloud.stream.bindings.input:
   destination: words
-#For testing
-spring.cloud.stream.bindings.input1.destination: counts
-spring.cloud.stream.bindings.output1.destination: words
-spring.cloud.stream.bindings.input1.binder: kafka
-spring.cloud.stream.bindings.output1.binder: kafka
+spring.cloud.stream.bindings.kTableInput:
+  destination: counts
+spring.cloud.stream.bindings.kTableOutput:
+  destination: results
+
 
 
 
