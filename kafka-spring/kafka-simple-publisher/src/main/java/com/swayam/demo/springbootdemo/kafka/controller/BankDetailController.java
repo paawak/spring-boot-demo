@@ -28,7 +28,8 @@ public class BankDetailController {
     @RequestMapping(value = "/send", method = RequestMethod.GET)
     public void getBankDetailsReactive() {
         LOGGER.info("sending messages to topic: {}", TOPIC_NAME);
-        bankDetailService.getBankDetailsReactive().doOnNext(bankDetail -> template.send(TOPIC_NAME, bankDetail));
+        bankDetailService.getBankDetailsReactive().doOnNext(bankDetail -> template.send(TOPIC_NAME, Integer.toString(bankDetail.getId()), bankDetail))
+                .subscribe();
     }
 
 }

@@ -14,6 +14,7 @@ spring:
   kafka:
     producer:
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
   flyway:
     locations: classpath:/sql
   jpa:
