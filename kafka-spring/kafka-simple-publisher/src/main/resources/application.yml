@@ -11,6 +11,9 @@ logging:
     org.hibernate: INFO
 
 spring:
+  kafka:
+    producer:
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
   flyway:
     locations: classpath:/sql
   jpa:
