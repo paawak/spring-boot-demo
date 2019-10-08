@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.swayam.demo.springbootdemo.kafka.service.BankDetailService;
+import com.swayam.demo.springbootdemo.kafkadto.BankDetail;
 
 @RestController
 @RequestMapping("/kafka")
@@ -17,10 +18,10 @@ public class BankDetailController {
 
     private static final String TOPIC_NAME = "bank-details";
 
-    private final KafkaTemplate<Object, Object> template;
+    private final KafkaTemplate<String, BankDetail> template;
     private final BankDetailService bankDetailService;
 
-    public BankDetailController(KafkaTemplate<Object, Object> template, BankDetailService bankDetailService) {
+    public BankDetailController(KafkaTemplate<String, BankDetail> template, BankDetailService bankDetailService) {
         this.template = template;
         this.bankDetailService = bankDetailService;
     }
