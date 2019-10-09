@@ -8,7 +8,8 @@ public class BankDetailRoute extends RouteBuilder {
 
     @Override
     public void configure() throws Exception {
-        from("kafka:bank-details?brokers=localhost:9092&autoOffsetReset=earliest").log("${headers[__TypeId__]} : ${body}");
+        from("kafka:bank-details?brokers=localhost:9092" + "&autoOffsetReset=earliest" + "&autoCommitEnable=true" + "&groupId=bank-detail-camel-consumer")
+                .log("${headers[__TypeId__]} : ${body}");
     }
 
 }
