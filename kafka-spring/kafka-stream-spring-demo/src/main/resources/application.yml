@@ -16,3 +16,5 @@ spring.cloud.stream.bindings.output:
   destination: bank-details-by-job
 spring.cloud.stream.bindings.input:
   destination: bank-details
+
+spring.cloud.stream.kafka.streams.binder.configuration.default.value.serde: com.swayam.demo.springbootdemo.kafkastream.config.BankDetailSerde
