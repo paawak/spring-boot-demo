@@ -3,10 +3,7 @@ spring:
     streams:
       application-id: BankDetailApplication
       properties: 
-        spring.json.trusted.packages: '*'
-    consumer:
-      properties:
-        spring.json.trusted.packages: '*'
+        spring.json.trusted.packages: 'com.swayam.demo.springbootdemo.kafkadto'
           
 spring.cloud.stream.bindings.output.contentType: application/json
 spring.cloud.stream.kafka.streams.binder.configuration.commit.interval.ms: 1000
@@ -19,5 +16,3 @@ spring.cloud.stream.bindings.output:
   destination: bank-details-by-job
 spring.cloud.stream.bindings.input:
   destination: bank-details
-  contentType: application/json
-spring.bindings.input.consumer.properties.spring.json.trusted.packages: '*'
