@@ -1,4 +1,13 @@
-spring.kafka.streams.application-id: BankDetailApplication
+spring:
+  kafka:
+    streams:
+      application-id: BankDetailApplication
+      properties: 
+        spring.json.trusted.packages: '*'
+    consumer:
+      properties:
+        spring.json.trusted.packages: '*'
+          
 spring.cloud.stream.bindings.output.contentType: application/json
 spring.cloud.stream.kafka.streams.binder.configuration.commit.interval.ms: 1000
 spring.cloud.stream.kafka.streams:
@@ -10,4 +19,5 @@ spring.cloud.stream.bindings.output:
   destination: bank-details-by-job
 spring.cloud.stream.bindings.input:
   destination: bank-details
-#spring.bindings.input.consumer.properties.spring.json.trusted.packages: '*'
+  contentType: application/json
+spring.bindings.input.consumer.properties.spring.json.trusted.packages: '*'
