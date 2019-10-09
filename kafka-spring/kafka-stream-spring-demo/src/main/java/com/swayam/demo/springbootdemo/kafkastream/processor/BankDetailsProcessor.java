@@ -22,14 +22,22 @@ public class BankDetailsProcessor {
 
     @StreamListener(INPUT_TOPIC)
     @SendTo(OUTPUT_TOPIC)
-    public KStream<String, List<BankDetail>> processBankDetails(KStream<String, BankDetail> bankDetailStream) {
+    public KStream<String, Long> processBankDetails(KStream<String, BankDetail> bankDetailStream) {
+
+        System.out.println("************************************* BankDetailsProcessor.processBankDetails()");
 
         Initializer<List<BankDetail>> initializer = ArrayList::new;
+
+        System.out.println("11111111111111111111111111111111111111111111 BankDetailsProcessor.processBankDetails()");
+
         Aggregator<String, BankDetail, List<BankDetail>> aggregator = (key, bankDetail, bankDetailPartialList) -> {
             bankDetailPartialList.add(bankDetail);
             return bankDetailPartialList;
         };
-        return bankDetailStream.groupBy((key, bankDetail) -> bankDetail.getJob()).aggregate(initializer, aggregator).toStream();
+
+        System.out.println("22222222222222222222222222222222222222222222222 BankDetailsProcessor.processBankDetails()");
+
+        return bankDetailStream.groupBy((key, bankDetail) -> bankDetail.getJob()).count().toStream();
 
         // input.flatMapValues(value ->
         // Arrays.asList(value.toLowerCase().split("\\W+"))).map((key, value) ->

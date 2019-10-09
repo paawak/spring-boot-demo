@@ -17,8 +17,11 @@ public class KafkaConfig {
     public ProducerFactory<Object, Object> producerFactory(KafkaProperties properties) {
         Map<String, Object> props = properties.buildProducerProperties();
         JsonSerializer<Object> valueSerializer = new JsonSerializer<>();
-        // do not have type info
-        valueSerializer.setAddTypeInfo(false);
+        if (false) {
+            // the default is true, we need the type info as of now, otherwise
+            // the downstream system will not work
+            valueSerializer.setAddTypeInfo(false);
+        }
         DefaultKafkaProducerFactory<Object, Object> pf = new DefaultKafkaProducerFactory(props, new StringSerializer(), valueSerializer);
         return pf;
     }
