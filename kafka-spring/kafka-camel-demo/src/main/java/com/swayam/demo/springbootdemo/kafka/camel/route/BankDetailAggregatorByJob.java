@@ -19,7 +19,9 @@ public class BankDetailAggregatorByJob extends RouteBuilder {
 			.json(JsonLibrary.Jackson, BankDetail.class).process(exchange -> {
 			    BankDetail bankDetail = exchange.getIn().getBody(BankDetail.class);
 			    exchange.getIn().setBody(toJobCount(bankDetail), JobCount.class);
-			}).log("${headers[" + KafkaConstants.KEY + "]} : ${body}");
+			})
+			.aggregate(header(KafkaConstants.KEY), new BankDetailAggregationStrategy())
+			.log("${headers[" + KafkaConstants.KEY + "]} : ${body}");
     }
 
     private JobCount toJobCount(BankDetail bankDetail) {
