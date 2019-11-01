@@ -12,6 +12,8 @@ import com.swayam.demo.springbootdemo.kafkadto.JobCount;
 @Service
 public class BankDetailAggregatorByJob extends RouteBuilder {
 
+    public static final String AGGREGATION_CHANNEL = "direct:bank-details-aggr";
+
     private final NamedParameterJdbcOperations jdbcTemplate;
 
     public BankDetailAggregatorByJob(NamedParameterJdbcOperations jdbcTemplate) {
@@ -22,15 +24,18 @@ public class BankDetailAggregatorByJob extends RouteBuilder {
     public void configure() {
 	from("kafka:bank-details?brokers=localhost:9092" + "&autoOffsetReset=earliest"
 		+ "&autoCommitEnable=true" + "&groupId=bank-detail-camel-consumer")
-			.routeId(BankDetailAggregatorByJob.class.getSimpleName()).unmarshal()
-			.json(JsonLibrary.Jackson, BankDetail.class).process(exchange -> {
-			    BankDetail bankDetail = exchange.getIn().getBody(BankDetail.class);
-			    exchange.getIn().setBody(toJobCount(bankDetail), JobCount.class);
-			})
-			.aggregate(header(KafkaConstants.KEY),
-				new BankDetailAggregationStrategy(jdbcTemplate))
-			.completionInterval(3_000)
-			.log("${headers[" + KafkaConstants.KEY + "]} : ${body}");
+			.routeId(BankDetailAggregatorByJob.class.getSimpleName() + "_to_channel")
+			.to(AGGREGATION_CHANNEL);
+
+	from(AGGREGATION_CHANNEL)
+		.routeId(BankDetailAggregatorByJob.class.getSimpleName() + "_aggregation")
+		.unmarshal().json(JsonLibrary.Jackson, BankDetail.class).process(exchange -> {
+		    BankDetail bankDetail = exchange.getIn().getBody(BankDetail.class);
+		    exchange.getIn().setBody(toJobCount(bankDetail), JobCount.class);
+		})
+		.aggregate(header(KafkaConstants.KEY),
+			new BankDetailAggregationStrategy(jdbcTemplate))
+		.completionInterval(3_000).log("${headers[" + KafkaConstants.KEY + "]} : ${body}");
     }
 
     private JobCount toJobCount(BankDetail bankDetail) {
