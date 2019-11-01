@@ -11,6 +11,10 @@ logging:
     org.hibernate: INFO
 
 spring:
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
   kafka:
     producer:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer

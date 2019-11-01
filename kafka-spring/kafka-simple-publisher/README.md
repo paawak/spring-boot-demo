@@ -6,6 +6,13 @@ This is a simple Kafka Publisher which publishes BankDetails on to the Topic *ba
 
 	curl "http://localhost:8090/kafka/send"
 
+## H2 Database Console
+
+	http://localhost:8090/h2-console
+	
+Jdbc URL: *jdbc:h2:mem:bank_details*	
+
+User name/password: *sa*	
 
 # Kafka Reference
 ## Starting Kafka Locally
