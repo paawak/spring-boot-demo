@@ -3,6 +3,7 @@ package com.swayam.demo.springbootdemo.kafka.camel.route;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.kafka.KafkaConstants;
 import org.apache.camel.model.dataformat.JsonLibrary;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcOperations;
 import org.springframework.stereotype.Service;
 
 import com.swayam.demo.springbootdemo.kafkadto.BankDetail;
@@ -10,6 +11,12 @@ import com.swayam.demo.springbootdemo.kafkadto.JobCount;
 
 @Service
 public class BankDetailAggregatorByJob extends RouteBuilder {
+
+    private final NamedParameterJdbcOperations jdbcTemplate;
+
+    public BankDetailAggregatorByJob(NamedParameterJdbcOperations jdbcTemplate) {
+	this.jdbcTemplate = jdbcTemplate;
+    }
 
     @Override
     public void configure() {
@@ -20,7 +27,8 @@ public class BankDetailAggregatorByJob extends RouteBuilder {
 			    BankDetail bankDetail = exchange.getIn().getBody(BankDetail.class);
 			    exchange.getIn().setBody(toJobCount(bankDetail), JobCount.class);
 			})
-			.aggregate(header(KafkaConstants.KEY), new BankDetailAggregationStrategy())
+			.aggregate(header(KafkaConstants.KEY),
+				new BankDetailAggregationStrategy(jdbcTemplate))
 			.completionInterval(3_000)
 			.log("${headers[" + KafkaConstants.KEY + "]} : ${body}");
     }
