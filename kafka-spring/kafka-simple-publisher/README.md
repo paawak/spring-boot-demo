@@ -4,7 +4,7 @@ This is a simple Kafka Publisher which publishes BankDetails on to the Topic *ba
 
 ## Trigger publishing of Bank Details
 
-	curl "http://localhost:8090/kafka/send"
+	curl "http://localhost:8090/kafka/publish"
 
 ## H2 Database Console
 

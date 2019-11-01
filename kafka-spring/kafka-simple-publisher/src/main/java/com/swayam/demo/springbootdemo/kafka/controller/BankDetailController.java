@@ -1,5 +1,7 @@
 package com.swayam.demo.springbootdemo.kafka.controller;
 
+import java.util.UUID;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -21,16 +23,19 @@ public class BankDetailController {
     private final KafkaTemplate<String, BankDetail> template;
     private final BankDetailService bankDetailService;
 
-    public BankDetailController(KafkaTemplate<String, BankDetail> template, BankDetailService bankDetailService) {
-        this.template = template;
-        this.bankDetailService = bankDetailService;
+    public BankDetailController(KafkaTemplate<String, BankDetail> template,
+	    BankDetailService bankDetailService) {
+	this.template = template;
+	this.bankDetailService = bankDetailService;
     }
 
-    @RequestMapping(value = "/send", method = RequestMethod.GET)
-    public void getBankDetailsReactive() {
-        LOGGER.info("sending messages to topic: {}", TOPIC_NAME);
-        bankDetailService.getBankDetailsReactive().doOnNext(bankDetail -> template.send(TOPIC_NAME, Integer.toString(bankDetail.getId()), bankDetail))
-                .subscribe();
+    @RequestMapping(value = "/publish", method = RequestMethod.GET)
+    public void publishMessagesOnKafka() {
+	UUID key = UUID.randomUUID();
+	LOGGER.info("sending messages to topic: {} with the key: {}", TOPIC_NAME, key);
+	bankDetailService.getBankDetailsReactive()
+		.doOnNext(bankDetail -> template.send(TOPIC_NAME, key.toString(), bankDetail))
+		.subscribe();
     }
 
 }
