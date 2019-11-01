@@ -22,7 +22,7 @@ User name/password: *sa*
 	
 ## Creating a Topic
 
-	bin/kafka-topics.sh --create --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1 --topic bank-details
+	bin/kafka-topics.sh --create --bootstrap-server localhost:9092 --replication-factor 1 --partitions 10 --topic bank-details
 	
 ## Listing all Topics
 
