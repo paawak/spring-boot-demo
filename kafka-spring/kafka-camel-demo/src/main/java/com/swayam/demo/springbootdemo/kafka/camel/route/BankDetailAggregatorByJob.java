@@ -21,6 +21,7 @@ public class BankDetailAggregatorByJob extends RouteBuilder {
 			    exchange.getIn().setBody(toJobCount(bankDetail), JobCount.class);
 			})
 			.aggregate(header(KafkaConstants.KEY), new BankDetailAggregationStrategy())
+			.completionInterval(3_000)
 			.log("${headers[" + KafkaConstants.KEY + "]} : ${body}");
     }
 
