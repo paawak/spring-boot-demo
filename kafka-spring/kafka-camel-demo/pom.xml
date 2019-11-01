@@ -44,6 +44,11 @@
 
 	<dependencies>
 		<dependency>
+			<groupId>com.swayam.demo.springbootdemo.kafkadto</groupId>
+			<artifactId>kafka-dto</artifactId>
+			<version>1.0-SNAPSHOT</version>
+		</dependency>	
+		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-webflux</artifactId>
 		</dependency>
@@ -69,6 +74,10 @@
 		<dependency>
 			<groupId>org.apache.camel</groupId>
 			<artifactId>camel-kafka-starter</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-jackson-starter</artifactId>
 		</dependency>
 		<!-- END :: Camel -->
 
