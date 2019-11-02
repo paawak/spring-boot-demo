@@ -1,3 +1,6 @@
+appConfig:
+  eventPublishDelayMillis: 200
+
 server:
   port: 8090
   servlet:
