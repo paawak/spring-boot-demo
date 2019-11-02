@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.swayam.demo.springbootdemo.kafka.service.BankDetailService;
 import com.swayam.demo.springbootdemo.kafkadto.BankDetail;
+import com.swayam.demo.springbootdemo.kafkadto.CompletionSignal;
 
 @RestController
 @RequestMapping("/kafka")
@@ -20,10 +21,10 @@ public class BankDetailController {
 
     private static final String TOPIC_NAME = "bank-details";
 
-    private final KafkaTemplate<String, BankDetail> template;
+    private final KafkaTemplate<String, Object> template;
     private final BankDetailService bankDetailService;
 
-    public BankDetailController(KafkaTemplate<String, BankDetail> template,
+    public BankDetailController(KafkaTemplate<String, Object> template,
 	    BankDetailService bankDetailService) {
 	this.template = template;
 	this.bankDetailService = bankDetailService;
@@ -35,6 +36,8 @@ public class BankDetailController {
 	LOGGER.info("sending messages to topic: {} with the key: {}", TOPIC_NAME, key);
 	bankDetailService.getBankDetailsReactive()
 		.doOnNext(bankDetail -> template.send(TOPIC_NAME, key.toString(), bankDetail))
+		.doOnComplete(() -> template.send(TOPIC_NAME, key.toString(),
+			new CompletionSignal(BankDetail.class, key.toString())))
 		.subscribe();
     }
 

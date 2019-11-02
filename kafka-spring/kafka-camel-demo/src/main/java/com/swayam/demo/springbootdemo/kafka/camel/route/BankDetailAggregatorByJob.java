@@ -7,12 +7,11 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcOperations;
 import org.springframework.stereotype.Service;
 
 import com.swayam.demo.springbootdemo.kafkadto.BankDetail;
+import com.swayam.demo.springbootdemo.kafkadto.CompletionSignal;
 import com.swayam.demo.springbootdemo.kafkadto.JobCount;
 
 @Service
 public class BankDetailAggregatorByJob extends RouteBuilder {
-
-    public static final String AGGREGATION_CHANNEL = "direct:bank-details-aggr";
 
     private final NamedParameterJdbcOperations jdbcTemplate;
 
@@ -25,17 +24,25 @@ public class BankDetailAggregatorByJob extends RouteBuilder {
 	from("kafka:bank-details?brokers=localhost:9092" + "&autoOffsetReset=earliest"
 		+ "&autoCommitEnable=true" + "&groupId=bank-detail-camel-consumer")
 			.routeId(BankDetailAggregatorByJob.class.getSimpleName() + "_to_channel")
-			.to(AGGREGATION_CHANNEL);
+			.to(RouteConstants.AGGREGATION_CHANNEL);
 
-	from(AGGREGATION_CHANNEL)
-		.routeId(BankDetailAggregatorByJob.class.getSimpleName() + "_aggregation")
+	from(RouteConstants.AGGREGATION_CHANNEL)
+		.routeId(BankDetailAggregatorByJob.class.getSimpleName() + "_aggregation").choice()
+		.when(simple("${header." + RouteConstants.TYPE_HEADER + "} == '"
+			+ BankDetail.class.getName() + "'"))
 		.unmarshal().json(JsonLibrary.Jackson, BankDetail.class).process(exchange -> {
 		    BankDetail bankDetail = exchange.getIn().getBody(BankDetail.class);
 		    exchange.getIn().setBody(toJobCount(bankDetail), JobCount.class);
-		})
+		}).when(simple("${header." + RouteConstants.TYPE_HEADER + "} == '"
+			+ CompletionSignal.class.getName() + "'"))
+		.process(exchange -> {
+		    exchange.getIn().setBody(new JobCount(), JobCount.class);
+		    exchange.getIn().setHeader(RouteConstants.COMPLETE_JOB_AGGREGATION_COMMAND,
+			    Boolean.TRUE);
+		}).end()
 		.aggregate(header(KafkaConstants.KEY),
 			new BankDetailAggregationStrategy(jdbcTemplate))
-		.completionInterval(3_000).log("${headers[" + KafkaConstants.KEY + "]} : ${body}");
+		.log("${headers[" + KafkaConstants.KEY + "]} : ${body}");
     }
 
     private JobCount toJobCount(BankDetail bankDetail) {

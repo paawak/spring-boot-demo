@@ -13,7 +13,7 @@ import org.apache.kafka.common.TopicPartition;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.springframework.stereotype.Service;
 
-import com.swayam.demo.springbootdemo.kafka.camel.route.BankDetailAggregatorByJob;
+import com.swayam.demo.springbootdemo.kafka.camel.route.RouteConstants;
 
 @Service
 public class KafkaMessageReplayer {
@@ -39,7 +39,7 @@ public class KafkaMessageReplayer {
 		}
 		String value = record.value();
 		System.out.println("********** " + value);
-		producerTemplate.sendBodyAndHeader(BankDetailAggregatorByJob.AGGREGATION_CHANNEL,
+		producerTemplate.sendBodyAndHeader(RouteConstants.AGGREGATION_CHANNEL,
 			value, KafkaConstants.KEY, correlationId);
 	    }
 	}

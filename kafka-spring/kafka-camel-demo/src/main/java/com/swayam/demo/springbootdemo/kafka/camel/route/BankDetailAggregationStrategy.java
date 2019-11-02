@@ -4,13 +4,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.camel.Exchange;
+import org.apache.camel.Predicate;
 import org.apache.camel.component.kafka.KafkaConstants;
 import org.apache.camel.processor.aggregate.AggregationStrategy;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcOperations;
 
 import com.swayam.demo.springbootdemo.kafkadto.JobCount;
 
-public class BankDetailAggregationStrategy implements AggregationStrategy {
+public class BankDetailAggregationStrategy implements AggregationStrategy, Predicate {
 
     private final NamedParameterJdbcOperations jdbcTemplate;
 
@@ -28,6 +29,15 @@ public class BankDetailAggregationStrategy implements AggregationStrategy {
 
 	JobCount partialResults = oldExchange.getIn().getBody(JobCount.class);
 	JobCount newMessage = newExchange.getIn().getBody(JobCount.class);
+
+	// any header that is used by the predicate should be set in the message
+	// returned from this method
+	Boolean shouldComplete = newExchange.getIn()
+		.getHeader(RouteConstants.COMPLETE_JOB_AGGREGATION_COMMAND, Boolean.class);
+	if (shouldComplete != null) {
+	    oldExchange.getIn().setHeader(RouteConstants.COMPLETE_JOB_AGGREGATION_COMMAND,
+		    shouldComplete);
+	}
 
 	oldExchange.getIn().setBody(doAggregation(newMessage, partialResults), JobCount.class);
 	return oldExchange;
@@ -79,6 +89,13 @@ public class BankDetailAggregationStrategy implements AggregationStrategy {
 
 	jdbcTemplate.update(sql, params);
 
+    }
+
+    @Override
+    public boolean matches(Exchange oldExchange) {
+	Boolean shouldComplete = oldExchange.getIn()
+		.getHeader(RouteConstants.COMPLETE_JOB_AGGREGATION_COMMAND, Boolean.class);
+	return shouldComplete == null ? false : shouldComplete;
     }
 
 }
