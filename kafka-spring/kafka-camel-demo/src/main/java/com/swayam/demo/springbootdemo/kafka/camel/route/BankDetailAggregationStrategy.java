@@ -7,11 +7,14 @@ import org.apache.camel.Exchange;
 import org.apache.camel.Predicate;
 import org.apache.camel.component.kafka.KafkaConstants;
 import org.apache.camel.processor.aggregate.AggregationStrategy;
+import org.apache.camel.processor.aggregate.CompletionAwareAggregationStrategy;
+import org.apache.camel.processor.aggregate.TimeoutAwareAggregationStrategy;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcOperations;
 
 import com.swayam.demo.springbootdemo.kafkadto.JobCount;
 
-public class BankDetailAggregationStrategy implements AggregationStrategy, Predicate {
+public class BankDetailAggregationStrategy implements AggregationStrategy, Predicate,
+	CompletionAwareAggregationStrategy, TimeoutAwareAggregationStrategy {
 
     private final NamedParameterJdbcOperations jdbcTemplate;
 
@@ -96,6 +99,17 @@ public class BankDetailAggregationStrategy implements AggregationStrategy, Predi
 	Boolean shouldComplete = oldExchange.getIn()
 		.getHeader(RouteConstants.COMPLETE_JOB_AGGREGATION_COMMAND, Boolean.class);
 	return shouldComplete == null ? false : shouldComplete;
+    }
+
+    @Override
+    public void onCompletion(Exchange exchange) {
+	System.out.println(
+		"########### BankDetailAggregationStrategy.onCompletion() Aggregation is complete");
+    }
+
+    @Override
+    public void timeout(Exchange oldExchange, int index, int total, long timeout) {
+	System.out.println("############# BankDetailAggregationStrategy.timeout(): timed out");
     }
 
 }
