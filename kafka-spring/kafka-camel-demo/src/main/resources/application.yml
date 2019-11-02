@@ -17,7 +17,7 @@ spring:
     hibernate:
       ddl-auto: none
   datasource:
-    url: jdbc:mysql://localhost:3306/camel_aggregation?useSSL=false
+    url: jdbc:mysql://localhost:3306/camel_aggregation?useSSL=false&allowPublicKeyRetrieval=true
     username: root
     password: root123
     driver-class-name: com.mysql.cj.jdbc.Driver
