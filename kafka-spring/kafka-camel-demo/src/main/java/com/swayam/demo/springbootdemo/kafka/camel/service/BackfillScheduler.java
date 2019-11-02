@@ -22,11 +22,11 @@ public class BackfillScheduler {
     public void checkForBackill() {
 	String sql = "SELECT * FROM message_outbox";
 	jdbcTemplate.query(sql, (ResultSet resultSet) -> {
-	    // String correlationId = resultSet.getString("correlation_id");
+	    String correlationId = resultSet.getString("correlation_id");
 	    String topicName = resultSet.getString("topic_name");
 	    int partitionId = resultSet.getInt("partition_id");
 	    long offset = resultSet.getLong("offset");
-	    kafkaMessageReplayer.replayMessages(topicName, partitionId, offset);
+	    kafkaMessageReplayer.replayMessages(topicName, partitionId, offset, correlationId);
 	});
     }
 
