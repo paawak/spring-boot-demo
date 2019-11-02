@@ -62,13 +62,14 @@ public class BankDetailAggregationStrategy implements AggregationStrategy {
 
     private void persistMessageOffsetDetails(Exchange message) {
 	String sql =
-		"INSERT INTO message_outbox (correlation_id, topic_name, partition_id, offset) VALUES (:correlationId, :topicName, :partitionId, :offset)";
+		"INSERT INTO message_outbox (correlation_id, processor_id, topic_name, partition_id, offset) VALUES (:correlationId, :processorId, :topicName, :partitionId, :offset)";
 	Map<String, Object> params = new HashMap<>();
 	params.put("correlationId", message.getIn().getHeader(KafkaConstants.KEY, String.class));
 	params.put("topicName", message.getIn().getHeader(KafkaConstants.TOPIC, String.class));
 	params.put("partitionId",
 		message.getIn().getHeader(KafkaConstants.PARTITION, Integer.class));
 	params.put("offset", message.getIn().getHeader(KafkaConstants.OFFSET, Long.class));
+	params.put("processorId",System.getProperty("processorId"));
 
 	jdbcTemplate.update(sql, params);
 
