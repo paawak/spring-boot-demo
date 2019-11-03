@@ -9,12 +9,16 @@ import org.apache.camel.component.kafka.KafkaConstants;
 import org.apache.camel.processor.aggregate.AggregationStrategy;
 import org.apache.camel.processor.aggregate.CompletionAwareAggregationStrategy;
 import org.apache.camel.processor.aggregate.TimeoutAwareAggregationStrategy;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcOperations;
 
 import com.swayam.demo.springbootdemo.kafkadto.JobCount;
 
 public class BankDetailAggregationStrategy implements AggregationStrategy, Predicate,
 	CompletionAwareAggregationStrategy, TimeoutAwareAggregationStrategy {
+
+    private static final Logger LOG = LoggerFactory.getLogger(BankDetailAggregationStrategy.class);
 
     private final NamedParameterJdbcOperations jdbcTemplate;
 
@@ -44,6 +48,29 @@ public class BankDetailAggregationStrategy implements AggregationStrategy, Predi
 
 	oldExchange.getIn().setBody(doAggregation(newMessage, partialResults), JobCount.class);
 	return oldExchange;
+    }
+
+    @Override
+    public boolean matches(Exchange oldExchange) {
+	Boolean shouldComplete = oldExchange.getIn()
+		.getHeader(RouteConstants.COMPLETE_JOB_AGGREGATION_COMMAND, Boolean.class);
+	return shouldComplete == null ? false : shouldComplete;
+    }
+
+    @Override
+    public void onCompletion(Exchange exchange) {
+	String correlationId = getCorrelationId(exchange);
+	LOG.info("########### Aggregation is complete for {}", correlationId);
+	String sql = "DELETE FROM message_outbox WHERE correlation_id = :correlationId";
+	Map<String, Object> params = new HashMap<>();
+	params.put("correlationId", correlationId);
+	jdbcTemplate.update(sql, params);
+	LOG.info("Record from *message_outbox* table deleted for {}", correlationId);
+    }
+
+    @Override
+    public void timeout(Exchange oldExchange, int index, int total, long timeout) {
+	LOG.info("############# timed out");
     }
 
     private JobCount doAggregation(JobCount newMessage, JobCount partialResults) {
@@ -77,7 +104,7 @@ public class BankDetailAggregationStrategy implements AggregationStrategy, Predi
 	String sql =
 		"INSERT INTO message_outbox (correlation_id, processor_id, topic_name, partition_id, offset) VALUES (:correlationId, :processorId, :topicName, :partitionId, :offset)";
 	Map<String, Object> params = new HashMap<>();
-	params.put("correlationId", message.getIn().getHeader(KafkaConstants.KEY, String.class));
+	params.put("correlationId", getCorrelationId(message));
 	String topicName = message.getIn().getHeader(KafkaConstants.TOPIC, String.class);
 	// TODO: i dont want to insert records which are being replayed
 	// FIXME: come-up with a better solution
@@ -94,22 +121,8 @@ public class BankDetailAggregationStrategy implements AggregationStrategy, Predi
 
     }
 
-    @Override
-    public boolean matches(Exchange oldExchange) {
-	Boolean shouldComplete = oldExchange.getIn()
-		.getHeader(RouteConstants.COMPLETE_JOB_AGGREGATION_COMMAND, Boolean.class);
-	return shouldComplete == null ? false : shouldComplete;
-    }
-
-    @Override
-    public void onCompletion(Exchange exchange) {
-	System.out.println(
-		"########### BankDetailAggregationStrategy.onCompletion() Aggregation is complete");
-    }
-
-    @Override
-    public void timeout(Exchange oldExchange, int index, int total, long timeout) {
-	System.out.println("############# BankDetailAggregationStrategy.timeout(): timed out");
+    private String getCorrelationId(Exchange message) {
+	return message.getIn().getHeader(KafkaConstants.KEY, String.class);
     }
 
 }

@@ -1,6 +1,6 @@
 
 CREATE TABLE message_outbox (
-  correlation_id varchar(50) NOT NULL,
+  correlation_id varchar(50) PRIMARY KEY NOT NULL,
   processor_id varchar(50) NOT NULL,
   topic_name varchar(200) NOT NULL,
   partition_id smallint NOT NULL,
