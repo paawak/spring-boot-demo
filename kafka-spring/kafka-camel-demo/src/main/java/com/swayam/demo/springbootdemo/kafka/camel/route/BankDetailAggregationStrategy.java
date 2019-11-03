@@ -34,9 +34,6 @@ public class BankDetailAggregationStrategy implements AggregationStrategy, Predi
 	    return newExchange;
 	}
 
-	JobCount partialResults = oldExchange.getIn().getBody(JobCount.class);
-	JobCount newMessage = newExchange.getIn().getBody(JobCount.class);
-
 	// any header that is used by the predicate should be set in the message
 	// returned from this method
 	Boolean shouldComplete = newExchange.getIn()
@@ -45,6 +42,9 @@ public class BankDetailAggregationStrategy implements AggregationStrategy, Predi
 	    oldExchange.getIn().setHeader(RouteConstants.COMPLETE_JOB_AGGREGATION_COMMAND,
 		    shouldComplete);
 	}
+
+	JobCount partialResults = oldExchange.getIn().getBody(JobCount.class);
+	JobCount newMessage = newExchange.getIn().getBody(JobCount.class);
 
 	oldExchange.getIn().setBody(doAggregation(newMessage, partialResults), JobCount.class);
 	return oldExchange;
