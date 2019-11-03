@@ -46,7 +46,7 @@ public class KafkaMessageReplayer {
 		    return;
 		}
 		String value = record.value();
-		LOG.info("correlationId: {}, value: {}", correlationId, value);
+		LOG.trace("correlationId: {}, value: {}", correlationId, value);
 		Map<String, Object> headers = new HashMap<>();
 		headers.put(KafkaConstants.KEY, correlationId);
 		headers.putAll(StreamSupport.stream(record.headers().spliterator(), false)
