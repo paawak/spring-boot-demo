@@ -2,7 +2,11 @@ package com.swayam.demo.springbootdemo.kafka.camel.service;
 
 import java.time.Duration;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 import org.apache.camel.ProducerTemplate;
 import org.apache.camel.component.kafka.KafkaConstants;
@@ -11,12 +15,16 @@ import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.apache.kafka.common.TopicPartition;
 import org.apache.kafka.common.serialization.StringDeserializer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.swayam.demo.springbootdemo.kafka.camel.route.RouteConstants;
 
 @Service
 public class KafkaMessageReplayer {
+
+    private static final Logger LOG = LoggerFactory.getLogger(KafkaMessageReplayer.class);
 
     private final ProducerTemplate producerTemplate;
 
@@ -38,9 +46,14 @@ public class KafkaMessageReplayer {
 		    return;
 		}
 		String value = record.value();
-		System.out.println("********** " + value);
-		producerTemplate.sendBodyAndHeader(RouteConstants.AGGREGATION_CHANNEL,
-			value, KafkaConstants.KEY, correlationId);
+		LOG.info("correlationId: {}, value: {}", correlationId, value);
+		Map<String, Object> headers = new HashMap<>();
+		headers.put(KafkaConstants.KEY, correlationId);
+		headers.putAll(StreamSupport.stream(record.headers().spliterator(), false)
+			.collect(Collectors.toMap(header -> header.key(),
+				header -> new String(header.value()))));
+		producerTemplate.sendBodyAndHeaders(RouteConstants.AGGREGATION_CHANNEL, value,
+			headers);
 	    }
 	}
     }
