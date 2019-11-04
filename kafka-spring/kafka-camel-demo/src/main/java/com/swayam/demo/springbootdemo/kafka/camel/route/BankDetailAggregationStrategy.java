@@ -8,6 +8,7 @@ import org.apache.camel.Predicate;
 import org.apache.camel.component.kafka.KafkaConstants;
 import org.apache.camel.processor.aggregate.AggregationStrategy;
 import org.apache.camel.processor.aggregate.CompletionAwareAggregationStrategy;
+import org.apache.camel.processor.aggregate.PreCompletionAwareAggregationStrategy;
 import org.apache.camel.processor.aggregate.TimeoutAwareAggregationStrategy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,10 +16,13 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcOperations;
 
 import com.swayam.demo.springbootdemo.kafkadto.JobCount;
 
-public class BankDetailAggregationStrategy implements AggregationStrategy, Predicate,
-	CompletionAwareAggregationStrategy, TimeoutAwareAggregationStrategy {
+public class BankDetailAggregationStrategy
+	implements AggregationStrategy, Predicate, CompletionAwareAggregationStrategy,
+	TimeoutAwareAggregationStrategy, PreCompletionAwareAggregationStrategy {
 
     private static final Logger LOG = LoggerFactory.getLogger(BankDetailAggregationStrategy.class);
+
+    private static final String PRECOMPLETE_DIRTY_AGGREGATION = "PRECOMPLETE_DIRTY_AGGREGATION";
 
     private final NamedParameterJdbcOperations jdbcTemplate;
 
@@ -30,6 +34,10 @@ public class BankDetailAggregationStrategy implements AggregationStrategy, Predi
     public Exchange aggregate(Exchange oldExchange, Exchange newExchange) {
 	if (oldExchange == null) {
 	    // insert only the first message in the group
+	    if (checkforDirtyAggregation(newExchange)) {
+		newExchange.getIn().setHeader(PRECOMPLETE_DIRTY_AGGREGATION, Boolean.TRUE);
+		return newExchange;
+	    }
 	    persistMessageOffsetDetails(newExchange);
 	    return newExchange;
 	}
@@ -73,6 +81,12 @@ public class BankDetailAggregationStrategy implements AggregationStrategy, Predi
 	LOG.info("############# timed out");
     }
 
+    @Override
+    public boolean preComplete(Exchange oldExchange, Exchange newExchange) {
+	return Boolean.TRUE.equals(
+		newExchange.getIn().getHeader(PRECOMPLETE_DIRTY_AGGREGATION, Boolean.class));
+    }
+
     private JobCount doAggregation(JobCount newMessage, JobCount partialResults) {
 	JobCount aggregate = new JobCount();
 
@@ -101,16 +115,15 @@ public class BankDetailAggregationStrategy implements AggregationStrategy, Predi
     }
 
     private void persistMessageOffsetDetails(Exchange message) {
+	if (Boolean.TRUE.equals(
+		message.getIn().getHeader(RouteConstants.BACKFILL_IN_PROGRESS, Boolean.class))) {
+	    return;
+	}
 	String sql =
 		"INSERT INTO message_outbox (correlation_id, processor_id, topic_name, partition_id, offset) VALUES (:correlationId, :processorId, :topicName, :partitionId, :offset)";
 	Map<String, Object> params = new HashMap<>();
 	params.put("correlationId", getCorrelationId(message));
 	String topicName = message.getIn().getHeader(KafkaConstants.TOPIC, String.class);
-	// TODO: i dont want to insert records which are being replayed
-	// FIXME: come-up with a better solution
-	if (topicName == null) {
-	    return;
-	}
 	params.put("topicName", topicName);
 	params.put("partitionId",
 		message.getIn().getHeader(KafkaConstants.PARTITION, Integer.class));
@@ -123,6 +136,15 @@ public class BankDetailAggregationStrategy implements AggregationStrategy, Predi
 
     private String getCorrelationId(Exchange message) {
 	return message.getIn().getHeader(KafkaConstants.KEY, String.class);
+    }
+
+    private boolean checkforDirtyAggregation(Exchange message) {
+	String sql = "SELECT COUNT(*) FROM message_outbox WHERE correlation_id = :correlationId";
+	Map<String, Object> params = new HashMap<>();
+	params.put("correlationId", getCorrelationId(message));
+	int count = jdbcTemplate.queryForObject(sql, params, Integer.class);
+	LOG.info("############# count: {}", count);
+	return count > 0;
     }
 
 }
