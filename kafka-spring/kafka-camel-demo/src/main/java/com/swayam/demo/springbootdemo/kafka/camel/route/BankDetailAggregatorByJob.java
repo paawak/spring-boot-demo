@@ -50,7 +50,7 @@ public class BankDetailAggregatorByJob extends RouteBuilder {
 		.aggregate(header(KafkaConstants.KEY),
 			new BankDetailAggregationStrategy(jdbcTemplate))
 		.completionTimeout(2_000).discardOnCompletionTimeout()
-		.log("${headers[" + KafkaConstants.KEY + "]} : ${body}");
+		.log(LoggingLevel.INFO, LOG, "${headers[" + KafkaConstants.KEY + "]} : ${body}");
     }
 
     private JobCount toJobCount(BankDetail bankDetail) {
