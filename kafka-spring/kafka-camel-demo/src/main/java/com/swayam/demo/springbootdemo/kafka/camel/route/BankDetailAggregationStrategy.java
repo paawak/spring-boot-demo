@@ -144,7 +144,7 @@ public class BankDetailAggregationStrategy
 	params.put("correlationId", getCorrelationId(message));
 	int count = jdbcTemplate.queryForObject(sql, params, Integer.class);
 	boolean dirtyRecordFound = count > 0;
-	LOG.info("Dirty records found: %s", dirtyRecordFound);
+	LOG.info("Dirty records found: {}", dirtyRecordFound);
 	return dirtyRecordFound;
     }
 
