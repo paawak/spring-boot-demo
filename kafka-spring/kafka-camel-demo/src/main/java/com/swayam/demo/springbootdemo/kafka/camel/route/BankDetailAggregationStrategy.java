@@ -143,8 +143,9 @@ public class BankDetailAggregationStrategy
 	Map<String, Object> params = new HashMap<>();
 	params.put("correlationId", getCorrelationId(message));
 	int count = jdbcTemplate.queryForObject(sql, params, Integer.class);
-	LOG.info("############# count: {}", count);
-	return count > 0;
+	boolean dirtyRecordFound = count > 0;
+	LOG.info("Dirty records found: %s", dirtyRecordFound);
+	return dirtyRecordFound;
     }
 
 }
