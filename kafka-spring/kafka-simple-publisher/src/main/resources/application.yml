@@ -1,5 +1,5 @@
 appConfig:
-  eventPublishDelayMillis: 10
+  eventPublishDelayMillis: -1
 
 server:
   port: 8090
