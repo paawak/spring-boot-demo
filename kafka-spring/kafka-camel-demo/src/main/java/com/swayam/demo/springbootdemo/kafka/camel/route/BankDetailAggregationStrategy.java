@@ -31,6 +31,11 @@ public class BankDetailAggregationStrategy implements AggregationStrategy, Predi
     @Override
     public Exchange aggregate(Exchange oldExchange, Exchange newExchange) {
 	if (oldExchange == null) {
+	    if (Boolean.TRUE.equals(newExchange.getIn()
+		    .getHeader(RouteConstants.BACKFILL_IN_PROGRESS, Boolean.class))) {
+		LOG.debug("++++ Message replay in progress");
+		return newExchange;
+	    }
 	    // insert only the first message in the group
 	    if (checkforDirtyAggregation(newExchange)) {
 		newExchange.getIn().setHeader(PRECOMPLETE_DIRTY_AGGREGATION, Boolean.TRUE);
