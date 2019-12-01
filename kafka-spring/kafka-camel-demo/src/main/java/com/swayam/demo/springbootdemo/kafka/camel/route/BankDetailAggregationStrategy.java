@@ -40,29 +40,36 @@ public class BankDetailAggregationStrategy implements AggregationStrategy, Predi
 	    return newExchange;
 	}
 
-	// any header that is used by the predicate should be set in the message
-	// returned from this method
-	Boolean shouldComplete = newExchange.getIn()
-		.getHeader(RouteConstants.COMPLETE_JOB_AGGREGATION_COMMAND, Boolean.class);
-	LOG.trace("+++++shouldComplete: {}", shouldComplete);
-	if (shouldComplete != null) {
-	    oldExchange.getIn().setHeader(RouteConstants.COMPLETE_JOB_AGGREGATION_COMMAND,
-		    shouldComplete);
-	}
-
 	JobCount partialResults = oldExchange.getIn().getBody(JobCount.class);
 	JobCount newMessage = newExchange.getIn().getBody(JobCount.class);
 
 	oldExchange.getIn().setBody(doAggregation(newMessage, partialResults), JobCount.class);
+
+	// any header that is used by the predicate should be set in the message
+	// returned from this method
+	Map<String, Object> headers = new HashMap<>();
+	headers.putAll(oldExchange.getIn().getHeaders());
+	headers.putAll(newExchange.getIn().getHeaders());
+	oldExchange.getIn().setHeaders(headers);
+
 	return oldExchange;
     }
 
     @Override
     public boolean matches(Exchange oldExchange) {
-	Boolean shouldComplete = oldExchange.getIn()
+	Boolean completionCommand = oldExchange.getIn()
 		.getHeader(RouteConstants.COMPLETE_JOB_AGGREGATION_COMMAND, Boolean.class);
-	LOG.trace("******shouldComplete: {}", shouldComplete);
-	return shouldComplete == null ? false : shouldComplete;
+	if (completionCommand == null) {
+	    return false;
+	}
+	Boolean isDirty =
+		oldExchange.getIn().getHeader(PRECOMPLETE_DIRTY_AGGREGATION, Boolean.class);
+	if (isDirty == null) {
+	    return completionCommand;
+	}
+	boolean shouldComplete = !isDirty && completionCommand;
+	LOG.debug("******shouldComplete: {}", shouldComplete);
+	return shouldComplete;
     }
 
     @Override
