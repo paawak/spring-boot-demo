@@ -34,6 +34,9 @@ public class KafkaMessageReplayer {
 
     public void replayMessages(String topicName, int partitionId, long offset,
 	    String correlationId) {
+	LOG.info(
+		"Kafka message replay in progress: topicName: {}, partitionId: {}, offset: {}, correlationId: {}",
+		topicName, partitionId, offset, correlationId);
 	KafkaConsumer<String, String> kafkaConsumer = getKafkaConsumer();
 	TopicPartition topicPartition = new TopicPartition(topicName, partitionId);
 	kafkaConsumer.assign(Arrays.asList(topicPartition));
