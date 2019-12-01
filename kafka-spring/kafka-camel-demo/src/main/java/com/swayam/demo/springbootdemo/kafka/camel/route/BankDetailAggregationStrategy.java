@@ -8,7 +8,6 @@ import org.apache.camel.Predicate;
 import org.apache.camel.component.kafka.KafkaConstants;
 import org.apache.camel.processor.aggregate.AggregationStrategy;
 import org.apache.camel.processor.aggregate.CompletionAwareAggregationStrategy;
-import org.apache.camel.processor.aggregate.PreCompletionAwareAggregationStrategy;
 import org.apache.camel.processor.aggregate.TimeoutAwareAggregationStrategy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,9 +15,8 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcOperations;
 
 import com.swayam.demo.springbootdemo.kafkadto.JobCount;
 
-public class BankDetailAggregationStrategy
-	implements AggregationStrategy, Predicate, CompletionAwareAggregationStrategy,
-	TimeoutAwareAggregationStrategy, PreCompletionAwareAggregationStrategy {
+public class BankDetailAggregationStrategy implements AggregationStrategy, Predicate,
+	CompletionAwareAggregationStrategy, TimeoutAwareAggregationStrategy {
 
     private static final Logger LOG = LoggerFactory.getLogger(BankDetailAggregationStrategy.class);
 
@@ -46,6 +44,7 @@ public class BankDetailAggregationStrategy
 	// returned from this method
 	Boolean shouldComplete = newExchange.getIn()
 		.getHeader(RouteConstants.COMPLETE_JOB_AGGREGATION_COMMAND, Boolean.class);
+	LOG.trace("+++++shouldComplete: {}", shouldComplete);
 	if (shouldComplete != null) {
 	    oldExchange.getIn().setHeader(RouteConstants.COMPLETE_JOB_AGGREGATION_COMMAND,
 		    shouldComplete);
@@ -62,6 +61,7 @@ public class BankDetailAggregationStrategy
     public boolean matches(Exchange oldExchange) {
 	Boolean shouldComplete = oldExchange.getIn()
 		.getHeader(RouteConstants.COMPLETE_JOB_AGGREGATION_COMMAND, Boolean.class);
+	LOG.trace("******shouldComplete: {}", shouldComplete);
 	return shouldComplete == null ? false : shouldComplete;
     }
 
@@ -79,12 +79,6 @@ public class BankDetailAggregationStrategy
     @Override
     public void timeout(Exchange oldExchange, int index, int total, long timeout) {
 	LOG.info("############# timed out");
-    }
-
-    @Override
-    public boolean preComplete(Exchange oldExchange, Exchange newExchange) {
-	return Boolean.TRUE.equals(
-		newExchange.getIn().getHeader(PRECOMPLETE_DIRTY_AGGREGATION, Boolean.class));
     }
 
     private JobCount doAggregation(JobCount newMessage, JobCount partialResults) {
