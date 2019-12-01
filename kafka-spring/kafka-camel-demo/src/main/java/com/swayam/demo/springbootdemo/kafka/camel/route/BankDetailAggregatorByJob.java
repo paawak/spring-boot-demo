@@ -1,8 +1,11 @@
 package com.swayam.demo.springbootdemo.kafka.camel.route;
 
+import org.apache.camel.LoggingLevel;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.kafka.KafkaConstants;
 import org.apache.camel.model.dataformat.JsonLibrary;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcOperations;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +15,8 @@ import com.swayam.demo.springbootdemo.kafkadto.JobCount;
 
 @Service
 public class BankDetailAggregatorByJob extends RouteBuilder {
+
+    private static final Logger LOG = LoggerFactory.getLogger(BankDetailAggregatorByJob.class);
 
     private final NamedParameterJdbcOperations jdbcTemplate;
 
@@ -27,7 +32,9 @@ public class BankDetailAggregatorByJob extends RouteBuilder {
 			.to(RouteConstants.AGGREGATION_CHANNEL);
 
 	from(RouteConstants.AGGREGATION_CHANNEL)
-		.routeId(BankDetailAggregatorByJob.class.getSimpleName() + "_aggregation").choice()
+		.routeId(BankDetailAggregatorByJob.class.getSimpleName() + "_aggregation")
+		.log(LoggingLevel.TRACE, LOG, "${header[" + RouteConstants.TYPE_HEADER + "]}")
+		.choice()
 		.when(simple("${header." + RouteConstants.TYPE_HEADER + "} == '"
 			+ BankDetail.class.getName() + "'"))
 		.unmarshal().json(JsonLibrary.Jackson, BankDetail.class).process(exchange -> {
