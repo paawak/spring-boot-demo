@@ -29,3 +29,13 @@ Start the **KafkaSimplePublisherApplication** and the use the below command to p
 
 	curl -X POST http://localhost:8080/actuator/shutdown
 	
+# Docker
+## Building docker image
+
+	mvn clean package
+	
+## Running Docker image
+
+	docker run -it -p 8080:8080 -e server.port=8080 -e processorId=camel_8080 -e spring.profiles.active=default paawak/kafka-camel-demo:latest
+			
+			

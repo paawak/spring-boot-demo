@@ -6,6 +6,7 @@ import org.apache.camel.component.kafka.KafkaConstants;
 import org.apache.camel.model.dataformat.JsonLibrary;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcOperations;
 import org.springframework.stereotype.Service;
 
@@ -19,14 +20,17 @@ public class BankDetailAggregatorByJob extends RouteBuilder {
     private static final Logger LOG = LoggerFactory.getLogger(BankDetailAggregatorByJob.class);
 
     private final NamedParameterJdbcOperations jdbcTemplate;
+    private final String kafkaServers;
 
-    public BankDetailAggregatorByJob(NamedParameterJdbcOperations jdbcTemplate) {
+    public BankDetailAggregatorByJob(NamedParameterJdbcOperations jdbcTemplate,
+	    @Value("${spring.kafka.bootstrap-servers}") String kafkaServers) {
 	this.jdbcTemplate = jdbcTemplate;
+	this.kafkaServers = kafkaServers;
     }
 
     @Override
     public void configure() {
-	from("kafka:bank-details?brokers=localhost:9092" + "&autoOffsetReset=earliest"
+	from("kafka:bank-details?brokers=" + kafkaServers + "&autoOffsetReset=earliest"
 		+ "&autoCommitEnable=true" + "&groupId=bank-detail-camel-consumer")
 			.routeId(BankDetailAggregatorByJob.class.getSimpleName() + "_to_channel")
 			.to(RouteConstants.AGGREGATION_CHANNEL);
