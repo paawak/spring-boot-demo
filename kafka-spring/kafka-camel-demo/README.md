@@ -38,4 +38,10 @@ Start the **KafkaSimplePublisherApplication** and the use the below command to p
 
 	docker run -it -p 8080:8080 -e server.port=8080 -e processorId=camel_8080 -e spring.profiles.active=default paawak/kafka-camel-demo:latest
 			
-			
+# Miscellaneous
+## Allow docker host to access MySql
+
+	CREATE USER 'root'@'172.17.0.%' IDENTIFIED BY 'root123';
+	GRANT ALL PRIVILEGES ON *.* TO 'root'@'172.17.0.%' WITH GRANT OPTION;
+	FLUSH PRIVILEGES;			
+	

@@ -17,6 +17,7 @@ import org.apache.kafka.common.TopicPartition;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.swayam.demo.springbootdemo.kafka.camel.route.RouteConstants;
@@ -27,9 +28,12 @@ public class KafkaMessageReplayer {
     private static final Logger LOG = LoggerFactory.getLogger(KafkaMessageReplayer.class);
 
     private final ProducerTemplate producerTemplate;
+    private final String kafkaBrokers;
 
-    public KafkaMessageReplayer(ProducerTemplate producerTemplate) {
+    public KafkaMessageReplayer(ProducerTemplate producerTemplate,
+	    @Value("${spring.kafka.bootstrap-servers}") String kafkaBrokers) {
 	this.producerTemplate = producerTemplate;
+	this.kafkaBrokers = kafkaBrokers;
     }
 
     public void replayMessages(String topicName, int partitionId, long offset,
@@ -64,7 +68,7 @@ public class KafkaMessageReplayer {
 
     private KafkaConsumer<String, String> getKafkaConsumer() {
 	Properties props = new Properties();
-	props.put("bootstrap.servers", "localhost:9092");
+	props.put("bootstrap.servers", kafkaBrokers);
 	props.put("group.id", "bank-detail-backfill");
 	props.put("key.deserializer", StringDeserializer.class);
 	props.put("value.deserializer", StringDeserializer.class);
