@@ -25,3 +25,7 @@ Start the **KafkaSimplePublisherApplication** and the use the below command to p
 
 	curl "http://localhost:8090/kafka/publish"
 
+## Shutdown the application	gracefully
+
+	curl -X POST http://localhost:8080/actuator/shutdown
+	
