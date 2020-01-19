@@ -134,7 +134,7 @@ public class BankDetailAggregationStrategy implements AggregationStrategy, Predi
 	params.put("partitionId",
 		message.getIn().getHeader(KafkaConstants.PARTITION, Integer.class));
 	params.put("offset", message.getIn().getHeader(KafkaConstants.OFFSET, Long.class));
-	params.put("processorId", System.getProperty("processorId"));
+	params.put("processorId", System.getenv("processorId"));
 
 	jdbcTemplate.update(sql, params);
 
