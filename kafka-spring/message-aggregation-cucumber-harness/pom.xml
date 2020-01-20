@@ -9,6 +9,14 @@
 		A BDD style test harness for Message Aggregation using Kafka/Camel/Spring
 	</description>
 	<url>http://palashray.com</url>
+	
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<log4j.version>2.3</log4j.version>
+		<slf4j.version>1.7.12</slf4j.version>
+		<cucumber.version>4.8.1</cucumber.version>
+	</properties>
+	
 	<build>
 		<finalName>${project.name}</finalName>
 		<sourceDirectory>src/main/java</sourceDirectory>
@@ -35,40 +43,9 @@
 			</plugin>
 		</plugins>
 	</build>
-	<dependencyManagement>
-		<dependencies>
-			<dependency>
-				<groupId>org.springframework</groupId>
-				<artifactId>spring-framework-bom</artifactId>
-				<version>4.2.4.RELEASE</version>
-				<type>pom</type>
-				<scope>import</scope>
-			</dependency>
-		</dependencies>
-	</dependencyManagement>
+	
 	<dependencies>
 	
-		<!-- Spring: START -->
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-core</artifactId>
-			<exclusions>
-				<exclusion>
-					<groupId>commons-logging</groupId>
-					<artifactId>commons-logging</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-context</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-test</artifactId>
-		</dependency>
-		<!-- Spring: END -->
-
 		<!-- Cucumber: START -->
 		<dependency>
 			<groupId>io.cucumber</groupId>
@@ -126,12 +103,5 @@
 			<version>4.12</version>
 		</dependency>
 	</dependencies>
-
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<log4j.version>2.3</log4j.version>
-		<slf4j.version>1.7.12</slf4j.version>
-		<cucumber.version>4.8.1</cucumber.version>
-	</properties>
 
 </project>
