@@ -1,0 +1,63 @@
+Cucumber Test Stack Trace
+__________________________________________
+
+StepDefinition
+
+DefinitionMatch
+
+TestStep
+
+TestCase
+
+Runner
+
+UnreportedStepExecutor
+
+ExecutionUnitRunner
+
+
+JavaStepDefinition
+
+
+Thread [main] (Suspended (breakpoint at line 26 in BanglaTypingSteps))	
+	BanglaTypingSteps.iAmOnBhashaEditor() line: 26	
+	NativeMethodAccessorImpl.invoke0(Method, Object, Object[]) line: not available [native method]	
+	NativeMethodAccessorImpl.invoke(Object, Object[]) line: 62	
+	DelegatingMethodAccessorImpl.invoke(Object, Object[]) line: 43	
+	Method.invoke(Object, Object...) line: 498	
+	Utils$1.call() line: 40	
+	Timeout.timeout(Callback<T>, long) line: 16	
+	Utils.invoke(Object, Method, long, Object...) line: 34	
+	JavaStepDefinition.execute(String, Object[]) line: 37	
+	StepDefinitionMatch.runStep(String, Scenario) line: 40	
+	PickleTestStep(TestStep).executeStep(String, Scenario, boolean) line: 77	
+	PickleTestStep(TestStep).run(EventBus, String, Scenario, boolean) line: 60	
+	TestCase.run(EventBus) line: 28	
+	Runner.runPickle(PickleEvent) line: 79	
+	ExecutionUnitRunner.run(RunNotifier) line: 81	
+	FeatureRunner.runChild(ParentRunner, RunNotifier) line: 63	
+	FeatureRunner.runChild(Object, RunNotifier) line: 18	
+	ParentRunner$3.run() line: 290	
+	ParentRunner$1.schedule(Runnable) line: 71	
+	FeatureRunner(ParentRunner<T>).runChildren(RunNotifier) line: 288	
+	ParentRunner<T>.access$000(ParentRunner, RunNotifier) line: 58	
+	ParentRunner$2.evaluate() line: 268	
+	FeatureRunner(ParentRunner<T>).run(RunNotifier) line: 363	
+	FeatureRunner.run(RunNotifier) line: 68	
+	Cucumber.runChild(FeatureRunner, RunNotifier) line: 98	
+	Cucumber.runChild(Object, RunNotifier) line: 40	
+	ParentRunner$3.run() line: 290	
+	ParentRunner$1.schedule(Runnable) line: 71	
+	Cucumber(ParentRunner<T>).runChildren(RunNotifier) line: 288	
+	ParentRunner<T>.access$000(ParentRunner, RunNotifier) line: 58	
+	ParentRunner$2.evaluate() line: 268	
+	Cucumber(ParentRunner<T>).run(RunNotifier) line: 363	
+	Cucumber.run(RunNotifier) line: 103	
+	JUnit4TestReference.run(TestExecution) line: 86	
+	TestExecution.run(ITestReference[]) line: 38	
+	RemoteTestRunner.runTests(String[], String, TestExecution) line: 459	
+	RemoteTestRunner.runTests(TestExecution) line: 678	
+	RemoteTestRunner.run() line: 382	
+	RemoteTestRunner.main(String[]) line: 192	
+
+
