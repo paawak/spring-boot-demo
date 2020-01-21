@@ -5,11 +5,11 @@ import org.slf4j.LoggerFactory;
 
 import io.cucumber.java8.En;
 
-public class KafkaSteps implements En {
+public class AggregationSteps implements En {
 
-    private static final Logger LOG = LoggerFactory.getLogger(KafkaSteps.class);
+    private static final Logger LOG = LoggerFactory.getLogger(AggregationSteps.class);
 
-    public KafkaSteps() {
+    public AggregationSteps() {
 
 	Given("The kafka-camel-demo application is available at {string}", (String url) -> {
 	    LOG.info("kafka-camel-demo app is available at: {}", url);
