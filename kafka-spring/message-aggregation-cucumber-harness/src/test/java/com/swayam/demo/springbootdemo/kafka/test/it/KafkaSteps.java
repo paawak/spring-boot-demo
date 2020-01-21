@@ -11,12 +11,16 @@ public class KafkaSteps implements En {
 
     public KafkaSteps() {
 
-	Given("Bank details messages are published on Kafka {string}", (String kafkaBrokers) -> {
-	    LOG.info("kafkaBrokers: {}", kafkaBrokers);
+	Given("The kafka-camel-demo application is available at {string}", (String url) -> {
+	    LOG.info("kafka-camel-demo app is available at: {}", url);
 	});
 
-	When("I wait for {int} mins", (Integer mins) -> {
-	    LOG.info("waiting for {} mins...", mins);
+	When("I publish bank details messages on Kafka by invoking {string}", (String url) -> {
+	    LOG.info("message publisher url: {}", url);
+	});
+
+	When("I wait for {int} second", (Integer second) -> {
+	    LOG.info("waiting for {} second...", second);
 	});
 
 	Then("Aggregation results are published", () -> {
