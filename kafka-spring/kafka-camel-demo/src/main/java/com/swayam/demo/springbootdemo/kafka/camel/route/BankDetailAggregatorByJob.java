@@ -54,7 +54,8 @@ public class BankDetailAggregatorByJob extends RouteBuilder {
 		.aggregate(header(KafkaConstants.KEY),
 			new BankDetailAggregationStrategy(jdbcTemplate))
 		.completionTimeout(2_000).discardOnCompletionTimeout()
-		.log(LoggingLevel.INFO, LOG, "${headers[" + KafkaConstants.KEY + "]} : ${body}");
+		.log(LoggingLevel.INFO, LOG, "${headers[" + KafkaConstants.KEY + "]} : ${body}")
+		.to("kafka:bank-details-aggregated?brokers=" + kafkaBrokers);
     }
 
     private JobCount toJobCount(BankDetail bankDetail) {
