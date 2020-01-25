@@ -6,8 +6,11 @@ This is a demo to show how messages can be aggregated using Kafka/Camel/Spring
 
 ## Start Kafka
 
-	bin/zookeeper-server-start.sh config/zookeeper.properties &
-	bin/kafka-server-start.sh config/server.properties &
+	cd $KAFKA_HOME
+
+	bin/zookeeper-server-start.sh config/zookeeper.properties > zookeepr.log &
+	
+	bin/kafka-server-start.sh config/server.properties > kafka.log &
 	
 ## Start the application	
 

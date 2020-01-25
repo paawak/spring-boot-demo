@@ -17,8 +17,11 @@ User name/password: *sa*
 # Kafka Reference
 ## Starting Kafka Locally
 
-	bin/zookeeper-server-start.sh config/zookeeper.properties
-	bin/kafka-server-start.sh config/server.properties
+	cd $KAFKA_HOME
+
+	bin/zookeeper-server-start.sh config/zookeeper.properties > zookeepr.log &
+	
+	bin/kafka-server-start.sh config/server.properties > kafka.log &
 	
 ## Creating a Topic
 
