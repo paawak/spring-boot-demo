@@ -14,6 +14,16 @@ Jdbc URL: *jdbc:h2:mem:bank_details*
 
 User name/password: *sa*	
 
+# Docker
+## Building docker image
+
+	mvn clean package
+	
+## Running Docker image
+
+	docker run -it -p 8090:8090 -e spring.profiles.active=default paawak/kafka-simple-publisher:latest
+			
+
 # Kafka Reference
 ## Starting Kafka Locally
 

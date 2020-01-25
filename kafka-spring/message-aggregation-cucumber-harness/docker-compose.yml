@@ -19,7 +19,16 @@ services:
           - spring.profiles.active=default
           - processorId=camel_8081
         networks:
-          - paawak-net          
+          - paawak-net  
+          
+    simple_publisher:
+        image: paawak/kafka-simple-publisher:latest
+        ports:
+          - "8090:8090"
+        environment:
+          - spring.profiles.active=default
+        networks:
+          - paawak-net                       
 
 networks:
     paawak-net:
