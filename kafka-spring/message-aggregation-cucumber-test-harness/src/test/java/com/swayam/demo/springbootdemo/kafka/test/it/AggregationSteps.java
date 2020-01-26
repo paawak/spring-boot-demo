@@ -20,8 +20,8 @@ public class AggregationSteps implements En {
 
     public AggregationSteps() {
 
-	Given("The kafka-camel-demo application is available at {string}", (String url) -> {
-	    LOG.info("kafka-camel-demo app is available at: {}", url);
+	Given("The kafka-camel-aggregation-example application is available at {string}", (String url) -> {
+	    LOG.info("kafka-camel-aggregation-example app is available at: {}", url);
 	});
 
 	When("I publish bank details messages on Kafka by invoking {string}", (String url) -> {
