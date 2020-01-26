@@ -51,7 +51,7 @@ public class KafkaMessageReader {
     private KafkaConsumer<String, String> getKafkaConsumer(String kafkaBrokers) {
 	Properties props = new Properties();
 	props.put("bootstrap.servers", kafkaBrokers);
-	props.put("group.id", "cucumber-aggregation-test-group" + System.currentTimeMillis());
+	props.put("group.id", "cucumber-aggregation-test-group-" + System.currentTimeMillis());
 	props.put("key.deserializer", StringDeserializer.class);
 	props.put("value.deserializer", StringDeserializer.class);
 	return new KafkaConsumer<>(props);
