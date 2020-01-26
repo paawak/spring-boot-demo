@@ -1,8 +1,11 @@
 package com.swayam.demo.springbootdemo.kafka.test.it;
 
+import static org.junit.Assert.assertEquals;
+
 import java.io.IOException;
 import java.time.Duration;
 import java.time.Instant;
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -61,7 +64,11 @@ public class AggregationSteps implements En {
 		    LOG.info(
 			    "verifying results published for brokers: {}, topic: {}, timeToWaitInSeconds: {}",
 			    brokers, topic, timeToWaitInSeconds);
-		    new KafkaMessageReader().readSingleMessage(brokers, topic, timeToWaitInSeconds);
+		    String expected =
+			    "{\"adminCount\":478,\"blueCollarCount\":946,\"entrepreneurCount\":168,\"houseMaidCount\":112,\"managementCount\":969,\"retiredCount\":230,\"selfEmployedCount\":183,\"servicesCount\":417,\"studentCount\":84,\"technicianCount\":768,\"unemployedCount\":128,\"unknownCount\":38}";
+		    CompletableFuture<String> completableFuture = new KafkaMessageReader()
+			    .readSingleMessage(brokers, topic, timeToWaitInSeconds);
+		    assertEquals(expected, completableFuture.get());
 		});
     }
 
