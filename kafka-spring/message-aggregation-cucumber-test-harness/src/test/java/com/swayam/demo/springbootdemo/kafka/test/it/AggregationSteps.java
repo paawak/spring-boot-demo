@@ -61,7 +61,7 @@ public class AggregationSteps implements En {
 		    LOG.info(
 			    "verifying results published for brokers: {}, topic: {}, timeToWaitInSeconds: {}",
 			    brokers, topic, timeToWaitInSeconds);
-		    new KafkaMessageReader().readMessage(brokers, topic, timeToWaitInSeconds);
+		    new KafkaMessageReader().readSingleMessage(brokers, topic, timeToWaitInSeconds);
 		});
     }
 
