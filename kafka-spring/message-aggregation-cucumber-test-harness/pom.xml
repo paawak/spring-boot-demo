@@ -77,7 +77,13 @@
 			<artifactId>fluent-hc</artifactId>
 			<version>${httpclient.version}</version>
 		</dependency>
-		<!-- END: apache-http-client -->		
+		<!-- END: apache-http-client -->
+
+		<dependency>
+			<groupId>org.apache.kafka</groupId>
+			<artifactId>kafka-clients</artifactId>
+			<version>2.3.1</version>
+		</dependency>	
 
 		<dependency>
 			<groupId>junit</groupId>

@@ -20,9 +20,10 @@ public class AggregationSteps implements En {
 
     public AggregationSteps() {
 
-	Given("The kafka-camel-aggregation-example application is available at {string}", (String url) -> {
-	    LOG.info("kafka-camel-aggregation-example app is available at: {}", url);
-	});
+	Given("The kafka-camel-aggregation-example application is available at {string}",
+		(String url) -> {
+		    LOG.info("kafka-camel-aggregation-example app is available at: {}", url);
+		});
 
 	When("I publish bank details messages on Kafka by invoking {string}", (String url) -> {
 	    LOG.info("message publisher url: {}", url);
@@ -55,9 +56,13 @@ public class AggregationSteps implements En {
 	    Thread.sleep(second * 1000);
 	});
 
-	Then("Aggregation results are published", () -> {
-	    LOG.info("verifying results published...");
-	});
+	Then("Aggregation results are published on the topic {string} of Kafka broker {string} in {int} second",
+		(String topic, String brokers, Integer timeToWaitInSeconds) -> {
+		    LOG.info(
+			    "verifying results published for brokers: {}, topic: {}, timeToWaitInSeconds: {}",
+			    brokers, topic, timeToWaitInSeconds);
+		    new KafkaMessageReader().readMessage(brokers, topic, timeToWaitInSeconds);
+		});
     }
 
 }
