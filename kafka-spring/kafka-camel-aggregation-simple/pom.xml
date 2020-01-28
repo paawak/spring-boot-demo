@@ -10,9 +10,9 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.swayam.demo.springbootdemo.kafka</groupId>
-	<artifactId>kafka-camel-aggregation-example-simple</artifactId>
+	<artifactId>kafka-camel-aggregation-simple</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>kafka-camel-aggregation-example-simple</name>
+	<name>kafka-camel-aggregation-simple</name>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>
