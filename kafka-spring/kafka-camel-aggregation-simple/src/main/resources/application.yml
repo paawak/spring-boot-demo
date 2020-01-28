@@ -22,13 +22,3 @@ logging:
 spring:
   kafka:
     bootstrap-servers: 192.168.1.4:9092    
-  flyway:
-    locations: classpath:/sql
-  jpa:
-    hibernate:
-      ddl-auto: none
-  datasource:
-    url: jdbc:mysql://192.168.1.4:3306/camel_aggregation?useSSL=false&allowPublicKeyRetrieval=true
-    username: root
-    password: root123
-    driver-class-name: com.mysql.cj.jdbc.Driver

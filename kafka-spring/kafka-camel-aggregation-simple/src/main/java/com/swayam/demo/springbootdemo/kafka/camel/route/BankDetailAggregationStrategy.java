@@ -11,7 +11,6 @@ import org.apache.camel.processor.aggregate.CompletionAwareAggregationStrategy;
 import org.apache.camel.processor.aggregate.TimeoutAwareAggregationStrategy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.jdbc.core.namedparam.NamedParameterJdbcOperations;
 
 import com.swayam.demo.springbootdemo.kafkadto.JobCount;
 
@@ -20,28 +19,11 @@ public class BankDetailAggregationStrategy implements AggregationStrategy, Predi
 
     private static final Logger LOG = LoggerFactory.getLogger(BankDetailAggregationStrategy.class);
 
-    private static final String PRECOMPLETE_DIRTY_AGGREGATION = "PRECOMPLETE_DIRTY_AGGREGATION";
-
-    private final NamedParameterJdbcOperations jdbcTemplate;
-
-    public BankDetailAggregationStrategy(NamedParameterJdbcOperations jdbcTemplate) {
-	this.jdbcTemplate = jdbcTemplate;
-    }
-
     @Override
     public Exchange aggregate(Exchange oldExchange, Exchange newExchange) {
 	if (oldExchange == null) {
-	    if (Boolean.TRUE.equals(newExchange.getIn()
-		    .getHeader(RouteConstants.BACKFILL_IN_PROGRESS, Boolean.class))) {
-		LOG.debug("++++ Message replay in progress");
-		return newExchange;
-	    }
-	    // insert only the first message in the group
-	    if (checkforDirtyAggregation(newExchange)) {
-		newExchange.getIn().setHeader(PRECOMPLETE_DIRTY_AGGREGATION, Boolean.TRUE);
-		return newExchange;
-	    }
-	    persistMessageOffsetDetails(newExchange);
+	    LOG.info("First message recieved for the correlationID: {}",
+		    getCorrelationId(newExchange));
 	    return newExchange;
 	}
 
@@ -67,25 +49,15 @@ public class BankDetailAggregationStrategy implements AggregationStrategy, Predi
 	if (completionCommand == null) {
 	    return false;
 	}
-	Boolean isDirty =
-		oldExchange.getIn().getHeader(PRECOMPLETE_DIRTY_AGGREGATION, Boolean.class);
-	if (isDirty == null) {
-	    return completionCommand;
-	}
-	boolean shouldComplete = !isDirty && completionCommand;
-	LOG.debug("******shouldComplete: {}", shouldComplete);
-	return shouldComplete;
+
+	LOG.debug("******shouldComplete: {}", completionCommand);
+	return completionCommand;
     }
 
     @Override
     public void onCompletion(Exchange exchange) {
 	String correlationId = getCorrelationId(exchange);
 	LOG.info("########### Aggregation is complete for {}", correlationId);
-	String sql = "DELETE FROM message_outbox WHERE correlation_id = :correlationId";
-	Map<String, Object> params = new HashMap<>();
-	params.put("correlationId", correlationId);
-	jdbcTemplate.update(sql, params);
-	LOG.info("Record from *message_outbox* table deleted for {}", correlationId);
     }
 
     @Override
@@ -120,38 +92,8 @@ public class BankDetailAggregationStrategy implements AggregationStrategy, Predi
 	return aggregate;
     }
 
-    private void persistMessageOffsetDetails(Exchange message) {
-	if (Boolean.TRUE.equals(
-		message.getIn().getHeader(RouteConstants.BACKFILL_IN_PROGRESS, Boolean.class))) {
-	    return;
-	}
-	String sql =
-		"INSERT INTO message_outbox (correlation_id, processor_id, topic_name, partition_id, offset) VALUES (:correlationId, :processorId, :topicName, :partitionId, :offset)";
-	Map<String, Object> params = new HashMap<>();
-	params.put("correlationId", getCorrelationId(message));
-	String topicName = message.getIn().getHeader(KafkaConstants.TOPIC, String.class);
-	params.put("topicName", topicName);
-	params.put("partitionId",
-		message.getIn().getHeader(KafkaConstants.PARTITION, Integer.class));
-	params.put("offset", message.getIn().getHeader(KafkaConstants.OFFSET, Long.class));
-	params.put("processorId", System.getenv("processorId"));
-
-	jdbcTemplate.update(sql, params);
-
-    }
-
     private String getCorrelationId(Exchange message) {
 	return message.getIn().getHeader(KafkaConstants.KEY, String.class);
-    }
-
-    private boolean checkforDirtyAggregation(Exchange message) {
-	String sql = "SELECT COUNT(*) FROM message_outbox WHERE correlation_id = :correlationId";
-	Map<String, Object> params = new HashMap<>();
-	params.put("correlationId", getCorrelationId(message));
-	int count = jdbcTemplate.queryForObject(sql, params, Integer.class);
-	boolean dirtyRecordFound = count > 0;
-	LOG.info("Dirty records found: {}", dirtyRecordFound);
-	return dirtyRecordFound;
     }
 
 }

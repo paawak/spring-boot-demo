@@ -7,7 +7,6 @@ import org.apache.camel.model.dataformat.JsonLibrary;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.jdbc.core.namedparam.NamedParameterJdbcOperations;
 import org.springframework.stereotype.Service;
 
 import com.swayam.demo.springbootdemo.kafkadto.BankDetail;
@@ -19,12 +18,10 @@ public class BankDetailAggregatorByJob extends RouteBuilder {
 
     private static final Logger LOG = LoggerFactory.getLogger(BankDetailAggregatorByJob.class);
 
-    private final NamedParameterJdbcOperations jdbcTemplate;
     private final String kafkaBrokers;
 
-    public BankDetailAggregatorByJob(NamedParameterJdbcOperations jdbcTemplate,
+    public BankDetailAggregatorByJob(
 	    @Value("${spring.kafka.bootstrap-servers}") String kafkaBrokers) {
-	this.jdbcTemplate = jdbcTemplate;
 	this.kafkaBrokers = kafkaBrokers;
     }
 
@@ -50,9 +47,7 @@ public class BankDetailAggregatorByJob extends RouteBuilder {
 		    exchange.getIn().setBody(new JobCount(), JobCount.class);
 		    exchange.getIn().setHeader(RouteConstants.COMPLETE_JOB_AGGREGATION_COMMAND,
 			    Boolean.TRUE);
-		}).end()
-		.aggregate(header(KafkaConstants.KEY),
-			new BankDetailAggregationStrategy(jdbcTemplate))
+		}).end().aggregate(header(KafkaConstants.KEY), new BankDetailAggregationStrategy())
 		.completionTimeout(2_000).discardOnCompletionTimeout().marshal()
 		.json(JsonLibrary.Jackson)
 		.log(LoggingLevel.INFO, LOG, "${headers[" + KafkaConstants.KEY + "]} : ${body}")
