@@ -39,7 +39,7 @@ Start the **KafkaSimplePublisherApplication** and the use the below command to p
 	
 ## Running Docker image
 
-	docker run -it -p 8080:8080 -e server.port=8080 -e processorId=camel_8080 -e spring.profiles.active=default paawak/kafka-camel-aggregation-example:latest
+	docker run -it -p 8080:8080 -e server.port=8080 -e processorId=camel_8080 -e spring.profiles.active=default paawak/kafka-camel-aggregation-with-replay:latest
 			
 # Miscellaneous
 ## Allow docker host to access MySql
