@@ -29,29 +29,29 @@ public class BankDetailAggregatorByJob extends RouteBuilder {
     public void configure() {
 	from("kafka:bank-details?brokers=" + kafkaBrokers + "&autoOffsetReset=earliest"
 		+ "&autoCommitEnable=true" + "&groupId=bank-detail-camel-consumer")
-			.routeId(BankDetailAggregatorByJob.class.getSimpleName() + "_to_channel")
-			.to(RouteConstants.AGGREGATION_CHANNEL);
-
-	from(RouteConstants.AGGREGATION_CHANNEL)
-		.routeId(BankDetailAggregatorByJob.class.getSimpleName() + "_aggregation")
-		.log(LoggingLevel.TRACE, LOG, "${header[" + RouteConstants.TYPE_HEADER + "]}")
-		.choice()
-		.when(simple("${header." + RouteConstants.TYPE_HEADER + "} == '"
-			+ BankDetail.class.getName() + "'"))
-		.unmarshal().json(JsonLibrary.Jackson, BankDetail.class).process(exchange -> {
-		    BankDetail bankDetail = exchange.getIn().getBody(BankDetail.class);
-		    exchange.getIn().setBody(toJobCount(bankDetail), JobCount.class);
-		}).when(simple("${header." + RouteConstants.TYPE_HEADER + "} == '"
-			+ CompletionSignal.class.getName() + "'"))
-		.process(exchange -> {
-		    exchange.getIn().setBody(new JobCount(), JobCount.class);
-		    exchange.getIn().setHeader(RouteConstants.COMPLETE_JOB_AGGREGATION_COMMAND,
-			    Boolean.TRUE);
-		}).end().aggregate(header(KafkaConstants.KEY), new BankDetailAggregationStrategy())
-		.completionTimeout(2_000).discardOnCompletionTimeout().marshal()
-		.json(JsonLibrary.Jackson)
-		.log(LoggingLevel.INFO, LOG, "${headers[" + KafkaConstants.KEY + "]} : ${body}")
-		.to("kafka:bank-details-aggregated?brokers=" + kafkaBrokers);
+			.routeId(BankDetailAggregatorByJob.class.getSimpleName())
+			.log(LoggingLevel.TRACE, LOG,
+				"${header[" + RouteConstants.TYPE_HEADER + "]}")
+			.choice()
+			.when(simple("${header." + RouteConstants.TYPE_HEADER + "} == '"
+				+ BankDetail.class.getName() + "'"))
+			.unmarshal().json(JsonLibrary.Jackson, BankDetail.class)
+			.process(exchange -> {
+			    BankDetail bankDetail = exchange.getIn().getBody(BankDetail.class);
+			    exchange.getIn().setBody(toJobCount(bankDetail), JobCount.class);
+			}).when(simple("${header." + RouteConstants.TYPE_HEADER + "} == '"
+				+ CompletionSignal.class.getName() + "'"))
+			.process(exchange -> {
+			    exchange.getIn().setBody(new JobCount(), JobCount.class);
+			    exchange.getIn().setHeader(
+				    RouteConstants.COMPLETE_JOB_AGGREGATION_COMMAND, Boolean.TRUE);
+			}).end()
+			.aggregate(header(KafkaConstants.KEY), new BankDetailAggregationStrategy())
+			.completionTimeout(2_000).discardOnCompletionTimeout().marshal()
+			.json(JsonLibrary.Jackson)
+			.log(LoggingLevel.INFO, LOG,
+				"${headers[" + KafkaConstants.KEY + "]} : ${body}")
+			.to("kafka:bank-details-aggregated?brokers=" + kafkaBrokers);
     }
 
     private JobCount toJobCount(BankDetail bankDetail) {
