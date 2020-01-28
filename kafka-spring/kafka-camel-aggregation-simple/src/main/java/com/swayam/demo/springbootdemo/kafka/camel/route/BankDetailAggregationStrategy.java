@@ -22,7 +22,7 @@ public class BankDetailAggregationStrategy implements AggregationStrategy, Predi
     @Override
     public Exchange aggregate(Exchange oldExchange, Exchange newExchange) {
 	if (oldExchange == null) {
-	    LOG.info("First message recieved for the correlationID: {}",
+	    LOG.info("########### First message recieved for the correlationID: {}",
 		    getCorrelationId(newExchange));
 	    return newExchange;
 	}
