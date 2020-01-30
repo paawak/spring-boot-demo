@@ -14,10 +14,6 @@ This is a demo to show how messages can be aggregated using Kafka/Camel/Spring
 	
 ## Start the application	
 
-The below environment variable should be set to uniquely identify this node.
-
-	-DprocessorId=camel_8080
-
 You can run another instance by changing the port
 
 	-Dserver.port=8080
@@ -39,7 +35,7 @@ Start the **KafkaSimplePublisherApplication** and the use the below command to p
 	
 ## Running Docker image
 
-	docker run -it -p 8080:8080 -e server.port=8080 -e processorId=camel_8080 -e spring.profiles.active=default paawak/kafka-camel-aggregation-simple:latest
+	docker run -it -p 8080:8080 -e server.port=8080 -e spring.profiles.active=default paawak/kafka-camel-aggregation-simple:latest
 			
 # Miscellaneous
 ## Allow docker host to access MySql
