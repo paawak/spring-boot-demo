@@ -1,0 +1,37 @@
+server:
+  port: 8080
+  servlet:
+    contextPath: /
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  
+logging:
+  level:
+    root: INFO
+    com.swayam.ocr.porua: DEBUG
+    org.springframework.web: INFO
+    org.springframework.web.client.RestTemplate: DEBUG
+    org.springframework.security.web.FilterChainProxy: WARN
+    org.springframework.data.repository: DEBUG
+
+spring:
+  servlet:
+    multipart:
+      max-file-size: 500MB
+      max-request-size: 500MB
+  datasource:
+    url: jdbc:mysql://localhost:3306/exp_to_b_del?useSSL=false
+    username: root
+    password: root123
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    properties:
+      hibernate:
+        dialect: 'org.hibernate.dialect.MySQLDialect'
+    show-sql: true
+    hibernate:
+      ddl-auto: none

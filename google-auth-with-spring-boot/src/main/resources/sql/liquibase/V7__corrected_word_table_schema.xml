@@ -1,0 +1,40 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+	<changeSet author="Palash Ray" id="7">
+		<createTable tableName="corrected_word">
+			<column autoIncrement="true" name="id" type="INT">
+				<constraints primaryKey="true"
+					primaryKeyName="SYS_PK_240109" />
+			</column>
+			<column name="user_id" type="INT">
+				<constraints nullable="false" />
+			</column>
+			<column name="ocr_word_id" type="INT">
+				<constraints nullable="false" />
+			</column>
+			<column name="corrected_text"
+				type="CLOB CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci" />
+			<column defaultValueBoolean="false" name="ignored"
+				type="BOOLEAN">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+
+		<addForeignKeyConstraint
+			baseColumnNames="user_id" baseTableName="corrected_word"
+			constraintName="SYS_FK_49129" deferrable="false"
+			initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+			referencedColumnNames="id" referencedTableName="user" validate="true" />
+
+		<addForeignKeyConstraint
+			baseColumnNames="ocr_word_id" baseTableName="corrected_word"
+			constraintName="SYS_FK_49127" deferrable="false"
+			initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+			referencedColumnNames="id" referencedTableName="ocr_word" validate="true" />
+
+	</changeSet>
+</databaseChangeLog>

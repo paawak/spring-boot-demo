@@ -1,0 +1,113 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+	<changeSet author="Palash Ray" id="1">
+		<createTable tableName="book">
+			<column autoIncrement="true" name="id" type="INT">
+				<constraints primaryKey="true"
+					primaryKeyName="SYS_PK_10109" />
+			</column>
+			<column name="name" type="VARCHAR(200)">
+				<constraints nullable="false" />
+			</column>
+			<column name="language" type="VARCHAR(25)">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+
+		<createTable tableName="ocr_word">
+			<column name="book_id" type="INT">
+				<constraints nullable="false" />
+			</column>
+			<column name="page_image_id" type="INT">
+				<constraints nullable="false" />
+			</column>
+			<column name="word_sequence_id" type="INT">
+				<constraints nullable="false" />
+			</column>
+			<column name="raw_text" type="CLOB CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci">
+				<constraints nullable="false" />
+			</column>
+			<column name="corrected_text" type="CLOB CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci" />
+			<column name="x1" type="INT">
+				<constraints nullable="false" />
+			</column>
+			<column name="y1" type="INT">
+				<constraints nullable="false" />
+			</column>
+			<column name="x2" type="INT">
+				<constraints nullable="false" />
+			</column>
+			<column name="y2" type="INT">
+				<constraints nullable="false" />
+			</column>
+			<column name="confidence" type="DOUBLE">
+				<constraints nullable="false" />
+			</column>
+			<column name="line_number" type="INT" />
+			<column defaultValueBoolean="false" name="ignored"
+				type="BOOLEAN">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+
+		<createTable tableName="page_image">
+			<column autoIncrement="true" name="id" type="INT">
+				<constraints primaryKey="true"
+					primaryKeyName="SYS_PK_10119" />
+			</column>
+			<column name="book_id" type="INT">
+				<constraints nullable="false" />
+			</column>
+			<column name="name" type="VARCHAR(200)">
+				<constraints nullable="false" />
+			</column>
+			<column name="page_number" type="INT">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+
+		<addUniqueConstraint columnNames="NAME"
+			constraintName="SYS_CT_10112" tableName="book" />
+
+		<addUniqueConstraint columnNames="NAME"
+			constraintName="SYS_CT_10124" tableName="page_image" />
+
+		<createIndex indexName="SYS_IDX_SYS_FK_10123_10130"
+			tableName="page_image">
+			<column name="book_id" />
+		</createIndex>
+
+		<createIndex indexName="SYS_IDX_SYS_FK_10143_10156"
+			tableName="ocr_word">
+			<column name="book_id" />
+		</createIndex>
+
+		<createIndex indexName="SYS_IDX_SYS_FK_10144_10158"
+			tableName="ocr_word">
+			<column name="page_image_id" />
+		</createIndex>
+
+		<addForeignKeyConstraint
+			baseColumnNames="book_id" baseTableName="page_image"
+			constraintName="SYS_FK_10123" deferrable="false"
+			initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+			referencedColumnNames="id" referencedTableName="book" validate="true" />
+
+		<addForeignKeyConstraint
+			baseColumnNames="book_id" baseTableName="ocr_word"
+			constraintName="SYS_FK_10143" deferrable="false"
+			initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+			referencedColumnNames="id" referencedTableName="book" validate="true" />
+
+		<addForeignKeyConstraint
+			baseColumnNames="page_image_id" baseTableName="ocr_word"
+			constraintName="SYS_FK_10144" deferrable="false"
+			initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+			referencedColumnNames="id" referencedTableName="page_image"
+			validate="true" />
+	</changeSet>
+</databaseChangeLog>

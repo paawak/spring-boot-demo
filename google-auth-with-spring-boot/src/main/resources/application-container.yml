@@ -1,0 +1,7 @@
+app:
+  config:
+    server:
+      image-write-directory: /tesseract-temp-images  
+    ocr:
+      tesseract:
+        tessdata-location: /tesseract/tessdata/

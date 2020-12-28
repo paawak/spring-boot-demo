@@ -1,0 +1,21 @@
+<html>
+<div>
+	<h2>Tesseract OCR Frontend</h2>
+	<div>
+		<form enctype="multipart/form-data" action="http://localhost:8080/ocr/train/submit/pdf" method="POST" >
+			<div>
+				<div>Book Id:</div>
+				<div>
+					<input type="text" name="bookId" /> 
+				</div>
+			</div>
+			<div>
+				Image: <input type="file" name="image"/>
+			</div>
+			<div>
+				<input type="submit" value="Submit to OCR"/>
+			</div> 
+		</form>
+	</div>
+</div>
+</html>
