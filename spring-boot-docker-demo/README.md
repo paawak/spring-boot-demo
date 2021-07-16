@@ -14,15 +14,12 @@ mvn clean install -P docker
 
 ## Running in Local
 
-    java -Dspring.profiles.active=local -jar target/porua-ocr-service.jar
+    java -Dspring.profiles.active=local -jar target/spring-boot-docker-demo.jar
 
 ## Running in Docker
 
     docker run -it -p 8080:8080    \
-    -v /kaaj/installs/tesseract/tessdata_best-4.0.0:/tesseract/tessdata    \
-    -v /kaaj/source/porua/tesseract-ocr-rest/images:/tesseract-temp-images   \
-    -e spring.profiles.active=container     \
-    paawak/porua-ocr-service:latest
+    paawak/spring-boot-docker-demo:latest
 				
 # Sources
 		
