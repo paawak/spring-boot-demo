@@ -1,6 +1,6 @@
 # About
 
-Demo for a Reactive Netty/Spring Boot Application within Docker. Can be accessed here: <http://localhost:8080/index.html>
+Demo for a Reactive Netty/Spring Boot Application within Docker. Can be accessed here: <http://localhost:5000/index.html>. This can also be deployed to AWS Elastic Beanstalk through command line or by uploading the *docker-compose.yml*
 
 # How build docker image
 
@@ -54,4 +54,8 @@ services:
         environment:
           - spring.profiles.active=default
 ```
+But note that you need to first upload this image to the Docker Hub. These are the commands:
 
+    docker login
+    docker push paawak/aws-docker-demo:latest
+        
