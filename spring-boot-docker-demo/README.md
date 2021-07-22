@@ -54,7 +54,4 @@ services:
         environment:
           - spring.profiles.active=default
 ```
-				
-# Sources
-		
-<https://github.com/paawak/porua/tree/master/tesseract-ocr-rest>
+
