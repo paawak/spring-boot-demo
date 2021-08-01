@@ -60,6 +60,8 @@ But note that you need to first upload this image to the Docker Hub. These are t
     docker push paawak/aws-docker-demo:latest
         
 ## Running on Minikube
+### Deploying an application
+The below steps are taken from <https://kubernetes.io/docs/tasks/run-application/run-stateless-application-deployment/>
 
 1. Start Minikube
 
@@ -71,10 +73,23 @@ But note that you need to first upload this image to the Docker Hub. These are t
 
 1. Create a Deployment based on the YAML file:
 
-    kubectl apply -f https://k8s.io/examples/application/deployment.yaml
+    kubectl apply -f kubernetes/application-deployment.yml
 
 1. Display information about the Deployment:
 
-    kubectl describe deployment nginx-deployment
+    kubectl describe deployment aws-docker-demo-deployment
         
-        
+1. List the Pods created by the deployment:
+
+    kubectl get pods -l app=aws-docker-demo
+    
+1. Display information about a Pod:
+
+    kubectl describe pod <pod-name>
+    
+1. Deleting a deployment - by name:
+
+    kubectl delete deployment aws-docker-demo-deployment
+
+### Exposing a deployed application
+The below steps are taken from <https://kubernetes.io/docs/concepts/services-networking/service/>
