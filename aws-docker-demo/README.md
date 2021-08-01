@@ -87,30 +87,29 @@ The below steps are taken from <https://kubernetes.io/docs/tasks/run-application
 
     kubectl describe pod <pod-name>
     
-1. Deleting a deployment - by name:
+1. Deleting a deployment:
 
     kubectl delete deployment aws-docker-demo-deployment
     
-1. Exposing this deployment
+### Exposing a deployed application
+The below steps are taken from <https://kubernetes.io/docs/concepts/services-networking/service/> and <https://kubernetes.io/docs/tutorials/stateless-application/expose-external-ip-address/>
 
-    kubectl expose deployment aws-docker-demo-deployment --type=LoadBalancer --name=aws-docker-demo-service    
-    
-1. Display information about the Service
+#### Using the expose command
 
-    kubectl get services aws-docker-demo-service    
-    
-1. To support extrenal IPs    
-    
-    minimube tunnel
-    
+    kubectl expose deployment aws-docker-demo-deployment --type=LoadBalancer --name=aws-docker-demo-service
+
+1. To get external IPs    
+Use any of the below commands:    
+
     minikube service aws-docker-demo-service
     
     minikube ip
+    
+1. Deleting a service:
 
-### Exposing a deployed application
-The below steps are taken from <https://kubernetes.io/docs/concepts/services-networking/service/>
+    kubectl delete svc aws-docker-demo-service    
 
-1. Deploy a Service:
+#### Deploying a Service
 
     kubectl apply -f kubernetes/application-service.yml
 
