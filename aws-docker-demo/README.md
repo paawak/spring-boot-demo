@@ -73,7 +73,7 @@ The below steps are taken from <https://kubernetes.io/docs/tasks/run-application
 
 1. Create a Deployment based on the YAML file:
 
-    kubectl apply -f kubernetes/application-deployment.yml
+    kubectl apply -f kubernetes/minikube/application-deployment.yml
 
 1. Display information about the Deployment:
 
@@ -111,7 +111,7 @@ Use any of the below commands:
 
 #### Deploying a Service
 
-    kubectl apply -f kubernetes/application-service.yml
+    kubectl apply -f kubernetes/minikube/application-service.yml
 
 1. Display information about the Deployment:
 
