@@ -102,6 +102,10 @@ The below steps are taken from <https://kubernetes.io/docs/tasks/run-application
 1. To support extrenal IPs    
     
     minimube tunnel
+    
+    minikube service aws-docker-demo-service
+    
+    minikube ip
 
 ### Exposing a deployed application
 The below steps are taken from <https://kubernetes.io/docs/concepts/services-networking/service/>
