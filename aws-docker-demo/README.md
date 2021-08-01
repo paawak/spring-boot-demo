@@ -67,9 +67,11 @@ The below steps are taken from <https://kubernetes.io/docs/tasks/run-application
 
     minikube start --nodes 2 -p aws-docker-demo
     
+    
 1. Check the status of the nodes
     
     minikube status -p aws-docker-demo        
+    
 
 1. Create a Deployment based on the YAML file:
 
