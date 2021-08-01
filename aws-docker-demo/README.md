@@ -59,3 +59,22 @@ But note that you need to first upload this image to the Docker Hub. These are t
     docker login
     docker push paawak/aws-docker-demo:latest
         
+## Running on Minikube
+
+1. Start Minikube
+
+    minikube start --nodes 2 -p aws-docker-demo
+    
+1. Check the status of the nodes
+    
+    minikube status -p aws-docker-demo        
+
+1. Create a Deployment based on the YAML file:
+
+    kubectl apply -f https://k8s.io/examples/application/deployment.yaml
+
+1. Display information about the Deployment:
+
+    kubectl describe deployment nginx-deployment
+        
+        
