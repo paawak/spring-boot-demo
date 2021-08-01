@@ -59,3 +59,74 @@ But note that you need to first upload this image to the Docker Hub. These are t
     docker login
     docker push paawak/aws-docker-demo:latest
         
+## Running on Minikube
+### Deploying an application
+The below steps are taken from <https://kubernetes.io/docs/tasks/run-application/run-stateless-application-deployment/>
+
+1. Start Minikube
+
+    minikube start --nodes 2 -p aws-docker-demo
+    
+1. Check the status of the nodes
+    
+    minikube status -p aws-docker-demo        
+
+1. Create a Deployment based on the YAML file:
+
+    kubectl apply -f kubernetes/minikube/application-deployment.yml
+
+1. Display information about the Deployment:
+
+    kubectl describe deployment aws-docker-demo-deployment
+        
+1. List the Pods created by the deployment:
+
+    kubectl get pods -l app=aws-docker-demo
+    
+1. Display information about a Pod:
+
+    kubectl describe pod <pod-name>
+    
+1. Deleting a deployment:
+
+    kubectl delete deployment aws-docker-demo-deployment
+    
+### Exposing a deployed application
+The below steps are taken from <https://kubernetes.io/docs/concepts/services-networking/service/> and <https://kubernetes.io/docs/tutorials/stateless-application/expose-external-ip-address/>
+
+#### Using the expose command
+
+    kubectl expose deployment aws-docker-demo-deployment --type=LoadBalancer --name=aws-docker-demo-service
+
+1. To get external IPs    
+Use any of the below commands:    
+
+    minikube service aws-docker-demo-service
+    
+    minikube ip
+    
+1. Deleting a service:
+
+    kubectl delete svc aws-docker-demo-service    
+
+#### Deploying a Service
+
+    kubectl apply -f kubernetes/minikube/application-service.yml
+
+1. Display information about the Deployment:
+
+    kubectl describe svc aws-docker-demo-service
+    
+1. Get the Endpoints
+
+    kubectl get ep aws-docker-demo-service
+    
+1. Get the NodePort
+
+    kubectl get svc aws-docker-demo-service -o yaml | grep nodePort -C 10
+    
+1. Get the IP Address
+
+    kubectl get nodes -o yaml | grep ExternalIP -C 1
+    
+                    
