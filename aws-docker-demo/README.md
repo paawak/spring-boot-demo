@@ -138,6 +138,40 @@ Use any of the below commands:
 
     kubectl create configmap dev-config --from-file=src/main/resources/application.yml
     
+#### Verify that configmap has been created
+
+    kubectl get configmaps dev-config -o yaml   
+    
+#### Using ConfigMap
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: aws-docker-demo-deployment
+spec:
+  selector:
+    matchLabels:
+      app: aws-docker-demo
+  replicas: 2 # tells deployment to run 2 pods matching the template
+  template:
+    metadata:
+      labels:
+        app: aws-docker-demo
+    spec:
+      containers:
+      - name: aws-docker-demo
+        image: paawak/aws-docker-demo:latest
+        ports:
+        - containerPort: 5000
+        env:
+          - name: APPLICATION_CONFIG 
+            valueFrom:
+              configMapKeyRef:
+                name: dev-config
+                key: application.yml  
+```
+    
 #### Reference    
 1. <https://kubernetes.io/docs/concepts/configuration/overview/>    
 1. <https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap/>    

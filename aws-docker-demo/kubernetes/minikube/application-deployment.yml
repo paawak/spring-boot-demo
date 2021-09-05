@@ -17,3 +17,9 @@ spec:
         image: paawak/aws-docker-demo:latest
         ports:
         - containerPort: 5000
+        env:
+          - name: APPLICATION_CONFIG 
+            valueFrom:
+              configMapKeyRef:
+                name: dev-config
+                key: application.yml             
