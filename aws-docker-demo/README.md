@@ -60,6 +60,10 @@ But note that you need to first upload this image to the Docker Hub. These are t
     docker push paawak/aws-docker-demo:latest
         
 ## Running on Minikube
+### Display Dashboard
+
+    minikube dashboard
+
 ### Deploying an application
 The below steps are taken from <https://kubernetes.io/docs/tasks/run-application/run-stateless-application-deployment/>
 
@@ -129,4 +133,11 @@ Use any of the below commands:
 
     kubectl get nodes -o yaml | grep ExternalIP -C 1
     
-                    
+### ConfigMaps
+#### Creating from yaml file
+
+    kubectl create configmap dev-config --from-file=src/main/resources/application.yml
+    
+#### Reference    
+1. <https://kubernetes.io/docs/concepts/configuration/overview/>    
+1. <https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap/>    
