@@ -45,10 +45,8 @@ public class DynamicControllerPostProcessor implements EnvironmentPostProcessor 
 	Loaded<?> loadedClass =
 		generatedClass.load(getClass().getClassLoader(), ClassLoadingStrategy.Default.INJECTION);
 
-	File baseLocation = new File("target/classes");
-
 	try {
-	    Map<TypeDescription, File> map = loadedClass.saveIn(baseLocation);
+	    Map<TypeDescription, File> map = loadedClass.saveIn(new File("target/classes"));
 	    System.out.println("Successfully saved the newly created class in: " + map);
 	} catch (IOException e) {
 	    throw new RuntimeException(e);
