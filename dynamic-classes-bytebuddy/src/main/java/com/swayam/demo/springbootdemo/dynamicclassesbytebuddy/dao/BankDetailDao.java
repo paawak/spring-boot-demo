@@ -1,11 +1,9 @@
 package com.swayam.demo.springbootdemo.dynamicclassesbytebuddy.dao;
 
-import java.util.List;
+import org.springframework.data.repository.CrudRepository;
 
 import com.swayam.demo.springbootdemo.dynamicclassesbytebuddy.model.BankDetail;
 
-public interface BankDetailDao {
-
-    List<BankDetail> getBankDetails();
+public interface BankDetailDao extends CrudRepository<BankDetail, Integer> {
 
 }

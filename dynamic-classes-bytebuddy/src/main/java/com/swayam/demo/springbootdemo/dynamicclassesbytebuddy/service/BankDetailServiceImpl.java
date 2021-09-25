@@ -1,7 +1,5 @@
 package com.swayam.demo.springbootdemo.dynamicclassesbytebuddy.service;
 
-import java.util.List;
-
 import org.springframework.stereotype.Service;
 
 import com.swayam.demo.springbootdemo.dynamicclassesbytebuddy.dao.BankDetailDao;
@@ -17,8 +15,8 @@ public class BankDetailServiceImpl implements BankDetailService {
     }
 
     @Override
-    public List<BankDetail> getBankDetails() {
-	return bankDetailDao.getBankDetails();
+    public Iterable<BankDetail> getBankDetails() {
+	return bankDetailDao.findAll();
     }
 
 }

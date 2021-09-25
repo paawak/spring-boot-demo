@@ -1,7 +1,5 @@
 package com.swayam.demo.springbootdemo.dynamicclassesbytebuddy.rest;
 
-import java.util.List;
-
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,7 +18,7 @@ public class BankDetailController {
     }
 
     @GetMapping
-    public List<BankDetail> getBankDetails() {
+    public Iterable<BankDetail> getBankDetails() {
 	return bankDetailService.getBankDetails();
     }
 
