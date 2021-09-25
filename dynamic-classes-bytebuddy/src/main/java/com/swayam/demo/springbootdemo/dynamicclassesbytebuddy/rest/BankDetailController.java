@@ -8,7 +8,7 @@ import com.swayam.demo.springbootdemo.dynamicclassesbytebuddy.model.BankDetail;
 import com.swayam.demo.springbootdemo.dynamicclassesbytebuddy.service.BankDetailService;
 
 @RestController
-@RequestMapping("/bank-item")
+@RequestMapping("/v1/bank-item")
 public class BankDetailController {
 
     private final BankDetailService bankDetailService;
