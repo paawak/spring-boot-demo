@@ -11,9 +11,13 @@ logging:
     org.hibernate: INFO
 
 spring:
+  h2:
+    console:
+      enabled: true
   flyway:
     locations: classpath:/sql
   jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
     hibernate:
       ddl-auto: none
   datasource:
