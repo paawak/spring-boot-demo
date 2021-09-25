@@ -5,12 +5,11 @@ import java.io.IOException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.BeansException;
-import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
-import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.env.EnvironmentPostProcessor;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
+import org.springframework.core.env.ConfigurableEnvironment;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,13 +22,16 @@ import net.bytebuddy.dynamic.DynamicType.Unloaded;
 import net.bytebuddy.dynamic.loading.ClassLoadingStrategy;
 
 @Order(Ordered.LOWEST_PRECEDENCE)
-@Configuration
-public class DynamicControllerPostProcessor implements BeanFactoryPostProcessor {
+public class DynamicControllerPostProcessor implements EnvironmentPostProcessor {
 
     private static final Logger LOG = LoggerFactory.getLogger(DynamicControllerPostProcessor.class);
 
     @Override
-    public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
+    public void postProcessEnvironment(ConfigurableEnvironment environment, SpringApplication application) {
+	createDynamicController();
+    }
+
+    private void createDynamicController() {
 
 	String className = BankDetailController.class.getName() + "V2";
 

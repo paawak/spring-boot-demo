@@ -1,0 +1,1 @@
+org.springframework.boot.env.EnvironmentPostProcessor=com.swayam.demo.springbootdemo.dynamicclassesbytebuddy.config.DynamicControllerPostProcessor
