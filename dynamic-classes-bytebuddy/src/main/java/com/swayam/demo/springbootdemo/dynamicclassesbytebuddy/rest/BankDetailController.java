@@ -2,8 +2,8 @@ package com.swayam.demo.springbootdemo.dynamicclassesbytebuddy.rest;
 
 import java.util.List;
 
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.swayam.demo.springbootdemo.dynamicclassesbytebuddy.model.BankDetail;
@@ -19,7 +19,7 @@ public class BankDetailController {
 	this.bankDetailService = bankDetailService;
     }
 
-    @RequestMapping(value = "/blocking", method = RequestMethod.GET)
+    @GetMapping
     public List<BankDetail> getBankDetails() {
 	return bankDetailService.getBankDetails();
     }
