@@ -2,9 +2,8 @@ package com.swayam.demo.springbootdemo.dynamicclassesbytebuddy.config;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Map;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.env.EnvironmentPostProcessor;
 import org.springframework.core.Ordered;
@@ -17,14 +16,13 @@ import com.swayam.demo.springbootdemo.dynamicclassesbytebuddy.rest.BankDetailCon
 
 import net.bytebuddy.ByteBuddy;
 import net.bytebuddy.description.annotation.AnnotationDescription;
+import net.bytebuddy.description.type.TypeDescription;
 import net.bytebuddy.dynamic.DynamicType.Loaded;
 import net.bytebuddy.dynamic.DynamicType.Unloaded;
 import net.bytebuddy.dynamic.loading.ClassLoadingStrategy;
 
 @Order(Ordered.LOWEST_PRECEDENCE)
 public class DynamicControllerPostProcessor implements EnvironmentPostProcessor {
-
-    private static final Logger LOG = LoggerFactory.getLogger(DynamicControllerPostProcessor.class);
 
     @Override
     public void postProcessEnvironment(ConfigurableEnvironment environment, SpringApplication application) {
@@ -35,7 +33,7 @@ public class DynamicControllerPostProcessor implements EnvironmentPostProcessor 
 
 	String className = BankDetailController.class.getName() + "V2";
 
-	LOG.info("Creating new class: {}", className);
+	System.out.println("Creating new class: " + className);
 
 	Unloaded<?> generatedClass =
 		new ByteBuddy().subclass(BankDetailController.class)
@@ -50,7 +48,8 @@ public class DynamicControllerPostProcessor implements EnvironmentPostProcessor 
 	File baseLocation = new File("target/classes");
 
 	try {
-	    loadedClass.saveIn(baseLocation);
+	    Map<TypeDescription, File> map = loadedClass.saveIn(baseLocation);
+	    System.out.println("Successfully saved the newly created class in: " + map);
 	} catch (IOException e) {
 	    throw new RuntimeException(e);
 	}
