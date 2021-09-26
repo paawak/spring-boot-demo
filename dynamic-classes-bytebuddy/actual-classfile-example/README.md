@@ -1,6 +1,6 @@
 # About
 
-Example of creating a class dynamically using ByteBuddy
+Example of creating a class dynamically using ByteBuddy. The .classfile is written on to disk.
 
 # Running in Local
 

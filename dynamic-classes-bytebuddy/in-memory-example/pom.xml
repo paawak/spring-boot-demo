@@ -12,7 +12,7 @@
 	<artifactId>in-memory-example</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>in-memory-example</name>
-	<description>Example of creating a class dynamically using ByteBuddy. This works with an in-memory class.</description>
+	<description>Example of creating a class dynamically using ByteBuddy. This works with an in-memory class, without actually writing the .classfile on the disk.</description>
 	<properties>
 		<java.version>11</java.version>
 	</properties>

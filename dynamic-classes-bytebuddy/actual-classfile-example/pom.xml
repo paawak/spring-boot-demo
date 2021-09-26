@@ -12,7 +12,7 @@
 	<artifactId>actual-classfile-example</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>actual-classfile-example</name>
-	<description>Example of creating a class dynamically using ByteBuddy. The classfile is written on to disk.</description>
+	<description>Example of creating a class dynamically using ByteBuddy. The .classfile is written on to disk.</description>
 	<properties>
 		<java.version>11</java.version>
 	</properties>

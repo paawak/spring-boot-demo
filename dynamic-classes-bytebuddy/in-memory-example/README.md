@@ -1,6 +1,6 @@
 # About
 
-Example of creating a class dynamically using ByteBuddy
+Example of creating a class dynamically using ByteBuddy. This works with an in-memory class, without actually writing the .classfile on the disk.
 
 # Running in Local
 
