@@ -1,10 +1,11 @@
 package com.swayam.demo.springbootdemo.dynamicclassesbytebuddy.config;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.env.EnvironmentPostProcessor;
-import org.springframework.core.Ordered;
-import org.springframework.core.annotation.Order;
-import org.springframework.core.env.ConfigurableEnvironment;
+import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
+import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
+import org.springframework.beans.factory.support.BeanDefinitionBuilder;
+import org.springframework.beans.factory.support.DefaultListableBeanFactory;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -12,23 +13,27 @@ import com.swayam.demo.springbootdemo.dynamicclassesbytebuddy.rest.BankDetailCon
 
 import net.bytebuddy.ByteBuddy;
 import net.bytebuddy.description.annotation.AnnotationDescription;
+import net.bytebuddy.dynamic.DynamicType.Loaded;
 import net.bytebuddy.dynamic.DynamicType.Unloaded;
-import net.bytebuddy.dynamic.loading.ClassInjector;
+import net.bytebuddy.dynamic.loading.ClassLoadingStrategy;
 
-@Order(Ordered.LOWEST_PRECEDENCE)
-public class DynamicControllerPostProcessor implements EnvironmentPostProcessor {
+@Configuration
+public class DynamicControllerPostProcessor implements BeanFactoryPostProcessor {
 
     @Override
-    public void postProcessEnvironment(ConfigurableEnvironment environment, SpringApplication application) {
-	System.err.println("*****" + application.getClassLoader());
-
+    public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
 	String className = BankDetailController.class.getName() + "V2";
 
-	createDynamicController(application.getClassLoader(), className);
+	Class<?> clazz = createDynamicController(beanFactory.getClass().getClassLoader(), className);
+
+	BeanDefinitionBuilder beanDefinitionBuilder = BeanDefinitionBuilder.rootBeanDefinition(clazz)
+		.addConstructorArgReference("bankDetailServiceImpl");
+	((DefaultListableBeanFactory) beanFactory).registerBeanDefinition("myController",
+		beanDefinitionBuilder.getBeanDefinition());
 
     }
 
-    private byte[] createDynamicController(ClassLoader classLoader, String className) {
+    private Class<?> createDynamicController(ClassLoader classLoader, String className) {
 
 	System.out.println("Creating new class: " + className);
 
@@ -38,11 +43,14 @@ public class DynamicControllerPostProcessor implements EnvironmentPostProcessor 
 				.defineArray("value", new String[] { "/v2/bank-item" }).build())
 		.name(className).make();
 
-	ClassInjector.UsingReflection.ofSystemClassLoader().inject(generatedClass.getAllTypes());
+	Loaded<?> loadedClass =
+		generatedClass.load(getClass().getClassLoader(), ClassLoadingStrategy.Default.INJECTION);
 
-	// generatedClass.load(classLoader, .ALLOW_EXISTING_TYPES);
-
-	return null;
+	try {
+	    return Class.forName(className);
+	} catch (ClassNotFoundException e) {
+	    throw new RuntimeException(e);
+	}
 
     }
 
