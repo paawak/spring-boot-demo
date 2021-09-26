@@ -13,7 +13,6 @@ import com.swayam.demo.springbootdemo.dynamicclassesbytebuddy.rest.BankDetailCon
 
 import net.bytebuddy.ByteBuddy;
 import net.bytebuddy.description.annotation.AnnotationDescription;
-import net.bytebuddy.dynamic.DynamicType.Loaded;
 import net.bytebuddy.dynamic.DynamicType.Unloaded;
 import net.bytebuddy.dynamic.loading.ClassLoadingStrategy;
 
@@ -43,8 +42,7 @@ public class DynamicControllerPostProcessor implements BeanFactoryPostProcessor 
 				.defineArray("value", new String[] { "/v2/bank-item" }).build())
 		.name(className).make();
 
-	Loaded<?> loadedClass =
-		generatedClass.load(getClass().getClassLoader(), ClassLoadingStrategy.Default.INJECTION);
+	generatedClass.load(getClass().getClassLoader(), ClassLoadingStrategy.Default.INJECTION);
 
 	try {
 	    return Class.forName(className);
