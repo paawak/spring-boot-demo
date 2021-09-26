@@ -48,7 +48,8 @@ public class DynamicControllerPostProcessor implements BeanFactoryPostProcessor 
 
 	generatedClass.load(getClass().getClassLoader(), ClassLoadingStrategy.Default.INJECTION);
 
-	LOG.info("Loaded the class {} successfully into the classloader", className);
+	LOG.info("Loaded the class {} successfully into the classloader {}", className,
+		getClass().getClassLoader());
 
 	try {
 	    return Class.forName(className);
