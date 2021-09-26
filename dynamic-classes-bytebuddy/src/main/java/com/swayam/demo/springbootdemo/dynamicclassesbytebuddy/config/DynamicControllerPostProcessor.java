@@ -1,5 +1,7 @@
 package com.swayam.demo.springbootdemo.dynamicclassesbytebuddy.config;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
@@ -19,22 +21,24 @@ import net.bytebuddy.dynamic.loading.ClassLoadingStrategy;
 @Configuration
 public class DynamicControllerPostProcessor implements BeanFactoryPostProcessor {
 
+    private static final Logger LOG = LoggerFactory.getLogger(DynamicControllerPostProcessor.class);
+
     @Override
     public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
 	String className = BankDetailController.class.getName() + "V2";
 
-	Class<?> clazz = createDynamicController(beanFactory.getClass().getClassLoader(), className);
+	Class<?> dynamicController = createDynamicController(className);
 
-	BeanDefinitionBuilder beanDefinitionBuilder = BeanDefinitionBuilder.rootBeanDefinition(clazz)
-		.addConstructorArgReference("bankDetailServiceImpl");
-	((DefaultListableBeanFactory) beanFactory).registerBeanDefinition("myController",
+	BeanDefinitionBuilder beanDefinitionBuilder = BeanDefinitionBuilder
+		.rootBeanDefinition(dynamicController).addConstructorArgReference("bankDetailServiceImpl");
+	((DefaultListableBeanFactory) beanFactory).registerBeanDefinition(className,
 		beanDefinitionBuilder.getBeanDefinition());
 
     }
 
-    private Class<?> createDynamicController(ClassLoader classLoader, String className) {
+    private Class<?> createDynamicController(String className) {
 
-	System.out.println("Creating new class: " + className);
+	LOG.info("Creating new class: {}", className);
 
 	Unloaded<?> generatedClass = new ByteBuddy().subclass(BankDetailController.class)
 		.annotateType(AnnotationDescription.Builder.ofType(RestController.class).build(),
@@ -43,6 +47,8 @@ public class DynamicControllerPostProcessor implements BeanFactoryPostProcessor 
 		.name(className).make();
 
 	generatedClass.load(getClass().getClassLoader(), ClassLoadingStrategy.Default.INJECTION);
+
+	LOG.info("Loaded the class {} successfully into the classloader", className);
 
 	try {
 	    return Class.forName(className);
