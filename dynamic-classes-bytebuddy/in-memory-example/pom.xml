@@ -8,11 +8,11 @@
 		<version>2.5.5</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.swayam.demo.springbootdemo</groupId>
-	<artifactId>dynamic-classes-bytebuddy</artifactId>
+	<groupId>com.swayam.demo.springbootdemo.dynamicclasses</groupId>
+	<artifactId>in-memory-example</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>dynamic-classes-bytebuddy</name>
-	<description>Example of creating a class dynamically using ByteBuddy</description>
+	<name>in-memory-example</name>
+	<description>Example of creating a class dynamically using ByteBuddy. This works with an in-memory class.</description>
 	<properties>
 		<java.version>11</java.version>
 	</properties>
