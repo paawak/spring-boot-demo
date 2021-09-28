@@ -29,6 +29,22 @@ public class DynamicControllerPostProcessor implements EnvironmentPostProcessor 
 	createDynamicController();
     }
 
+    /***
+     * Creates the below class dynamically and loads it into the ClassLoader as
+     * well as saves the .class file on the disk:
+     * 
+     * <pre>
+     * &#64;RestController
+     * &#64;RequestMapping("/v2/bank-item")
+     * public class BankDetailControllerV2 extends BankDetailController {
+     * 
+     *     public BankDetailControllerV2(BankDetailService bankDetailService) {
+     * 	super(bankDetailService);
+     *     }
+     * 
+     * }
+     * </pre>
+     */
     private void createDynamicController() {
 
 	String className = BankDetailController.class.getName() + "V2";
