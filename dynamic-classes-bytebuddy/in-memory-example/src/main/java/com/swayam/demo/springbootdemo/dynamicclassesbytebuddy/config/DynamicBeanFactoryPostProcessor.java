@@ -19,9 +19,9 @@ import net.bytebuddy.dynamic.DynamicType.Unloaded;
 import net.bytebuddy.dynamic.loading.ClassLoadingStrategy;
 
 @Configuration
-public class DynamicControllerPostProcessor implements BeanFactoryPostProcessor {
+public class DynamicBeanFactoryPostProcessor implements BeanFactoryPostProcessor {
 
-    private static final Logger LOG = LoggerFactory.getLogger(DynamicControllerPostProcessor.class);
+    private static final Logger LOG = LoggerFactory.getLogger(DynamicBeanFactoryPostProcessor.class);
 
     @Override
     public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
