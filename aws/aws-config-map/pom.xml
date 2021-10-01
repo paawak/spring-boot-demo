@@ -5,11 +5,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.swayam.demo.springbootdemo</groupId>
-	<artifactId>aws-docker-demo</artifactId>
+	<artifactId>aws-config-map</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging> 
 
-	<name>aws-docker-demo</name>
+	<name>aws-config-map</name>
 	<description>Demo project for Server to Client Reactive programming with Netty on Docker. This can also be deployed to AWS Elastic Beanstalk</description>
 
 	<parent>
