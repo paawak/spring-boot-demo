@@ -27,7 +27,7 @@ public class SwaggerConfig {
     }
 
     private Docket docket(String version) {
-	ApiInfo apiInfo = new ApiInfoBuilder().title("Dynamic Classes Example " + version).version(version)
+	ApiInfo apiInfo = new ApiInfoBuilder().title("Static JPA Example " + version).version(version)
 		.contact(new Contact("Palash Ray", "https://palashray.com", "paawak@gmail.com")).build();
 	return new Docket(DocumentationType.SWAGGER_2).groupName(version).select().apis(RequestHandlerSelectors.any())
 		.paths(PathSelectors.ant("/" + version + "/*")).build().apiInfo(apiInfo);
