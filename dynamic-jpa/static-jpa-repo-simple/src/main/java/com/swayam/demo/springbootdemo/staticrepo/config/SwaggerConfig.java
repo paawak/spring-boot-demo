@@ -1,4 +1,4 @@
-package com.swayam.demo.springbootdemo.dynamicclassesbytebuddy.config;
+package com.swayam.demo.springbootdemo.staticrepo.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

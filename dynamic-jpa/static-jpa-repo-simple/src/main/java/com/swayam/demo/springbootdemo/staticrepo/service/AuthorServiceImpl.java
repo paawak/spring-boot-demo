@@ -1,9 +1,9 @@
-package com.swayam.demo.springbootdemo.dynamicclassesbytebuddy.service;
+package com.swayam.demo.springbootdemo.staticrepo.service;
 
 import org.springframework.stereotype.Service;
 
-import com.swayam.demo.springbootdemo.dynamicclassesbytebuddy.dao.AuthorDao;
-import com.swayam.demo.springbootdemo.dynamicclassesbytebuddy.model.Author;
+import com.swayam.demo.springbootdemo.staticrepo.dao.AuthorDao;
+import com.swayam.demo.springbootdemo.staticrepo.model.Author;
 
 @Service
 public class AuthorServiceImpl implements AuthorService {

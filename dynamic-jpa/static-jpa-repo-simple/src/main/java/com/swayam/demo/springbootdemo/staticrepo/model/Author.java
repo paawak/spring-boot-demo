@@ -1,4 +1,4 @@
-package com.swayam.demo.springbootdemo.dynamicclassesbytebuddy.model;
+package com.swayam.demo.springbootdemo.staticrepo.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

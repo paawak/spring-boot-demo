@@ -1,9 +1,9 @@
-package com.swayam.demo.springbootdemo.dynamicclassesbytebuddy.service;
+package com.swayam.demo.springbootdemo.staticrepo.service;
 
 import org.springframework.stereotype.Service;
 
-import com.swayam.demo.springbootdemo.dynamicclassesbytebuddy.dao.BookDao;
-import com.swayam.demo.springbootdemo.dynamicclassesbytebuddy.model.Book;
+import com.swayam.demo.springbootdemo.staticrepo.dao.BookDao;
+import com.swayam.demo.springbootdemo.staticrepo.model.Book;
 
 @Service
 public class BookServiceImpl implements BookService {

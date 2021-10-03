@@ -1,11 +1,11 @@
-package com.swayam.demo.springbootdemo.dynamicclassesbytebuddy.rest;
+package com.swayam.demo.springbootdemo.staticrepo.rest;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.swayam.demo.springbootdemo.dynamicclassesbytebuddy.model.Author;
-import com.swayam.demo.springbootdemo.dynamicclassesbytebuddy.service.AuthorService;
+import com.swayam.demo.springbootdemo.staticrepo.model.Author;
+import com.swayam.demo.springbootdemo.staticrepo.service.AuthorService;
 
 @RestController
 @RequestMapping("/v1/author")
