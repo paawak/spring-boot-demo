@@ -4,12 +4,14 @@ import java.util.List;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.swayam.demo.springbootdemo.staticrepo.dao.AuthorDao;
 import com.swayam.demo.springbootdemo.staticrepo.model.Author;
 
 @RestController
+@RequestMapping("/v1/author")
 public class AuthorController {
 
     private final AuthorDao authorDao;
@@ -18,13 +20,13 @@ public class AuthorController {
 	this.authorDao = authorDao;
     }
 
-    @GetMapping(path = "/v1/author")
+    @GetMapping
     public Iterable<Author> getAuthors() {
 	return authorDao.findAll();
     }
 
-    @GetMapping(path = "/v1/author/{name}")
-    public List<Author> getAuthorsByName(@PathVariable("name") String name) {
+    @GetMapping("/{name}")
+    public List<Author> getAuthorsByName(@PathVariable String name) {
 	return authorDao.findByFirstNameContainingIgnoreCaseOrLastNameContainingIgnoreCase(name, name);
     }
 
