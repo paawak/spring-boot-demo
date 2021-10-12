@@ -1,0 +1,43 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd"
+	logicalFilePath="V1__initial_schema.xml">
+	<changeSet author="Palash Ray" id="1">
+
+		<createTable tableName="author">
+			<column autoIncrement="true" name="id" type="INT">
+				<constraints primaryKey="true"
+					primaryKeyName="SYS_PK_10119" />
+			</column>
+			<column name="first_name" type="VARCHAR(50)">
+				<constraints nullable="false" />
+			</column>
+			<column name="last_name" type="VARCHAR(50)">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+		<createTable tableName="book">
+			<column autoIncrement="true" name="id" type="INT">
+				<constraints primaryKey="true"
+					primaryKeyName="SYS_PK_10109" />
+			</column>
+			<column name="name" type="VARCHAR(200)">
+				<constraints nullable="false" />
+			</column>
+			<column name="author_id" type="INT">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+
+		<addForeignKeyConstraint
+			baseColumnNames="author_id" baseTableName="book"
+			constraintName="SYS_FK_10123" deferrable="false"
+			initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+			referencedColumnNames="id" referencedTableName="author"
+			validate="true" />
+
+	</changeSet>
+</databaseChangeLog>
