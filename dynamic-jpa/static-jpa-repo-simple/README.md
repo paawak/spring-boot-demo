@@ -35,3 +35,10 @@ The JDBC Url is: *jdbc:h2:mem:bank_details*. The user-name and password are both
 ### Update and Author in a Book
 
     curl -X PUT "http://localhost:8080/v1/book/author?authorId=2&bookId=1" -H  "accept: */*"
+
+# Reference
+## Cucumber
+Spring Cucumber Reference: <https://github.com/paawak/cucumber-jvm/tree/master/spring>    
+
+JUnit 5 Example: <https://github.com/paawak/cucumber-jvm/tree/master/examples/calculator-java-junit5>
+
