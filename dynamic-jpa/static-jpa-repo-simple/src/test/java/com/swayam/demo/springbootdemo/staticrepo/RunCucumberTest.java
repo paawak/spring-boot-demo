@@ -7,7 +7,7 @@ import org.junit.platform.suite.api.Suite;
 import io.cucumber.core.options.Constants;
 
 @Suite
-@SelectClasspathResource("com/swayam")
+@SelectClasspathResource("cukes")
 @ConfigurationParameter(key = Constants.PLUGIN_PUBLISH_QUIET_PROPERTY_NAME, value = "true")
 public class RunCucumberTest {
 
