@@ -22,16 +22,16 @@ public class AuthorSteps {
     private RestTemplate restTemplate;
 
     @Autowired
-    private AuthorSharedDTO authorDto;
+    private SharedDTO sharedDto;
 
     @Given("The application is available at {string}")
     public void applicationBaseUrl(String baseUrl) {
-	authorDto.setBaseUrl(baseUrl);
+	sharedDto.setBaseUrl(baseUrl);
     }
 
     @Given("Health check is fine at {string}")
     public void checkApplicationHealth(String uri) {
-	Map<String, String> response = restTemplate.exchange(authorDto.getBaseUrl() + uri, HttpMethod.GET, null,
+	Map<String, String> response = restTemplate.exchange(sharedDto.getBaseUrl() + uri, HttpMethod.GET, null,
 		new ParameterizedTypeReference<Map<String, String>>() {
 		}).getBody();
 	assertEquals("UP", response.get("status"));
@@ -39,23 +39,23 @@ public class AuthorSteps {
 
     @When("I fetch authors at {string}")
     public void fetchAuthors(String uri) {
-	List<Author> authors = restTemplate.exchange(authorDto.getBaseUrl() + uri, HttpMethod.GET, null,
+	List<Author> authors = restTemplate.exchange(sharedDto.getBaseUrl() + uri, HttpMethod.GET, null,
 		new ParameterizedTypeReference<List<Author>>() {
 		}).getBody();
-	authorDto.setAuthors(authors);
+	sharedDto.setAuthors(authors);
     }
 
     @When("I search for author by name at {string}")
     public void searchByName(String uri) {
-	List<Author> authors = restTemplate.exchange(authorDto.getBaseUrl() + uri, HttpMethod.GET, null,
+	List<Author> authors = restTemplate.exchange(sharedDto.getBaseUrl() + uri, HttpMethod.GET, null,
 		new ParameterizedTypeReference<List<Author>>() {
 		}).getBody();
-	authorDto.setAuthors(authors);
+	sharedDto.setAuthors(authors);
     }
 
     @Then("I should find {int} authors")
     public void fetchAuthors(int authorCount) {
-	assertEquals(authorCount, authorDto.getAuthors().size());
+	assertEquals(authorCount, sharedDto.getAuthors().size());
     }
 
 }
