@@ -32,7 +32,7 @@ The JDBC Url is: *jdbc:h2:mem:bank_details*. The user-name and password are both
 
 <http://localhost:8080/v1/book/agn>
 
-### Update and Author in a Book
+### Update an Author in a Book
 
     curl -X PUT "http://localhost:8080/v1/book/author?authorId=2&bookId=1" -H  "accept: */*"
 

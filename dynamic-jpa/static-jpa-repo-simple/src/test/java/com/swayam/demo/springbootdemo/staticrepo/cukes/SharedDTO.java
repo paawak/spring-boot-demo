@@ -18,5 +18,6 @@ public class SharedDTO {
     private String baseUrl;
     private List<Author> authors;
     private List<Book> books;
+    private int booksAffected;
 
 }

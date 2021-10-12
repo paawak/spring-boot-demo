@@ -38,9 +38,27 @@ public class BookSteps {
 	sharedDto.setBooks(books);
     }
 
+    @When("I update the author of a book at {string}")
+    public void updateAuthorInBook(String uri) {
+	int booksAffected =
+		restTemplate.exchange(sharedDto.getBaseUrl() + uri, HttpMethod.PUT, null, Integer.class).getBody();
+	sharedDto.setBooksAffected(booksAffected);
+    }
+
     @Then("I should find {int} books")
     public void fetchAuthors(int bookCount) {
 	assertEquals(bookCount, sharedDto.getBooks().size());
+    }
+
+    @Then("{int} book should be affected")
+    public void countBooksAffected(int bookCount) {
+	assertEquals(bookCount, sharedDto.getBooksAffected());
+    }
+
+    @Then("The author first name should be {string}")
+    public void verifyAuthorFirstName(String authorFirstName) {
+	assertEquals(1, sharedDto.getBooks().size());
+	assertEquals(authorFirstName, sharedDto.getBooks().get(0).getAuthor().getFirstName());
     }
 
 }
