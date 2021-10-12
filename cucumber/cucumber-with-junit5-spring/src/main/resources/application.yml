@@ -1,0 +1,28 @@
+server:
+  port: 8080
+  servlet:
+    contextPath: /
+  
+logging:
+  level:
+    root: INFO
+    com.swayam.demo: DEBUG
+    org.springframework.web: INFO
+    org.hibernate: INFO
+
+spring:
+  h2:
+    console:
+      enabled: true
+  liquibase:
+    enabled: true
+    change-log: classpath:/sql/liquibase/master-change-log.xml
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: none
+  datasource:
+    url: jdbc:h2:mem:library
+    username: sa
+    password: sa
+    driver-class-name: org.h2.Driver
