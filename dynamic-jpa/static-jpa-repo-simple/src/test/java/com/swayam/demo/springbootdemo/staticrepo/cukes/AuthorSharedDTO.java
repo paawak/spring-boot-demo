@@ -12,8 +12,9 @@ import lombok.Data;
 @Component
 @ScenarioScope
 @Data
-public class AuthorResponse {
+public class AuthorSharedDTO {
 
+    private String baseUrl;
     private List<Author> authors;
 
 }
