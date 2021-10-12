@@ -45,9 +45,17 @@ public class AuthorSteps {
 	authorDto.setAuthors(authors);
     }
 
+    @When("I search for author by name at {string}")
+    public void searchByName(String uri) {
+	List<Author> authors = restTemplate.exchange(authorDto.getBaseUrl() + uri, HttpMethod.GET, null,
+		new ParameterizedTypeReference<List<Author>>() {
+		}).getBody();
+	authorDto.setAuthors(authors);
+    }
+
     @Then("I should find {int} authors")
     public void fetchAuthors(int authorCount) {
-	assertEquals(2, authorDto.getAuthors().size());
+	assertEquals(authorCount, authorDto.getAuthors().size());
     }
 
 }
