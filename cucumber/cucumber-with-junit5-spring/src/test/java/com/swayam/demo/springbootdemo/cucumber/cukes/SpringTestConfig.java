@@ -1,11 +1,13 @@
-package com.swayam.demo.springbootdemo.staticrepo.cukes;
+package com.swayam.demo.springbootdemo.cucumber.cukes;
 
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.RestTemplate;
 
+@ComponentScan
 @Configuration
-public class RestConfig {
+public class SpringTestConfig {
 
     @Bean
     public RestTemplate restTemplate() {
