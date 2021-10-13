@@ -1,4 +1,4 @@
-package com.swayam.demo.springbootdemo.staticrepo;
+package com.swayam.demo.springbootdemo.abstaticrepo;
 
 import org.junit.platform.suite.api.ConfigurationParameter;
 import org.junit.platform.suite.api.SelectClasspathResource;

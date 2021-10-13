@@ -1,4 +1,4 @@
-package com.swayam.demo.springbootdemo.staticrepo.dao;
+package com.swayam.demo.springbootdemo.abstaticrepo.dao;
 
 import java.util.List;
 
@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.swayam.demo.springbootdemo.staticrepo.model.Book;
+import com.swayam.demo.springbootdemo.abstaticrepo.model.Book;
 
 public interface BookDao extends CrudRepository<Book, Integer> {
 

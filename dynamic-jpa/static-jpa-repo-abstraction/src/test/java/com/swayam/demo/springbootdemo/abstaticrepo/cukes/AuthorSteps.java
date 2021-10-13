@@ -1,4 +1,4 @@
-package com.swayam.demo.springbootdemo.staticrepo.cukes;
+package com.swayam.demo.springbootdemo.abstaticrepo.cukes;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -10,7 +10,7 @@ import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.web.client.RestTemplate;
 
-import com.swayam.demo.springbootdemo.staticrepo.model.Author;
+import com.swayam.demo.springbootdemo.abstaticrepo.model.Author;
 
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;

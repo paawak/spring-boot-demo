@@ -1,4 +1,4 @@
-package com.swayam.demo.springbootdemo.staticrepo.config;
+package com.swayam.demo.springbootdemo.abstaticrepo.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

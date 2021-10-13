@@ -1,11 +1,11 @@
-package com.swayam.demo.springbootdemo.staticrepo.cukes;
+package com.swayam.demo.springbootdemo.abstaticrepo.cukes;
 
 import java.util.List;
 
 import org.springframework.stereotype.Component;
 
-import com.swayam.demo.springbootdemo.staticrepo.model.Author;
-import com.swayam.demo.springbootdemo.staticrepo.model.Book;
+import com.swayam.demo.springbootdemo.abstaticrepo.model.Author;
+import com.swayam.demo.springbootdemo.abstaticrepo.model.Book;
 
 import io.cucumber.spring.ScenarioScope;
 import lombok.Data;

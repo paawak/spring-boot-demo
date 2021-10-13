@@ -1,4 +1,4 @@
-package com.swayam.demo.springbootdemo.staticrepo.rest;
+package com.swayam.demo.springbootdemo.abstaticrepo.rest;
 
 import java.util.List;
 
@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.swayam.demo.springbootdemo.staticrepo.dao.BookDao;
-import com.swayam.demo.springbootdemo.staticrepo.model.Book;
+import com.swayam.demo.springbootdemo.abstaticrepo.dao.BookDao;
+import com.swayam.demo.springbootdemo.abstaticrepo.model.Book;
 
 @RestController
 @RequestMapping("/v1/book")

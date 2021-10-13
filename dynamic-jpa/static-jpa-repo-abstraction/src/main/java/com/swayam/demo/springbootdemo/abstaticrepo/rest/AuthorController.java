@@ -1,4 +1,4 @@
-package com.swayam.demo.springbootdemo.staticrepo.rest;
+package com.swayam.demo.springbootdemo.abstaticrepo.rest;
 
 import java.util.List;
 
@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.swayam.demo.springbootdemo.staticrepo.dao.AuthorDao;
-import com.swayam.demo.springbootdemo.staticrepo.model.Author;
+import com.swayam.demo.springbootdemo.abstaticrepo.dao.AuthorDao;
+import com.swayam.demo.springbootdemo.abstaticrepo.model.Author;
 
 @RestController
 @RequestMapping("/v1/author")

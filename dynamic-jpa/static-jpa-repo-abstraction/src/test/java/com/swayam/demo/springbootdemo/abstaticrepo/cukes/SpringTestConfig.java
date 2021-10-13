@@ -1,4 +1,4 @@
-package com.swayam.demo.springbootdemo.staticrepo.cukes;
+package com.swayam.demo.springbootdemo.abstaticrepo.cukes;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;

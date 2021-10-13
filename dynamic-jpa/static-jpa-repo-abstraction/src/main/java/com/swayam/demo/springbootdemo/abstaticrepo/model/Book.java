@@ -1,4 +1,4 @@
-package com.swayam.demo.springbootdemo.staticrepo.model;
+package com.swayam.demo.springbootdemo.abstaticrepo.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
