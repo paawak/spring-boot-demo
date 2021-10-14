@@ -17,7 +17,18 @@ public class SharedDTO {
 
     private String baseUrl;
     private List<Author> authors;
-    private List<BookTemplate> books;
+    private List<BookTemplateImpl> books;
     private int booksAffected;
+
+    @Data
+    static class BookTemplateImpl implements BookTemplate {
+
+	private int id;
+
+	private String name;
+
+	private Author author;
+
+    }
 
 }

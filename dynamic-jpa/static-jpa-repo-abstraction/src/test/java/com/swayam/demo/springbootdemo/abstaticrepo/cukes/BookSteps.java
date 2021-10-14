@@ -9,7 +9,7 @@ import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.web.client.RestTemplate;
 
-import com.swayam.demo.springbootdemo.abstaticrepo.model.BookTemplate;
+import com.swayam.demo.springbootdemo.abstaticrepo.cukes.SharedDTO.BookTemplateImpl;
 
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -24,16 +24,16 @@ public class BookSteps {
 
     @When("I fetch books at {string}")
     public void fetchBooks(String uri) {
-	List<BookTemplate> books = restTemplate.exchange(sharedDto.getBaseUrl() + uri, HttpMethod.GET, null,
-		new ParameterizedTypeReference<List<BookTemplate>>() {
+	List<BookTemplateImpl> books = restTemplate.exchange(sharedDto.getBaseUrl() + uri, HttpMethod.GET, null,
+		new ParameterizedTypeReference<List<BookTemplateImpl>>() {
 		}).getBody();
 	sharedDto.setBooks(books);
     }
 
     @When("I search for books by name at {string}")
     public void searchByName(String uri) {
-	List<BookTemplate> books = restTemplate.exchange(sharedDto.getBaseUrl() + uri, HttpMethod.GET, null,
-		new ParameterizedTypeReference<List<BookTemplate>>() {
+	List<BookTemplateImpl> books = restTemplate.exchange(sharedDto.getBaseUrl() + uri, HttpMethod.GET, null,
+		new ParameterizedTypeReference<List<BookTemplateImpl>>() {
 		}).getBody();
 	sharedDto.setBooks(books);
     }
