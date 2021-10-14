@@ -4,7 +4,7 @@
 	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd"
-	logicalFilePath="V1__initial_schema.xml">
+	logicalFilePath="1__initial_schema.xml">
 	<changeSet author="Palash Ray" id="1">
 
 		<createTable tableName="author">
@@ -38,6 +38,5 @@
 			initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
 			referencedColumnNames="id" referencedTableName="author"
 			validate="true" />
-
 	</changeSet>
 </databaseChangeLog>
