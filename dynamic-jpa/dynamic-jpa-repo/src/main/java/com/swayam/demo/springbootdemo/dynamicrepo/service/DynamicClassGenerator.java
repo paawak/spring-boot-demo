@@ -9,19 +9,7 @@ public class DynamicClassGenerator {
      * <pre>
      * &#64;Entity
      * &#64;Table(name = "book")
-     * &#64;Data
-     * public class Book implements BookTemplate {
-     * 
-     *     &#64;Id
-     *     &#64;GeneratedValue(strategy = GenerationType.IDENTITY)
-     *     private int id;
-     * 
-     *     &#64;Column
-     *     private String name;
-     * 
-     *     &#64;OneToOne(fetch = FetchType.EAGER)
-     *     &#64;JoinColumn(name = "author_id")
-     *     private Author author;
+     * public class Book extends BookTemplateImpl {
      * 
      * }
      * </pre>
