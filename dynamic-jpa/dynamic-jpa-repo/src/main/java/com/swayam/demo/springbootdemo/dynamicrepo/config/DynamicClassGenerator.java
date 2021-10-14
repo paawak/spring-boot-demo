@@ -1,4 +1,4 @@
-package com.swayam.demo.springbootdemo.dynamicrepo.service;
+package com.swayam.demo.springbootdemo.dynamicrepo.config;
 
 import java.io.File;
 import java.io.IOException;
@@ -24,7 +24,7 @@ import net.bytebuddy.dynamic.DynamicType.Unloaded;
 import net.bytebuddy.dynamic.loading.ClassLoadingStrategy;
 import net.bytebuddy.matcher.ElementMatchers;
 
-public class DynamicClassGenerator {
+class DynamicClassGenerator {
 
     private static final Logger LOG = LoggerFactory.getLogger(DynamicClassGenerator.class);
 
@@ -77,10 +77,10 @@ public class DynamicClassGenerator {
      * @param repositoryClassName
      * @param entityClassName
      */
-    public void createJpaRepository(Class<?> entityClass, String repositoryClassName) {
+    public Optional<Class<?>> createJpaRepository(Class<?> entityClass, String repositoryClassName) {
 	if (classFileExists(repositoryClassName)) {
 	    LOG.info("The Repository class " + repositoryClassName + " already exists, not creating a new one");
-	    return;
+	    return Optional.empty();
 	}
 	Generic crudRepo = Generic.Builder.parameterizedType(CrudRepository.class, entityClass, Integer.class).build();
 
@@ -94,7 +94,7 @@ public class DynamicClassGenerator {
 			.build())
 		.name(repositoryClassName).make();
 
-	saveGeneratedClassAsFile(generatedClass);
+	return Optional.of(saveGeneratedClassAsFile(generatedClass));
     }
 
     private boolean classFileExists(String className) {
