@@ -51,8 +51,8 @@ public class DynamicJpaBeanFactoryPostProcessor implements BeanFactoryPostProces
 		.rootBeanDefinition(JpaRepositoryFactoryBean.class).addConstructorArgValue(jpaRepositoryClass);
 	defaultListableBeanFactory.registerBeanDefinition(beanName, beanDefinitionBuilder.getBeanDefinition());
 
-	LOG.info("Registered the {} bean for the JpaRepository {} successfully",
-		JpaRepositoryFactoryBean.class.getSimpleName(), beanName);
+	LOG.info("Registered the {} bean for {} successfully", JpaRepositoryFactoryBean.class.getSimpleName(),
+		beanName);
     }
 
 }

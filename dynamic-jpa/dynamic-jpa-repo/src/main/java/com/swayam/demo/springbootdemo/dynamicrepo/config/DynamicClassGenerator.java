@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.swayam.demo.springbootdemo.dynamicrepo.dao.BookDaoTemplate;
 import com.swayam.demo.springbootdemo.dynamicrepo.model.BookTemplateImpl;
@@ -48,7 +49,7 @@ class DynamicClassGenerator {
 	    return Optional.empty();
 	}
 
-	LOG.info("Creating new class: " + entityClassName);
+	LOG.info("Creating new Entity class: {}...", entityClassName);
 
 	Unloaded<?> generatedClass = new ByteBuddy().subclass(BookTemplateImpl.class)
 		.annotateType(AnnotationDescription.Builder.ofType(Entity.class).build(),
@@ -82,10 +83,14 @@ class DynamicClassGenerator {
 	    LOG.info("The Repository class " + repositoryClassName + " already exists, not creating a new one");
 	    return Optional.empty();
 	}
+
+	LOG.info("Creating new Repo class: {}...", repositoryClassName);
+
 	Generic crudRepo = Generic.Builder.parameterizedType(CrudRepository.class, entityClass, Integer.class).build();
 
 	Unloaded<?> generatedClass = new ByteBuddy().makeInterface(crudRepo).implement(BookDaoTemplate.class)
 		.method(ElementMatchers.named("updateAuthor")).withoutCode()
+		.annotateMethod(AnnotationDescription.Builder.ofType(Transactional.class).build())
 		.annotateMethod(AnnotationDescription.Builder.ofType(Modifying.class).build())
 		.annotateMethod(AnnotationDescription.Builder.ofType(Query.class)
 			.define("value",
