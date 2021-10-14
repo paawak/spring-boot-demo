@@ -2,6 +2,10 @@
 
 Example of creating JPA Entity and Repo dynamically.
 
+To print Spring Boot's *CONDITIONS EVALUATION REPORT*, use the below line in *application.yml*:
+
+    logging.level.org.springframework.boot.autoconfigure.logging: debug
+
 # Rest End Points
 
 ## Access H2 DB Console
