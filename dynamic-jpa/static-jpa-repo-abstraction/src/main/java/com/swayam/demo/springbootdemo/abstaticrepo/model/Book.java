@@ -15,7 +15,7 @@ import lombok.Data;
 @Entity
 @Table(name = "book")
 @Data
-public class Book {
+public class Book implements BookTemplate {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

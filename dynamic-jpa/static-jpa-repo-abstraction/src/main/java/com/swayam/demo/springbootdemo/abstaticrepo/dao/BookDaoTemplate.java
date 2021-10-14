@@ -2,14 +2,14 @@ package com.swayam.demo.springbootdemo.abstaticrepo.dao;
 
 import java.util.List;
 
-import com.swayam.demo.springbootdemo.abstaticrepo.model.Book;
+import com.swayam.demo.springbootdemo.abstaticrepo.model.BookTemplate;
 
 public interface BookDaoTemplate {
 
-    List<Book> findByNameContainingIgnoreCase(String name);
+    List<BookTemplate> findByNameContainingIgnoreCase(String name);
 
     int updateAuthor(int bookId, int authorId);
 
-    Iterable<Book> findAll();
+    Iterable<? extends BookTemplate> findAll();
 
 }

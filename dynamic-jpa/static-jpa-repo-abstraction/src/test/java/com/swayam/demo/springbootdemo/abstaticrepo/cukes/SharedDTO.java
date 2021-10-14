@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Component;
 
 import com.swayam.demo.springbootdemo.abstaticrepo.model.Author;
-import com.swayam.demo.springbootdemo.abstaticrepo.model.Book;
+import com.swayam.demo.springbootdemo.abstaticrepo.model.BookTemplate;
 
 import io.cucumber.spring.ScenarioScope;
 import lombok.Data;
@@ -17,7 +17,7 @@ public class SharedDTO {
 
     private String baseUrl;
     private List<Author> authors;
-    private List<Book> books;
+    private List<BookTemplate> books;
     private int booksAffected;
 
 }

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.swayam.demo.springbootdemo.abstaticrepo.dao.BookDaoTemplate;
-import com.swayam.demo.springbootdemo.abstaticrepo.model.Book;
+import com.swayam.demo.springbootdemo.abstaticrepo.model.BookTemplate;
 
 @RestController
 @RequestMapping("/v1/book")
@@ -23,12 +23,12 @@ public class BookController {
     }
 
     @GetMapping
-    public Iterable<Book> getBooks() {
+    public Iterable<? extends BookTemplate> getBooks() {
 	return bookDao.findAll();
     }
 
     @GetMapping("/{name}")
-    public List<Book> getBooksByName(@PathVariable("name") String name) {
+    public List<BookTemplate> getBooksByName(@PathVariable("name") String name) {
 	return bookDao.findByNameContainingIgnoreCase(name);
     }
 
