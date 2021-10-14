@@ -9,7 +9,7 @@ import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.web.client.RestTemplate;
 
-import com.swayam.demo.springbootdemo.dynamicrepo.cukes.SharedDTO.BookTemplateImpl;
+import com.swayam.demo.springbootdemo.dynamicrepo.model.BookTemplateImpl;
 
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
