@@ -9,16 +9,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.swayam.demo.springbootdemo.abstaticrepo.dao.BookDao;
+import com.swayam.demo.springbootdemo.abstaticrepo.dao.BookDaoTemplate;
 import com.swayam.demo.springbootdemo.abstaticrepo.model.Book;
 
 @RestController
 @RequestMapping("/v1/book")
 public class BookController {
 
-    private final BookDao bookDao;
+    private final BookDaoTemplate bookDao;
 
-    public BookController(BookDao bookDao) {
+    public BookController(BookDaoTemplate bookDao) {
 	this.bookDao = bookDao;
     }
 
