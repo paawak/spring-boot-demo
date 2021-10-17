@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -31,7 +30,6 @@ public class BankDetailController {
 	return bankDetailService.getBankDetails();
     }
 
-    @CrossOrigin(origins = "http://localhost:8100")
     @RequestMapping(value = "/reactive", method = RequestMethod.GET)
     public Flux<BankDetail> getBankDetailsReactive() {
 	LOGGER.info("serving reactive content");
