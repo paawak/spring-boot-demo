@@ -1,3 +1,6 @@
+bank-service:
+  cors-allow-host: 'http://localhost:8100'
+
 server:
   port: 5000
   servlet:
