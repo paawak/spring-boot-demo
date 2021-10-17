@@ -1,0 +1,11 @@
+server:
+  port: 8100
+  servlet:
+    contextPath: /
+  
+logging:
+  level:
+    root: INFO
+    com.swayam.demo: DEBUG
+    org.springframework.web: INFO
+    org.hibernate: INFO

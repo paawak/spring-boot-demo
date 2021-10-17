@@ -5,12 +5,12 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.swayam.demo.springbootdemo</groupId>
-	<artifactId>rds-postgres-demo</artifactId>
+	<artifactId>bank-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging> 
 
-	<name>rds-postgres-demo</name>
-	<description>Demo project for Server to Client Reactive programming with Netty on Docker. This can also be deployed to AWS Elastic Beanstalk</description>
+	<name>bank-service</name>
+	<description>The service tier.</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
