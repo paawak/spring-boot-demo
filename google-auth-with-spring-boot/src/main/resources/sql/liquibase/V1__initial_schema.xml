@@ -69,5 +69,23 @@
 			constraintName="FK_book_genre_id" referencedColumnNames="id"
 			referencedTableName="genre" />
 
+		<createTable tableName="user">
+			<column autoIncrement="true" name="id" type="INT">
+				<constraints primaryKey="true" />
+			</column>
+			<column name="name" type="VARCHAR(200)">
+				<constraints nullable="false" />
+			</column>
+			<column name="email" type="VARCHAR(200)">
+				<constraints nullable="false" />
+			</column>
+			<column name="role" type="VARCHAR(50)">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+
+		<addUniqueConstraint columnNames="email"
+			tableName="user" />
+
 	</changeSet>
 </databaseChangeLog>
