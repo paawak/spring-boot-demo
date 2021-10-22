@@ -6,10 +6,13 @@ import java.util.List;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.ParameterBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.schema.ModelRef;
+import springfox.documentation.service.ApiInfo;
+import springfox.documentation.service.Contact;
 import springfox.documentation.service.Parameter;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
@@ -20,12 +23,21 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 public class SwaggerConfig {
 
     @Bean
-    public Docket api() {
-	return new Docket(DocumentationType.SWAGGER_2).globalOperationParameters(globalParameterList()).select().apis(RequestHandlerSelectors.any()).paths(PathSelectors.any()).build();
+    public Docket swaggerApiV1() {
+	return docket("v1");
+    }
+
+    private Docket docket(String version) {
+	ApiInfo apiInfo = new ApiInfoBuilder().title("Google OAuth2 Example " + version).version(version)
+		.contact(new Contact("Palash Ray", "https://palashray.com", "paawak@gmail.com")).build();
+	return new Docket(DocumentationType.SWAGGER_2).globalOperationParameters(globalParameterList())
+		.groupName(version).select().apis(RequestHandlerSelectors.any())
+		.paths(PathSelectors.ant("/" + version + "/**")).build().apiInfo(apiInfo);
     }
 
     private List<Parameter> globalParameterList() {
-	Parameter authTokenHeader = new ParameterBuilder().name("Authorization").modelRef(new ModelRef("string")).required(true).parameterType("header").description("Basic Auth Token").build();
+	Parameter authTokenHeader = new ParameterBuilder().name("Authorization").modelRef(new ModelRef("string"))
+		.required(true).parameterType("header").description("Basic Auth Token").build();
 	return Collections.singletonList(authTokenHeader);
     }
 
