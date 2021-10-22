@@ -12,7 +12,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken.Payload;
-import com.swayam.demo.springboot.googleauth.model.old.UserDetails;
+import com.swayam.demo.springboot.googleauth.model.UserDetails;
 import com.swayam.demo.springboot.googleauth.repo.UserDetailsRepository;
 import com.swayam.demo.springboot.googleauth.service.GoogleTokenVerifier;
 
@@ -42,8 +42,8 @@ public class GoogleAuthenticationManager implements AuthenticationManager {
 
 	UserDetails userDetails = optUserDetails.get();
 
-	UsernamePasswordAuthenticationToken token =
-		new UsernamePasswordAuthenticationToken(userDetails.getName(), "DontBotherBro", Arrays.asList(new SimpleGrantedAuthority(userDetails.getRole().name())));
+	UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(userDetails.getName(),
+		"DontBotherBro", Arrays.asList(new SimpleGrantedAuthority(userDetails.getRole().name())));
 	token.setDetails(userDetails);
 	return token;
     }
