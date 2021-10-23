@@ -36,14 +36,16 @@ import com.swayam.demo.springboot.googleauth.repo.UserDetailsRepository;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private static final String OCR_TRAIN_QUERY_WORD_IMAGE = "/ocr/train/query/word/image";
-    private static final String[] URLS_TO_ALLOW_WITHOUT_AUTH = { "/v2/api-docs", "/configuration/**", "/swagger-ui.html", "/swagger*/**", "/webjars/**", "/ocr/train/user/register", "/actuator/**" };
+    private static final String[] URLS_TO_ALLOW_WITHOUT_AUTH = { "/v2/api-docs", "/configuration/**",
+	    "/swagger-ui.html", "/swagger*/**", "/webjars/**", "/ocr/train/user/register", "/actuator/**" };
 
     @Autowired
     private UserDetailsRepository userDetailsRepository;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-	http.cors(config -> config.configurationSource(corsConfigurationSource())).authorizeRequests().antMatchers(URLS_TO_ALLOW_WITHOUT_AUTH).permitAll().anyRequest().authenticated().and()
+	http.cors(config -> config.configurationSource(corsConfigurationSource())).authorizeRequests()
+		.antMatchers(URLS_TO_ALLOW_WITHOUT_AUTH).permitAll().anyRequest().authenticated().and()
 		.addFilterBefore(authenticationFilter(), BasicAuthenticationFilter.class).csrf().disable();
     }
 
@@ -55,7 +57,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private CorsConfigurationSource corsConfigurationSource() {
 	UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
 	CorsConfiguration corsConfiguration = new CorsConfiguration().applyPermitDefaultValues();
-	corsConfiguration.addAllowedOrigin("http://localhost:3000");
+	corsConfiguration.addAllowedOrigin("http://localhost:8000");
 	corsConfiguration.addAllowedMethod(HttpMethod.GET);
 	corsConfiguration.addAllowedMethod(HttpMethod.PUT);
 	corsConfiguration.addAllowedMethod(HttpMethod.POST);
@@ -66,21 +68,24 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	corsConfiguration.addAllowedHeader("Accept");
 	corsConfiguration.addAllowedHeader("Origin");
 	corsConfiguration.addAllowedHeader("Authorization");
-	source.registerCorsConfiguration("/ocr/**", corsConfiguration);
+	source.registerCorsConfiguration("/**", corsConfiguration);
 	return source;
     }
 
     private AuthenticationFilter authenticationFilter() {
 	AuthenticationSuccessHandler successHandler = new SimpleUrlAuthenticationSuccessHandler() {
 	    @Override
-	    protected void handle(HttpServletRequest request, HttpServletResponse response, Authentication authentication) {
+	    protected void handle(HttpServletRequest request, HttpServletResponse response,
+		    Authentication authentication) {
 		// do nothing
 	    }
 	};
-	AuthenticationConverter authenticationConverter = new AuthenticationTokenExtractor(new AntPathRequestMatcher(OCR_TRAIN_QUERY_WORD_IMAGE));
+	AuthenticationConverter authenticationConverter =
+		new AuthenticationTokenExtractor(new AntPathRequestMatcher(OCR_TRAIN_QUERY_WORD_IMAGE));
 	AuthenticationFilter filter = new AuthenticationFilter(authenticationManager(), authenticationConverter);
 	RequestMatcher requestMatcher =
-		new NegatedRequestMatcher(new OrRequestMatcher(Arrays.stream(URLS_TO_ALLOW_WITHOUT_AUTH).map(pattern -> new AntPathRequestMatcher(pattern)).collect(Collectors.toList())));
+		new NegatedRequestMatcher(new OrRequestMatcher(Arrays.stream(URLS_TO_ALLOW_WITHOUT_AUTH)
+			.map(pattern -> new AntPathRequestMatcher(pattern)).collect(Collectors.toList())));
 	filter.setRequestMatcher(requestMatcher);
 	filter.setSuccessHandler(successHandler);
 	return filter;
