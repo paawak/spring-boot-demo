@@ -5,4 +5,5 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
 	<include file="V1__initial_schema.xml" relativeToChangelogFile="true" />
+	<include file="V2__registered_users.xml" relativeToChangelogFile="true" />
 </databaseChangeLog>

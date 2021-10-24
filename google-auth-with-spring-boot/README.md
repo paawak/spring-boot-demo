@@ -2,6 +2,9 @@
 
 Demo application for Google OAuth2 Integration with Spring Boot.
 
+# UI Code
+There is a frontend ReactJS application that works with this: <https://github.com/paawak/blog/tree/master/code/reactjs/library-ui-secured-with-google>
+
 # Rest API
 ## Swagger
 <http://localhost:8000/swagger-ui/>
