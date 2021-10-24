@@ -35,9 +35,8 @@ import com.swayam.demo.springboot.googleauth.repo.UserDetailsRepository;
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true, jsr250Enabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private static final String OCR_TRAIN_QUERY_WORD_IMAGE = "/ocr/train/query/word/image";
     private static final String[] URLS_TO_ALLOW_WITHOUT_AUTH = { "/v2/api-docs", "/configuration/**",
-	    "/swagger-ui.html", "/swagger*/**", "/webjars/**", "/ocr/train/user/register", "/actuator/**" };
+	    "/swagger-ui.html", "/swagger*/**", "/webjars/**", "/h2-console/**", "/actuator/**" };
 
     @Autowired
     private UserDetailsRepository userDetailsRepository;
@@ -80,8 +79,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		// do nothing
 	    }
 	};
-	AuthenticationConverter authenticationConverter =
-		new AuthenticationTokenExtractor(new AntPathRequestMatcher(OCR_TRAIN_QUERY_WORD_IMAGE));
+	AuthenticationConverter authenticationConverter = new AuthenticationTokenExtractor();
 	AuthenticationFilter filter = new AuthenticationFilter(authenticationManager(), authenticationConverter);
 	RequestMatcher requestMatcher =
 		new NegatedRequestMatcher(new OrRequestMatcher(Arrays.stream(URLS_TO_ALLOW_WITHOUT_AUTH)
