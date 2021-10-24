@@ -55,9 +55,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     private CorsConfigurationSource corsConfigurationSource() {
-	UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-	CorsConfiguration corsConfiguration = new CorsConfiguration().applyPermitDefaultValues();
-	corsConfiguration.addAllowedOrigin("http://localhost:8000");
+	CorsConfiguration corsConfiguration = new CorsConfiguration();
+	corsConfiguration.setAllowedOrigins(Arrays.asList("http://localhost:3000"));
 	corsConfiguration.addAllowedMethod(HttpMethod.GET);
 	corsConfiguration.addAllowedMethod(HttpMethod.PUT);
 	corsConfiguration.addAllowedMethod(HttpMethod.POST);
@@ -68,6 +67,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	corsConfiguration.addAllowedHeader("Accept");
 	corsConfiguration.addAllowedHeader("Origin");
 	corsConfiguration.addAllowedHeader("Authorization");
+	UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
 	source.registerCorsConfiguration("/**", corsConfiguration);
 	return source;
     }
