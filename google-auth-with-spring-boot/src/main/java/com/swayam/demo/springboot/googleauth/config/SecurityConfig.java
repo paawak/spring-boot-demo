@@ -45,7 +45,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 	http.cors(config -> config.configurationSource(corsConfigurationSource())).authorizeRequests()
 		.antMatchers(URLS_TO_ALLOW_WITHOUT_AUTH).permitAll().anyRequest().authenticated().and()
-		.addFilterBefore(authenticationFilter(), BasicAuthenticationFilter.class).csrf().disable();
+		.addFilterBefore(authenticationFilter(), BasicAuthenticationFilter.class).csrf().disable().headers()
+		.frameOptions().sameOrigin().httpStrictTransportSecurity().disable();
     }
 
     @Override

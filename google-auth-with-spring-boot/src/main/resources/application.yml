@@ -14,7 +14,7 @@ logging:
     root: INFO
     com.swayam.demo.springboot.googleauth: DEBUG
     org.springframework.web: INFO
-    org.springframework.security.web.FilterChainProxy: WARN
+    org.springframework.security.web.FilterChainProxy: DEBUG
 
 spring:
   h2:
