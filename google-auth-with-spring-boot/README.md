@@ -80,4 +80,5 @@ logging:
     org.springframework.security.web.FilterChainProxy: DEBUG
 ```
 
-
+## Swagger Config for JWT
+<https://www.baeldung.com/spring-boot-swagger-jwt>
