@@ -1,0 +1,92 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd"
+	logicalFilePath="V1__initial_schema.xml">
+	<changeSet author="Palash Ray" id="1">
+		<createTable tableName="genre">
+			<column autoIncrement="true" name="id" type="INT">
+				<constraints primaryKey="true" />
+			</column>
+			<column name="short_name" type="VARCHAR(10)">
+				<constraints nullable="false" />
+			</column>
+			<column name="name" type="VARCHAR(100)">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+
+		<createTable tableName="author">
+			<column autoIncrement="true" name="id" type="INT">
+				<constraints primaryKey="true" />
+			</column>
+			<column name="first_name" type="VARCHAR(200)">
+				<constraints nullable="false" />
+			</column>
+			<column name="last_name" type="VARCHAR(200)">
+				<constraints nullable="false" />
+			</column>
+			<column name="address" type="VARCHAR(200)">
+				<constraints nullable="false" />
+			</column>
+			<column name="city" type="VARCHAR(200)">
+				<constraints nullable="false" />
+			</column>
+			<column name="state" type="VARCHAR(200)">
+				<constraints nullable="false" />
+			</column>
+			<column name="zip_code" type="VARCHAR(50)">
+				<constraints nullable="false" />
+			</column>
+			<column name="country" type="VARCHAR(200)">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+
+		<createTable tableName="book">
+			<column autoIncrement="true" name="id" type="INT">
+				<constraints primaryKey="true" />
+			</column>
+			<column name="title" type="TEXT">
+				<constraints nullable="false" />
+			</column>
+			<column name="author_id" type="INT">
+				<constraints nullable="false" />
+			</column>
+			<column name="genre_id" type="INT">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+
+		<addForeignKeyConstraint
+			baseColumnNames="author_id" baseTableName="book"
+			constraintName="FK_book_author_id" referencedColumnNames="id"
+			referencedTableName="author" />
+
+		<addForeignKeyConstraint
+			baseColumnNames="genre_id" baseTableName="book"
+			constraintName="FK_book_genre_id" referencedColumnNames="id"
+			referencedTableName="genre" />
+
+		<createTable tableName="user">
+			<column autoIncrement="true" name="id" type="INT">
+				<constraints primaryKey="true" />
+			</column>
+			<column name="name" type="VARCHAR(200)">
+				<constraints nullable="false" />
+			</column>
+			<column name="email" type="VARCHAR(200)">
+				<constraints nullable="false" />
+			</column>
+			<column name="role" type="VARCHAR(50)">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+
+		<addUniqueConstraint columnNames="email"
+			tableName="user" />
+
+	</changeSet>
+</databaseChangeLog>

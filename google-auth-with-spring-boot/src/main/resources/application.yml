@@ -1,0 +1,34 @@
+server:
+  port: 8000
+  servlet:
+    contextPath: /
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  
+logging:
+  level:
+    root: INFO
+    com.swayam.demo.springboot.googleauth: DEBUG
+    org.springframework.web: INFO
+    org.springframework.security.web.FilterChainProxy: DEBUG
+
+spring:
+  h2:
+    console:
+      enabled: true
+  liquibase:
+    enabled: true
+    change-log: classpath:/sql/liquibase/master-change-log.xml
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: none
+  datasource:
+    url: jdbc:h2:mem:library
+    username: sa
+    password: sa
+    driver-class-name: org.h2.Driver
