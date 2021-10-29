@@ -3,9 +3,6 @@ package com.swayam.demo.springboot.googleauth.config;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -14,10 +11,8 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationConverter;
 import org.springframework.security.web.authentication.AuthenticationFilter;
-import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
@@ -73,18 +68,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     private AuthenticationFilter authenticationFilter() {
-	AuthenticationSuccessHandler successHandler = new SimpleUrlAuthenticationSuccessHandler() {
-	    @Override
-	    protected void handle(HttpServletRequest request, HttpServletResponse response,
-		    Authentication authentication) {
-		// do nothing
-	    }
-	};
+	SimpleUrlAuthenticationSuccessHandler successHandler = new SimpleUrlAuthenticationSuccessHandler();
+	successHandler.setRedirectStrategy((request, response, url) -> {
+	});
 	AuthenticationConverter authenticationConverter = new AuthenticationTokenExtractor();
-	AuthenticationFilter filter = new AuthenticationFilter(authenticationManager(), authenticationConverter);
+
 	RequestMatcher requestMatcher =
 		new NegatedRequestMatcher(new OrRequestMatcher(Arrays.stream(URLS_TO_ALLOW_WITHOUT_AUTH)
 			.map(pattern -> new AntPathRequestMatcher(pattern)).collect(Collectors.toList())));
+
+	AuthenticationFilter filter = new AuthenticationFilter(authenticationManager(), authenticationConverter);
 	filter.setRequestMatcher(requestMatcher);
 	filter.setSuccessHandler(successHandler);
 	return filter;
