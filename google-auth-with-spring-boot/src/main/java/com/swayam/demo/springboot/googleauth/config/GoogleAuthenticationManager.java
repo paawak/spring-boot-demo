@@ -42,10 +42,8 @@ public class GoogleAuthenticationManager implements AuthenticationManager {
 
 	UserDetails userDetails = optUserDetails.get();
 
-	UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(userDetails.getName(),
-		"DontBotherBro", Arrays.asList(new SimpleGrantedAuthority(userDetails.getRole().name())));
-	token.setDetails(userDetails);
-	return token;
+	return new UsernamePasswordAuthenticationToken(userDetails, "DontBotherBro",
+		Arrays.asList(new SimpleGrantedAuthority(userDetails.getRole().name())));
     }
 
 }
