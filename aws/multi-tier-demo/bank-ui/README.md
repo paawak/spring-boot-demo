@@ -13,7 +13,7 @@ Demo for Bank UI. Can be accessed here: <http://localhost:8100>.
 
 ### Run Docker image
 
-    docker run -it --rm -d -p 8100:80 --name bank-ui bank-ui:latest
+    docker run -it -p 8100:80 bank-ui:latest
 
 ### Logon into a running container
 
