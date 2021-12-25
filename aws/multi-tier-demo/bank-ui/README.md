@@ -1,134 +1,46 @@
-# About
+# Getting Started with Create React App
 
-Demo for a Reactive Netty/Spring Boot Application within Docker. Can be accessed here: <http://localhost:5000/index.html>. This can also be deployed to AWS Elastic Beanstalk through command line or by uploading the *docker-compose.yml*
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-# How build docker image
+## Available Scripts
 
-    mvn clean package -P docker
+In the project directory, you can run:
 
-# How upload docker image to docker hub
+### `npm start`
 
-    mvn clean install -P docker
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-# How to run
+The page will reload if you make edits.\
+You will also see any lint errors in the console.
 
-## Running in Local
+### `npm test`
 
-    java -Dspring.profiles.active=local -jar target/aws-docker-demo.jar
+Launches the test runner in the interactive watch mode.\
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-## Running in Docker
+### `npm run build`
 
-    docker run -it -p 8080:5000    \
-    paawak/aws-docker-demo:latest
-    
-## Running on AWS Elastic Beanstalk
-For the application to run on Beanstalk without any addition Beanstalk-specific configuration files, you need to listen to Docker port *5000*. Also, you would need to *expose* this port in your Docker file:
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
-    EXPOSE 5000
+The build is minified and the filenames include the hashes.\
+Your app is ready to be deployed!
 
-If you do that, you are pretty much all set. You can use the below commands to deploy your application on to AWS:
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-    eb init -p docker  aws-docker-demo
-    eb create demo-with-docker-env
-    
-To open the browser:
+### `npm run eject`
 
-    eb open
-    
-To terminate:
-        
-        eb terminate demo-with-docker-env
-        
-This will upload zip and upload all the files within that directory. 
+**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-You can also create an application by simply uploading the docker compose file:
+If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-```yaml
-version: '3'
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
-services:
-    aws-docker-demo:
-        image: paawak/aws-docker-demo:latest
-        ports:
-          - "80:5000"
-        environment:
-          - spring.profiles.active=default
-```
-But note that you need to first upload this image to the Docker Hub. These are the commands:
+You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-    docker login
-    docker push paawak/aws-docker-demo:latest
-        
-## Running on Minikube
-### Deploying an application
-The below steps are taken from <https://kubernetes.io/docs/tasks/run-application/run-stateless-application-deployment/>
+## Learn More
 
-1. Start Minikube
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-    minikube start --nodes 2 -p aws-docker-demo
-    
-    
-1. Check the status of the nodes
-    
-    minikube status -p aws-docker-demo        
-    
-
-1. Create a Deployment based on the YAML file:
-
-    kubectl apply -f kubernetes/minikube/application-deployment.yml
-
-1. Display information about the Deployment:
-
-    kubectl describe deployment aws-docker-demo-deployment
-        
-1. List the Pods created by the deployment:
-
-    kubectl get pods -l app=aws-docker-demo
-    
-1. Display information about a Pod:
-
-    kubectl describe pod <pod-name>
-    
-1. Deleting a deployment:
-
-    kubectl delete deployment aws-docker-demo-deployment
-    
-### Exposing a deployed application
-The below steps are taken from <https://kubernetes.io/docs/concepts/services-networking/service/> and <https://kubernetes.io/docs/tutorials/stateless-application/expose-external-ip-address/>
-
-#### Using the expose command
-
-    kubectl expose deployment aws-docker-demo-deployment --type=LoadBalancer --name=aws-docker-demo-service
-
-1. To get external IPs    
-Use any of the below commands:    
-
-    minikube service aws-docker-demo-service
-    
-    minikube ip
-    
-1. Deleting a service:
-
-    kubectl delete svc aws-docker-demo-service    
-
-#### Deploying a Service
-
-    kubectl apply -f kubernetes/minikube/application-service.yml
-
-1. Display information about the Deployment:
-
-    kubectl describe svc aws-docker-demo-service
-    
-1. Get the Endpoints
-
-    kubectl get ep aws-docker-demo-service
-    
-1. Get the NodePort
-
-    kubectl get svc aws-docker-demo-service -o yaml | grep nodePort -C 10
-    
-1. Get the IP Address
-
-    kubectl get nodes -o yaml | grep ExternalIP -C 1
-    
-                    
+To learn React, check out the [React documentation](https://reactjs.org/).
