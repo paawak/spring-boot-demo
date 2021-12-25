@@ -1,6 +1,5 @@
-FROM openjdk:11.0.8-jre
+FROM nginx:stable
 LABEL author.name="Palash Ray"
 LABEL author.email="paawak@gmail.com"
-ADD target/aws-docker-demo.jar //
-EXPOSE 5000
-ENTRYPOINT ["java", "-jar", "/aws-docker-demo.jar"]
+COPY ./nginx/nginx.conf /etc/nginx/conf.d/default.conf
+ADD public /usr/share/nginx/html/
