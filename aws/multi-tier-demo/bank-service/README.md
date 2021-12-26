@@ -14,12 +14,12 @@ Demo for a Reactive Netty/Spring Boot Application within Docker. Can be accessed
 
 ## Running in Local
 
-    java -Dspring.profiles.active=local -jar target/aws-docker-demo.jar
+    java -jar target/bank-service.jar
 
 ## Running in Docker
 
-    docker run -it -p 8080:5000    \
-    paawak/aws-docker-demo:latest
+    docker run -it -p 5000:5000    \
+    paawak/bank-service:latest
     
 ## Running on AWS Elastic Beanstalk
 For the application to run on Beanstalk without any addition Beanstalk-specific configuration files, you need to listen to Docker port *5000*. Also, you would need to *expose* this port in your Docker file:
@@ -28,7 +28,7 @@ For the application to run on Beanstalk without any addition Beanstalk-specific 
 
 If you do that, you are pretty much all set. You can use the below commands to deploy your application on to AWS:
 
-    eb init -p docker  aws-docker-demo
+    eb init -p docker  bank-service
     eb create demo-with-docker-env
     
 To open the browser:
@@ -47,8 +47,8 @@ You can also create an application by simply uploading the docker compose file:
 version: '3'
 
 services:
-    aws-docker-demo:
-        image: paawak/aws-docker-demo:latest
+    bank-service:
+        image: paawak/bank-service:latest
         ports:
           - "80:5000"
         environment:
@@ -57,7 +57,7 @@ services:
 But note that you need to first upload this image to the Docker Hub. These are the commands:
 
     docker login
-    docker push paawak/aws-docker-demo:latest
+    docker push paawak/bank-service:latest
         
 ## Running on Minikube
 ### Deploying an application
@@ -65,12 +65,12 @@ The below steps are taken from <https://kubernetes.io/docs/tasks/run-application
 
 1. Start Minikube
 
-    minikube start --nodes 2 -p aws-docker-demo
+    minikube start --nodes 2 -p bank-service
     
     
 1. Check the status of the nodes
     
-    minikube status -p aws-docker-demo        
+    minikube status -p bank-service        
     
 
 1. Create a Deployment based on the YAML file:
@@ -79,11 +79,11 @@ The below steps are taken from <https://kubernetes.io/docs/tasks/run-application
 
 1. Display information about the Deployment:
 
-    kubectl describe deployment aws-docker-demo-deployment
+    kubectl describe deployment bank-service-deployment
         
 1. List the Pods created by the deployment:
 
-    kubectl get pods -l app=aws-docker-demo
+    kubectl get pods -l app=bank-service
     
 1. Display information about a Pod:
 
@@ -91,25 +91,25 @@ The below steps are taken from <https://kubernetes.io/docs/tasks/run-application
     
 1. Deleting a deployment:
 
-    kubectl delete deployment aws-docker-demo-deployment
+    kubectl delete deployment bank-service-deployment
     
 ### Exposing a deployed application
 The below steps are taken from <https://kubernetes.io/docs/concepts/services-networking/service/> and <https://kubernetes.io/docs/tutorials/stateless-application/expose-external-ip-address/>
 
 #### Using the expose command
 
-    kubectl expose deployment aws-docker-demo-deployment --type=LoadBalancer --name=aws-docker-demo-service
+    kubectl expose deployment bank-service-deployment --type=LoadBalancer --name=bank-service-service
 
 1. To get external IPs    
 Use any of the below commands:    
 
-    minikube service aws-docker-demo-service
+    minikube service bank-service-service
     
     minikube ip
     
 1. Deleting a service:
 
-    kubectl delete svc aws-docker-demo-service    
+    kubectl delete svc bank-service-service    
 
 #### Deploying a Service
 
@@ -117,15 +117,15 @@ Use any of the below commands:
 
 1. Display information about the Deployment:
 
-    kubectl describe svc aws-docker-demo-service
+    kubectl describe svc bank-service-service
     
 1. Get the Endpoints
 
-    kubectl get ep aws-docker-demo-service
+    kubectl get ep bank-service-service
     
 1. Get the NodePort
 
-    kubectl get svc aws-docker-demo-service -o yaml | grep nodePort -C 10
+    kubectl get svc bank-service-service -o yaml | grep nodePort -C 10
     
 1. Get the IP Address
 
