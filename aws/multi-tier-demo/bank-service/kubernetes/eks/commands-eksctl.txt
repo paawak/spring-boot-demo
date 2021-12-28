@@ -27,6 +27,10 @@ kubectl apply -f service-service.yml
 
 kubectl get all -n paawak-bank-app
 
+kubectl -n paawak-bank-app describe pod bank-service-65464f59ff-rq7jj
+
+kubectl exec -it bank-service-65464f59ff-rq7jj -n paawak-bank-app -- /bin/bash
+
 
 kubectl -n paawak-bank-app describe service bank-service
 
