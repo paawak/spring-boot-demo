@@ -1,0 +1,12 @@
+Create cluster
+
+eksctl create cluster --name bank-eks-cluster --region us-east-2
+
+View Kubernetes resources
+
+kubectl get nodes -o wide
+
+Delete your cluster and nodes
+
+eksctl delete cluster --name bank-eks-cluster --region us-east-2
+

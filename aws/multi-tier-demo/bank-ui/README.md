@@ -9,11 +9,11 @@ Demo for Bank UI. Can be accessed here: <http://localhost:8100>.
 ## Docker
 ### Build Docker image
 
-    docker build -t bank-ui:latest .
+    docker build -t paawak/bank-ui:latest .
 
 ### Run Docker image
 
-    docker run -it -p 8100:80 bank-ui:latest
+    docker run -it -p 8100:80 paawak/bank-ui:latest
 
 ### Logon into a running container
 

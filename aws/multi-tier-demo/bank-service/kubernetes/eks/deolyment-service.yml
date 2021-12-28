@@ -1,0 +1,107 @@
+apiVersion: apps/v1
+
+kind: Deployment
+
+metadata:
+
+  name: bank-service
+
+  namespace: paawak-bank-app
+
+  labels:
+
+    role: api
+
+spec:
+
+  replicas: 2
+
+  strategy:
+
+    type: RollingUpdate
+
+    rollingUpdate:
+
+      maxSurge: 1
+
+      maxUnavailable: 25%
+
+  selector:
+
+    matchLabels:
+
+      role: api
+
+  template:
+
+    metadata:
+
+      labels:
+
+        role: api
+
+    spec:
+
+      containers:
+
+      - name: bank-service
+
+        image: paawak/bank-service:latest
+
+        imagePullPolicy: Always
+
+        env:
+
+          - name: MONGO_CONN_STR
+
+            value: mongodb://mongo-0.mongo,mongo-1.mongo,mongo-2.mongo:27017/langdb?replicaSet=rs0
+
+          - name: MONGO_USERNAME
+
+            valueFrom:
+
+              secretKeyRef:
+
+                name: mongodb-secret
+
+                key: username
+
+          - name: MONGO_PASSWORD
+
+            valueFrom:
+
+              secretKeyRef:
+
+                name: mongodb-secret
+
+                key: password
+
+        ports:
+
+        - containerPort: 5000
+
+        livenessProbe:
+
+          httpGet:
+
+            path: /actuator/health
+
+            port: 5000
+
+          initialDelaySeconds: 2
+
+          periodSeconds: 5
+
+        readinessProbe:
+
+          httpGet:
+
+             path: /actuator/health
+
+             port: 5000
+
+          initialDelaySeconds: 5
+
+          periodSeconds: 5
+
+          successThreshold: 1
