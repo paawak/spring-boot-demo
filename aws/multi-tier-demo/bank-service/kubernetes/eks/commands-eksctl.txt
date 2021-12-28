@@ -1,3 +1,7 @@
+Log into aws
+
+aws configure
+
 Create cluster
 
 eksctl create cluster --name bank-eks-cluster --region us-east-2
@@ -9,4 +13,20 @@ kubectl get nodes -o wide
 Delete your cluster and nodes
 
 eksctl delete cluster --name bank-eks-cluster --region us-east-2
+
+Create namespace
+
+kubectl create namespace paawak-bank-app
+
+Deploy
+
+kubectl apply -f deployment-service.yml
+
+kubectl apply -f service-service.yml
+
+
+kubectl get all -n paawak-bank-app
+
+
+kubectl -n paawak-bank-app describe service bank-service
 
