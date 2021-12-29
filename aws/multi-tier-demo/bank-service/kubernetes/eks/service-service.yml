@@ -5,9 +5,6 @@ metadata:
   namespace: paawak-bank-app
 spec:
   type: LoadBalancer
-  selector:
-    app: bank-service
   ports:
-    - protocol: TCP
-      port: 5000
+    - port: 80
       targetPort: 5000
