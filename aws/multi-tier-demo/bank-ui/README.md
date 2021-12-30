@@ -5,11 +5,12 @@ Demo for Bank UI. Can be accessed here: <http://localhost:3000>.
 ## Docker
 ### Build Docker image
 
+    npm run build
     docker build -t paawak/bank-ui:latest .
 
 ### Run Docker image
 
-    docker run -it -p 80:80 paawak/bank-ui:latest
+    docker run -it -p 8100:80 paawak/bank-ui:latest
 
 ### Logon into a running container
 
