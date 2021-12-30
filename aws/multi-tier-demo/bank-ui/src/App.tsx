@@ -1,10 +1,11 @@
 import { CustomerList } from './CustomerList';
 import './App.css';
+import { Config } from './Config';
 
 function App() {
-  const url = `http://${process.env.REACT_APP_REST_API_BASE_NAME}/bank-item/blocking`
+
   return (
-      <CustomerList url={url}/>
+      <CustomerList url={Config.REST_API_BASE_NAME + "/bank-item/blocking"}/>
   );
 }
 
