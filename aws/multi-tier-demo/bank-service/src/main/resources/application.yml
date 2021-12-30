@@ -1,8 +1,8 @@
 bank-service:
-  cors-allow-host: 'http://localhost:8100'
+  cors-allow-host: '*'
 
 server:
-  port: 5000
+  port: 8080
   servlet:
     contextPath: /
   
