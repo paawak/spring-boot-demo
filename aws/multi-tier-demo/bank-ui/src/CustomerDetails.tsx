@@ -1,10 +1,5 @@
 import React, { FunctionComponent } from 'react';
-
-type CustomerDetailsProps = {
-    id: string,
-    age: string,
-    job: string
-}
+import { CustomerDetailsProps } from './CustomerDetailsProps';
 
 export const CustomerDetails: FunctionComponent<CustomerDetailsProps> = ({ id, age, job }) => {
     return (

@@ -1,38 +1,34 @@
-import React, { FunctionComponent } from 'react';
-import { bind } from "@react-rxjs/core"
-import { createSignal } from "@react-rxjs/utils"
-import { map } from "rxjs/operators"
+import { FunctionComponent, useState, useEffect } from 'react';
+import { CustomerDetails } from './CustomerDetails';
+import { CustomerDetailsProps } from './CustomerDetailsProps';
 
 type CustomerListProps = {
 }
 
-const [startClicked$, setStart] = createSignal<string>();
-
-const [doStarted, started$] = bind(startClicked$, "")
-
-const [useCharCount] = bind(
-    started$.pipe(
-      map((text) => text.length)
-    )
-  )
-
-
 export const CustomerList: FunctionComponent<CustomerListProps> = ({ }) => {
+
+    const [customers, setCustomers] = useState<CustomerDetailsProps[]>([]);
+    const [error, setError] = useState<boolean>(false);
+
+    useEffect(() => {
+        fetch('http://localhost:8080/bank-item/blocking')
+          .then(response => response.json())
+          .then(response => setCustomers(response))
+          .catch(error => {
+              setError(true);
+              console.error("Error fetching customer list", error)
+            });
+      }, []); 
+
+    const customerRows = customers.map((customer)=>
+      <CustomerDetails id={customer.id} age={customer.age} job={customer.job}/>
+    );
 
     return (
         <div>
-                <div>
-                    <br />
-                    Echo: {useCharCount()}
-                </div>
             <div>
                 <div>
-                    <h2>Customer List</h2>
-                    <a href="#" id="fetch"
-                    onClick={(e) => setStart("DummyText")}
-                    >Fetch</a>
-                    &nbsp;&nbsp;&nbsp;&nbsp;
-                    <a href="#" id="stop">Stop</a>
+                    <h2>Customer List</h2>                    
                 </div>
             </div>
 
@@ -42,6 +38,7 @@ export const CustomerList: FunctionComponent<CustomerListProps> = ({ }) => {
                     <div className="div-table-col">Customer Age</div>
                     <div className="div-table-col">Customer Job</div>
                 </div>
+                {customerRows}
             </div>
         </div>
     );
