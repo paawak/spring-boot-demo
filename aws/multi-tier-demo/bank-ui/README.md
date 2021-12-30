@@ -1,6 +1,12 @@
 # About
 
-Demo for Bank UI. Can be accessed here: <http://localhost:3000>. 
+Demo for Bank UI. 
+
+## Running locally
+
+    npm start
+
+This will make the application available here: <http://localhost:3000>. 
 
 ## Docker
 ### Build Docker image
@@ -8,9 +14,17 @@ Demo for Bank UI. Can be accessed here: <http://localhost:3000>.
     npm run build
     docker build -t paawak/bank-ui:latest .
 
+### Push image
+
+    docker login
+    docker push paawak/bank-ui:latest
+      
+
 ### Run Docker image
 
-    docker run -it -p 8100:80 paawak/bank-ui:latest
+    docker run --env REACT_APP_REST_API_BASE_NAME=localhost:8080 -it -p 8100:80 paawak/bank-ui:latest
+
+This will make the application available here: <http://localhost:8100>.     
 
 ### Logon into a running container
 

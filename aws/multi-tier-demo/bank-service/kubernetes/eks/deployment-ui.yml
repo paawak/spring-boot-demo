@@ -1,11 +1,10 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: frontend
-  namespace: cloudacademy
+  name: bank-ui
+  namespace: paawak-bank-app
   labels:
-    role: frontend
-    env: demo
+    app: bank-ui
 spec:
   replicas: 2
   strategy:
@@ -15,31 +14,31 @@ spec:
       maxUnavailable: 25%
   selector:
     matchLabels:
-      role: frontend
+      app: bank-ui
   template:
     metadata:
       labels:
-        role: frontend
+        app: bank-ui
     spec:
       containers:
-      - name: frontend
-        image: cloudacademydevops/frontend:v10
+      - name: bank-ui
+        image: paawak/bank-ui:latest
         imagePullPolicy: Always
         env:
-          - name: REACT_APP_APIHOSTPORT
-            value: $API_ELB_PUBLIC_FQDN
+          - name: REACT_APP_REST_API_BASE_NAME
+            value: ab7938317a755492093ca7def0dffd2a-920361146.us-east-2.elb.amazonaws.com
         ports:
-        - containerPort: 8080
+        - containerPort: 80
         livenessProbe:
           httpGet:
-            path: /ok
-            port: 8080
+            path: /index.html
+            port: 80
           initialDelaySeconds: 2
           periodSeconds: 5
         readinessProbe:
           httpGet:
-             path: /ok
-             port: 8080
+             path: /index.html
+             port: 80
           initialDelaySeconds: 5
           periodSeconds: 5
           successThreshold: 1
