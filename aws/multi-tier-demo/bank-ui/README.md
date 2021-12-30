@@ -11,7 +11,6 @@ This will make the application available here: <http://localhost:3000>.
 ## Docker
 ### Build Docker image
 
-    npm run build
     docker build -t paawak/bank-ui:latest .
 
 ### Push image
