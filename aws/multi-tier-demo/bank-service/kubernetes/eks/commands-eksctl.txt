@@ -41,7 +41,7 @@ Test and confirm that the API route URL /ok endpoint can be called successfully.
 
 
 {
-BANK_SERVICE_ELB_PUBLIC_FQDN=$(kubectl get svc bank-service -ojsonpath="{.status.loadBalancer.ingress[0].hostname}")
+BANK_SERVICE_ELB_PUBLIC_FQDN=$(kubectl get svc bank-service-loadbalancer -ojsonpath="{.status.loadBalancer.ingress[0].hostname}")
 until nslookup $BANK_SERVICE_ELB_PUBLIC_FQDN >/dev/null 2>&1; do sleep 2 && echo waiting for DNS to propagate...; done
 curl $BANK_SERVICE_ELB_PUBLIC_FQDN/actuator/health
 echo
