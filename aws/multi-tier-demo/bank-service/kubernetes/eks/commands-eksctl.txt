@@ -60,10 +60,10 @@ curl -s $BANK_SERVICE_ELB_PUBLIC_FQDN/bank-item/blocking | jq .
 
 5.1. Retrieve the FQDN of the API LoadBalancer and store it in the $API_PUBLIC_FQDN variable. The value stored in the $API_PUBLIC_FQDN variable is injected into the Frontend container's REACT_APP_APIHOSTPORT environment var - this tells the frontend where to send browser initiated API AJAX calls. In the terminal run the following command:
 
-
+kubectl get svc bank-ui-loadbalancer -ojsonpath="{.status.loadBalancer.ingress[0].hostname}"
 
 {
-API_ELB_PUBLIC_FQDN=$(kubectl get svc api -ojsonpath="{.status.loadBalancer.ingress[0].hostname}")
+API_ELB_PUBLIC_FQDN=$(kubectl get svc bank-ui-loadbalancer -ojsonpath="{.status.loadBalancer.ingress[0].hostname}")
 echo API_ELB_PUBLIC_FQDN=$API_ELB_PUBLIC_FQDN
 }
 

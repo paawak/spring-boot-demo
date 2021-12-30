@@ -30,7 +30,13 @@ This will make the application available here: <http://localhost:8100>.
     docker container ls
 
     docker exec -it musing_hodgkin bash
-    
+
+# Passing env vars to React App
+
+<https://blog.codecentric.de/en/2018/12/react-application-container-environment-aware-kubernetes-deployment/>
+
+
+<https://javaadpatel.com/building-and-deploying-react-containers/>
 
 # Getting Started with Create React App
 
