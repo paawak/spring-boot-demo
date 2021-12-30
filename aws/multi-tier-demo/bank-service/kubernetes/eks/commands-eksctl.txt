@@ -22,7 +22,7 @@ Deploy
 
 kubectl apply -f deployment-service.yml
 
-kubectl apply -f service-service.yml
+kubectl apply -f loadbalancer-service.yml
 
 
 kubectl get all -n paawak-bank-app
@@ -31,8 +31,8 @@ Confirm the API setup within the cluster:
 
 {
 kubectl rollout status deployment bank-service
-kubectl get pods -l role=api
-kubectl get svc bank-service
+kubectl get pods -l app=bank-service
+kubectl get svc bank-service-loadbalancer
 }
 
 
@@ -52,10 +52,8 @@ echo
 
 
 
-curl -s $API_ELB_PUBLIC_FQDN/languages | jq .
-curl -s $API_ELB_PUBLIC_FQDN/languages/go | jq .
-curl -s $API_ELB_PUBLIC_FQDN/languages/java | jq .
-curl -s $API_ELB_PUBLIC_FQDN/languages/nodejs | jq .
+curl -s $BANK_SERVICE_ELB_PUBLIC_FQDN/actuator | jq .
+curl -s $BANK_SERVICE_ELB_PUBLIC_FQDN/bank-item/blocking | jq .
 
 
 
