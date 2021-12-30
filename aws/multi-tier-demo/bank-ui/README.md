@@ -21,11 +21,13 @@ This will make the application available here: <http://localhost:3000>.
 
 ### Run Docker image
 
-    docker run --env REACT_APP_REST_API_BASE_NAME=localhost:8080 -it -p 8100:80 paawak/bank-ui:latest
+    docker run --env REST_API_BASE_NAME=http://localhost:8080 -it -p 8100:80 paawak/bank-ui:latest
 
 This will make the application available here: <http://localhost:8100>.     
 
 ### Logon into a running container
+
+    docker container ls
 
     docker exec -it musing_hodgkin bash
     
