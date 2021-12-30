@@ -3,20 +3,21 @@ import { CustomerDetails } from './CustomerDetails';
 import { CustomerDetailsProps } from './CustomerDetailsProps';
 
 type CustomerListProps = {
+    url: string
 }
 
-export const CustomerList: FunctionComponent<CustomerListProps> = ({ }) => {
+export const CustomerList: FunctionComponent<CustomerListProps> = ({ url }) => {
 
     const [customers, setCustomers] = useState<CustomerDetailsProps[]>([]);
     const [error, setError] = useState<boolean>(false);
 
     useEffect(() => {
-        fetch('http://localhost:8080/bank-item/blocking')
+        fetch(url)
           .then(response => response.json())
           .then(response => setCustomers(response))
           .catch(error => {
               setError(true);
-              console.error("Error fetching customer list", error)
+              console.error("Error fetching customer list", error);
             });
       }, []); 
 

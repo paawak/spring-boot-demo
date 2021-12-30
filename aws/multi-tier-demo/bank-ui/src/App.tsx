@@ -3,7 +3,7 @@ import './App.css';
 
 function App() {
   return (
-      <CustomerList/>
+      <CustomerList url='http://localhost:8080/bank-item/blocking'/>
   );
 }
 

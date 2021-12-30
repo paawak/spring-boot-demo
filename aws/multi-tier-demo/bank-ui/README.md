@@ -1,3 +1,21 @@
+# About
+
+Demo for Bank UI. Can be accessed here: <http://localhost:3000>. 
+
+## Docker
+### Build Docker image
+
+    docker build -t paawak/bank-ui:latest .
+
+### Run Docker image
+
+    docker run -it -p 80:80 paawak/bank-ui:latest
+
+### Logon into a running container
+
+    docker exec -it musing_hodgkin bash
+    
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
