@@ -1,0 +1,189 @@
+
+
+curl -o kubectl https://amazon-eks.s3.us-west-2.amazonaws.com/1.21.2/2021-07-05/bin/linux/amd64/kubectl
+chmod +x ./kubectl
+sudo cp ./kubectl /usr/local/bin
+export PATH=/usr/local/bin:$PATH
+
+
+kubectl version --short --client=true
+
+
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+unzip awscliv2.zip
+sudo ./aws/install
+
+
+aws --version
+
+
+
+EKS_CLUSTER_NAME=$(aws eks list-clusters --region us-west-2 --query clusters[0] --output text)
+echo $EKS_CLUSTER_NAME
+
+
+aws eks update-kubeconfig --name $EKS_CLUSTER_NAME --region us-west-2 
+
+
+
+
+
+-------------------
+
+
+4.5. Test and confirm that the API route URL /ok endpoint can be called successfully. In the terminal run the following command:
+
+
+{
+API_ELB_PUBLIC_FQDN=$(kubectl get svc api -ojsonpath="{.status.loadBalancer.ingress[0].hostname}")
+until nslookup $API_ELB_PUBLIC_FQDN >/dev/null 2>&1; do sleep 2 && echo waiting for DNS to propagate...; done
+curl $API_ELB_PUBLIC_FQDN/ok
+echo
+}
+
+----------------
+
+
+curl -s $API_ELB_PUBLIC_FQDN/languages | jq .
+curl -s $API_ELB_PUBLIC_FQDN/languages/go | jq .
+curl -s $API_ELB_PUBLIC_FQDN/languages/java | jq .
+curl -s $API_ELB_PUBLIC_FQDN/languages/nodejs | jq .
+
+
+
+{
+API_ELB_PUBLIC_FQDN=$(kubectl get svc api -ojsonpath="{.status.loadBalancer.ingress[0].hostname}")
+echo API_ELB_PUBLIC_FQDN=$API_ELB_PUBLIC_FQDN
+}
+
+
+
+----------------------------------------------
+
+
+cat << EOF | kubectl apply -f -
+
+apiVersion: apps/v1
+
+kind: StatefulSet
+
+metadata:
+
+  name: mongo
+
+  namespace: cloudacademy
+
+spec:
+
+  serviceName: mongo
+
+  replicas: 3
+
+  selector:
+
+    matchLabels:
+
+      role: db
+
+  template:
+
+    metadata:
+
+      labels:
+
+        role: db
+
+        env: demo
+
+        replicaset: rs0.main
+
+    spec:
+
+      affinity:
+
+        podAntiAffinity:
+
+          preferredDuringSchedulingIgnoredDuringExecution:
+
+          - weight: 100
+
+            podAffinityTerm:
+
+              labelSelector:
+
+                matchExpressions:
+
+                - key: replicaset
+
+                  operator: In
+
+                  values:
+
+                  - rs0.main
+
+              topologyKey: kubernetes.io/hostname
+
+      terminationGracePeriodSeconds: 10
+
+      containers:
+
+        - name: mongo
+
+          image: mongo:4.2
+
+          command:
+
+            - "numactl"
+
+            - "--interleave=all"
+
+            - "mongod"
+
+            - "--wiredTigerCacheSizeGB"
+
+            - "0.1"
+
+            - "--bind_ip"
+
+            - "0.0.0.0"
+
+            - "--replSet"
+
+            - "rs0"
+
+          ports:
+
+            - containerPort: 27017
+
+          volumeMounts:
+
+            - name: mongodb-persistent-storage-claim
+
+              mountPath: /data/db
+
+  volumeClaimTemplates:
+
+    - metadata:
+
+        name: mongodb-persistent-storage-claim
+
+      spec:
+
+        accessModes:
+
+          - ReadWriteOnce
+
+        storageClassName: gp2
+
+        resources:
+
+          requests:
+
+            storage: 0.5Gi
+
+EOF
+
+
+-------------------------------
+
+

@@ -1,0 +1,84 @@
+Log into aws
+
+aws configure
+
+Create cluster
+
+eksctl create cluster --name bank-eks-cluster --region us-east-2
+
+View Kubernetes resources
+
+kubectl get nodes -o wide
+
+Create namespace
+
+kubectl create namespace paawak-bank-app
+
+Set defult namspace
+
+kubectl config set-context --current --namespace paawak-bank-app
+
+Deploy
+
+kubectl apply -f deployment-service.yml
+
+kubectl apply -f loadbalancer-service.yml
+
+
+kubectl get all -n paawak-bank-app
+
+Confirm the API setup within the cluster:
+
+{
+kubectl rollout status deployment bank-service
+kubectl get pods -l app=bank-service
+kubectl get svc bank-service-loadbalancer
+}
+
+
+
+Test and confirm that the API route URL /ok endpoint can be called successfully. In the terminal run the following command:
+
+
+{
+BANK_SERVICE_ELB_PUBLIC_FQDN=$(kubectl get svc bank-service-loadbalancer -ojsonpath="{.status.loadBalancer.ingress[0].hostname}")
+until nslookup $BANK_SERVICE_ELB_PUBLIC_FQDN >/dev/null 2>&1; do sleep 2 && echo waiting for DNS to propagate...; done
+curl $BANK_SERVICE_ELB_PUBLIC_FQDN/actuator/health
+echo
+}
+
+
+4.6. Test and confirm that the API route URL /languages, and /languages/{name} endpoints can be called successfully. In the terminal run any of the following commands:
+
+
+
+curl -s $BANK_SERVICE_ELB_PUBLIC_FQDN/actuator | jq .
+curl -s $BANK_SERVICE_ELB_PUBLIC_FQDN/bank-item/blocking | jq .
+
+
+
+
+5.1. Retrieve the FQDN of the API LoadBalancer and store it in the $API_PUBLIC_FQDN variable. The value stored in the $API_PUBLIC_FQDN variable is injected into the Frontend container's REACT_APP_APIHOSTPORT environment var - this tells the frontend where to send browser initiated API AJAX calls. In the terminal run the following command:
+
+kubectl get svc bank-ui-loadbalancer -ojsonpath="{.status.loadBalancer.ingress[0].hostname}"
+
+{
+API_ELB_PUBLIC_FQDN=$(kubectl get svc bank-ui-loadbalancer -ojsonpath="{.status.loadBalancer.ingress[0].hostname}")
+echo API_ELB_PUBLIC_FQDN=$API_ELB_PUBLIC_FQDN
+}
+
+
+echo http://$API_ELB_PUBLIC_FQDN
+
+kubectl -n paawak-bank-app describe pod bank-service-65464f59ff-rq7jj
+
+kubectl exec -it bank-service-65464f59ff-rq7jj -n paawak-bank-app -- /bin/bash
+
+
+kubectl -n paawak-bank-app describe service bank-service
+
+
+
+Delete your cluster and nodes
+
+eksctl delete cluster --name bank-eks-cluster --region us-east-2
