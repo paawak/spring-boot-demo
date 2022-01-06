@@ -2,6 +2,16 @@
 
 Demo for a Reactive Netty/Spring Boot Application within Docker. Can be accessed here: <http://localhost:5000/index.html>. This can also be deployed to AWS Elastic Beanstalk through command line or by uploading the *docker-compose.yml*
 
+# Useful links
+
+<https://skaffold.dev/docs/pipeline-stages/init/>
+
+<https://github.com/kubernetes-sigs/kustomize>
+
+<https://kubectl.docs.kubernetes.io/installation/kustomize/>
+
+<https://kustomize.io/>
+
 # How build docker image
 
     mvn clean package -P docker
