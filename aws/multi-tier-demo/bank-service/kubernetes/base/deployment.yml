@@ -2,9 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: bank-service
-  namespace: paawak-bank-app
-  labels:
-    app: bank-service
 spec:
   replicas: 2
   selector:
