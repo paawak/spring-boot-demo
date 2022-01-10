@@ -71,6 +71,7 @@ Use any of the below commands:
 - Deleting a deployment:
 
     kubectl delete deployment bank-service-dev
+    kubectl delete service bank-service-loadbalancer-dev
     
 - Stopping Minikube
     
