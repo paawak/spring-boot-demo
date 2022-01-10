@@ -62,7 +62,7 @@ The below steps are taken from <https://kubernetes.io/docs/tasks/run-application
 - To get external IPs    
 Use any of the below commands:    
 
-    minikube service bank-service-loadbalancer-dev
+    minikube service bank-service-loadbalancer-dev -n paawak-bank-app
     
     minikube ip    
     

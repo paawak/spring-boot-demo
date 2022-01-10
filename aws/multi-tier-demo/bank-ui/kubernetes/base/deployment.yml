@@ -23,7 +23,7 @@ spec:
         imagePullPolicy: Always
         env:
           - name: REST_API_BASE_NAME
-            value: "http://192.168.49.2:32755"
+            value: "http://192.168.49.2:30675"
         ports:
         - containerPort: 80
         livenessProbe:
