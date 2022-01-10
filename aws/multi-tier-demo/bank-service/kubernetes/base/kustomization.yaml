@@ -1,3 +1,7 @@
 resources:
 - deployment.yml
 - loadbalancer.yml
+
+namespace: paawak-bank-app
+commonLabels:
+  app: bank-service

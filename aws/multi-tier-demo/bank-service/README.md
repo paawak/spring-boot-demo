@@ -35,68 +35,45 @@ Demo for a Reactive Netty/Spring Boot Application within Docker. Can be accessed
 ### Deploying an application
 The below steps are taken from <https://kubernetes.io/docs/tasks/run-application/run-stateless-application-deployment/>
 
-1. Start Minikube
+- Start Minikube
 
-    minikube start --nodes 2 -p bank-service
+    minikube start --nodes 2
+        
+- Create the namespace
     
+    kubectl create namespace paawak-bank-app        
     
-1. Check the status of the nodes
-    
-    minikube status -p bank-service        
-    
-
-1. Create a Deployment based on the YAML file:
+- Create a Deployment and LoadBalancers through Kustomize
 
     kubectl apply -k overlays/dev/
 
-1. Display information about the Deployment:
+- Display information about the Deployment:
 
     kubectl describe deployment bank-service-dev
         
-1. List the Pods created by the deployment:
+- List the Pods created by the deployment:
 
     kubectl get pods -l app=bank-service
     
-1. Display information about a Pod:
+- Display information about a Pod:
 
     kubectl describe pod <pod-name>
     
-1. Deleting a deployment:
-
-    kubectl delete deployment bank-service-dev
-    
-### Exposing a deployed application
-The below steps are taken from <https://kubernetes.io/docs/concepts/services-networking/service/> and <https://kubernetes.io/docs/tutorials/stateless-application/expose-external-ip-address/>
-
-1. To get external IPs    
+- To get external IPs    
 Use any of the below commands:    
 
     minikube service bank-service-loadbalancer-dev
     
-    minikube ip
+    minikube ip    
     
-1. Deleting a service:
+- Deleting a deployment:
 
-    kubectl delete svc bank-service-service    
-
-#### Deploying a Service
-
-    kubectl apply -f kubernetes/minikube/application-service.yml
-
-1. Display information about the Deployment:
-
-    kubectl describe svc bank-service-service
+    kubectl delete deployment bank-service-dev
     
-1. Get the Endpoints
-
-    kubectl get ep bank-service-service
+- Stopping Minikube
     
-1. Get the NodePort
-
-    kubectl get svc bank-service-service -o yaml | grep nodePort -C 10
+    minikube ip    
     
-1. Get the IP Address
 
-    kubectl get nodes -o yaml | grep ExternalIP -C 1
     
                     
