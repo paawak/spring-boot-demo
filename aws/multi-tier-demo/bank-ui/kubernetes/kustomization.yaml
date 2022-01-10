@@ -1,0 +1,8 @@
+resources:
+- ./dev
+- ./production
+
+namePrefix: cluster-a-
+namespace: paawak-bank-app
+commonLabels:
+  app: bank-ui
