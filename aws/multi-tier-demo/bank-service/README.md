@@ -47,7 +47,7 @@ The below steps are taken from <https://kubernetes.io/docs/tasks/run-application
 
 1. Create a Deployment based on the YAML file:
 
-    kubectl apply -k ./
+    kubectl apply -k overlays/dev/
 
 1. Display information about the Deployment:
 

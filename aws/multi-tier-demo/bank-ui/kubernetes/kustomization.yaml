@@ -1,7 +1,0 @@
-resources:
-- ./dev
-- ./production
-
-namespace: paawak-bank-app
-commonLabels:
-  app: bank-ui
