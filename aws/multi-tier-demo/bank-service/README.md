@@ -30,45 +30,7 @@ Demo for a Reactive Netty/Spring Boot Application within Docker. Can be accessed
 
     docker run -it -p 5000:5000    \
     paawak/bank-service:latest
-    
-## Running on AWS Elastic Beanstalk
-For the application to run on Beanstalk without any addition Beanstalk-specific configuration files, you need to listen to Docker port *5000*. Also, you would need to *expose* this port in your Docker file:
-
-    EXPOSE 5000
-
-If you do that, you are pretty much all set. You can use the below commands to deploy your application on to AWS:
-
-    eb init -p docker  bank-service
-    eb create demo-with-docker-env
-    
-To open the browser:
-
-    eb open
-    
-To terminate:
-        
-        eb terminate demo-with-docker-env
-        
-This will upload zip and upload all the files within that directory. 
-
-You can also create an application by simply uploading the docker compose file:
-
-```yaml
-version: '3'
-
-services:
-    bank-service:
-        image: paawak/bank-service:latest
-        ports:
-          - "80:5000"
-        environment:
-          - spring.profiles.active=default
-```
-But note that you need to first upload this image to the Docker Hub. These are the commands:
-
-    docker login
-    docker push paawak/bank-service:latest
-        
+            
 ## Running on Minikube
 ### Deploying an application
 The below steps are taken from <https://kubernetes.io/docs/tasks/run-application/run-stateless-application-deployment/>
@@ -85,11 +47,11 @@ The below steps are taken from <https://kubernetes.io/docs/tasks/run-application
 
 1. Create a Deployment based on the YAML file:
 
-    kubectl apply -f kubernetes/minikube/application-deployment.yml
+    kubectl apply -k ./
 
 1. Display information about the Deployment:
 
-    kubectl describe deployment bank-service-deployment
+    kubectl describe deployment bank-service-dev
         
 1. List the Pods created by the deployment:
 
@@ -101,19 +63,15 @@ The below steps are taken from <https://kubernetes.io/docs/tasks/run-application
     
 1. Deleting a deployment:
 
-    kubectl delete deployment bank-service-deployment
+    kubectl delete deployment bank-service-dev
     
 ### Exposing a deployed application
 The below steps are taken from <https://kubernetes.io/docs/concepts/services-networking/service/> and <https://kubernetes.io/docs/tutorials/stateless-application/expose-external-ip-address/>
 
-#### Using the expose command
-
-    kubectl expose deployment bank-service-deployment --type=LoadBalancer --name=bank-service-service
-
 1. To get external IPs    
 Use any of the below commands:    
 
-    minikube service bank-service-service
+    minikube service bank-service-loadbalancer-dev
     
     minikube ip
     
