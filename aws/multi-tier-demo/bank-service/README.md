@@ -12,6 +12,8 @@ Demo for a Reactive Netty/Spring Boot Application within Docker. Can be accessed
 
 <https://kustomize.io/>
 
+<https://kubernetes.io/docs/tasks/manage-kubernetes-objects/kustomization/>
+
 # How build docker image
 
     mvn clean package -P docker
