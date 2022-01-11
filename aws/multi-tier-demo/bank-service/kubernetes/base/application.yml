@@ -1,3 +1,6 @@
+metadata:
+  name: bank-service-configs
+
 bank-service:
   cors-allow-host: '*'
 
@@ -19,8 +22,3 @@ spring:
   jpa:
     hibernate:
       ddl-auto: none
-  datasource:
-    url: jdbc:h2:mem:bank_details
-    username: sa
-    password: sa
-    driver-class-name: org.h2.Driver

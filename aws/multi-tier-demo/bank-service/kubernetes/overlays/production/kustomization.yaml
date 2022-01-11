@@ -1,3 +1,10 @@
+nameSuffix: -prod
+
+configMapGenerator:
+- name: bank-service-configs
+  behavior: create
+  files:
+  - application-prod.yml
+
 resources:
 - ./../../base
-nameSuffix: -prod

@@ -17,6 +17,12 @@ spec:
         image: paawak/bank-service:latest
         ports:
         - containerPort: 8080
+        env:
+          - name: APPLICATION_CONFIG 
+            valueFrom:
+              configMapKeyRef:
+                name: bank-service-configs
+                key: application-dev.yml    
         livenessProbe:
           httpGet:
             path: /actuator/health

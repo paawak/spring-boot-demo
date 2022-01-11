@@ -1,0 +1,6 @@
+spring:
+  datasource:
+    url: jdbc:mysql:bank_details
+    username: root
+    password: rootwe23
+    driver-class-name: org.mysql.Driver

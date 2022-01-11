@@ -1,3 +1,10 @@
+nameSuffix: -dev
+
+configMapGenerator:
+- name: bank-service-configs
+  behavior: merge
+  files:
+  - application-dev.yml
+
 resources:
 - ./../../base
-nameSuffix: -dev
