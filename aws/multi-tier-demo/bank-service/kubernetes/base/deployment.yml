@@ -22,7 +22,7 @@ spec:
             valueFrom:
               configMapKeyRef:
                 name: bank-service-configs
-                key: application-dev.yml    
+                key: application.yml    
         livenessProbe:
           httpGet:
             path: /actuator/health
