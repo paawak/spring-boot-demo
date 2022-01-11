@@ -68,10 +68,9 @@ Use any of the below commands:
     
     minikube ip    
     
-- Deleting a deployment:
+- Deleting all deployments:
 
-    kubectl delete deployment bank-service-dev
-    kubectl delete service bank-service-loadbalancer-dev
+    kubectl delete -k overlays/dev/
     
 - Stopping Minikube
     
