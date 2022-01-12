@@ -61,6 +61,10 @@ The below steps are taken from <https://kubernetes.io/docs/tasks/run-application
 
     kubectl describe pod <pod-name>
     
+- Log into a shell of running pod
+
+    kubectl exec -it bank-service-65464f59ff-rq7jj -n paawak-bank-app -- /bin/bash    
+    
 - To get external IPs    
 Use any of the below commands:    
 
