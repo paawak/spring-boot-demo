@@ -22,7 +22,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<java.version>1.8</java.version>
+		<java.version>11</java.version>
 		<jib.maven-plugin-version>3.1.4</jib.maven-plugin-version>
 	</properties>
 
@@ -70,7 +70,6 @@
 	</dependencies>
 
 	<build>
-		<finalName>${project.artifactId}</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
@@ -86,12 +85,20 @@
                 <version>${jib.maven-plugin-version}</version>
                 <configuration>
                     <from>
-                        <image>gcr.io/google-appengine/openjdk:8</image>
+                        <image>openjdk:11.0.8-jre</image>
                     </from>
+					<to>
+						<image>docker.io/paawak/bank-service</image>
+						<tags>
+							<tag>${project.version}</tag>
+							<tag>latest</tag>
+						</tags>
+					</to>
                     <container>
-                        <jvmFlags>
-                            <jvmFlag>-Djava.security.egd=file:/dev/./urandom</jvmFlag>
-                        </jvmFlags>
+						<ports>
+							<port>8080</port>
+						</ports>
+						<format>OCI</format>
                     </container>
                 </configuration>
             </plugin>			
