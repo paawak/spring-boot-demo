@@ -4,7 +4,7 @@ configMapGenerator:
 - name: bank-service-configs
   behavior: merge
   files:
-  - application.yml=application-dev.yml
+  - application-dev.yml
 
 resources:
 - ./../../base

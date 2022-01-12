@@ -33,6 +33,11 @@ Demo for a Reactive Netty/Spring Boot Application within Docker. Can be accessed
     docker run -it -p 5000:5000    \
     paawak/bank-service:latest
             
+## Save entire docker image as a tar
+
+    docker create --name latest-bank-service  paawak/bank-service:latest false
+    docker export latest-bank-service  -o bank-service.tar            
+            
 ## Running on Minikube
 ### Deploying an application
 The below steps are taken from <https://kubernetes.io/docs/tasks/run-application/run-stateless-application-deployment/>

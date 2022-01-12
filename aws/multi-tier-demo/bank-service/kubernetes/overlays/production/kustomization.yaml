@@ -4,7 +4,7 @@ configMapGenerator:
 - name: bank-service-configs
   behavior: create
   files:
-  - application.yml=application-prod.yml
+  - application-prod.yml
 
 resources:
 - ./../../base

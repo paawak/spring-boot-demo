@@ -23,6 +23,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
+		<jib.maven-plugin-version>3.1.4</jib.maven-plugin-version>
 	</properties>
 
 	<dependencies>
@@ -79,6 +80,21 @@
 				<groupId>org.flywaydb</groupId>
 				<artifactId>flyway-maven-plugin</artifactId>
 			</plugin>
+            <plugin>
+                <groupId>com.google.cloud.tools</groupId>
+                <artifactId>jib-maven-plugin</artifactId>
+                <version>${jib.maven-plugin-version}</version>
+                <configuration>
+                    <from>
+                        <image>gcr.io/google-appengine/openjdk:8</image>
+                    </from>
+                    <container>
+                        <jvmFlags>
+                            <jvmFlag>-Djava.security.egd=file:/dev/./urandom</jvmFlag>
+                        </jvmFlags>
+                    </container>
+                </configuration>
+            </plugin>			
 		</plugins>
 	</build>
 

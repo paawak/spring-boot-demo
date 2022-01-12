@@ -4,9 +4,9 @@ metadata:
   name: bank-service
 build:
   artifacts:
-  - image: paawak/bank-service
-    docker:
-      dockerfile: Dockerfile
+  - image: docker.io/paawak/bank-service
+    jib: {}
+
 deploy:
   kustomize:
     paths:
