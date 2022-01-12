@@ -5,6 +5,8 @@ configMapGenerator:
   behavior: merge
   files:
   - application-dev.yml
+  literals:
+  - spring.profiles.active=dev
 
 resources:
 - ./../../base

@@ -5,6 +5,8 @@ configMapGenerator:
   behavior: create
   files:
   - application-prod.yml
+  literals:
+  - spring.profiles.active=prod
 
 resources:
 - ./../../base
