@@ -5,7 +5,7 @@ commonLabels:
 configMapGenerator:
 - name: bank-service-configs
   files:
-  - application.properties
+  - application.yml
   options:
     disableNameSuffixHash: true
 
