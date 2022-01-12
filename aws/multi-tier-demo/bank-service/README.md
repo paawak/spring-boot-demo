@@ -16,11 +16,13 @@ Demo for a Reactive Netty/Spring Boot Application within Docker. Can be accessed
 
 # How build docker image
 
-    mvn clean package -P docker
+We use Jib Maven Plugin: 
 
-# How upload docker image to docker hub
+<https://github.com/GoogleContainerTools/jib>
 
-    mvn clean install -P docker
+<https://github.com/GoogleContainerTools/jib/tree/master/jib-maven-plugin>
+
+    mvn compile jib:build
 
 # How to run
 
