@@ -3,7 +3,7 @@ commonLabels:
   app: bank-service
 
 configMapGenerator:
-- name: bank-service-configs
+- name: bank-service-common-config
   files:
   - application.yml
   options:

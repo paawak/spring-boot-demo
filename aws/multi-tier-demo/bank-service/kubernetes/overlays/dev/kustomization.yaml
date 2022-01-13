@@ -1,4 +1,12 @@
 nameSuffix: -dev
+namespace: paawak-bank-app
+
+configMapGenerator:
+- name: bank-service-profile-config
+  files:
+  - application-dev.yml
+  options:
+    disableNameSuffixHash: true
 
 resources:
 - ./../../base
