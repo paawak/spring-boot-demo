@@ -6,13 +6,13 @@ spec:
   template:
     spec:
       containers:
-      - name: bank-service
-        env:
-          - name: spring.profiles.active 
-            value: prod   
-        volumeMounts:
-        - name: prod-config
-          mountPath: /config/prod
+        - name: bank-service
+          env:
+            - name: spring.profiles.active 
+              value: prod   
+          volumeMounts:
+          - name: prod-config
+            mountPath: /config/prod
       volumes:
       - name: prod-config
         configMap:
