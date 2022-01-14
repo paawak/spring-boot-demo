@@ -16,9 +16,6 @@ spec:
       containers:
       - name: bank-service
         image: paawak/bank-service:latest
-        env:
-          - name: spring.profiles.active 
-            value: dev   
         volumeMounts:
         - name: common-config
           mountPath: /config/common
@@ -28,6 +25,3 @@ spec:
       - name: common-config
         configMap:
           name: bank-service-common-config
-      - name: dev-config
-        configMap:
-          name: bank-service-profile-config
