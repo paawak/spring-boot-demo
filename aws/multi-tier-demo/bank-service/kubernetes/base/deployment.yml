@@ -19,8 +19,6 @@ spec:
         volumeMounts:
         - name: common-config
           mountPath: /config/common
-        - name: dev-config
-          mountPath: /config/dev
       volumes:
       - name: common-config
         configMap:
