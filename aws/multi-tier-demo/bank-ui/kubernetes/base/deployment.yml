@@ -2,9 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: bank-ui
-  namespace: paawak-bank-app
-  labels:
-    app: bank-ui
 spec:
   replicas: 2
   strategy:
@@ -26,7 +23,7 @@ spec:
         imagePullPolicy: Always
         env:
           - name: REST_API_BASE_NAME
-            value: "http://af8e9cb955ed247a0933197e2431a2ed-150370215.us-east-2.elb.amazonaws.com"
+            value: "http://192.168.49.2:30675"
         ports:
         - containerPort: 80
         livenessProbe:

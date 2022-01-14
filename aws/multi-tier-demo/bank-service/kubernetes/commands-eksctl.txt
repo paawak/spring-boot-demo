@@ -14,7 +14,7 @@ Create namespace
 
 kubectl create namespace paawak-bank-app
 
-Set defult namspace
+Set defult namespace
 
 kubectl config set-context --current --namespace paawak-bank-app
 

@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bank-service
+  labels:
+    app: bank-service
+spec:
+  selector:
+    matchLabels:
+      app: bank-service
+  template:
+    metadata:
+      labels:
+        app: bank-service
+    spec:
+      containers:
+      - name: bank-service
+        image: paawak/bank-service:latest
+        volumeMounts:
+        - name: common-config
+          mountPath: /config/common
+        - name: dev-config
+          mountPath: /config/dev
+      volumes:
+      - name: common-config
+        configMap:
+          name: bank-service-common-config

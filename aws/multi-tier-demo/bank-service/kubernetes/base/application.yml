@@ -1,0 +1,6 @@
+spring:
+  flyway:
+    locations: classpath:/sql
+  jpa:
+    hibernate:
+      ddl-auto: none

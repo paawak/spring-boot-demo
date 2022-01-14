@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bank-service
+spec:
+  template:
+    spec:
+      containers:
+      - name: bank-service
+        env:
+          - name: spring.profiles.active 
+            value: dev   
+        volumeMounts:
+        - name: dev-config
+          mountPath: /config/dev
+      volumes:
+      - name: dev-config
+        configMap:
+          name: bank-service-profile-config

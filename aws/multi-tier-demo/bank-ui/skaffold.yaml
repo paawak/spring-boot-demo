@@ -1,0 +1,24 @@
+apiVersion: skaffold/v2beta26
+kind: Config
+metadata:
+  name: bank-ui
+build:
+  artifacts:
+  - image: paawak/bank-ui
+    docker:
+      dockerfile: Dockerfile
+deploy:
+  kustomize:
+    paths:
+    - kubernetes/overlays/dev
+profiles:
+- name: base
+  deploy:
+    kustomize:
+      paths:
+      - kubernetes/base
+- name: production
+  deploy:
+    kustomize:
+      paths:
+      - kubernetes/overlays/production

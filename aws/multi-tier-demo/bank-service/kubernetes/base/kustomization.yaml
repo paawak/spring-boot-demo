@@ -1,0 +1,14 @@
+namespace: paawak-bank-app
+commonLabels:
+  app: bank-service
+
+configMapGenerator:
+- name: bank-service-common-config
+  files:
+  - application.yml
+  options:
+    disableNameSuffixHash: true
+
+resources:
+- deployment.yml
+- loadbalancer.yml

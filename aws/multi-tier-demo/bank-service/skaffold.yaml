@@ -1,0 +1,29 @@
+apiVersion: skaffold/v2beta26
+kind: Config
+metadata:
+  name: bank-service
+build:
+  artifacts:
+  - image: docker.io/paawak/bank-service
+    jib: {}
+
+deploy:
+  kustomize:
+    paths:
+    - kubernetes/overlays/dev
+profiles:
+- name: kubernetes
+  deploy:
+    kustomize:
+      paths:
+      - kubernetes
+- name: base
+  deploy:
+    kustomize:
+      paths:
+      - kubernetes/base
+- name: production
+  deploy:
+    kustomize:
+      paths:
+      - kubernetes/overlays/production
