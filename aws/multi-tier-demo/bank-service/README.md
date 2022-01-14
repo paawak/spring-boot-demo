@@ -26,6 +26,12 @@ We use Jib Maven Plugin:
 
 # How to run
 
+## Running on Kubernetes
+
+With Skaffold
+
+    skaffold run --tail
+
 ## Running in Local
 
     java -jar target/bank-service.jar
