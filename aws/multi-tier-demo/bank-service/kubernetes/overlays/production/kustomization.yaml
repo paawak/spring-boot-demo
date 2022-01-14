@@ -1,12 +1,17 @@
 nameSuffix: -prod
+namespace: paawak-bank-app
+commonLabels:
+  app: bank-service
 
 configMapGenerator:
-- name: bank-service-configs
-  behavior: create
+- name: bank-service-profile-config
   files:
   - application-prod.yml
-  literals:
-  - spring.profiles.active=prod
+  options:
+    disableNameSuffixHash: true
+
+patchesStrategicMerge:
+  - deployment-prod.yml
 
 resources:
 - ./../../base
