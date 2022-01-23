@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
       - name: bank-ui
-        image: paawak/bank-ui:latest
+        image: docker.io/paawak/bank-ui:latest
         imagePullPolicy: Always
         env:
           - name: REST_API_BASE_NAME
