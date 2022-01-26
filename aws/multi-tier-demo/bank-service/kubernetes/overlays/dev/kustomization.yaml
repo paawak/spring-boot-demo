@@ -1,7 +1,5 @@
 nameSuffix: -dev
 namespace: paawak-bank-app
-commonLabels:
-  app: bank-service
 
 configMapGenerator:
 - name: app-config

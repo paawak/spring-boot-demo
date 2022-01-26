@@ -1,4 +1,6 @@
 namePrefix: bank-service-
+commonLabels:
+  app: bank-service
 
 configMapGenerator:
 - name: app-config
