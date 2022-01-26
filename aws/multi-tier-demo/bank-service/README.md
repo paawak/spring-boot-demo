@@ -26,6 +26,12 @@ We use Jib Maven Plugin:
 
 # How to run
 
+## Running on Kubernetes
+
+With Skaffold
+
+    skaffold run --tail
+
 ## Running in Local
 
     java -jar target/bank-service.jar
@@ -47,14 +53,20 @@ The below steps are taken from <https://kubernetes.io/docs/tasks/run-application
 - Start Minikube
 
     minikube start --nodes 2
+    
+- Minikube Dashboard
+
+    minikube dashboard
         
 - Create the namespace
     
     kubectl create namespace paawak-bank-app        
     
+    kubectl config set-context --current --namespace=paawak-bank-app
+    
 - Create a Deployment and LoadBalancers through Kustomize
 
-    kubectl apply -k overlays/dev/
+    kubectl apply -k kubernetes/overlays/dev/
 
 - Display information about the Deployment:
 
@@ -85,7 +97,7 @@ Use any of the below commands:
     
 - Stopping Minikube
     
-    minikube ip    
+    minikube stop    
     
 
     

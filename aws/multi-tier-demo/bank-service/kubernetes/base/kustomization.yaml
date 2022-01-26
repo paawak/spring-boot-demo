@@ -1,9 +1,9 @@
-namespace: paawak-bank-app
+namePrefix: bank-service-
 commonLabels:
   app: bank-service
 
 configMapGenerator:
-- name: bank-service-common-config
+- name: app-config
   files:
   - application.yml
   options:

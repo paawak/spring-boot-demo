@@ -1,25 +1,33 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: bank-service
-  labels:
-    app: bank-service
+  name: deployment
 spec:
-  selector:
-    matchLabels:
-      app: bank-service
+  replicas: 2
   template:
-    metadata:
-      labels:
-        app: bank-service
     spec:
       containers:
-      - name: bank-service
-        image: paawak/bank-service:latest
-        volumeMounts:
-        - name: common-config
-          mountPath: /config/common
+        - name: bank-service
+          image: paawak/bank-service:latest
+          ports:
+          - containerPort: 8080
+          livenessProbe:
+            httpGet:
+                path: /actuator/health
+                port: 8080
+            initialDelaySeconds: 3
+            periodSeconds: 5
+          readinessProbe:
+            httpGet:
+                 path: /actuator/health
+                 port: 8080
+            initialDelaySeconds: 3
+            periodSeconds: 5
+            successThreshold: 1
+          volumeMounts:
+          - name: common-config
+            mountPath: /config/common
       volumes:
       - name: common-config
         configMap:
-          name: bank-service-common-config
+          name: app-config

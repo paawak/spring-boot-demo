@@ -1,14 +1,11 @@
 nameSuffix: -dev
 namespace: paawak-bank-app
-commonLabels:
-  app: bank-service
 
 configMapGenerator:
-- name: bank-service-profile-config
+- name: app-config
+  behavior: merge
   files:
   - application-dev.yml
-  options:
-    disableNameSuffixHash: true
 
 patchesStrategicMerge:
   - deployment-dev.yml
