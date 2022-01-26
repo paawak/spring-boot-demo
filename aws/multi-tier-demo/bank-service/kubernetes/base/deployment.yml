@@ -1,18 +1,10 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: bank-service
-  labels:
-    app: bank-service
+  name: deployment
 spec:
   replicas: 2
-  selector:
-    matchLabels:
-      app: bank-service
   template:
-    metadata:
-      labels:
-        app: bank-service
     spec:
       containers:
         - name: bank-service

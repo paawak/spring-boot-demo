@@ -1,4 +1,5 @@
 nameSuffix: -dev
+namePrefix: bank-service-
 namespace: paawak-bank-app
 commonLabels:
   app: bank-service

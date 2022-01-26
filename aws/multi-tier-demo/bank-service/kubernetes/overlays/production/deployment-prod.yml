@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: bank-service
+  name: deployment
 spec:
   template:
     spec:
@@ -10,10 +10,3 @@ spec:
           env:
             - name: spring.profiles.active 
               value: prod   
-          volumeMounts:
-          - name: prod-config
-            mountPath: /config/prod
-      volumes:
-      - name: prod-config
-        configMap:
-          name: bank-service-profile-config
