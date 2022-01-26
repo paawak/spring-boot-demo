@@ -1,5 +1,7 @@
+namePrefix: bank-service-
+
 configMapGenerator:
-- name: bank-service-config
+- name: app-config
   files:
   - application.yml
   options:

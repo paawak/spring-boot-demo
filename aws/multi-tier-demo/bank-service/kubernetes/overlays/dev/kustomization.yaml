@@ -1,11 +1,10 @@
 nameSuffix: -dev
-namePrefix: bank-service-
 namespace: paawak-bank-app
 commonLabels:
   app: bank-service
 
 configMapGenerator:
-- name: bank-service-config
+- name: app-config
   behavior: merge
   files:
   - application-dev.yml

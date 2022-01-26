@@ -30,4 +30,4 @@ spec:
       volumes:
       - name: common-config
         configMap:
-          name: bank-service-config
+          name: app-config
