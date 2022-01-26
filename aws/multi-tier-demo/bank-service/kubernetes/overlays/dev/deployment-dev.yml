@@ -10,10 +10,4 @@ spec:
           env:
             - name: spring.profiles.active 
               value: dev   
-          volumeMounts:
-          - name: dev-config
-            mountPath: /config/dev
-      volumes:
-      - name: dev-config
-        configMap:
-          name: bank-service-profile-config
+

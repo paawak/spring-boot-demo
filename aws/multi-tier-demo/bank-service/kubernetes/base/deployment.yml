@@ -38,4 +38,4 @@ spec:
       volumes:
       - name: common-config
         configMap:
-          name: bank-service-common-config
+          name: bank-service-config

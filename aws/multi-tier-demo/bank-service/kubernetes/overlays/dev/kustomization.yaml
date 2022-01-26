@@ -4,11 +4,10 @@ commonLabels:
   app: bank-service
 
 configMapGenerator:
-- name: bank-service-profile-config
+- name: bank-service-config
+  behavior: merge
   files:
   - application-dev.yml
-  options:
-    disableNameSuffixHash: true
 
 patchesStrategicMerge:
   - deployment-dev.yml
