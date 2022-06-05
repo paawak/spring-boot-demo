@@ -32,7 +32,7 @@ public class DBExporter {
 	DatabaseConnection database = new JdbcConnection(dataSource.getConnection());
 	try (Liquibase liquibase =
 		new Liquibase("./target/changelog.xml", new FileSystemResourceAccessor(), database);) {
-	    liquibase.generateChangeLog(new CatalogAndSchema(null, "public"),
+	    liquibase.generateChangeLog(CatalogAndSchema.DEFAULT,
 		    new DiffToChangeLog(new DiffOutputControl()), System.out);
 	}
     }
