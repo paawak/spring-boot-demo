@@ -73,13 +73,20 @@
 					</excludes>
 				</configuration>
 			</plugin>
+			<!-- mvn liquibase:generateChangeLog -->
 			<plugin>
 				<groupId>org.liquibase</groupId>
 				<artifactId>liquibase-maven-plugin</artifactId>
 				<version>4.9.1</version>
 				<configuration>
-					<propertyFileWillOverride>true</propertyFileWillOverride>
-					<propertyFile>target/classes/liquibase.properties</propertyFile>
+					<url>jdbc:postgresql://localhost:5432/tesseract-porua</url>
+					<driver>org.postgresql.Driver</driver>
+					<username>postgres</username>
+					<password>postgres</password>
+					<diffTypes>data</diffTypes>
+					<outputChangeLogFile>target/changelog.xml</outputChangeLogFile>
+					<diffIncludeObjects>page_image</diffIncludeObjects>
+					<verbose>true</verbose>
 				</configuration>
 			</plugin>
 		</plugins>
