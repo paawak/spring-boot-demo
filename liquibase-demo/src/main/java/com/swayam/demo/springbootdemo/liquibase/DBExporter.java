@@ -18,6 +18,12 @@ import liquibase.exception.LiquibaseException;
 import liquibase.integration.commandline.CommandLineUtils;
 import liquibase.resource.FileSystemResourceAccessor;
 
+/**
+ * https://docs.liquibase.com/tools-integrations/maven/commands/maven-generate-changelog.html
+ * 
+ * @author paawak
+ *
+ */
 @Service
 public class DBExporter {
 
@@ -37,8 +43,10 @@ public class DBExporter {
 	    diffOutputControl.setObjectChangeFilter(
 		    new StandardObjectChangeFilter(StandardObjectChangeFilter.FilterType.INCLUDE, "country"));
 
+	    String diffTypes = "data";// if null, it will export schema
+
 	    CommandLineUtils.doGenerateChangeLog("./target/changelog.xml", liquibase.getDatabase(), "", "",
-		    "data", "Palash Ray", "", null, diffOutputControl);
+		    diffTypes, "Palash Ray", "", null, diffOutputControl);
 
 	}
     }
