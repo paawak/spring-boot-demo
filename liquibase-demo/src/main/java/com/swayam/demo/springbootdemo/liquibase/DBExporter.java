@@ -38,10 +38,10 @@ public class DBExporter {
 	DatabaseConnection database = new JdbcConnection(dataSource.getConnection());
 
 	try (Liquibase liquibase = new Liquibase(null, new FileSystemResourceAccessor(), database);) {
-
+	    StandardObjectChangeFilter filter = new StandardObjectChangeFilter(
+		    StandardObjectChangeFilter.FilterType.INCLUDE, "page_image");
 	    DiffOutputControl diffOutputControl = new DiffOutputControl(false, false, false, null);
-	    diffOutputControl.setObjectChangeFilter(
-		    new StandardObjectChangeFilter(StandardObjectChangeFilter.FilterType.INCLUDE, "country"));
+	    diffOutputControl.setObjectChangeFilter(filter);
 
 	    String diffTypes = "data";// if null, it will export schema
 
