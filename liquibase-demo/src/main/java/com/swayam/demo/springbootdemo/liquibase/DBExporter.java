@@ -9,13 +9,13 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.springframework.stereotype.Service;
 
-import liquibase.CatalogAndSchema;
 import liquibase.Liquibase;
 import liquibase.database.DatabaseConnection;
 import liquibase.database.jvm.JdbcConnection;
 import liquibase.diff.output.DiffOutputControl;
-import liquibase.diff.output.changelog.DiffToChangeLog;
+import liquibase.diff.output.StandardObjectChangeFilter;
 import liquibase.exception.LiquibaseException;
+import liquibase.integration.commandline.CommandLineUtils;
 import liquibase.resource.FileSystemResourceAccessor;
 
 @Service
@@ -30,10 +30,17 @@ public class DBExporter {
     @PostConstruct
     public void export() throws LiquibaseException, SQLException, IOException, ParserConfigurationException {
 	DatabaseConnection database = new JdbcConnection(dataSource.getConnection());
+
 	try (Liquibase liquibase =
 		new Liquibase("./target/changelog.xml", new FileSystemResourceAccessor(), database);) {
-	    liquibase.generateChangeLog(CatalogAndSchema.DEFAULT,
-		    new DiffToChangeLog(new DiffOutputControl()), System.out);
+
+	    DiffOutputControl diffOutputControl = new DiffOutputControl(true, true, true, null);
+	    diffOutputControl.setObjectChangeFilter(
+		    new StandardObjectChangeFilter(StandardObjectChangeFilter.FilterType.EXCLUDE, "data"));
+
+	    CommandLineUtils.doGenerateChangeLog("./target/changelog.xml", liquibase.getDatabase(), "", "",
+		    "", "Palash Ray", "", "./target", diffOutputControl);
+
 	}
     }
 
