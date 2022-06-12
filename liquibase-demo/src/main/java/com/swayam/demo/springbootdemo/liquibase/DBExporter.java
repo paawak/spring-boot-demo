@@ -31,15 +31,14 @@ public class DBExporter {
     public void export() throws LiquibaseException, SQLException, IOException, ParserConfigurationException {
 	DatabaseConnection database = new JdbcConnection(dataSource.getConnection());
 
-	try (Liquibase liquibase =
-		new Liquibase("./target/changelog.xml", new FileSystemResourceAccessor(), database);) {
+	try (Liquibase liquibase = new Liquibase(null, new FileSystemResourceAccessor(), database);) {
 
-	    DiffOutputControl diffOutputControl = new DiffOutputControl(true, true, true, null);
+	    DiffOutputControl diffOutputControl = new DiffOutputControl(false, false, false, null);
 	    diffOutputControl.setObjectChangeFilter(
-		    new StandardObjectChangeFilter(StandardObjectChangeFilter.FilterType.EXCLUDE, "data"));
+		    new StandardObjectChangeFilter(StandardObjectChangeFilter.FilterType.INCLUDE, "country"));
 
 	    CommandLineUtils.doGenerateChangeLog("./target/changelog.xml", liquibase.getDatabase(), "", "",
-		    "", "Palash Ray", "", "./target", diffOutputControl);
+		    "data", "Palash Ray", "", null, diffOutputControl);
 
 	}
     }
