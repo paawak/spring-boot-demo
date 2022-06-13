@@ -51,7 +51,9 @@ public class DBExporter {
 	    String diffTypes = "data";// if null, it will export schema
 	    String author = "Palash Ray";
 	    String context = null;
-	    String dataDir = null;// if not null, will create CSV files
+	    String dataDir = null;// "./target";// set this to null for all data
+				  // in xml:
+				  // if not null, will create CSV files
 
 	    CommandLineUtils.doGenerateChangeLog(changelogFile, liquibase.getDatabase(), catalogueName,
 		    schemaName, diffTypes, author, context, dataDir, diffOutputControl);
