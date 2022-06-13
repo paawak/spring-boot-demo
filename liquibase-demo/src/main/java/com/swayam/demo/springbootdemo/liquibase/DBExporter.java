@@ -37,9 +37,11 @@ public class DBExporter {
     public void export() throws LiquibaseException, SQLException, IOException, ParserConfigurationException {
 	DatabaseConnection database = new JdbcConnection(dataSource.getConnection());
 
+	String tableName = "country";
+
 	try (Liquibase liquibase = new Liquibase(null, new FileSystemResourceAccessor(), database);) {
-	    StandardObjectChangeFilter filter = new StandardObjectChangeFilter(
-		    StandardObjectChangeFilter.FilterType.INCLUDE, "page_image");
+	    StandardObjectChangeFilter filter =
+		    new StandardObjectChangeFilter(StandardObjectChangeFilter.FilterType.INCLUDE, tableName);
 	    DiffOutputControl diffOutputControl = new DiffOutputControl(false, false, false, null);
 	    diffOutputControl.setObjectChangeFilter(filter);
 

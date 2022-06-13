@@ -81,13 +81,13 @@
 				<artifactId>liquibase-maven-plugin</artifactId>
 				<version>4.9.1</version>
 				<configuration>
-					<url>jdbc:postgresql://localhost:5432/tesseract-porua</url>
+					<url>jdbc:postgresql://localhost:5432/druto-chithhi-address-store</url>
 					<driver>org.postgresql.Driver</driver>
 					<username>postgres</username>
 					<password>postgres</password>
 					<diffTypes>data</diffTypes>
 					<outputChangeLogFile>target/changelog.xml</outputChangeLogFile>
-					<diffIncludeObjects>page_image</diffIncludeObjects>
+					<diffIncludeObjects>country</diffIncludeObjects>
 					<verbose>true</verbose>
 				</configuration>
 			</plugin>
