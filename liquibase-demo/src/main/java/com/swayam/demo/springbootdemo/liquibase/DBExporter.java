@@ -43,10 +43,16 @@ public class DBExporter {
 	    DiffOutputControl diffOutputControl = new DiffOutputControl(false, false, false, null);
 	    diffOutputControl.setObjectChangeFilter(filter);
 
+	    String changelogFile = "./target/changelog.xml";
+	    String catalogueName = null;
+	    String schemaName = null;
 	    String diffTypes = "data";// if null, it will export schema
+	    String author = "Palash Ray";
+	    String context = null;
+	    String dataDir = null;// if not null, will create CSV files
 
-	    CommandLineUtils.doGenerateChangeLog("./target/changelog.xml", liquibase.getDatabase(), "", "",
-		    diffTypes, "Palash Ray", "", null, diffOutputControl);
+	    CommandLineUtils.doGenerateChangeLog(changelogFile, liquibase.getDatabase(), catalogueName,
+		    schemaName, diffTypes, author, context, dataDir, diffOutputControl);
 
 	}
     }
