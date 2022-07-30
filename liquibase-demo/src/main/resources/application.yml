@@ -6,3 +6,7 @@ spring:
     driver-class-name: org.postgresql.Driver
   liquibase:
     enabled: false
+
+logging:
+  level:
+    liquibase: TRACE
