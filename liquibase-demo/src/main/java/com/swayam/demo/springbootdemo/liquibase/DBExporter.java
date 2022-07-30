@@ -48,7 +48,9 @@ public class DBExporter {
 	    String changelogFile = "./target/changelog.xml";
 	    String catalogueName = null;
 	    String schemaName = null;
-	    String diffTypes = "data";// if null, it will export schema
+	    String diffTypes = "batcheddata";// if null, it will export schema.
+					     // The value of this can also be
+					     // *data*
 	    String author = "Palash Ray";
 	    String context = null;
 	    String dataDir = null;// "./target";// set this to null for all data
