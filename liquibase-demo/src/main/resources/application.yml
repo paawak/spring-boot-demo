@@ -14,3 +14,5 @@ logging:
 app:
   config:
     batch-size: 200
+    tableName: 'ocr_word'
+    changeLogDir: './target/'

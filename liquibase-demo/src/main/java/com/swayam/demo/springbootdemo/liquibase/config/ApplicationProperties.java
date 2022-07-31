@@ -13,5 +13,7 @@ import lombok.Data;
 public class ApplicationProperties {
 
     private int batchSize;
+    private String tableName;
+    private String changeLogDir;
 
 }

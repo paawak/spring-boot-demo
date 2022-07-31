@@ -28,7 +28,6 @@ public class BatchedDataSnapshotGenerator extends JdbcSnapshotGenerator {
 	if (foundObject instanceof Table) {
 	    Table table = (Table) foundObject;
 	    try {
-
 		BatchedData exampleData = new BatchedData().setTable(table);
 		table.setAttribute("batcheddata", exampleData);
 	    } catch (Exception e) {

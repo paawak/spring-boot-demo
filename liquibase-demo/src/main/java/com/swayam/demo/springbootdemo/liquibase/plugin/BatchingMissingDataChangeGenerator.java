@@ -7,10 +7,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.swayam.demo.springbootdemo.liquibase.service.BatchedDBExporter;
 import com.swayam.demo.springbootdemo.liquibase.service.query.BatchedDataQuery;
 import com.swayam.demo.springbootdemo.liquibase.service.query.PostgresBatchedDataQuery;
 
 import liquibase.GlobalConfiguration;
+import liquibase.Scope;
 import liquibase.change.Change;
 import liquibase.change.ColumnConfig;
 import liquibase.change.core.InsertDataChange;
@@ -41,7 +43,8 @@ public class BatchingMissingDataChangeGenerator extends MissingDataChangeGenerat
     @Override
     public Change[] fixMissing(DatabaseObject missingObject, DiffOutputControl outputControl,
 	    Database referenceDatabase, Database comparisionDatabase, ChangeGeneratorChain chain) {
-	System.out.println("*********** BatchingMissingDataChangeGenerator.fixMissing()");
+	// String context = outputControl.getContext();
+	System.out.println("*********** BatchingMissingDataChangeGenerator.fixMissing() ");
 	BatchedDataQuery batchedDataQuery = getBatchedDataQuery(referenceDatabase);
 	Statement stmt = null;
 	ResultSet rs = null;
@@ -53,7 +56,9 @@ public class BatchingMissingDataChangeGenerator extends MissingDataChangeGenerat
 		return null;
 	    }
 
-	    String sql = batchedDataQuery.getSqlQuery(referenceDatabase, table, 0, 20);
+	    String sql = batchedDataQuery.getSqlQuery(referenceDatabase, table,
+		    Scope.getCurrentScope().getUI().get(BatchedDBExporter.KEY_START_OFFSET, Integer.class),
+		    Scope.getCurrentScope().getUI().get(BatchedDBExporter.KEY_SIZE, Integer.class));
 	    stmt = ((JdbcConnection) referenceDatabase.getConnection())
 		    .createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);
 	    stmt.setFetchSize(1000);

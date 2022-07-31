@@ -6,9 +6,15 @@ import java.sql.SQLException;
 import javax.sql.DataSource;
 import javax.xml.parsers.ParserConfigurationException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.jdbc.core.JdbcOperations;
 import org.springframework.stereotype.Service;
 
+import com.swayam.demo.springbootdemo.liquibase.config.ApplicationProperties;
+
 import liquibase.Liquibase;
+import liquibase.Scope;
 import liquibase.database.DatabaseConnection;
 import liquibase.database.jvm.JdbcConnection;
 import liquibase.diff.output.DiffOutputControl;
@@ -26,16 +32,39 @@ import liquibase.resource.FileSystemResourceAccessor;
 @Service
 public class BatchedDBExporter {
 
-    private final DataSource dataSource;
+    public static final String KEY_START_OFFSET = "KEY_START_OFFSET";
+    public static final String KEY_SIZE = "KEY_SIZE";
 
-    public BatchedDBExporter(DataSource dataSource) {
+    private static final Logger LOG = LoggerFactory.getLogger(BatchedDBExporter.class);
+
+    private final DataSource dataSource;
+    private final JdbcOperations jdbcOperations;
+    private final ApplicationProperties applicationProperties;
+
+    public BatchedDBExporter(DataSource dataSource, JdbcOperations jdbcOperations,
+	    ApplicationProperties applicationProperties) {
 	this.dataSource = dataSource;
+	this.jdbcOperations = jdbcOperations;
+	this.applicationProperties = applicationProperties;
     }
 
     public void export() throws LiquibaseException, SQLException, IOException, ParserConfigurationException {
-	DatabaseConnection database = new JdbcConnection(dataSource.getConnection());
+	String tableName = applicationProperties.getTableName();
+	String rowCountQuery = "SELECT COUNT(*) FROM " + tableName;
+	int rowCount = jdbcOperations.queryForObject(rowCountQuery, Integer.class);
+	LOG.info("Found {} rows for the table {}", rowCount, tableName);
+	for (int startOffset = 0; startOffset < rowCount; startOffset +=
+		applicationProperties.getBatchSize()) {
+	    String changelogFile = applicationProperties.getChangeLogDir() + "changeLog_" + tableName + "_"
+		    + startOffset + "_" + (startOffset + applicationProperties.getBatchSize()) + ".xml";
+	    LOG.info("Generating file {}...", changelogFile);
+	    exportSingleBatch(changelogFile, tableName, startOffset, applicationProperties.getBatchSize());
+	}
+    }
 
-	String tableName = "ocr_word";
+    private void exportSingleBatch(String changelogFile, String tableName, int startOffset, int size)
+	    throws IOException, ParserConfigurationException, LiquibaseException, SQLException {
+	DatabaseConnection database = new JdbcConnection(dataSource.getConnection());
 
 	try (Liquibase liquibase = new Liquibase(null, new FileSystemResourceAccessor(), database);) {
 	    StandardObjectChangeFilter filter =
@@ -43,7 +72,6 @@ public class BatchedDBExporter {
 	    DiffOutputControl diffOutputControl = new DiffOutputControl(false, false, false, null);
 	    diffOutputControl.setObjectChangeFilter(filter);
 
-	    String changelogFile = "./target/changelog.xml";
 	    String catalogueName = null;
 	    String schemaName = null;
 	    String diffTypes = "batcheddata";// if null, it will export schema.
@@ -54,6 +82,9 @@ public class BatchedDBExporter {
 	    String dataDir = null;// "./target";// set this to null for all data
 				  // in xml:
 				  // if not null, will create CSV files
+
+	    Scope.getCurrentScope().getUI().set(KEY_START_OFFSET, 0);
+	    Scope.getCurrentScope().getUI().set(KEY_SIZE, 30);
 
 	    CommandLineUtils.doGenerateChangeLog(changelogFile, liquibase.getDatabase(), catalogueName,
 		    schemaName, diffTypes, author, context, dataDir, diffOutputControl);
