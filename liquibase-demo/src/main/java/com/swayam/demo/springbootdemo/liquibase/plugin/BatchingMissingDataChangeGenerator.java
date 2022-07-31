@@ -131,7 +131,7 @@ public class BatchingMissingDataChangeGenerator extends MissingDataChangeGenerat
 	if (db instanceof PostgresDatabase) {
 	    return new PostgresBatchedDataQuery();
 	}
-	throw new UnexpectedLiquibaseException("Batching is not supported for " + db.getDatabaseProductName()
+	throw new UnsupportedOperationException("Batching is not supported for " + db.getDatabaseProductName()
 		+ ". Please create an implementation of the " + BatchedDataQuery.class);
     }
 
