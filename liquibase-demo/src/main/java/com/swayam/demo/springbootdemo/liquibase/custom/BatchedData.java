@@ -1,4 +1,4 @@
-package com.swayam.demo.springbootdemo.liquibase;
+package com.swayam.demo.springbootdemo.liquibase.custom;
 
 import liquibase.structure.core.Data;
 import liquibase.structure.core.Table;

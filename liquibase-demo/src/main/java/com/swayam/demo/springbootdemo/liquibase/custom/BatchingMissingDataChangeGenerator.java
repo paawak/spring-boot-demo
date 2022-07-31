@@ -1,4 +1,4 @@
-package com.swayam.demo.springbootdemo.liquibase;
+package com.swayam.demo.springbootdemo.liquibase.custom;
 
 import liquibase.change.Change;
 import liquibase.database.Database;

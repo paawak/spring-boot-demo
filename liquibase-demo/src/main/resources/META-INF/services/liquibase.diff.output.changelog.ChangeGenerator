@@ -1,1 +1,1 @@
-com.swayam.demo.springbootdemo.liquibase.BatchingMissingDataChangeGenerator
+com.swayam.demo.springbootdemo.liquibase.custom.BatchingMissingDataChangeGenerator
