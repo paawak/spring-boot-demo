@@ -30,7 +30,7 @@ public class BatchedDataSnapshotGenerator extends JdbcSnapshotGenerator {
 	    try {
 
 		BatchedData exampleData = new BatchedData().setTable(table);
-		table.setAttribute("data", exampleData);
+		table.setAttribute("batcheddata", exampleData);
 	    } catch (Exception e) {
 		throw new DatabaseException(e);
 	    }
