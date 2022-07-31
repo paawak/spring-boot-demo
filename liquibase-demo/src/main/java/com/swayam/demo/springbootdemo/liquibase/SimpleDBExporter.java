@@ -3,7 +3,6 @@ package com.swayam.demo.springbootdemo.liquibase;
 import java.io.IOException;
 import java.sql.SQLException;
 
-import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -25,15 +24,14 @@ import liquibase.resource.FileSystemResourceAccessor;
  *
  */
 @Service
-public class DBExporter {
+public class SimpleDBExporter {
 
     private final DataSource dataSource;
 
-    public DBExporter(DataSource dataSource) {
+    public SimpleDBExporter(DataSource dataSource) {
 	this.dataSource = dataSource;
     }
 
-    @PostConstruct
     public void export() throws LiquibaseException, SQLException, IOException, ParserConfigurationException {
 	DatabaseConnection database = new JdbcConnection(dataSource.getConnection());
 
@@ -48,9 +46,7 @@ public class DBExporter {
 	    String changelogFile = "./target/changelog.xml";
 	    String catalogueName = null;
 	    String schemaName = null;
-	    String diffTypes = "batcheddata";// if null, it will export schema.
-					     // The value of this can also be
-					     // *data*
+	    String diffTypes = "data";// if null, it will export schema.
 	    String author = "Palash Ray";
 	    String context = null;
 	    String dataDir = null;// "./target";// set this to null for all data
