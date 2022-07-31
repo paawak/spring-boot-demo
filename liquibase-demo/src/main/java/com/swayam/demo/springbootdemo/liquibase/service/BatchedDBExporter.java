@@ -35,7 +35,7 @@ public class BatchedDBExporter {
     public void export() throws LiquibaseException, SQLException, IOException, ParserConfigurationException {
 	DatabaseConnection database = new JdbcConnection(dataSource.getConnection());
 
-	String tableName = "country";
+	String tableName = "ocr_word";
 
 	try (Liquibase liquibase = new Liquibase(null, new FileSystemResourceAccessor(), database);) {
 	    StandardObjectChangeFilter filter =

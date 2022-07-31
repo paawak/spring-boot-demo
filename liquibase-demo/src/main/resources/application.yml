@@ -9,7 +9,7 @@ spring:
 
 logging:
   level:
-    liquibase: TRACE
+    liquibase: info
 
 app:
   config:
