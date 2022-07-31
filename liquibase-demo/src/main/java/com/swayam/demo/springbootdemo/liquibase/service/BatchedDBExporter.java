@@ -1,4 +1,4 @@
-package com.swayam.demo.springbootdemo.liquibase;
+package com.swayam.demo.springbootdemo.liquibase.service;
 
 import java.io.IOException;
 import java.sql.SQLException;

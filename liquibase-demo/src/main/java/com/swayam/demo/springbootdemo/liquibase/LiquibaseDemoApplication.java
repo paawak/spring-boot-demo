@@ -5,6 +5,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import com.swayam.demo.springbootdemo.liquibase.service.BatchedDBExporter;
+
 @SpringBootApplication
 public class LiquibaseDemoApplication implements CommandLineRunner {
 

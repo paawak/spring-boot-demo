@@ -1,4 +1,4 @@
-package com.swayam.demo.springbootdemo.liquibase.custom;
+package com.swayam.demo.springbootdemo.liquibase.plugin;
 
 import liquibase.exception.DatabaseException;
 import liquibase.snapshot.DatabaseSnapshot;

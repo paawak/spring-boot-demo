@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/druto-chithhi-address-store
+    url: jdbc:postgresql://localhost:5432/tesseract-porua
     username: postgres
     password: postgres
     driver-class-name: org.postgresql.Driver
@@ -10,3 +10,7 @@ spring:
 logging:
   level:
     liquibase: TRACE
+
+app:
+  config:
+    batch-size: 200
