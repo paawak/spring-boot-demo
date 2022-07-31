@@ -6,12 +6,12 @@ import liquibase.structure.core.Table;
 public class PostgresBatchedDataQuery implements BatchedDataQuery {
 
     @Override
-    public String getSqlQuery(Database database, Table table, int start, int size) {
+    public String getSqlQuery(Database database, Table table, int startOffset, int size) {
 	String sql =
 		"SELECT * FROM "
 			+ database.escapeTableName(table.getSchema().getCatalogName(),
 				table.getSchema().getName(), table.getName())
-			+ " OFFSET " + start + " LIMIT " + size;
+			+ " OFFSET " + startOffset + " LIMIT " + size;
 	return sql;
     }
 

@@ -5,6 +5,6 @@ import liquibase.structure.core.Table;
 
 public interface BatchedDataQuery {
 
-    String getSqlQuery(Database database, Table table, int start, int size);
+    String getSqlQuery(Database database, Table table, int startOffset, int size);
 
 }

@@ -83,8 +83,8 @@ public class BatchedDBExporter {
 				  // in xml:
 				  // if not null, will create CSV files
 
-	    Scope.getCurrentScope().getUI().set(KEY_START_OFFSET, 0);
-	    Scope.getCurrentScope().getUI().set(KEY_SIZE, 30);
+	    Scope.getCurrentScope().getUI().set(KEY_START_OFFSET, startOffset);
+	    Scope.getCurrentScope().getUI().set(KEY_SIZE, size);
 
 	    CommandLineUtils.doGenerateChangeLog(changelogFile, liquibase.getDatabase(), catalogueName,
 		    schemaName, diffTypes, author, context, dataDir, diffOutputControl);
