@@ -8,7 +8,7 @@ spring:
     spring.jpa.database-platform: org.hibernate.dialect.H2Dialect
   liquibase:
     enabled: true
-    change-log: classpath:/sql/liquibase/changelog/001-initial-schema.xml
+    change-log: classpath:/sql/liquibase/master-change-log.xml
   h2:
     console:
       enabled: true
