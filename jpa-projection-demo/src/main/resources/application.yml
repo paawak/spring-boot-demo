@@ -1,0 +1,13 @@
+spring:
+  datasource:
+    url: jdbc:h2:file:./target/h2-db;AUTO_SERVER=TRUE
+    username: sa
+    password: sa
+    driverClassName: org.h2.Driver
+  jpa:
+    spring.jpa.database-platform: org.hibernate.dialect.H2Dialect
+  liquibase:
+    enabled: false
+  h2:
+    console:
+      enabled: true

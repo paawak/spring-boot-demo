@@ -1,0 +1,149 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <changeSet author="paawak (generated)" id="1661454589409-1">
+        <createTable tableName="AUTHOR">
+            <column autoIncrement="true" name="ID" type="NUMBER(20)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="CONSTRAINT_7"/>
+            </column>
+            <column name="FIRST_NAME" type="VARCHAR(200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="LAST_NAME" type="VARCHAR(200)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="paawak (generated)" id="1661454589409-2">
+        <createTable tableName="BOOK">
+            <column autoIncrement="true" name="ID" type="NUMBER(20)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="CONSTRAINT_1"/>
+            </column>
+            <column name="TITLE" type="CHARACTER LARGE OBJECT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="AUTHOR_ID" type="NUMBER(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="MAIN_CHAPTER_ID" type="NUMBER(20)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="paawak (generated)" id="1661454589409-3">
+        <createTable tableName="BOOK_GENRE">
+            <column name="BOOK_ID" type="NUMBER(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="GENRE_ID" type="NUMBER(20)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="paawak (generated)" id="1661454589409-4">
+        <createTable tableName="CHAPTER">
+            <column autoIncrement="true" name="ID" type="NUMBER(20)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="CONSTRAINT_5"/>
+            </column>
+            <column name="TITLE" type="CHARACTER LARGE OBJECT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="PLOT_SUMMARY" type="CHARACTER LARGE OBJECT"/>
+            <column name="CONTENT_ID" type="NUMBER(20)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="paawak (generated)" id="1661454589409-5">
+        <createTable tableName="CHAPTER_HIERERCHY">
+            <column name="PARENT_ID" type="NUMBER(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CHILD_ID" type="NUMBER(20)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="paawak (generated)" id="1661454589409-6">
+        <createTable tableName="GENRE">
+            <column autoIncrement="true" name="ID" type="NUMBER(20)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="CONSTRAINT_4"/>
+            </column>
+            <column name="SHORT_NAME" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="NAME" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="paawak (generated)" id="1661454589409-7">
+        <createTable tableName="SECTION">
+            <column autoIncrement="true" name="ID" type="NUMBER(20)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="CONSTRAINT_A"/>
+            </column>
+            <column name="SECTION_TEXT" type="CHARACTER LARGE OBJECT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="STYLE" type="CHARACTER LARGE OBJECT"/>
+            <column name="SECTION_LENGTH" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="paawak (generated)" id="1661454589409-8">
+        <createIndex indexName="CONSTRAINT_INDEX_1" tableName="BOOK">
+            <column name="AUTHOR_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="paawak (generated)" id="1661454589409-9">
+        <createIndex indexName="CONSTRAINT_INDEX_1F" tableName="BOOK">
+            <column name="MAIN_CHAPTER_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="paawak (generated)" id="1661454589409-10">
+        <createIndex indexName="CONSTRAINT_INDEX_5" tableName="CHAPTER">
+            <column name="CONTENT_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="paawak (generated)" id="1661454589409-11">
+        <createIndex indexName="CONSTRAINT_INDEX_C" tableName="CHAPTER_HIERERCHY">
+            <column name="PARENT_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="paawak (generated)" id="1661454589409-12">
+        <createIndex indexName="CONSTRAINT_INDEX_C6" tableName="CHAPTER_HIERERCHY">
+            <column name="CHILD_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="paawak (generated)" id="1661454589409-13">
+        <createIndex indexName="CONSTRAINT_INDEX_F" tableName="BOOK_GENRE">
+            <column name="BOOK_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="paawak (generated)" id="1661454589409-14">
+        <createIndex indexName="CONSTRAINT_INDEX_F0" tableName="BOOK_GENRE">
+            <column name="GENRE_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="paawak (generated)" id="1661454589409-15">
+        <addForeignKeyConstraint baseColumnNames="AUTHOR_ID" baseTableName="BOOK" constraintName="CONSTRAINT_1F" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="ID" referencedTableName="AUTHOR" validate="true"/>
+    </changeSet>
+    <changeSet author="paawak (generated)" id="1661454589409-16">
+        <addForeignKeyConstraint baseColumnNames="MAIN_CHAPTER_ID" baseTableName="BOOK" constraintName="CONSTRAINT_1F3" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="ID" referencedTableName="CHAPTER" validate="true"/>
+    </changeSet>
+    <changeSet author="paawak (generated)" id="1661454589409-17">
+        <addForeignKeyConstraint baseColumnNames="CONTENT_ID" baseTableName="CHAPTER" constraintName="CONSTRAINT_56" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="ID" referencedTableName="SECTION" validate="true"/>
+    </changeSet>
+    <changeSet author="paawak (generated)" id="1661454589409-18">
+        <addForeignKeyConstraint baseColumnNames="PARENT_ID" baseTableName="CHAPTER_HIERERCHY" constraintName="CONSTRAINT_C" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="ID" referencedTableName="CHAPTER" validate="true"/>
+    </changeSet>
+    <changeSet author="paawak (generated)" id="1661454589409-19">
+        <addForeignKeyConstraint baseColumnNames="CHILD_ID" baseTableName="CHAPTER_HIERERCHY" constraintName="CONSTRAINT_C6" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="ID" referencedTableName="CHAPTER" validate="true"/>
+    </changeSet>
+    <changeSet author="paawak (generated)" id="1661454589409-20">
+        <addForeignKeyConstraint baseColumnNames="BOOK_ID" baseTableName="BOOK_GENRE" constraintName="CONSTRAINT_F" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="ID" referencedTableName="BOOK" validate="true"/>
+    </changeSet>
+    <changeSet author="paawak (generated)" id="1661454589409-21">
+        <addForeignKeyConstraint baseColumnNames="GENRE_ID" baseTableName="BOOK_GENRE" constraintName="CONSTRAINT_F0" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="ID" referencedTableName="GENRE" validate="true"/>
+    </changeSet>
+</databaseChangeLog>
