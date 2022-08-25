@@ -1,0 +1,620 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+	<changeSet author="Palash Ray" id="002"
+		logicalFilePath="002-data.xml">
+		<insert tableName="SECTION">
+
+			<column name="SECTION_TEXT"
+				value="It is hard luck on a young fellow to have expensive tastes, great expectations, aristocratic connections, but no actual money in his pocket, and no profession by which he may earn any. The fact was that my father, a good, sanguine, easy-going man, had such confidence in the wealth and benevolence of his bachelor elder brother, Lord Southerton, that he took it for granted that I, his only son, would never be called upon to earn a living for myself. He imagined that if there were not a vacancy for me on the great Southerton Estates, at least there would be found some post in that diplomatic service which still remains the special preserve of our privileged classes. He died too early to realize how false his calculations had been. Neither my uncle nor the State took the slightest notice of me, or showed any interest in my career. An occasional brace of pheasants, or basket of hares, was all that ever reached me to remind me that I was heir to Otwell House and one of the richest estates in the country. In the meantime, I found myself a bachelor and man about town, living in a suite of apartments in Grosvenor Mansions, with no occupation save that of pigeon-shooting and polo-playing at Hurlingham. Month by month I realized that it was more and more difficult to get the brokers to renew my bills, or to cash any further post-obits upon an unentailed property. Ruin lay right across my path, and every day I saw it clearer, nearer, and more absolutely unavoidable. " />
+			<column name="STYLE" />
+			<column name="SECTION_LENGTH" valueNumeric="263" />
+		</insert>
+		<insert tableName="SECTION">
+
+			<column name="SECTION_TEXT"
+				value="\&quot;Then light this cigar and come round with me and see my little menagerie.\&quot; " />
+			<column name="STYLE" />
+			<column name="SECTION_LENGTH" valueNumeric="56" />
+		</insert>
+		<insert tableName="SECTION">
+
+			<column name="SECTION_TEXT"
+				value="The whole afternoon was occupied by this inspection, which included all the birds, beasts, and even reptiles which he had imported. Some were free, some in cages, a few actually in the house. He spoke with enthusiasm of his successes and his failures, his births and his deaths, and he would cry out in his delight, like a schoolboy, when, as we walked, some gaudy bird would flutter up from the grass, or some curious beast slink into the cover. Finally he led me down a corridor which extended from one wing of the house. At the end of this there was a heavy door with a sliding shutter in it, and beside it there projected from the wall an iron handle attached to a wheel and a drum. A line of stout bars extended across the passage. " />
+			<column name="STYLE" />
+			<column name="SECTION_LENGTH" valueNumeric="67" />
+		</insert>
+		<insert tableName="SECTION">
+
+			<column name="SECTION_TEXT"
+				value="\&quot;I am about to show you the jewel of my collection,\&quot; said he. \&quot;There is only one other specimen in Europe, now that the Rotterdam cub is dead. It is a Brazilian cat.\&quot; " />
+			<column name="STYLE" />
+			<column name="SECTION_LENGTH" valueNumeric="23" />
+		</insert>
+		<insert tableName="SECTION">
+
+			<column name="SECTION_TEXT"
+				value="What made me feel my own poverty the more was that, apart from the great wealth of Lord Southerton, all my other relations were fairly well-to-do. The nearest of these was Everard King, my father\0027s nephew and my own first cousin, who had spent an adventurous life in Brazil, and had now returned to this country to settle down on his fortune. We never knew how he made his money, but he appeared to have plenty of it, for he bought the estate of Greylands, near Clipton-on-the-Marsh, in Suffolk. For the first year of his residence in England he took no more notice of me than my miserly uncle; but at last one summer morning, to my very great relief and joy, I received a letter asking me to come down that very day and spend a short visit at Greylands Court. I was expecting a rather long visit to Bankruptcy Court at the time, and this interruption seemed almost providential. If I could only get on terms with this unknown relative of mine, I might pull through yet. For the family credit he could not let me go entirely to the wall. I ordered my valet to pack my valise, and I set off the same evening for Clipton-on-the-Marsh. " />
+			<column name="STYLE" />
+			<column name="SECTION_LENGTH" valueNumeric="210" />
+		</insert>
+		<insert tableName="SECTION">
+
+			<column name="SECTION_TEXT"
+				value="After changing at Ipswich, a little local train deposited me at a small, deserted station lying amidst a rolling grassy country, with a sluggish and winding river curving in and out amidst the valleys, between high, silted banks, which showed that we were within reach of the tide. No carriage was awaiting me (I found afterwards that my telegram had been delayed), so I hired a dogcart at the local inn. The driver, an excellent fellow, was full of my relative\0027s praises, and I learned from him that Mr. Everard King was already a name to conjure with in that part of the county. He had entertained the school-children, he had thrown his grounds open to visitors, he had subscribed to charities—in short, his benevolence had been so universal that my driver could only account for it on the supposition that he had parliamentary ambitions. " />
+			<column name="STYLE" value="" />
+			<column name="SECTION_LENGTH" valueNumeric="146" />
+		</insert>
+		<insert tableName="SECTION">
+
+			<column name="SECTION_TEXT"
+				value="My attention was drawn away from my driver\0027s panegyric by the appearance of a very beautiful bird which settled on a telegraph-post beside the road. At first I thought that it was a jay, but it was larger, with a brighter plumage. The driver accounted for its presence at once by saying that it belonged to the very man whom we were about to visit. It seems that the acclimatization of foreign creatures was one of his hobbies, and that he had brought with him from Brazil a number of birds and beasts which he was endeavouring to rear in England. When once we had passed the gates of Greylands Park we had ample evidence of this taste of his. Some small spotted deer, a curious wild pig known, I believe, as a peccary, a gorgeously feathered oriole, some sort of armadillo, and a singular lumbering in-toed beast like a very fat badger, were among the creatures which I observed as we drove along the winding avenue. " />
+			<column name="STYLE" />
+			<column name="SECTION_LENGTH" valueNumeric="167" />
+		</insert>
+		<insert tableName="SECTION">
+
+			<column name="SECTION_TEXT"
+				value="Mr. Everard King, my unknown cousin, was standing in person upon the steps of his house, for he had seen us in the distance, and guessed that it was I. His appearance was very homely and benevolent, short and stout, forty-five years old, perhaps, with a round, good-humoured face, burned brown with the tropical sun, and shot with a thousand wrinkles. He wore white linen clothes, in true planter style, with a cigar between his lips, and a large Panama hat upon the back of his head. It was such a figure as one associates with a verandahed bungalow, and it looked curiously out of place in front of this broad, stone English mansion, with its solid wings and its Palladio pillars before the doorway." />
+			<column name="STYLE" />
+			<column name="SECTION_LENGTH" valueNumeric="278" />
+		</insert>
+		<insert tableName="SECTION">
+
+			<column name="SECTION_TEXT"
+				value="\&quot;My dear!\&quot; he cried, glancing over his shoulder; \&quot;my dear, here is our guest! Welcome, welcome to Greylands! I am delighted to make your acquaintance, Cousin Marshall, and I take it as a great compliment that you should honour this sleepy little country place with your presence.\&quot; " />
+			<column name="STYLE" />
+			<column name="SECTION_LENGTH" valueNumeric="223" />
+		</insert>
+		<insert tableName="SECTION">
+
+			<column name="SECTION_TEXT"
+				value="Nothing could be more hearty than his manner, and he set me at my ease in an instant. But it needed all his cordiality to atone for the frigidity and even rudeness of his wife, a tall, haggard woman, who came forward at his summons. She was, I believe, of Brazilian extraction, though she spoke excellent English, and I excused her manners on the score of her ignorance of our customs. She did not attempt to conceal, however, either then or afterwards, that I was no very welcome visitor at Greylands Court. Her actual words were, as a rule, courteous, but she was the possessor of a pair of particularly expressive dark eyes, and I read in them very clearly from the first that she heartily wished me back in London once more." />
+			<column name="STYLE" />
+			<column name="SECTION_LENGTH" valueNumeric="56" />
+		</insert>
+		<insert tableName="SECTION">
+
+			<column name="SECTION_TEXT"
+				value="However, my debts were too pressing and my designs upon my wealthy relative were too vital for me to allow them to be upset by the ill-temper of his wife, so I disregarded her coldness and reciprocated the extreme cordiality of his welcome. No pains had been spared by him to make me comfortable. My room was a charming one. He implored me to tell him anything which could add to my happiness. It was on the tip of my tongue to inform him that a blank cheque would materially help towards that end, but I felt that it might be premature in the present state of our acquaintance. The dinner was excellent, and as we sat together afterwards over his Havanas and coffee, which later he told me was specially prepared upon his own plantation, it seemed to me that all my driver\0027s eulogies were justified, and that I had never met a more large-hearted and hospitable man. " />
+			<column name="STYLE" />
+			<column name="SECTION_LENGTH" valueNumeric="678" />
+		</insert>
+		<insert tableName="SECTION">
+
+			<column name="SECTION_TEXT"
+				value="But, in spite of his cheery good nature, he was a man with a strong will and a fiery temper of his own. Of this I had an example upon the following morning. The curious aversion which Mrs. Everard King had conceived towards me was so strong, that her manner at breakfast was almost offensive. But her meaning became unmistakable when her husband had quitted the room. " />
+			<column name="STYLE" />
+			<column name="SECTION_LENGTH" valueNumeric="789" />
+		</insert>
+		<insert tableName="SECTION">
+
+			<column name="SECTION_TEXT"
+				value="\&quot;The best train in the day is at twelve-fifteen,\&quot; said she. " />
+			<column name="STYLE" />
+			<column name="SECTION_LENGTH" valueNumeric="56" />
+		</insert>
+		<insert tableName="SECTION">
+
+			<column name="SECTION_TEXT"
+				value="\&quot;But I was not thinking of going today,\&quot; I answered, frankly—perhaps even defiantly, for I was determined not to be driven out by this woman. " />
+			<column name="STYLE" />
+			<column name="SECTION_LENGTH" valueNumeric="67" />
+		</insert>
+		<insert tableName="SECTION">
+
+			<column name="SECTION_TEXT"
+				value="\&quot;Oh, if it rests with you—\&quot; said she, and stopped with a most insolent expression in her eyes. " />
+			<column name="STYLE" />
+			<column name="SECTION_LENGTH" valueNumeric="68" />
+		</insert>
+		<insert tableName="SECTION">
+
+			<column name="SECTION_TEXT"
+				value="\&quot;I am sure,\&quot; I answered, \&quot;that Mr. Everard King would tell me if I were outstaying my welcome.\&quot; " />
+			<column name="STYLE" />
+			<column name="SECTION_LENGTH" valueNumeric="23" />
+		</insert>
+		<insert tableName="SECTION">
+
+			<column name="SECTION_TEXT"
+				value="\&quot;What\0027s this? What\0027s this?\&quot; said a voice, and there he was in the room. He had overheard my last words, and a glance at our faces had told him the rest. In an instant his chubby, cheery face set into an expression of absolute ferocity. " />
+			<column name="STYLE" />
+			<column name="SECTION_LENGTH" valueNumeric="1223" />
+		</insert>
+		<insert tableName="SECTION">
+
+			<column name="SECTION_TEXT"
+				value="\&quot;Might I trouble you to walk outside, Marshall?\&quot; said he. (I may mention that my own name is Marshall King.) " />
+			<column name="STYLE" />
+			<column name="SECTION_LENGTH" valueNumeric="456" />
+		</insert>
+		<insert tableName="SECTION">
+
+			<column name="SECTION_TEXT"
+				value="He closed the door behind me, and then, for an instant, I heard him talking in a low voice of concentrated passion to his wife. This gross breach of hospitality had evidently hit upon his tenderest point. I am no eavesdropper, so I walked out on to the lawn. Presently I heard a hurried step behind me, and there was the lady, her face pale with excitement, and her eyes red with tears. " />
+			<column name="STYLE" />
+			<column name="SECTION_LENGTH" valueNumeric="56" />
+		</insert>
+		<insert tableName="SECTION">
+
+			<column name="SECTION_TEXT"
+				value="\&quot;My husband has asked me to apologize to you, Mr. Marshall King,\&quot; said she, standing with downcast eyes before me. " />
+			<column name="STYLE" />
+			<column name="SECTION_LENGTH" valueNumeric="67" />
+		</insert>
+		<insert tableName="SECTION">
+
+			<column name="SECTION_TEXT"
+				value="\&quot;Please do not say another word, Mrs. King.\&quot; " />
+			<column name="STYLE" />
+			<column name="SECTION_LENGTH" valueNumeric="67" />
+		</insert>
+		<insert tableName="SECTION">
+
+			<column name="SECTION_TEXT"
+				value="Her dark eyes suddenly blazed out at me. " />
+			<column name="STYLE" />
+			<column name="SECTION_LENGTH" valueNumeric="78" />
+		</insert>
+		<insert tableName="SECTION">
+
+			<column name="SECTION_TEXT"
+				value="\&quot;You fool!\&quot; she hissed, with frantic vehemence, and turning on her heel swept back to the house. " />
+			<column name="STYLE" />
+			<column name="SECTION_LENGTH" valueNumeric="98" />
+		</insert>
+		<insert tableName="SECTION">
+
+			<column name="SECTION_TEXT"
+				value="The insult was so outrageous, so insufferable, that I could only stand staring after her in bewilderment. I was still there when my host joined me. He was his cheery, chubby self once more. " />
+			<column name="STYLE" />
+			<column name="SECTION_LENGTH" valueNumeric="45" />
+		</insert>
+		<insert tableName="SECTION">
+
+			<column name="SECTION_TEXT"
+				value="\&quot;I hope that my wife has apologized for her foolish remarks,\&quot; said he. " />
+			<column name="STYLE" />
+			<column name="SECTION_LENGTH" valueNumeric="44" />
+		</insert>
+		<insert tableName="SECTION">
+
+			<column name="SECTION_TEXT"
+				value="\&quot;Oh, yes—yes, certainly!\&quot; " />
+			<column name="STYLE" />
+			<column name="SECTION_LENGTH" valueNumeric="56" />
+		</insert>
+		<insert tableName="SECTION">
+
+			<column name="SECTION_TEXT"
+				value="He put his hand through my arm and walked with me up and down the lawn. " />
+			<column name="STYLE" />
+			<column name="SECTION_LENGTH" valueNumeric="78" />
+		</insert>
+		<insert tableName="SECTION">
+
+			<column name="SECTION_TEXT"
+				value="\&quot;You must not take it seriously,\&quot; said he. \&quot;It would grieve me inexpressibly if you curtailed your visit by one hour. The fact is—there is no reason why there should be any concealment between relatives—that my poor dear wife is incredibly jealous. She hates that anyone—male or female—should for an instant come between us. Her ideal is a desert island and an eternal tete-a-tete. That gives you the clue to her actions, which are, I confess, upon this particular point, not very far removed from mania. Tell me that you will think no more of it.\&quot; " />
+			<column name="STYLE" />
+			<column name="SECTION_LENGTH" valueNumeric="123" />
+		</insert>
+		<insert tableName="SECTION">
+
+			<column name="SECTION_TEXT"
+				value="\&quot;No, no; certainly not.\&quot; " />
+			<column name="STYLE" />
+			<column name="SECTION_LENGTH" valueNumeric="45" />
+		</insert>
+		<insert tableName="SECTION">
+
+			<column name="SECTION_TEXT"
+				value="The monstrous cat walked over to one side of the room and coiled itself up under a grating. Everard King came out, and taking the iron handle which I have mentioned, he began to turn it. As he did so the line of bars in the corridor began to pass through a slot in the wall and closed up the front of this grating, so as to make an effective cage. When it was in position he opened the door once more and invited me into the room, which was heavy with the pungent, musty smell peculiar to the great carnivora. " />
+			<column name="STYLE" />
+			<column name="SECTION_LENGTH" valueNumeric="345" />
+		</insert>
+
+		<insert tableName="AUTHOR">
+
+			<column name="FIRST_NAME" value="Balaichand" />
+			<column name="LAST_NAME" value="Mukhopadhyay" />
+		</insert>
+		<insert tableName="AUTHOR">
+
+			<column name="FIRST_NAME" value="Salman" />
+			<column name="LAST_NAME" value="Rushdie" />
+		</insert>
+		<insert tableName="AUTHOR">
+
+			<column name="FIRST_NAME" value="PG" />
+			<column name="LAST_NAME" value="Wodehouse" />
+		</insert>
+		<insert tableName="AUTHOR">
+
+			<column name="FIRST_NAME" value="Frederick" />
+			<column name="LAST_NAME" value="Forsyth" />
+		</insert>
+		<insert tableName="AUTHOR">
+
+			<column name="FIRST_NAME" value="Saradindu" />
+			<column name="LAST_NAME" value="Bandyopadhyay" />
+		</insert>
+		<insert tableName="AUTHOR">
+
+			<column name="FIRST_NAME" value="Rabindranath" />
+			<column name="LAST_NAME" value="Tagore" />
+		</insert>
+		<insert tableName="AUTHOR">
+
+			<column name="FIRST_NAME" value="Bankim" />
+			<column name="LAST_NAME" value="Chatterjee" />
+		</insert>
+		<insert tableName="AUTHOR">
+
+			<column name="FIRST_NAME" value="Sharat" />
+			<column name="LAST_NAME" value="Chatterjee" />
+		</insert>
+		<insert tableName="AUTHOR">
+
+			<column name="FIRST_NAME" value="Amitava" />
+			<column name="LAST_NAME" value="Ghosh" />
+		</insert>
+		<insert tableName="AUTHOR">
+
+			<column name="FIRST_NAME" value="Arthur Conan" />
+			<column name="LAST_NAME" value="Doyle" />
+		</insert>
+		<insert tableName="CHAPTER">
+
+			<column name="TITLE" value="aaaaa" />
+			<column name="PLOT_SUMMARY" />
+			<column name="CONTENT_ID" valueNumeric="1" />
+		</insert>
+		<insert tableName="CHAPTER">
+
+			<column name="TITLE" value="bbbbb" />
+			<column name="PLOT_SUMMARY" />
+			<column name="CONTENT_ID" valueNumeric="5" />
+		</insert>
+		<insert tableName="CHAPTER">
+
+			<column name="TITLE" value="cccc" />
+			<column name="PLOT_SUMMARY" />
+			<column name="CONTENT_ID" valueNumeric="10" />
+		</insert>
+		<insert tableName="CHAPTER">
+
+			<column name="TITLE" value="dddd" />
+			<column name="PLOT_SUMMARY" />
+			<column name="CONTENT_ID" valueNumeric="15" />
+		</insert>
+		<insert tableName="CHAPTER">
+
+			<column name="TITLE" value="eeee" />
+			<column name="PLOT_SUMMARY" />
+			<column name="CONTENT_ID" valueNumeric="20" />
+		</insert>
+		<insert tableName="CHAPTER">
+
+			<column name="TITLE" value="ffff" />
+			<column name="PLOT_SUMMARY" />
+			<column name="CONTENT_ID" valueNumeric="25" />
+		</insert>
+		<insert tableName="CHAPTER">
+
+			<column name="TITLE" value="aaa 11" />
+			<column name="PLOT_SUMMARY" />
+			<column name="CONTENT_ID" valueNumeric="2" />
+		</insert>
+		<insert tableName="CHAPTER">
+
+			<column name="TITLE" value="aaa 22" />
+			<column name="PLOT_SUMMARY" />
+			<column name="CONTENT_ID" valueNumeric="3" />
+		</insert>
+		<insert tableName="CHAPTER">
+
+			<column name="TITLE" value="aaa 333" />
+			<column name="PLOT_SUMMARY" />
+			<column name="CONTENT_ID" valueNumeric="4" />
+		</insert>
+		<insert tableName="CHAPTER">
+
+			<column name="TITLE" value="bbb 11" />
+			<column name="PLOT_SUMMARY" />
+			<column name="CONTENT_ID" valueNumeric="6" />
+		</insert>
+		<insert tableName="CHAPTER">
+
+			<column name="TITLE" value="bbb 22" />
+			<column name="PLOT_SUMMARY" />
+			<column name="CONTENT_ID" valueNumeric="7" />
+		</insert>
+		<insert tableName="CHAPTER">
+
+			<column name="TITLE" value="bbb 333" />
+			<column name="PLOT_SUMMARY" />
+			<column name="CONTENT_ID" valueNumeric="8" />
+		</insert>
+		<insert tableName="CHAPTER">
+
+			<column name="TITLE" value="bbb 444" />
+			<column name="PLOT_SUMMARY" />
+			<column name="CONTENT_ID" valueNumeric="9" />
+		</insert>
+		<insert tableName="CHAPTER">
+
+			<column name="TITLE" value="ccc 11" />
+			<column name="PLOT_SUMMARY" />
+			<column name="CONTENT_ID" valueNumeric="11" />
+		</insert>
+		<insert tableName="CHAPTER">
+
+			<column name="TITLE" value="ccc 22" />
+			<column name="PLOT_SUMMARY" />
+			<column name="CONTENT_ID" valueNumeric="12" />
+		</insert>
+		<insert tableName="CHAPTER">
+
+			<column name="TITLE" value="ccc 333" />
+			<column name="PLOT_SUMMARY" />
+			<column name="CONTENT_ID" valueNumeric="13" />
+		</insert>
+		<insert tableName="CHAPTER">
+
+			<column name="TITLE" value="ccc 444" />
+			<column name="PLOT_SUMMARY" />
+			<column name="CONTENT_ID" valueNumeric="14" />
+		</insert>
+		<insert tableName="CHAPTER">
+
+			<column name="TITLE" value="ddd 11" />
+			<column name="PLOT_SUMMARY" />
+			<column name="CONTENT_ID" valueNumeric="16" />
+		</insert>
+		<insert tableName="CHAPTER">
+
+			<column name="TITLE" value="ddd 22" />
+			<column name="PLOT_SUMMARY" />
+			<column name="CONTENT_ID" valueNumeric="17" />
+		</insert>
+		<insert tableName="CHAPTER">
+
+			<column name="TITLE" value="ddd 333" />
+			<column name="PLOT_SUMMARY" />
+			<column name="CONTENT_ID" valueNumeric="18" />
+		</insert>
+		<insert tableName="CHAPTER">
+
+			<column name="TITLE" value="ddd 444" />
+			<column name="PLOT_SUMMARY" />
+			<column name="CONTENT_ID" valueNumeric="19" />
+		</insert>
+		<insert tableName="CHAPTER">
+
+			<column name="TITLE" value="eeee 11" />
+			<column name="PLOT_SUMMARY" />
+			<column name="CONTENT_ID" valueNumeric="21" />
+		</insert>
+		<insert tableName="CHAPTER">
+
+			<column name="TITLE" value="eee 22" />
+			<column name="PLOT_SUMMARY" />
+			<column name="CONTENT_ID" valueNumeric="22" />
+		</insert>
+		<insert tableName="CHAPTER">
+
+			<column name="TITLE" value="eeee 333" />
+			<column name="PLOT_SUMMARY" />
+			<column name="CONTENT_ID" valueNumeric="23" />
+		</insert>
+		<insert tableName="CHAPTER">
+
+			<column name="TITLE" value="eeee 444" />
+			<column name="PLOT_SUMMARY" />
+			<column name="CONTENT_ID" valueNumeric="24" />
+		</insert>
+		<insert tableName="CHAPTER">
+
+			<column name="TITLE" value="fff 11" />
+			<column name="PLOT_SUMMARY" />
+			<column name="CONTENT_ID" valueNumeric="26" />
+		</insert>
+		<insert tableName="CHAPTER">
+
+			<column name="TITLE" value="fffff 22" />
+			<column name="PLOT_SUMMARY" />
+			<column name="CONTENT_ID" valueNumeric="27" />
+		</insert>
+		<insert tableName="CHAPTER">
+
+			<column name="TITLE" value="ffff 333" />
+			<column name="PLOT_SUMMARY" />
+			<column name="CONTENT_ID" valueNumeric="28" />
+		</insert>
+		<insert tableName="CHAPTER">
+
+			<column name="TITLE" value="fffff 444" />
+			<column name="PLOT_SUMMARY" />
+			<column name="CONTENT_ID" valueNumeric="29" />
+		</insert>
+		<insert tableName="CHAPTER">
+
+			<column name="TITLE" value="main CHAPTER for brazilian cat" />
+			<column name="PLOT_SUMMARY" />
+			<column name="CONTENT_ID" valueNumeric="30" />
+		</insert>
+		<insert tableName="BOOK">
+
+			<column name="TITLE" value="The Bazilian Cat" />
+			<column name="AUTHOR_ID" valueNumeric="10" />
+			<column name="MAIN_CHAPTER_ID" valueNumeric="30" />
+		</insert>
+
+		<insert tableName="CHAPTER_HIERERCHY">
+			<column name="PARENT_ID" valueNumeric="30" />
+			<column name="CHILD_ID" valueNumeric="1" />
+		</insert>
+		<insert tableName="CHAPTER_HIERERCHY">
+			<column name="PARENT_ID" valueNumeric="30" />
+			<column name="CHILD_ID" valueNumeric="2" />
+		</insert>
+		<insert tableName="CHAPTER_HIERERCHY">
+			<column name="PARENT_ID" valueNumeric="30" />
+			<column name="CHILD_ID" valueNumeric="3" />
+		</insert>
+		<insert tableName="CHAPTER_HIERERCHY">
+			<column name="PARENT_ID" valueNumeric="30" />
+			<column name="CHILD_ID" valueNumeric="4" />
+		</insert>
+		<insert tableName="CHAPTER_HIERERCHY">
+			<column name="PARENT_ID" valueNumeric="30" />
+			<column name="CHILD_ID" valueNumeric="5" />
+		</insert>
+		<insert tableName="CHAPTER_HIERERCHY">
+			<column name="PARENT_ID" valueNumeric="30" />
+			<column name="CHILD_ID" valueNumeric="6" />
+		</insert>
+		<insert tableName="CHAPTER_HIERERCHY">
+			<column name="PARENT_ID" valueNumeric="1" />
+			<column name="CHILD_ID" valueNumeric="7" />
+		</insert>
+		<insert tableName="CHAPTER_HIERERCHY">
+			<column name="PARENT_ID" valueNumeric="1" />
+			<column name="CHILD_ID" valueNumeric="8" />
+		</insert>
+		<insert tableName="CHAPTER_HIERERCHY">
+			<column name="PARENT_ID" valueNumeric="1" />
+			<column name="CHILD_ID" valueNumeric="9" />
+		</insert>
+		<insert tableName="CHAPTER_HIERERCHY">
+			<column name="PARENT_ID" valueNumeric="2" />
+			<column name="CHILD_ID" valueNumeric="10" />
+		</insert>
+		<insert tableName="CHAPTER_HIERERCHY">
+			<column name="PARENT_ID" valueNumeric="2" />
+			<column name="CHILD_ID" valueNumeric="11" />
+		</insert>
+		<insert tableName="CHAPTER_HIERERCHY">
+			<column name="PARENT_ID" valueNumeric="2" />
+			<column name="CHILD_ID" valueNumeric="13" />
+		</insert>
+		<insert tableName="CHAPTER_HIERERCHY">
+			<column name="PARENT_ID" valueNumeric="2" />
+			<column name="CHILD_ID" valueNumeric="12" />
+		</insert>
+		<insert tableName="CHAPTER_HIERERCHY">
+			<column name="PARENT_ID" valueNumeric="3" />
+			<column name="CHILD_ID" valueNumeric="14" />
+		</insert>
+		<insert tableName="CHAPTER_HIERERCHY">
+			<column name="PARENT_ID" valueNumeric="3" />
+			<column name="CHILD_ID" valueNumeric="15" />
+		</insert>
+		<insert tableName="CHAPTER_HIERERCHY">
+			<column name="PARENT_ID" valueNumeric="3" />
+			<column name="CHILD_ID" valueNumeric="16" />
+		</insert>
+		<insert tableName="CHAPTER_HIERERCHY">
+			<column name="PARENT_ID" valueNumeric="3" />
+			<column name="CHILD_ID" valueNumeric="17" />
+		</insert>
+		<insert tableName="CHAPTER_HIERERCHY">
+			<column name="PARENT_ID" valueNumeric="4" />
+			<column name="CHILD_ID" valueNumeric="18" />
+		</insert>
+		<insert tableName="CHAPTER_HIERERCHY">
+			<column name="PARENT_ID" valueNumeric="4" />
+			<column name="CHILD_ID" valueNumeric="19" />
+		</insert>
+		<insert tableName="CHAPTER_HIERERCHY">
+			<column name="PARENT_ID" valueNumeric="4" />
+			<column name="CHILD_ID" valueNumeric="20" />
+		</insert>
+		<insert tableName="CHAPTER_HIERERCHY">
+			<column name="PARENT_ID" valueNumeric="4" />
+			<column name="CHILD_ID" valueNumeric="21" />
+		</insert>
+		<insert tableName="CHAPTER_HIERERCHY">
+			<column name="PARENT_ID" valueNumeric="5" />
+			<column name="CHILD_ID" valueNumeric="22" />
+		</insert>
+		<insert tableName="CHAPTER_HIERERCHY">
+			<column name="PARENT_ID" valueNumeric="5" />
+			<column name="CHILD_ID" valueNumeric="23" />
+		</insert>
+		<insert tableName="CHAPTER_HIERERCHY">
+			<column name="PARENT_ID" valueNumeric="5" />
+			<column name="CHILD_ID" valueNumeric="24" />
+		</insert>
+		<insert tableName="CHAPTER_HIERERCHY">
+			<column name="PARENT_ID" valueNumeric="5" />
+			<column name="CHILD_ID" valueNumeric="25" />
+		</insert>
+		<insert tableName="CHAPTER_HIERERCHY">
+			<column name="PARENT_ID" valueNumeric="6" />
+			<column name="CHILD_ID" valueNumeric="26" />
+		</insert>
+		<insert tableName="CHAPTER_HIERERCHY">
+			<column name="PARENT_ID" valueNumeric="6" />
+			<column name="CHILD_ID" valueNumeric="27" />
+		</insert>
+		<insert tableName="CHAPTER_HIERERCHY">
+			<column name="PARENT_ID" valueNumeric="6" />
+			<column name="CHILD_ID" valueNumeric="28" />
+		</insert>
+		<insert tableName="CHAPTER_HIERERCHY">
+			<column name="PARENT_ID" valueNumeric="6" />
+			<column name="CHILD_ID" valueNumeric="29" />
+		</insert>
+
+		<insert tableName="GENRE">
+
+			<column name="SHORT_NAME" value="dr" />
+			<column name="NAME" value="drama" />
+		</insert>
+		<insert tableName="GENRE">
+
+			<column name="SHORT_NAME" value="fc" />
+			<column name="NAME" value="fition" />
+		</insert>
+		<insert tableName="GENRE">
+
+			<column name="SHORT_NAME" value="mys" />
+			<column name="NAME" value="mystery" />
+		</insert>
+		<insert tableName="GENRE">
+
+			<column name="SHORT_NAME" value="st" />
+			<column name="NAME" value="satire" />
+		</insert>
+		<insert tableName="GENRE">
+
+			<column name="SHORT_NAME" value="rm" />
+			<column name="NAME" value="romance" />
+		</insert>
+		<insert tableName="GENRE">
+
+			<column name="SHORT_NAME" value="hr" />
+			<column name="NAME" value="horror" />
+		</insert>
+		<insert tableName="GENRE">
+
+			<column name="SHORT_NAME" value="pt" />
+			<column name="NAME" value="poetry" />
+		</insert>
+
+		<insert tableName="BOOK_GENRE">
+			<column name="BOOK_ID" valueNumeric="1" />
+			<column name="GENRE_ID" valueNumeric="2" />
+		</insert>
+		<insert tableName="BOOK_GENRE">
+			<column name="BOOK_ID" valueNumeric="1" />
+			<column name="GENRE_ID" valueNumeric="3" />
+		</insert>
+	</changeSet>
+
+</databaseChangeLog>

@@ -64,6 +64,8 @@
 							<password>sa</password>
 							<url>jdbc:h2:file:./target/h2-db;AUTO_SERVER=TRUE</url>
 							<driver>org.h2.Driver</driver>
+							<!-- comment the below for schema -->
+							<diffTypes>data</diffTypes>
 							<outputChangeLogFile>./target/h2-changeLog.xml</outputChangeLogFile>
 						</configuration>
 					</plugin>
