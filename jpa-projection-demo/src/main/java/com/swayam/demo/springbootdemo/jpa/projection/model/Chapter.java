@@ -16,6 +16,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name = "CHAPTER")
 public class Chapter implements Serializable {
@@ -32,11 +34,12 @@ public class Chapter implements Serializable {
     @Column(name = "plot_summary")
     private String plotSummary;
 
+    @JsonManagedReference
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "content_id")
     private Section contents;
 
-    // @JsonManagedReference
+    @JsonManagedReference
     @OneToMany(fetch = FetchType.EAGER, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
     @JoinTable(name = "CHAPTER_HIERERCHY", joinColumns = @JoinColumn(name = "parent_id", referencedColumnName = "id"),
 	    inverseJoinColumns = @JoinColumn(name = "child_id", referencedColumnName = "id"))
