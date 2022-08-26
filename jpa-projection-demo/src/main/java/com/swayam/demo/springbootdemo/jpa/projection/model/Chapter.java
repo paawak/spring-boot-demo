@@ -14,10 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "CHAPTER")
@@ -26,9 +23,7 @@ public class Chapter implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "chapterIdGenerator")
-    @SequenceGenerator(name = "chapterIdGenerator", sequenceName = "SEQ_CHAPTER_ID")
-    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "title")
@@ -41,7 +36,7 @@ public class Chapter implements Serializable {
     @JoinColumn(name = "content_id")
     private Section contents;
 
-    @JsonManagedReference
+    // @JsonManagedReference
     @OneToMany(fetch = FetchType.EAGER, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
     @JoinTable(name = "CHAPTER_HIERERCHY", joinColumns = @JoinColumn(name = "parent_id", referencedColumnName = "id"),
 	    inverseJoinColumns = @JoinColumn(name = "child_id", referencedColumnName = "id"))
