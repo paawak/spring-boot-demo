@@ -1,11 +1,15 @@
 package com.swayam.demo.springbootdemo.jpa.projection.service;
 
+import java.util.List;
+
 import com.swayam.demo.springbootdemo.jpa.projection.model.Book;
 
 public interface BookService {
 
-	Book getBook(Long bookId);
+    List<Book> getBooks();
 
-	Book saveOrUpdate(Book book);
+    Book getBook(Long bookId);
+
+    Book saveOrUpdate(Book book);
 
 }

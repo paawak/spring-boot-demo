@@ -1,6 +1,7 @@
 package com.swayam.demo.springbootdemo.jpa.projection.controllers;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.List;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,9 +18,13 @@ public class BookController {
 
     private final BookService bookService;
 
-    @Autowired
     public BookController(BookService bookService) {
 	this.bookService = bookService;
+    }
+
+    @GetMapping
+    public List<Book> getBooks() {
+	return bookService.getBooks();
     }
 
     @GetMapping(path = "/{bookId}")

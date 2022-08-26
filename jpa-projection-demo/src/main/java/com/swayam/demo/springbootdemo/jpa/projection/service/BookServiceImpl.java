@@ -1,6 +1,7 @@
 package com.swayam.demo.springbootdemo.jpa.projection.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.swayam.demo.springbootdemo.jpa.projection.dao.BookDao;
@@ -11,9 +12,13 @@ public class BookServiceImpl implements BookService {
 
     private final BookDao bookRepo;
 
-    @Autowired
     public BookServiceImpl(BookDao bookRepo) {
 	this.bookRepo = bookRepo;
+    }
+
+    @Override
+    public List<Book> getBooks() {
+	return bookRepo.findAll();
     }
 
     @Override
