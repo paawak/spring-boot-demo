@@ -17,125 +17,123 @@ import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name = "CHAPTER")
 public class Chapter implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "chapterIdGenerator")
-	@SequenceGenerator(name = "chapterIdGenerator", sequenceName = "SEQ_CHAPTER_ID")
-	@Column(name = "id")
-	private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "chapterIdGenerator")
+    @SequenceGenerator(name = "chapterIdGenerator", sequenceName = "SEQ_CHAPTER_ID")
+    @Column(name = "id")
+    private Long id;
 
-	@Column(name = "title")
-	private String title;
+    @Column(name = "title")
+    private String title;
 
-	@Column(name = "plot_summary")
-	private String plotSummary;
+    @Column(name = "plot_summary")
+    private String plotSummary;
 
-	@OneToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "content_id")
-	private Section contents;
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "content_id")
+    private Section contents;
 
-	@OneToMany(fetch = FetchType.EAGER, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
-	@JoinTable(name = "CHAPTER_HIERERCHY", joinColumns = @JoinColumn(name = "parent_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "child_id", referencedColumnName = "id"))
-	private Set<Chapter> subChapters;
+    @JsonManagedReference
+    @OneToMany(fetch = FetchType.EAGER, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+    @JoinTable(name = "CHAPTER_HIERERCHY", joinColumns = @JoinColumn(name = "parent_id", referencedColumnName = "id"),
+	    inverseJoinColumns = @JoinColumn(name = "child_id", referencedColumnName = "id"))
+    private Set<Chapter> subChapters;
 
-	public Long getId() {
-		return id;
-	}
+    public Long getId() {
+	return id;
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public void setId(Long id) {
+	this.id = id;
+    }
 
-	public String getTitle() {
-		return title;
-	}
+    public String getTitle() {
+	return title;
+    }
 
-	public void setTitle(String title) {
-		this.title = title;
-	}
+    public void setTitle(String title) {
+	this.title = title;
+    }
 
-	public String getPlotSummary() {
-		return plotSummary;
-	}
+    public String getPlotSummary() {
+	return plotSummary;
+    }
 
-	public void setPlotSummary(String plotSummary) {
-		this.plotSummary = plotSummary;
-	}
+    public void setPlotSummary(String plotSummary) {
+	this.plotSummary = plotSummary;
+    }
 
-	public Section getContents() {
-		return contents;
-	}
+    public Section getContents() {
+	return contents;
+    }
 
-	public void setContents(Section contents) {
-		this.contents = contents;
-	}
+    public void setContents(Section contents) {
+	this.contents = contents;
+    }
 
-	public Set<Chapter> getSubChapters() {
-		return subChapters;
-	}
+    public Set<Chapter> getSubChapters() {
+	return subChapters;
+    }
 
-	public void setSubChapters(Set<Chapter> subChapters) {
-		this.subChapters = subChapters;
-	}
+    public void setSubChapters(Set<Chapter> subChapters) {
+	this.subChapters = subChapters;
+    }
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((contents == null) ? 0 : contents.hashCode());
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((plotSummary == null) ? 0 : plotSummary.hashCode());
-		result = prime * result + ((subChapters == null) ? 0 : subChapters.hashCode());
-		result = prime * result + ((title == null) ? 0 : title.hashCode());
-		return result;
-	}
+    @Override
+    public int hashCode() {
+	final int prime = 31;
+	int result = 1;
+	result = prime * result + ((contents == null) ? 0 : contents.hashCode());
+	result = prime * result + ((id == null) ? 0 : id.hashCode());
+	result = prime * result + ((plotSummary == null) ? 0 : plotSummary.hashCode());
+	result = prime * result + ((title == null) ? 0 : title.hashCode());
+	return result;
+    }
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Chapter other = (Chapter) obj;
-		if (contents == null) {
-			if (other.contents != null)
-				return false;
-		} else if (!contents.equals(other.contents))
-			return false;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		if (plotSummary == null) {
-			if (other.plotSummary != null)
-				return false;
-		} else if (!plotSummary.equals(other.plotSummary))
-			return false;
-		if (subChapters == null) {
-			if (other.subChapters != null)
-				return false;
-		} else if (!subChapters.equals(other.subChapters))
-			return false;
-		if (title == null) {
-			if (other.title != null)
-				return false;
-		} else if (!title.equals(other.title))
-			return false;
-		return true;
-	}
+    @Override
+    public boolean equals(Object obj) {
+	if (this == obj)
+	    return true;
+	if (obj == null)
+	    return false;
+	if (getClass() != obj.getClass())
+	    return false;
+	Chapter other = (Chapter) obj;
+	if (contents == null) {
+	    if (other.contents != null)
+		return false;
+	} else if (!contents.equals(other.contents))
+	    return false;
+	if (id == null) {
+	    if (other.id != null)
+		return false;
+	} else if (!id.equals(other.id))
+	    return false;
+	if (plotSummary == null) {
+	    if (other.plotSummary != null)
+		return false;
+	} else if (!plotSummary.equals(other.plotSummary))
+	    return false;
+	if (title == null) {
+	    if (other.title != null)
+		return false;
+	} else if (!title.equals(other.title))
+	    return false;
+	return true;
+    }
 
-	@Override
-	public String toString() {
-		return "Chapter [id=" + id + ", title=" + title + ", plotSummary=" + plotSummary + ", contents=" + contents
-				+ ", subChapters=" + subChapters + "]";
-	}
+    @Override
+    public String toString() {
+	return "Chapter [id=" + id + ", title=" + title + ", plotSummary=" + plotSummary + ", contents=" + contents
+		+ "]";
+    }
 
 }
