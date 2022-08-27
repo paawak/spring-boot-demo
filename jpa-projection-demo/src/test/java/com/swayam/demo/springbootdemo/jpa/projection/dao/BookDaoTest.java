@@ -23,8 +23,9 @@ class BookDaoTest {
     @Test
     void test() {
 	// given
-	EasyRandomParameters params = new EasyRandomParameters().excludeField(field -> field.getName().equals("id"));
-	Book newBook = new EasyRandom(params).nextObject(Book.class);
+	EasyRandomParameters easyRandomParams = new EasyRandomParameters().excludeField(field -> field.getName().equals("id"));
+	EasyRandom easyRandom = new EasyRandom(easyRandomParams);
+	Book newBook = easyRandom.nextObject(Book.class);
 	newBook.getChapters().forEach(chapter -> {
 	    chapter.setBook(newBook);
 	    chapter.getSections().forEach(section -> section.setChapter(chapter));
