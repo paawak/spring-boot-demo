@@ -25,6 +25,10 @@ class BookDaoTest {
 	// given
 	EasyRandomParameters params = new EasyRandomParameters().excludeField(field -> field.getName().equals("id"));
 	Book newBook = new EasyRandom(params).nextObject(Book.class);
+	newBook.getChapters().forEach(chapter -> {
+	    chapter.setBook(newBook);
+	    chapter.getSections().forEach(section -> section.setChapter(chapter));
+	});
 
 	// when
 	Book savedBook = bookDao.save(newBook);

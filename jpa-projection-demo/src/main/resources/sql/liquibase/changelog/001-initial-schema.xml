@@ -4,11 +4,11 @@
 	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
-	<changeSet author="Palash Ray" id="001" logicalFilePath="001-initial-schema.xml">
+	<changeSet author="Palash Ray" id="001"
+		logicalFilePath="001-initial-schema.xml">
 		<createTable tableName="AUTHOR">
 			<column autoIncrement="true" name="ID" type="NUMBER(20)">
-				<constraints nullable="false" primaryKey="true"
-					primaryKeyName="CONSTRAINT_7" />
+				<constraints nullable="false" primaryKey="true" />
 			</column>
 			<column name="FIRST_NAME" type="VARCHAR(200)">
 				<constraints nullable="false" />
@@ -18,71 +18,9 @@
 			</column>
 		</createTable>
 
-		<createTable tableName="BOOK">
-			<column autoIncrement="true" name="ID" type="NUMBER(20)">
-				<constraints nullable="false" primaryKey="true"
-					primaryKeyName="CONSTRAINT_1" />
-			</column>
-			<column name="TITLE" type="CHARACTER LARGE OBJECT">
-				<constraints nullable="false" />
-			</column>
-			<column name="AUTHOR_ID" type="NUMBER(20)">
-				<constraints nullable="false" />
-			</column>
-			<column name="MAIN_CHAPTER_ID" type="NUMBER(20)">
-				<constraints nullable="false" />
-			</column>
-		</createTable>
-
-		<createTable tableName="BOOK_GENRE">
-			<column name="BOOK_ID" type="NUMBER(20)">
-				<constraints nullable="false" />
-			</column>
-			<column name="GENRE_ID" type="NUMBER(20)">
-				<constraints nullable="false" />
-			</column>
-		</createTable>
-
-		<createTable tableName="CHAPTER">
-			<column autoIncrement="true" name="ID" type="NUMBER(20)">
-				<constraints nullable="false" primaryKey="true"
-					primaryKeyName="CONSTRAINT_5" />
-			</column>
-			<column name="TITLE" type="CHARACTER LARGE OBJECT">
-				<constraints nullable="false" />
-			</column>
-			<column name="PLOT_SUMMARY" type="CHARACTER LARGE OBJECT" />
-			<column name="CONTENT_ID" type="NUMBER(20)">
-				<constraints nullable="false" />
-			</column>
-		</createTable>
-
-		<createTable tableName="CHAPTER_HIERERCHY">
-			<column name="PARENT_ID" type="NUMBER(20)">
-				<constraints nullable="false" />
-			</column>
-			<column name="CHILD_ID" type="NUMBER(20)">
-				<constraints nullable="false" />
-			</column>
-		</createTable>
-
-		<createTable tableName="GENRE">
-			<column autoIncrement="true" name="ID" type="NUMBER(20)">
-				<constraints nullable="false" primaryKey="true"
-					primaryKeyName="CONSTRAINT_4" />
-			</column>
-			<column name="SHORT_NAME" type="VARCHAR(10)">
-				<constraints nullable="false" />
-			</column>
-			<column name="NAME" type="VARCHAR(100)">
-				<constraints nullable="false" />
-			</column>
-		</createTable>
-
 		<createTable tableName="SECTION">
 			<column autoIncrement="true" name="ID" type="NUMBER(20)">
-				<constraints nullable="false" primaryKey="true"
-					primaryKeyName="CONSTRAINT_A" />
+				<constraints nullable="false" primaryKey="true" />
 			</column>
 			<column name="SECTION_TEXT" type="CHARACTER LARGE OBJECT">
 				<constraints nullable="false" />
@@ -91,89 +29,60 @@
 			<column name="SECTION_LENGTH" type="INT">
 				<constraints nullable="false" />
 			</column>
+			<column name="CHAPTER_ID" type="NUMBER(20)">
+				<!-- constraints nullable="false" /-->
+			</column>
 		</createTable>
 
-		<createIndex indexName="CONSTRAINT_INDEX_1"
-			tableName="BOOK">
+		<createTable tableName="CHAPTER">
+			<column autoIncrement="true" name="ID" type="NUMBER(20)">
+				<constraints nullable="false" primaryKey="true" />
+			</column>
+			<column name="TITLE" type="CHARACTER LARGE OBJECT">
+				<constraints nullable="false" />
+			</column>
+			<column name="PLOT_SUMMARY" type="CHARACTER LARGE OBJECT" />
+			<column name="BOOK_ID" type="NUMBER(20)">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+
+		<createTable tableName="BOOK">
+			<column autoIncrement="true" name="ID" type="NUMBER(20)">
+				<constraints nullable="false" primaryKey="true" />
+			</column>
+			<column name="TITLE" type="CHARACTER LARGE OBJECT">
+				<constraints nullable="false" />
+			</column>
+			<column name="AUTHOR_ID" type="NUMBER(20)">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+
+		<createIndex indexName="IND_BOOK_AUTHOR" tableName="BOOK">
 			<column name="AUTHOR_ID" />
-		</createIndex>
-
-		<createIndex indexName="CONSTRAINT_INDEX_1F"
-			tableName="BOOK">
-			<column name="MAIN_CHAPTER_ID" />
-		</createIndex>
-
-		<createIndex indexName="CONSTRAINT_INDEX_5"
-			tableName="CHAPTER">
-			<column name="CONTENT_ID" />
-		</createIndex>
-
-		<createIndex indexName="CONSTRAINT_INDEX_C"
-			tableName="CHAPTER_HIERERCHY">
-			<column name="PARENT_ID" />
-		</createIndex>
-
-		<createIndex indexName="CONSTRAINT_INDEX_C6"
-			tableName="CHAPTER_HIERERCHY">
-			<column name="CHILD_ID" />
-		</createIndex>
-
-		<createIndex indexName="CONSTRAINT_INDEX_F"
-			tableName="BOOK_GENRE">
-			<column name="BOOK_ID" />
-		</createIndex>
-
-		<createIndex indexName="CONSTRAINT_INDEX_F0"
-			tableName="BOOK_GENRE">
-			<column name="GENRE_ID" />
 		</createIndex>
 
 		<addForeignKeyConstraint
 			baseColumnNames="AUTHOR_ID" baseTableName="BOOK"
-			constraintName="CONSTRAINT_1F" deferrable="false"
+			constraintName="CNS_BOOK_AUTHOR" deferrable="false"
 			initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT"
 			referencedColumnNames="ID" referencedTableName="AUTHOR"
 			validate="true" />
 
 		<addForeignKeyConstraint
-			baseColumnNames="MAIN_CHAPTER_ID" baseTableName="BOOK"
-			constraintName="CONSTRAINT_1F3" deferrable="false"
+			baseColumnNames="CHAPTER_ID" baseTableName="SECTION"
+			constraintName="CNS_SECTION_CHAPTER" deferrable="false"
 			initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT"
 			referencedColumnNames="ID" referencedTableName="CHAPTER"
 			validate="true" />
 
 		<addForeignKeyConstraint
-			baseColumnNames="CONTENT_ID" baseTableName="CHAPTER"
-			constraintName="CONSTRAINT_56" deferrable="false"
+			baseColumnNames="BOOK_ID" baseTableName="CHAPTER"
+			constraintName="CNS_CHAPTER_BOOK" deferrable="false"
 			initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT"
-			referencedColumnNames="ID" referencedTableName="SECTION"
+			referencedColumnNames="ID" referencedTableName="BOOK"
 			validate="true" />
 
-		<addForeignKeyConstraint
-			baseColumnNames="PARENT_ID" baseTableName="CHAPTER_HIERERCHY"
-			constraintName="CONSTRAINT_C" deferrable="false"
-			initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT"
-			referencedColumnNames="ID" referencedTableName="CHAPTER"
-			validate="true" />
-
-		<addForeignKeyConstraint
-			baseColumnNames="CHILD_ID" baseTableName="CHAPTER_HIERERCHY"
-			constraintName="CONSTRAINT_C6" deferrable="false"
-			initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT"
-			referencedColumnNames="ID" referencedTableName="CHAPTER"
-			validate="true" />
-
-		<addForeignKeyConstraint
-			baseColumnNames="BOOK_ID" baseTableName="BOOK_GENRE"
-			constraintName="CONSTRAINT_F" deferrable="false"
-			initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT"
-			referencedColumnNames="ID" referencedTableName="BOOK" validate="true" />
-
-		<addForeignKeyConstraint
-			baseColumnNames="GENRE_ID" baseTableName="BOOK_GENRE"
-			constraintName="CONSTRAINT_F0" deferrable="false"
-			initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT"
-			referencedColumnNames="ID" referencedTableName="GENRE"
-			validate="true" />
 	</changeSet>
 </databaseChangeLog>
