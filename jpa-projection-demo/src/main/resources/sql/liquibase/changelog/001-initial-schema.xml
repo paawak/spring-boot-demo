@@ -7,7 +7,7 @@
 	<changeSet author="Palash Ray" id="001"
 		logicalFilePath="001-initial-schema.xml">
 		<createTable tableName="AUTHOR">
-			<column autoIncrement="true" name="ID" type="NUMBER(20)">
+			<column autoIncrement="true" name="ID" type="BIGINT">
 				<constraints nullable="false" primaryKey="true" />
 			</column>
 			<column name="FIRST_NAME" type="VARCHAR(200)">
@@ -19,7 +19,7 @@
 		</createTable>
 
 		<createTable tableName="SECTION">
-			<column autoIncrement="true" name="ID" type="NUMBER(20)">
+			<column autoIncrement="true" name="ID" type="BIGINT">
 				<constraints nullable="false" primaryKey="true" />
 			</column>
 			<column name="SECTION_TEXT" type="CHARACTER LARGE OBJECT">
@@ -29,39 +29,35 @@
 			<column name="SECTION_LENGTH" type="INT">
 				<constraints nullable="false" />
 			</column>
-			<column name="CHAPTER_ID" type="NUMBER(20)">
-				<!-- constraints nullable="false" /-->
+			<column name="CHAPTER_ID" type="BIGINT">
+				<constraints nullable="false" />
 			</column>
 		</createTable>
 
 		<createTable tableName="CHAPTER">
-			<column autoIncrement="true" name="ID" type="NUMBER(20)">
+			<column autoIncrement="true" name="ID" type="BIGINT">
 				<constraints nullable="false" primaryKey="true" />
 			</column>
 			<column name="TITLE" type="CHARACTER LARGE OBJECT">
 				<constraints nullable="false" />
 			</column>
 			<column name="PLOT_SUMMARY" type="CHARACTER LARGE OBJECT" />
-			<column name="BOOK_ID" type="NUMBER(20)">
+			<column name="BOOK_ID" type="BIGINT">
 				<constraints nullable="false" />
 			</column>
 		</createTable>
 
 		<createTable tableName="BOOK">
-			<column autoIncrement="true" name="ID" type="NUMBER(20)">
+			<column autoIncrement="true" name="ID" type="BIGINT">
 				<constraints nullable="false" primaryKey="true" />
 			</column>
 			<column name="TITLE" type="CHARACTER LARGE OBJECT">
 				<constraints nullable="false" />
 			</column>
-			<column name="AUTHOR_ID" type="NUMBER(20)">
+			<column name="AUTHOR_ID" type="BIGINT">
 				<constraints nullable="false" />
 			</column>
 		</createTable>
-
-		<createIndex indexName="IND_BOOK_AUTHOR" tableName="BOOK">
-			<column name="AUTHOR_ID" />
-		</createIndex>
 
 		<addForeignKeyConstraint
 			baseColumnNames="AUTHOR_ID" baseTableName="BOOK"
@@ -81,8 +77,7 @@
 			baseColumnNames="BOOK_ID" baseTableName="CHAPTER"
 			constraintName="CNS_CHAPTER_BOOK" deferrable="false"
 			initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT"
-			referencedColumnNames="ID" referencedTableName="BOOK"
-			validate="true" />
+			referencedColumnNames="ID" referencedTableName="BOOK" validate="true" />
 
 	</changeSet>
 </databaseChangeLog>

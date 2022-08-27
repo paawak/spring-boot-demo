@@ -41,8 +41,8 @@ public class Section implements Serializable {
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     @JsonBackReference
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "chapter_id")
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "chapter_id", nullable = false)
     private Chapter chapter;
 
 }

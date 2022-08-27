@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:h2:mem:h2-test-db;MODE=MySQL
+    url: jdbc:h2:mem:h2-test-db;MODE=PostgreSQL
     username: sa
     password: sa
     driverClassName: org.h2.Driver
@@ -9,3 +9,11 @@ spring:
   liquibase:
     enabled: true
     change-log: classpath:/sql/liquibase/master-change-log.xml
+
+logging:
+  level:
+    root: INFO
+    com.swayam.demo: DEBUG
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+        
