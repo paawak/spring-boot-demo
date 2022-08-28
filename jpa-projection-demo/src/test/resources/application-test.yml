@@ -1,0 +1,14 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:h2-test-db;MODE=PostgreSQL
+    username: sa
+    password: sa
+    driverClassName: org.h2.Driver
+
+logging:
+  level:
+    root: INFO
+    com.swayam.demo: DEBUG
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+        

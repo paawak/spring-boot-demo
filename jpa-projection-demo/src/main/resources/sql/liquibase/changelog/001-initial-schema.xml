@@ -1,0 +1,83 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+	<changeSet author="Palash Ray" id="001"
+		logicalFilePath="001-initial-schema.xml">
+		<createTable tableName="AUTHOR">
+			<column autoIncrement="true" name="ID" type="BIGINT">
+				<constraints nullable="false" primaryKey="true" />
+			</column>
+			<column name="FIRST_NAME" type="VARCHAR(200)">
+				<constraints nullable="false" />
+			</column>
+			<column name="LAST_NAME" type="VARCHAR(200)">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+
+		<createTable tableName="SECTION">
+			<column autoIncrement="true" name="ID" type="BIGINT">
+				<constraints nullable="false" primaryKey="true" />
+			</column>
+			<column name="SECTION_TEXT" type="CHARACTER LARGE OBJECT">
+				<constraints nullable="false" />
+			</column>
+			<column name="STYLE" type="CHARACTER LARGE OBJECT" />
+			<column name="SECTION_LENGTH" type="INT">
+				<constraints nullable="false" />
+			</column>
+			<column name="CHAPTER_ID" type="BIGINT">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+
+		<createTable tableName="CHAPTER">
+			<column autoIncrement="true" name="ID" type="BIGINT">
+				<constraints nullable="false" primaryKey="true" />
+			</column>
+			<column name="TITLE" type="CHARACTER LARGE OBJECT">
+				<constraints nullable="false" />
+			</column>
+			<column name="PLOT_SUMMARY" type="CHARACTER LARGE OBJECT" />
+			<column name="BOOK_ID" type="BIGINT">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+
+		<createTable tableName="BOOK">
+			<column autoIncrement="true" name="ID" type="BIGINT">
+				<constraints nullable="false" primaryKey="true" />
+			</column>
+			<column name="TITLE" type="CHARACTER LARGE OBJECT">
+				<constraints nullable="false" />
+			</column>
+			<column name="AUTHOR_ID" type="BIGINT">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+
+		<addForeignKeyConstraint
+			baseColumnNames="AUTHOR_ID" baseTableName="BOOK"
+			constraintName="CNS_BOOK_AUTHOR" deferrable="false"
+			initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT"
+			referencedColumnNames="ID" referencedTableName="AUTHOR"
+			validate="true" />
+
+		<addForeignKeyConstraint
+			baseColumnNames="CHAPTER_ID" baseTableName="SECTION"
+			constraintName="CNS_SECTION_CHAPTER" deferrable="false"
+			initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT"
+			referencedColumnNames="ID" referencedTableName="CHAPTER"
+			validate="true" />
+
+		<addForeignKeyConstraint
+			baseColumnNames="BOOK_ID" baseTableName="CHAPTER"
+			constraintName="CNS_CHAPTER_BOOK" deferrable="false"
+			initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT"
+			referencedColumnNames="ID" referencedTableName="BOOK" validate="true" />
+
+	</changeSet>
+</databaseChangeLog>

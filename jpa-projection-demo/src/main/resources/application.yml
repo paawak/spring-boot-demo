@@ -1,0 +1,14 @@
+spring:
+  datasource:
+    url: jdbc:h2:file:./target/h2-db;MODE=PostgreSQL;AUTO_SERVER=TRUE
+    username: sa
+    password: sa
+    driverClassName: org.h2.Driver
+  jpa:
+    spring.jpa.database-platform: org.hibernate.dialect.H2Dialect
+  liquibase:
+    enabled: true
+    change-log: classpath:/sql/liquibase/master-change-log.xml
+  h2:
+    console:
+      enabled: true
