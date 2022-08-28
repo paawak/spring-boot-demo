@@ -21,9 +21,10 @@ class BookDaoTest {
     private BookDao bookDao;
 
     @Test
-    void test() {
+    void testSave() {
 	// given
-	EasyRandomParameters easyRandomParams = new EasyRandomParameters().excludeField(field -> field.getName().equals("id"));
+	EasyRandomParameters easyRandomParams =
+		new EasyRandomParameters().excludeField(field -> field.getName().equals("id"));
 	EasyRandom easyRandom = new EasyRandom(easyRandomParams);
 	Book newBook = easyRandom.nextObject(Book.class);
 	newBook.getChapters().forEach(chapter -> {
@@ -35,7 +36,7 @@ class BookDaoTest {
 	Book savedBook = bookDao.save(newBook);
 
 	// then
-	assertEquals(1L, savedBook.getId());
+	assertEquals(11L, savedBook.getId());
     }
 
 }

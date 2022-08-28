@@ -4,11 +4,6 @@ spring:
     username: sa
     password: sa
     driverClassName: org.h2.Driver
-  jpa:
-    spring.jpa.database-platform: org.hibernate.dialect.H2Dialect
-  liquibase:
-    enabled: true
-    change-log: classpath:/sql/liquibase/master-change-log.xml
 
 logging:
   level:
