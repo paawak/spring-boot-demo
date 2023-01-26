@@ -21,8 +21,8 @@
 			<column name="housing" type="VARCHAR(3)" />
 			<column name="loan" type="VARCHAR(3)" />
 			<column name="contact" type="VARCHAR(50)" />
-			<column name="day" type="INT" />
-			<column name="month" type="VARCHAR(50)" />
+			<column name="record_day" type="INT" />
+			<column name="record_month" type="VARCHAR(50)" />
 			<column name="duration" type="INT" />
 			<column name="campaign" type="INT" />
 			<column name="pdays" type="INT" />

@@ -8,7 +8,7 @@
 	<changeSet author="Palash Ray" id="2">
 		<sql>
 			INSERT INTO bank_details (id, age, job, marital, education, defaulted,
-			balance, housing, loan, contact, day, month, duration, campaign,
+			balance, housing, loan, contact, record_day, record_month, duration, campaign,
 			pdays, previous, poutcome, y) VALUES
 			(1, 30, 'unemployed', 'married', 'primary', 'no', 1787, 'no', 'no',
 			'cellular', 19, 'oct', 79, 1, -1, 0, 'unknown', 'no'),
@@ -817,7 +817,7 @@
 
 
 			INSERT INTO bank_details (id, age, job, marital, education, defaulted,
-			balance, housing, loan, contact, day, month, duration, campaign,
+			balance, housing, loan, contact, record_day, record_month, duration, campaign,
 			pdays, previous, poutcome, y) VALUES
 			(403, 27, 'blue-collar', 'single', 'secondary', 'no', 148, 'no', 'no',
 			'cellular', 22, 'jul', 203, 1, -1, 0, 'unknown', 'no'),
