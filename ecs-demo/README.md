@@ -8,7 +8,7 @@
 
 #### Run docker image
 
-	docker run -it -p 8080:8080 localhost/ecs-demo:latest
+	docker run -it -p 8080:80 localhost/ecs-demo:latest
 
 #### Bank details
 
