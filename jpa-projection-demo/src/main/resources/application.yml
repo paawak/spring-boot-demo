@@ -12,3 +12,9 @@ spring:
   h2:
     console:
       enabled: true
+
+logging:
+  level:
+    root: INFO
+    org.hibernate.SQL: DEBUG
+      
