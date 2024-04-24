@@ -3,6 +3,7 @@ package com.swayam.demo.springbootdemo.jpa.projection.model;
 import java.io.Serializable;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.CascadeType;
@@ -18,6 +19,7 @@ import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
 
+@JsonIgnoreProperties({ "hibernateLazyInitializer" })
 @Data
 @Entity
 @Table(name = "BOOK")
