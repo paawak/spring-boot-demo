@@ -7,7 +7,9 @@
   http://localhost:8080/h2-console
   
   UserName: sa
+  
   Password: sa
+  
   Jdbc Url: jdbc:h2:file:./target/h2-db
 
 ### Liquibase
