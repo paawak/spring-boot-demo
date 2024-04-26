@@ -5,8 +5,9 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.swayam.demo.springbootdemo.jpa.projection.dao.BookDao;
-import com.swayam.demo.springbootdemo.jpa.projection.dao.BookDao.BookView;
+import com.swayam.demo.springbootdemo.jpa.projection.model.AuthorView;
 import com.swayam.demo.springbootdemo.jpa.projection.model.Book;
+import com.swayam.demo.springbootdemo.jpa.projection.model.BookView;
 
 @Service
 public class BookServiceImpl implements BookService {
@@ -35,6 +36,11 @@ public class BookServiceImpl implements BookService {
 	@Override
 	public Book saveOrUpdate(Book book) {
 		return bookRepo.save(book);
+	}
+
+	@Override
+	public List<AuthorView> getAuthorAndChapters() {
+		return bookRepo.findAllAuthorAndChapters();
 	}
 
 }

@@ -9,8 +9,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.swayam.demo.springbootdemo.jpa.projection.dao.BookDao.BookView;
+import com.swayam.demo.springbootdemo.jpa.projection.model.AuthorView;
 import com.swayam.demo.springbootdemo.jpa.projection.model.Book;
+import com.swayam.demo.springbootdemo.jpa.projection.model.BookView;
 import com.swayam.demo.springbootdemo.jpa.projection.service.BookService;
 
 @RestController
@@ -31,6 +32,11 @@ public class BookController {
 	@GetMapping("/view")
 	public List<BookView> getBooksForView() {
 		return bookService.getBooksForView();
+	}
+
+	@GetMapping("/author")
+	public List<AuthorView> getAuthorAndChapters() {
+		return bookService.getAuthorAndChapters();
 	}
 
 	@GetMapping(path = "/{bookId}")
