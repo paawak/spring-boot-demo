@@ -5,30 +5,42 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.swayam.demo.springbootdemo.jpa.projection.dao.BookDao;
+import com.swayam.demo.springbootdemo.jpa.projection.model.AuthorView;
 import com.swayam.demo.springbootdemo.jpa.projection.model.Book;
+import com.swayam.demo.springbootdemo.jpa.projection.model.BookView;
 
 @Service
 public class BookServiceImpl implements BookService {
 
-    private final BookDao bookRepo;
+	private final BookDao bookRepo;
 
-    public BookServiceImpl(BookDao bookRepo) {
-	this.bookRepo = bookRepo;
-    }
+	public BookServiceImpl(BookDao bookRepo) {
+		this.bookRepo = bookRepo;
+	}
 
-    @Override
-    public List<Book> getBooks() {
-	return bookRepo.findAll();
-    }
+	@Override
+	public List<Book> getBooks() {
+		return bookRepo.findAll();
+	}
 
-    @Override
-    public Book getBook(Long bookId) {
-	return bookRepo.getReferenceById(bookId);
-    }
+	@Override
+	public List<BookView> getBooksForView() {
+		return bookRepo.findAllByIdNotNull();
+	}
 
-    @Override
-    public Book saveOrUpdate(Book book) {
-	return bookRepo.save(book);
-    }
+	@Override
+	public Book getBook(Long bookId) {
+		return bookRepo.getReferenceById(bookId);
+	}
+
+	@Override
+	public Book saveOrUpdate(Book book) {
+		return bookRepo.save(book);
+	}
+
+	@Override
+	public List<AuthorView> getAuthorAndChapters() {
+		return bookRepo.findAllAuthorAndChapters();
+	}
 
 }
