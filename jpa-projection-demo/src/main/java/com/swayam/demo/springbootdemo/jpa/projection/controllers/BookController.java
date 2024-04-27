@@ -9,44 +9,44 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.swayam.demo.springbootdemo.jpa.projection.dao.BookDao;
 import com.swayam.demo.springbootdemo.jpa.projection.model.AuthorView;
 import com.swayam.demo.springbootdemo.jpa.projection.model.Book;
 import com.swayam.demo.springbootdemo.jpa.projection.model.BookView;
-import com.swayam.demo.springbootdemo.jpa.projection.service.BookService;
 
 @RestController
 @RequestMapping("/books")
 public class BookController {
 
-	private final BookService bookService;
+	private final BookDao bookDao;
 
-	public BookController(BookService bookService) {
-		this.bookService = bookService;
+	public BookController(BookDao bookDao) {
+		this.bookDao = bookDao;
 	}
 
 	@GetMapping
 	public List<Book> getBooks() {
-		return bookService.getBooks();
+		return bookDao.findAll();
 	}
 
 	@GetMapping("/view")
 	public List<BookView> getBooksForView() {
-		return bookService.getBooksForView();
+		return bookDao.findAllByIdNotNull();
 	}
 
 	@GetMapping("/author")
 	public List<AuthorView> getAuthorAndChapters() {
-		return bookService.getAuthorAndChapters();
+		return bookDao.findAllAuthorAndChapters();
 	}
 
 	@GetMapping(path = "/{bookId}")
 	public Book getBook(@PathVariable("bookId") Long bookId) {
-		return bookService.getBook(bookId);
+		return bookDao.getReferenceById(bookId);
 	}
 
 	@PostMapping
 	public Book saveNew(@RequestBody Book newBook) {
-		return bookService.saveOrUpdate(newBook);
+		return bookDao.save(newBook);
 	}
 
 }
