@@ -7,7 +7,8 @@ import org.junit.platform.suite.api.Suite;
 import io.cucumber.core.options.Constants;
 
 @Suite
-@SelectClasspathResource("cukes")
+@SelectClasspathResource("/cukes") // location of the feature files
+@ConfigurationParameter(key = Constants.GLUE_PROPERTY_NAME, value = "com.swayam.demo.springbootdemo.cucumber.cukes")
 @ConfigurationParameter(key = Constants.PLUGIN_PUBLISH_QUIET_PROPERTY_NAME, value = "true")
 @ConfigurationParameter(key = Constants.FILTER_TAGS_PROPERTY_NAME, value = "@book or @author")
 public class RunCucumberTest {
