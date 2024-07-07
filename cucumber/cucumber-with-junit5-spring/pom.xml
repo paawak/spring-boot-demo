@@ -13,7 +13,8 @@
 	<artifactId>cucumber-with-junit5-spring</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>cucumber-with-junit5-spring</name>
-	<description>Example of creating Cucumber based BDD tests using JUnit5 and Spring for Dependency Injection.</description>
+	<description>Example of creating Cucumber based BDD tests using JUnit5 and
+		Spring for Dependency Injection.</description>
 	<properties>
 		<java.version>21</java.version>
 		<cucumber.version>7.0.0</cucumber.version>
@@ -57,11 +58,10 @@
 			<artifactId>liquibase-core</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>io.springfox</groupId>
-			<artifactId>springfox-boot-starter</artifactId>
-			<version>3.0.0</version>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+			<version>2.6.0</version>
 		</dependency>
-
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
