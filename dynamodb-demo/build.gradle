@@ -25,7 +25,11 @@ repositories {
 }
 
 dependencies {
+	implementation(platform("software.amazon.awssdk:bom:2.27.21"))
+
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'software.amazon.awssdk:dynamodb-enhanced'
+	
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
