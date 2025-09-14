@@ -1,21 +1,26 @@
 package com.com.swayam.demo.springbootdemo.dynamodb.model;
 
-import java.util.UUID;
+import java.time.LocalDateTime;
 
 import lombok.Data;
 import lombok.Getter;
 import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbBean;
 import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbPartitionKey;
+import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbSortKey;
 
 @DynamoDbBean
 @Data
-public class Author {
+public class Book {
 
     @Getter(onMethod_ = { @DynamoDbPartitionKey })
-    private UUID id;
+    private String id;
 
-    private String firstName;
+    @Getter(onMethod_ = { @DynamoDbSortKey })
+    private LocalDateTime publishedOn;
 
-    private String lastName;
+    private String title;
 
+    private String description;
+
+    private String authorId;
 }
