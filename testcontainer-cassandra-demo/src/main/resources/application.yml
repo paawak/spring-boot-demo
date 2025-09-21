@@ -1,14 +1,13 @@
 spring:
   application:
     name: testcontainer-cassandra-demo	
-  data:
-    cassandra:
-      schema-action: CREATE_IF_NOT_EXISTS
-      contact-points: localhost
-      port: 9042
-      ssl: false
-      keyspace-name: testcontainer_demo
-      local-datacenter: datacenter1
+  cassandra:      
+    contact-points: localhost
+    ssl: 
+      enabled: false
+    keyspace-name: testcontainer_demo
+    local-datacenter: datacenter1
+    schema-action: create_if_not_exists
 
 logging:
   level:
