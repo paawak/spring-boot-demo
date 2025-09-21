@@ -6,8 +6,8 @@ import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.swayam.demo.springbootdemo.testcontainer.cassandra.model.BankDetail;
@@ -25,13 +25,12 @@ public class BankDetailRestController {
 		this.bankDetailRepository = bankDetailRepository;
 	}
 
-	@RequestMapping(method = RequestMethod.GET)
+	@GetMapping
 	public List<BankDetail> getBankDetails() {
-		LOGGER.info("serving reactive content");
 		return bankDetailRepository.findAll();
 	}
 
-	@RequestMapping(value = "/group", method = RequestMethod.GET)
+	@GetMapping("/group")
 	public Set<String> getBankDetailsGrouped() {
 		LOGGER.info("grouping by");
 		return bankDetailRepository.findAll().stream().collect(Collectors.groupingBy(BankDetail::getJob)).keySet();
