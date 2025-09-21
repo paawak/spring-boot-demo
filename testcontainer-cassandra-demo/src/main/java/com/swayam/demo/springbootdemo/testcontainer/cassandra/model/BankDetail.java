@@ -5,64 +5,43 @@ import org.springframework.data.cassandra.core.mapping.Column;
 import org.springframework.data.cassandra.core.mapping.PrimaryKeyColumn;
 import org.springframework.data.cassandra.core.mapping.Table;
 
-import lombok.Data;
-
 @Table("bank_detail")
-@Data
-public class BankDetail {
+public record BankDetail(
 
-	@PrimaryKeyColumn(type = PrimaryKeyType.PARTITIONED)
-	private Integer id;
+		@PrimaryKeyColumn(type = PrimaryKeyType.PARTITIONED) Integer id,
 
-	@Column
-	private Integer age;
+		@Column Integer age,
 
-	@Column
-	private String job;
+		@Column String job,
 
-	@Column
-	private String marital;
+		@Column String marital,
 
-	@Column
-	private String education;
+		@Column String education,
 
-	@Column
-	private String defaulted;
+		@Column String defaulted,
 
-	@Column
-	private float balance;
+		@Column float balance,
 
-	@Column
-	private String housing;
+		@Column String housing,
 
-	@Column
-	private String loan;
+		@Column String loan,
 
-	@Column
-	private String contact;
+		@Column String contact,
 
-	@Column
-	private Integer day;
+		@Column Integer day,
 
-	@Column
-	private String month;
+		@Column String month,
 
-	@Column
-	private Integer duration;
+		@Column Integer duration,
 
-	@Column
-	private Integer campaign;
+		@Column Integer campaign,
 
-	@Column
-	private Integer pdays;
+		@Column Integer pdays,
 
-	@Column
-	private Integer previous;
+		@Column Integer previous,
 
-	@Column
-	private String poutcome;
+		@Column String poutcome,
 
-	@Column
-	private String y;
+		@Column String y) {
 
 }

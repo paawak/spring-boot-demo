@@ -33,7 +33,7 @@ public class BankDetailRestController {
 	@GetMapping("/group")
 	public Set<String> getBankDetailsGrouped() {
 		LOGGER.info("grouping by");
-		return bankDetailRepository.findAll().stream().collect(Collectors.groupingBy(BankDetail::getJob)).keySet();
+		return bankDetailRepository.findAll().stream().collect(Collectors.groupingBy(BankDetail::job)).keySet();
 	}
 
 }
