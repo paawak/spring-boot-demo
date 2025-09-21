@@ -24,6 +24,26 @@ repositories {
 	mavenCentral()
 }
 
+sourceSets {
+    main {
+        java {
+            srcDirs = ['src/main/java']
+        }
+        resources {
+            srcDirs = ['src/main/resources', 'src/main/cql']
+        }
+    }
+    
+    test {
+        java {
+            srcDirs = ['src/test/java']
+        }
+        resources {
+            srcDirs = ['src/test/resources']
+        }
+    }
+}
+
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-cassandra'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
