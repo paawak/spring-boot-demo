@@ -2,25 +2,25 @@
 -- Table structure for table bank_detail
 --
 
-CREATE TABLE bank_detail (
-  id bigint,
-  age smallint,
-  job varchar,
-  marital varchar,
-  education varchar,
-  defaulted varchar,
-  balance bigint,
-  housing varchar,
-  loan varchar,
-  contact varchar,
-  day smallint,
-  month varchar,
-  duration smallint,
-  campaign smallint,
-  pdays smallint,
-  previous smallint,
-  poutcome varchar,
-  y varchar,
+CREATE TABLE IF NOT EXISTS bank_detail (
+  id int,
+  age int,
+  job text,
+  marital text,
+  education text,
+  defaulted text,
+  balance int,
+  housing text,
+  loan text,
+  contact text,
+  day int,
+  month text,
+  duration int,
+  campaign int,
+  pdays int,
+  previous int,
+  poutcome text,
+  y text,
   
   PRIMARY KEY (id)
 );
