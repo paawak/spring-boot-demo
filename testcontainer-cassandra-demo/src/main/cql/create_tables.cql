@@ -1,8 +1,8 @@
 --
--- Table structure for table bank_details
+-- Table structure for table bank_detail
 --
 
-CREATE TABLE bank_details (
+CREATE TABLE bank_detail (
   id bigint,
   age smallint,
   job varchar,

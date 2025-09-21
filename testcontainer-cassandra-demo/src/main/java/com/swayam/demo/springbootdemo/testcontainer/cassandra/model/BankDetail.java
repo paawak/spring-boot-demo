@@ -7,11 +7,11 @@ import org.springframework.data.cassandra.core.mapping.Column;
 import org.springframework.data.cassandra.core.mapping.PrimaryKeyColumn;
 import org.springframework.data.cassandra.core.mapping.Table;
 
-@Table("bank_details")
+@Table("bank_detail")
 public class BankDetail {
 
 	@PrimaryKeyColumn(type = PrimaryKeyType.PARTITIONED)
-	private int id;
+	private Integer id;
 
 	@Column
 	private int age;

@@ -1,1 +1,1 @@
-CREATE KEYSPACE reactive_demo WITH REPLICATION = { 'class' : 'SimpleStrategy', 'replication_factor' : 1 };
+CREATE KEYSPACE IF NOT EXISTS testcontainer_demo WITH REPLICATION = { 'class' : 'SimpleStrategy', 'replication_factor' : 1 };
