@@ -7,9 +7,9 @@ spring:
       enabled: false
     keyspace-name: testcontainer_demo
     local-datacenter: datacenter1
-    schema-action: create_if_not_exists
+    schema-action: CREATE_IF_NOT_EXISTS
 
 logging:
   level:
-    com.datastax.driver: INFO  
-    org.springframework.web: INFO       
+    root: info
+    com.datastax.driver: debug
