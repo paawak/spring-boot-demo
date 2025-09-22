@@ -2,6 +2,13 @@
 
 ## Running Cassandra using Podman
 
+### Install Podman
+
+```bash
+sudo apt-get -y install podman
+```
+
+### Start Cassandra from image
 Start Cassandra on __localhost__, port __9042__
 
 ```bash
@@ -10,13 +17,13 @@ podman network create cassandra
 podman run --rm -it --name cassandra --network cassandra -p 9042:9042 cassandra:5.0.5
 ```
 
-Connect __cqlsh__:
+### Connect to cqlsh
 
 ```bash
 podman run --rm --network cassandra -it cassandra:5.0.5 cqlsh cassandra 9042
 ```
 
-Create the Keyspace:
+### Create Keyspace using cqlsh
 
 ```
 -- Create a keyspace
