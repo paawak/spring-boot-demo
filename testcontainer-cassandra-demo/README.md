@@ -1,6 +1,32 @@
 # Getting Started
 
-### Reference Documentation
+## Running Cassandra using Podman
+
+Start Cassandra on __localhost__, port __9042__
+
+```bash
+podman network create cassandra
+
+podman run --rm -it --name cassandra --network cassandra -p 9042:9042 cassandra:5.0.5
+```
+
+Connect __cqlsh__:
+
+```bash
+podman run --rm --network cassandra -it cassandra:5.0.5 cqlsh cassandra 9042
+```
+
+Create the Keyspace:
+
+```
+-- Create a keyspace
+CREATE KEYSPACE IF NOT EXISTS testcontainer_demo WITH REPLICATION = { 'class' : 'SimpleStrategy', 'replication_factor' : '1' };
+
+-- Use the keyspace
+use testcontainer_demo;
+```
+
+## Reference Documentation
 For further reference, please consider the following sections:
 
 * [Official Gradle documentation](https://docs.gradle.org)
@@ -11,27 +37,6 @@ For further reference, please consider the following sections:
 * [Spring Web](https://docs.spring.io/spring-boot/3.5.5/reference/web/servlet.html)
 * [Spring Data for Apache Cassandra](https://docs.spring.io/spring-boot/3.5.5/reference/data/nosql.html#data.nosql.cassandra)
 * [Testcontainers](https://java.testcontainers.org/)
-
-### Guides
-The following guides illustrate how to use some features concretely:
-
-* [Building a RESTful Web Service](https://spring.io/guides/gs/rest-service/)
-* [Serving Web Content with Spring MVC](https://spring.io/guides/gs/serving-web-content/)
-* [Building REST services with Spring](https://spring.io/guides/tutorials/rest/)
-* [Spring Data for Apache Cassandra](https://spring.io/guides/gs/accessing-data-cassandra/)
-
-### Additional Links
-These additional references should also help you:
-
-* [Gradle Build Scans – insights for your project's build](https://scans.gradle.com#gradle)
-
-### Testcontainers support
-
-This project uses [Testcontainers at development time](https://docs.spring.io/spring-boot/3.5.5/reference/features/dev-services.html#features.dev-services.testcontainers).
-
-Testcontainers has been configured to use the following Docker images:
-
-* [`cassandra:latest`](https://hub.docker.com/_/cassandra)
-
-Please review the tags of the used images and set them to the same as you're running in production.
-
+* [Testcontainers at development time](https://docs.spring.io/spring-boot/3.5.5/reference/features/dev-services.html#features.dev-services.testcontainers)
+* [Cassandra official Docker image](https://hub.docker.com/_/cassandra)
+* [Cassandra quick start](https://cassandra.apache.org/_/quickstart.html)
