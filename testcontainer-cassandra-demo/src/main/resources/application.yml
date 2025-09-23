@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: testcontainer-cassandra-demo	
+  cassandra:      
+    contact-points: localhost
+    ssl:
+      enabled: false
+    keyspace-name: testcontainer_demo
+    local-datacenter: datacenter1
+    schema-action: CREATE_IF_NOT_EXISTS
+    request:
+      timeout: 5s
+
+logging:
+  level:
+    root: info
+    com.datastax.driver: debug
