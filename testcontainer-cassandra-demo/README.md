@@ -8,12 +8,23 @@
 sudo apt-get -y install podman
 ```
 
+Put __docker.io__ entry in the registry so that images can be pulled with their short-names:
+
+```bash
+sudo vi /etc/containers/registries.conf
+```
+
+This is the line to put:
+
+```vi
+# # An array of host[:port] registries to try when pulling an unqualified image, in order.
+ unqualified-search-registries = ["docker.io"]
+```
+
 ### Start Cassandra from image
 Start Cassandra on __localhost__, port __9042__
 
 ```bash
-podman network create cassandra
-
 podman run --rm -it --name cassandra --network cassandra -p 9042:9042 cassandra:5.0.5
 ```
 
