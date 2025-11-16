@@ -25,14 +25,15 @@ This is the line to put:
 Start Cassandra on __localhost__, port __9042__
 
 ```bash
-podman run --rm -it --name cassandra --network cassandra -p 9042:9042 cassandra:5.0.5
+podman run -it --name local_cassandra -p 9042:9042 docker.io/library/cassandra:5.0.5
 ```
 
 ### Connect to cqlsh
 
 ```bash
-podman run --rm --network cassandra -it cassandra:5.0.5 cqlsh cassandra 9042
+podman exec -it local_cassandra bash -c cqlsh
 ```
+
 
 ### Create Keyspace using cqlsh
 
