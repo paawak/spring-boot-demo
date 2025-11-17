@@ -25,7 +25,14 @@ This is the line to put:
 Start Cassandra on __localhost__, port __9042__
 
 ```bash
+# No volumes
 podman run -it --name local_cassandra -p 9042:9042 docker.io/library/cassandra:5.0.5
+
+# With volume to keep data
+# 2 volumes are mounted: 
+# 1. Directory containing the .cql scripts for table creation
+# 2. Local directory to preserve the Cassandra data
+podman run -it -v /source/spring-boot-demo/testcontainer-cassandra-demo/src/main/cql/:/home -v /home/my-drive/local-data-temp/:/var/lib/cassandra --name local_cassandra -p 9042:9042 docker.io/library/cassandra:5.0.5
 ```
 
 ### Connect to cqlsh
@@ -43,6 +50,13 @@ CREATE KEYSPACE IF NOT EXISTS testcontainer_demo WITH REPLICATION = { 'class' : 
 
 -- Use the keyspace
 use testcontainer_demo;
+```
+
+### Create tables and insert data using Cqlsh
+
+```
+SOURCE '/home/create_tables.cql'
+SOURCE '/home/bank_detail_data.cql'
 ```
 
 ## Reference Documentation
