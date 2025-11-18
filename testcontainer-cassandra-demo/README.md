@@ -35,6 +35,12 @@ podman run -it --name local_cassandra -p 9042:9042 docker.io/library/cassandra:5
 podman run -it -v /source/spring-boot-demo/testcontainer-cassandra-demo/src/main/cql/:/home -v /home/my-drive/local-data-temp/:/var/lib/cassandra --name local_cassandra -p 9042:9042 docker.io/library/cassandra:5.0.5
 ```
 
+Once started successfully for the first time, you can use the below command:
+
+```bash
+podman start local_cassandra
+```
+
 ### Connect to cqlsh
 
 ```bash
