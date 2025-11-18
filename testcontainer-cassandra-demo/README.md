@@ -38,7 +38,11 @@ podman run -it -v /source/spring-boot-demo/testcontainer-cassandra-demo/src/main
 Once started successfully for the first time, you can use the below command:
 
 ```bash
-podman start local_cassandra
+# Specify -a for attaching the container's stdout and stderr on console
+podman start -a local_cassandra
+
+# Below command to stop
+podman stop local_cassandra
 ```
 
 ### Connect to cqlsh
