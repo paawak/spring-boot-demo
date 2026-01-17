@@ -8,20 +8,49 @@
 sudo apt-get -y install podman
 ```
 
+Put __docker.io__ entry in the registry so that images can be pulled with their short-names:
+
+```bash
+sudo vi /etc/containers/registries.conf
+```
+
+This is the line to put:
+
+```vi
+# # An array of host[:port] registries to try when pulling an unqualified image, in order.
+ unqualified-search-registries = ["docker.io"]
+```
+
 ### Start Cassandra from image
 Start Cassandra on __localhost__, port __9042__
 
 ```bash
-podman network create cassandra
+# No volumes
+podman run -it --name local_cassandra -p 9042:9042 docker.io/library/cassandra:5.0.5
 
-podman run --rm -it --name cassandra --network cassandra -p 9042:9042 cassandra:5.0.5
+# With volume to keep data
+# 2 volumes are mounted: 
+# 1. Directory containing the .cql scripts for table creation
+# 2. Local directory to preserve the Cassandra data
+podman run -it -v /source/spring-boot-demo/testcontainer-cassandra-demo/src/main/cql/:/home -v /home/my-drive/local-data-temp/:/var/lib/cassandra --name local_cassandra -p 9042:9042 docker.io/library/cassandra:5.0.5
+```
+
+Once started successfully for the first time, you can use the below command:
+
+```bash
+# Specify -a for attaching the container's stdout and stderr on console
+podman start -a local_cassandra
+
+# Below command to stop
+podman stop local_cassandra
 ```
 
 ### Connect to cqlsh
 
 ```bash
-podman run --rm --network cassandra -it cassandra:5.0.5 cqlsh cassandra 9042
+podman exec -it local_cassandra bash -c cqlsh
 ```
+
 
 ### Create Keyspace using cqlsh
 
@@ -31,6 +60,13 @@ CREATE KEYSPACE IF NOT EXISTS testcontainer_demo WITH REPLICATION = { 'class' : 
 
 -- Use the keyspace
 use testcontainer_demo;
+```
+
+### Create tables and insert data using Cqlsh
+
+```
+SOURCE '/home/create_tables.cql'
+SOURCE '/home/bank_detail_data.cql'
 ```
 
 ## Reference Documentation
