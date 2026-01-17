@@ -1,47 +1,46 @@
 package com.swayam.demo.springbootdemo.testcontainer.cassandra.model;
 
 import org.springframework.data.cassandra.core.cql.PrimaryKeyType;
-import org.springframework.data.cassandra.core.mapping.Column;
 import org.springframework.data.cassandra.core.mapping.PrimaryKeyColumn;
 import org.springframework.data.cassandra.core.mapping.Table;
 
 @Table("bank_detail")
 public record BankDetail(
 
-		@PrimaryKeyColumn(type = PrimaryKeyType.PARTITIONED) Integer id,
+	@PrimaryKeyColumn(type = PrimaryKeyType.PARTITIONED) Integer id,
 
-		@Column Integer age,
+	Integer age,
 
-		@Column String job,
+	String job,
 
-		@Column String marital,
+	String marital,
 
-		@Column String education,
+	String education,
 
-		@Column String defaulted,
+	String defaulted,
 
-		@Column float balance,
+	float balance,
 
-		@Column String housing,
+	String housing,
 
-		@Column String loan,
+	String loan,
 
-		@Column String contact,
+	String contact,
 
-		@Column Integer day,
+	Integer day,
 
-		@Column String month,
+	String month,
 
-		@Column Integer duration,
+	Integer duration,
 
-		@Column Integer campaign,
+	Integer campaign,
 
-		@Column Integer pdays,
+	Integer pdays,
 
-		@Column Integer previous,
+	Integer previous,
 
-		@Column String poutcome,
+	String poutcome,
 
-		@Column String y) {
+	String y) {
 
 }
